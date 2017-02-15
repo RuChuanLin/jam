@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">12345</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1/jamdb?useUnicode=true&amp;characterEncoding=utf-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property> 
+			<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> 
+			<property name="hibernate.connection.url">jdbc:sqlserver://127.0.0.1:1433;DatabaseName=JSPDB</property> 
+			<property name="hibernate.connection.username">sa</property> <property name="hibernate.connection.password">sa123456</property> 
+			<property name="hibernate.current_session_context_class">thread</property> -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.current_session_context_class">
+			org.hibernate.context.internal.ThreadLocalSessionContext
+		</property>
+		<mapping class="_01_member.model.Member" />
+		<mapping class="_01_member.model.InnerMsg" />
+		<mapping class="_01_member.model.PersonalVideo" />
+		<mapping class="_01_member.model.PublicVideo" />
+		<mapping class="_02_transaction.model.UsedItem" />
+		<mapping class="_02_transaction.model.NewItem" />
+		<mapping class="_02_transaction.model.OrderForm" />
+		<mapping class="_02_transaction.model.OrderItem" />
+		<mapping class="_02_transaction.model.BidRecord" />
+		<mapping class="_03_course.model.Course" />
+		<mapping class="_03_course.model.ReserveRecord" />
+		<mapping class="_04_band.model.Band" />
+		<mapping class="_05_forum.model.Forum" />
+		<mapping class="_05_forum.model.Comment" />
+	</session-factory>
+</hibernate-configuration>
