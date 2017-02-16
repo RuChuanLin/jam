@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_01_member.model.Member" table="MEMBER">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="account" type="java.lang.String">
+            <column name="ACCOUNT" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="isOneClick" type="boolean">
+            <column name="ISONECLICK" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="isNoted" type="boolean">
+            <column name="ISNOTED" />
+        </property>
+        <property name="alias" type="java.lang.String">
+            <column name="ALIAS" />
+        </property>
+        <property name="pic" type="java.sql.Blob">
+            <column name="PIC" />
+        </property>
+        <property name="intro" type="java.sql.Clob">
+            <column name="INTRO" />
+        </property>
+    </class>
+</hibernate-mapping>

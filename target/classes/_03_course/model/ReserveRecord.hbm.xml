@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_03_course.model.ReserveRecord" table="RESERVERECORD">
+        <id name="studentId" type="int">
+            <column name="STUDENTID" />
+            <generator class="assigned" />
+        </id>
+        <property name="pk" type="int">
+            <column name="PK" />
+        </property>
+        <property name="teacherId" type="int">
+            <column name="TEACHERID" />
+        </property>
+        <property name="time" type="java.util.Calendar">
+            <column name="TIME" />
+        </property>
+        <property name="status" type="byte">
+            <column name="STATUS" />
+        </property>
+    </class>
+</hibernate-mapping>

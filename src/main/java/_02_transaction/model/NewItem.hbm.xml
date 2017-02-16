@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_02_transaction.model.NewItem" table="NEWITEM">
+        <id name="usedItemId" type="int">
+            <column name="USEDITEMID" />
+            <generator class="assigned" />
+        </id>
+        <property name="category" type="java.lang.String">
+            <column name="CATEGORY" />
+        </property>
+        <property name="brand" type="java.lang.String">
+            <column name="BRAND" />
+        </property>
+        <property name="image" type="java.sql.Blob">
+            <column name="IMAGE" />
+        </property>
+        <property name="price" type="int">
+            <column name="PRICE" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="model" type="java.lang.String">
+            <column name="MODEL" />
+        </property>
+        <property name="browsedCount" type="int">
+            <column name="BROWSEDCOUNT" />
+        </property>
+        <property name="updatedDate" type="java.util.Calendar">
+            <column name="UPDATEDDATE" />
+        </property>
+        <property name="onSale" type="char">
+            <column name="ONSALE" />
+        </property>
+        <property name="itemCount" type="int">
+            <column name="ITEMCOUNT" />
+        </property>
+        <property name="sold" type="int">
+            <column name="SOLD" />
+        </property>
+    </class>
+</hibernate-mapping>

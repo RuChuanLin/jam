@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_03_course.model.Course" table="COURSE">
+        <id name="courseId" type="int">
+            <column name="COURSEID" />
+            <generator class="assigned" />
+        </id>
+        <property name="teacherId" type="int">
+            <column name="TEACHERID" />
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="CATEGORY" />
+        </property>
+        <property name="expectedArea" type="java.lang.String">
+            <column name="EXPECTEDAREA" />
+        </property>
+        <property name="duration" type="byte">
+            <column name="DURATION" />
+        </property>
+        <property name="experience" type="byte">
+            <column name="EXPERIENCE" />
+        </property>
+        <property name="charge" type="int">
+            <column name="CHARGE" />
+        </property>
+        <property name="expectedStudent" type="java.lang.String">
+            <column name="EXPECTEDSTUDENT" />
+        </property>
+        <property name="video" type="int">
+            <column name="VIDEO" />
+        </property>
+        <property name="picture" type="java.sql.Blob">
+            <column name="PICTURE" />
+        </property>
+        <property name="intro" type="java.lang.String">
+            <column name="INTRO" />
+        </property>
+        <property name="time" type="java.sql.Date">
+            <column name="TIME" />
+        </property>
+    </class>
+</hibernate-mapping>

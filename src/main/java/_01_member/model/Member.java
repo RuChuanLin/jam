@@ -3,22 +3,11 @@ package _01_member.model;
 import java.sql.Blob;
 import java.sql.Clob;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "member")
+
 public class Member {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private int userId;
-	@Column(name="account", length=70)
-	@Size(max=70)
 	private String account;
 	private String password;
 	private boolean isOneClick;

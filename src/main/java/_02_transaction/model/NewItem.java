@@ -9,11 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "newItem")
 public class NewItem {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int usedItemId;
 	private String category;
 	private String brand;
