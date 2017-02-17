@@ -34,8 +34,11 @@
 		<mapping resource="_04_band/model/Band.hbm.xml" />
 		<mapping resource="_05_forum/model/Forum.hbm.xml" />
 		<mapping resource="_05_forum/model/Comment.hbm.xml" />
-		<mapping class="_99_test.model.One" />
-		<mapping class="_99_test.model.Many" />
+		<!-- <mapping class="_99_test.model.hbm_ano.One" />
+		<mapping class="_99_test.model.hbm_ano.Many" /> 
+		<mapping resource="_99_test/model/hbm_xml/One.hbm.xml" />
+		<mapping resource="_99_test/model/hbm_xml/Many.hbm.xml" />-->
+		<mapping resource="_999_test/tx/model/TXObject.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>
