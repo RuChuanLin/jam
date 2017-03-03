@@ -2,16 +2,8 @@ package _03_course.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="reserveRecord")
+
 public class ReserveRecord {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pk;
 	private int teacherId;
 	private int studentId;

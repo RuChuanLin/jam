@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_02_transaction.model.OrderForm" table="ORDERFORM">
+        <id name="orderId" type="int">
+            <column name="ORDERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="zip" type="short">
+            <column name="ZIP" />
+        </property>
+        <property name="buyer" type="int">
+            <column name="BUYER" />
+        </property>
+        <property name="buyTime" type="java.util.Calendar">
+            <column name="BUYTIME" />
+        </property>
+        <property name="amount" type="int">
+            <column name="AMOUNT" />
+        </property>
+    </class>
+</hibernate-mapping>

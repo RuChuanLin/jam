@@ -1,17 +1,7 @@
 package _02_transaction.model;
 
 import java.util.Calendar;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="orderForm")
 public class OrderForm {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
 	private String name;
 	private String phone;
@@ -20,6 +10,35 @@ public class OrderForm {
 	private int buyer;
 	private java.util.Calendar buyTime;
 	private int amount;
+	public OrderForm(int orderId, String name, String phone, String address, short zip, int buyer, Calendar buyTime,
+			int amount) {
+		super();
+		this.orderId = orderId;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.zip = zip;
+		this.buyer = buyer;
+		this.buyTime = buyTime;
+		this.amount = amount;
+	}
+	public OrderForm() {
+		super();
+	}
+	public OrderForm(int orderId) {
+		super();
+		this.orderId = orderId;
+	}
+	public OrderForm(String name, String phone, String address, short zip, int buyer, Calendar buyTime, int amount) {
+		super();
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.zip = zip;
+		this.buyer = buyer;
+		this.buyTime = buyTime;
+		this.amount = amount;
+	}
 	public int getOrderId() {
 		return orderId;
 	}
@@ -67,34 +86,6 @@ public class OrderForm {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-	public OrderForm(int orderId) {
-		super();
-		this.orderId = orderId;
-	}
-	public OrderForm(String name, String phone, String address, short zip, int buyer, Calendar buyTime, int amount) {
-		super();
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.zip = zip;
-		this.buyer = buyer;
-		this.buyTime = buyTime;
-		this.amount = amount;
-	}
-	public OrderForm() {
-		super();
-	}
-	public OrderForm(int orderId, String name, String phone, String address, short zip, int buyer, Calendar buyTime,
-			int amount) {
-		super();
-		this.orderId = orderId;
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.zip = zip;
-		this.buyer = buyer;
-		this.buyTime = buyTime;
-		this.amount = amount;
-	}
+	}	
+
 }

@@ -1,32 +1,18 @@
 package _01_member.model;
 
 import java.sql.Blob;
-import java.sql.Clob;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-@Entity
-@Table(name = "member")
 public class Member {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private int userId;
-	@Column(name="account", length=70)
-	@Size(max=70)
 	private String account;
 	private String password;
 	private boolean isOneClick;
 	private String email;
 	private boolean isNoted;
 	private String alias;
-	private java.sql.Blob pic;
-	private java.sql.Clob intro;
+	private Blob pic;
+	private String intro;
 
 	public int getUserId() {
 		return userId;
@@ -84,28 +70,29 @@ public class Member {
 		this.alias = alias;
 	}
 
-	public java.sql.Blob getPic() {
+	public Blob getPic() {
 		return pic;
 	}
 
-	public void setPic(java.sql.Blob pic) {
+	public void setPic(Blob pic) {
 		this.pic = pic;
 	}
 
-	public java.sql.Clob getIntro() {
+	public String getIntro() {
 		return intro;
 	}
 
-	public void setIntro(java.sql.Clob intro) {
+	public void setIntro(String intro) {
 		this.intro = intro;
 	}
 
 	public Member() {
 		super();
 	}
-
+	
+	//註冊時用的
 	public Member(String account, String password, boolean isOneClick, String email, boolean isNoted, String alias,
-			Blob pic, Clob intro) {
+			Blob pic, String intro) {
 		super();
 		this.account = account;
 		this.password = password;
@@ -116,9 +103,9 @@ public class Member {
 		this.pic = pic;
 		this.intro = intro;
 	}
-
+	
 	public Member(int userId, String account, String password, boolean isOneClick, String email, boolean isNoted,
-			String alias, Blob pic, Clob intro) {
+			String alias, Blob pic, String intro) {
 		super();
 		this.userId = userId;
 		this.account = account;

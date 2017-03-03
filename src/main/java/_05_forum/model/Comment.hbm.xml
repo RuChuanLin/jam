@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:31 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_05_forum.model.Comment" table="COMMENT">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="articleId" type="int">
+            <column name="ARTICLEID" />
+        </property>
+        <property name="author" type="int">
+            <column name="AUTHOR" />
+        </property>
+        <property name="article" type="java.sql.Clob">
+            <column name="ARTICLE" />
+        </property>
+        <property name="time" type="java.util.Calendar">
+            <column name="TIME" />
+        </property>
+        <property name="good" type="int">
+            <column name="GOOD" />
+        </property>
+        <property name="bad" type="int">
+            <column name="BAD" />
+        </property>
+        <property name="responseId" type="int">
+            <column name="RESPONSEID" />
+        </property>
+    </class>
+</hibernate-mapping>
