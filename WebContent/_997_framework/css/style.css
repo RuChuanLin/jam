@@ -1053,7 +1053,6 @@ input[type="submit"]:disabled {
     background-color: #406C6E;
     border-radius: 2px;
     border: #406C6E;
-    
 }
 
 .form-btn.submit {
@@ -1092,13 +1091,94 @@ iframe {
     padding: 10px;
     text-align: center;
 }
+
+
 /*----------------------------------------ÊÕ¼þÏ»----------------------------------------*/
 
-.mailbox-page{
-border: 1px solid red;
-width: 100%;
-min-height: 300px;
-margin-top: 50px;
+.mailbox-page {
+    border: 1px solid red;
+    width: 100%;
+    min-height: 600px;
+    margin-top: 50px;
+}
 
+.mailbox-container {
+     position: relative;
+    width: 1000px;
+    height: 500px;
+    background-color: #363636;
+    border-radius: 10px;
+    color: #EEEEEE;
+    margin: 10px auto 10px;
+}
 
+.mailbox-list {
+   
+    width: 100%;
+    height: auto;
+
+}
+
+.mailbox-table-body {
+    width: 100%;
+    table-layout: fixed;
+    
+    
+}
+.mailbox-bottom{
+    border: 1px white solid;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+
+}
+.mailbox-bottom-inline{
+   
+    margin-top:12px; 
+ 
+}
+.mail-btn{
+
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+}
+.mail-prev-btn{
+    margin-left: 85%;
+}
+.mail-next-btn{
+    margin-left: 30px;
+}
+
+.mailbox-table-body tr:nth-child(even) {
+    background:
+}
+
+.mailbox-table-body tr:nth-child(odd) {
+
+}
+
+.mailbox-table-body tr td {
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 10px;
+}
+
+.mail-td-delete {
+    width: 30px;
+}
+
+.mail-td-sender {
+    width: 200px;
+}
+
+.mail-td-subject {}
+
+.mail-td-date {
+    width: 150px;
 }

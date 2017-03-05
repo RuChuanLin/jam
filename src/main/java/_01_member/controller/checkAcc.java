@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import _01_member.model.MemberDAO;
-import _01_member.model.MemberService;
+import _01_member.model.MemberHBN;
 
 @WebServlet("/checkAcc")
 public class checkAcc extends HttpServlet {
@@ -31,7 +31,7 @@ public class checkAcc extends HttpServlet {
 
 		System.out.println(account);
 		Gson gson = new Gson();
-		MemberDAO dao = new MemberService();
+		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
 
 		

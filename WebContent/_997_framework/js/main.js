@@ -1,4 +1,18 @@
-jQuery(document).ready(function($) {
+//初始化
+(function () {
+    if (sessionStorage.getItem("account")) {
+        $("#member-pic").attr("src", sessionStorage.getItem("pic"));
+        // $("#member-instrument").html(sessionStorage.getItem("instrument"));
+        $("#member-name").html(sessionStorage.getItem("alias"));
+        $("#member-intro").html(sessionStorage.getItem("intro"));
+    }
+})();
+
+
+jQuery(document).ready(function ($) {
+
+
+    var pic_base64 = '';
 
     //------變數------------
     var formModal = $('.user-modal'),
@@ -20,30 +34,37 @@ jQuery(document).ready(function($) {
         termsAccept = $('#accept-terms'),
         regSubmit = $('#reg-submit'),
         loginSubmit = $('#login-submit'),
-        mailBttuon = $('.mail-btn');
-
+        mailButton = $('.mail-btn');
+    memberUpdateButton = $('#update-member');
 
     //---------事件處理--------------
 
 
     regSubmit.on("click", onSignupClick);
-    loginSubmit.on("click", onLoginClick);
+    loginSubmit.on("click", () => {
+        onLoginClick().then((arg) => showInfo(arg));
+    });
+    memberUpdateButton.on("click", onMemberUpdateClick);
 
+    //------------------------------
+    $("#update-member-pic").change(function () {
+        readImage(this);
+    });
     //---------------註冊ajax------------------
 
     //註冊帳號重複
 
 
-    signupEmail.on('keyup', function() {
+    signupEmail.on('keyup', function () {
         var account = $(this).val();
         console.log(account);
         if (account != '') {
             $.ajax({
-                    type: "POST",
-                    url: `http://localhost:8080/Jam/checkAcc`,
-                    data: { account },
-                    dataType: 'json'
-                })
+                type: "POST",
+                url: `http://localhost:8080/Jam/checkAcc`,
+                data: { account },
+                dataType: 'json'
+            })
                 .done(response => { //function(response){...}
                     console.log(response);
                     if (response) {
@@ -77,44 +98,96 @@ jQuery(document).ready(function($) {
                 //呈現成功畫面
             } else {
                 console.log('fail')
-                    //呈現失敗畫面
+                //呈現失敗畫面
             }
         });
     }
 
 
-
-
-
     function onLoginClick() {
-        var account = loginEmail.val();
-        var password = loginPassword.val();
-        console.log(account + ' ' + password);
-        $.ajax({
-            url: `http://localhost:8080/Jam/login`,
-            cache: false,
-            dataType: 'json',
-            type: 'POST',
-            data: { account, password }
-        }).done((response) => {
-            console.log(response);
-            // $.cookie('account', email, { expires: 7, path: '/' });
-            
-            
-        }).fail((reason) => {
-            console.log('Ajax request 發生錯誤');
-            console.log(reason);
-        })
+        return new Promise((resolve, reject) => {
+            var account = loginEmail.val();
+            var password = loginPassword.val();
+            console.log(account + ' ' + password);
+            $.ajax({
+                url: `http://localhost:8080/Jam/login`,
+                cache: false,
+                dataType: 'json',
+                type: 'POST',
+                data: { account, password }
+            }).done((response) => {
+                console.log(response);
+                sessionStorage.setItem("account", response.account);
+                sessionStorage.setItem("alias", response.alias);
+                sessionStorage.setItem("email", response.email);
+                sessionStorage.setItem("intro", response.intro);
+                sessionStorage.setItem("pic", response.pic);
+                resolve(response);
+            }).fail((reason) => {
+                console.log('Ajax request 發生錯誤');
+                console.log(reason);
+            })
+        });
+
     };
 
+    function showInfo(arg) {
+        return new Promise((resolve, reject) => {
+            $("#member-pic").attr("src", arg.pic);
+            $("#member-instrument").html(arg.instrument);
+            $("#member-name").html(arg.alias);
+            $("#member-intro").html(arg.intro);
+        });
+    }
+
+
     function onLogoutClick() {
-        $.removeCookie('account', { path: '/' });
+        sessionStorage.clear();
         window.location.reload(false);
         return;
     }
 
 
+    function readImage(input) {
+        console.log(input);
+        if (input.files && input.files[0]) {
+            // FileReader 文件
+            // https://developer.mozilla.org/zh-TW/docs/Web/API/FileReader
+            // http://www.javascripture.com/FileReader
+            var FR = new FileReader();
+            console.log(FR.readyState);
+            FR.onload = function (e) {
+                //e.target.result = base64 format picture
+                $('#img').attr("src", e.target.result);
+                pic_base64 = e.target.result;
+            };
+            FR.readAsDataURL(input.files[0]);
+        }
+    }
 
+    function onMemberUpdateClick() {
+        let intro = $('#update-member-intro').val();
+        let email = $('#update-member-email').val();
+        let alias = $('#udpate-member-name').val();
+        let pic = pic_base64;
+        $.ajax({
+            url: `http://localhost:8080/Jam/updatePerson`,
+            cache: true,
+            dataType: 'json',
+            type: 'POST',
+            data: { account: sessionStorage.getItem('account'), intro, email, alias, pic }
+        }).done((response) => {
+            console.log(response);
+            sessionStorage.setItem('alias', response.alias);
+            sessionStorage.setItem('email', response.email);
+            sessionStorage.setItem('pic', response.pic);
+            sessionStorage.setItem('intro', response.intro);
+            $("#member-pic").attr("src", response.pic);
+            $("#member-instrument").html(response.instrument);
+            $("#member-name").html(response.alias);
+            $("#member-intro").html(response.intro);
+        }).fail();
+    }
 
 
 
@@ -133,22 +206,22 @@ jQuery(document).ready(function($) {
     navRight.on('click', '.login', login_selected);
 
     //close modal
-    formModal.on('click', function(event) {
+    formModal.on('click', function (event) {
         if ($(event.target).is(formModal) || $(event.target).is('.close-form')) {
             formModal.removeClass('is-visible');
         }
     });
     //close modal when clicking the esc keyboard button
-    $(document).keyup(function(event) {
+    $(document).keyup(function (event) {
         if (event.which == '27') {
             formModal.removeClass('is-visible');
         }
     });
 
     //switch from a tab to another
-    formModalTab.on('click', function(event) {
+    formModalTab.on('click', function (event) {
         event.preventDefault();
-        ($(event.target).is(tabLogin)) ? login_selected(): signup_selected();
+        ($(event.target).is(tabLogin)) ? login_selected() : signup_selected();
     });
 
     //hide or show password
@@ -163,13 +236,13 @@ jQuery(document).ready(function($) {
     // });
 
     //show forgot-password form 
-    forgotPasswordLink.on('click', function(event) {
+    forgotPasswordLink.on('click', function (event) {
         event.preventDefault();
         forgot_password_selected();
     });
 
     //back to login from the forgot-password form
-    backToLoginLink.on('click', function(event) {
+    backToLoginLink.on('click', function (event) {
         event.preventDefault();
         login_selected();
     });
@@ -190,18 +263,18 @@ jQuery(document).ready(function($) {
 
 
     //驗證畫面按確認後回到主畫面
-    $('.confirm-button').on('click', function() {
+    $('.confirm-button').on('click', function () {
         $('.confirm-success').toggleClass('is-visible');
     });
 
     //站內信modal彈出
-    mailBttuon.on('click', function() {
+    mailButton.on('click', function () {
         $('.mailbox-modal').addClass('is-visible');
     });
 
     //站內信modal關閉
     var mailModal = $('.mailbox-modal');
-    mailModal.click(function(event) {
+    mailModal.click(function (event) {
         if ($(event.target).is(mailModal)) {
             mailModal.removeClass('is-visible');
         }
@@ -284,12 +357,12 @@ jQuery(document).ready(function($) {
     var myJamEvent = $('.my-jam-event-title');
     var linkDiv = $('.my-jam-event-link');
 
-    myJamEvent.on('mouseover', function() {
+    myJamEvent.on('mouseover', function () {
         myJamEvent.addClass('isopen');
         linkDiv.fadeIn("slow");
     });
 
-    linkDiv.on('mouseleave', function() {
+    linkDiv.on('mouseleave', function () {
         myJamEvent.removeClass('isopen');
         linkDiv.fadeOut("slow");
     });
@@ -297,33 +370,33 @@ jQuery(document).ready(function($) {
 
 
     //..........會員資料展開收合...........
-    $('.abtbtn.show').on('click', function() {
+    $('.abtbtn.show').on('click', function () {
         $('.profolio-about-me-defualt').hide();
         $('.profolio-about-me-show').show();
     });
 
-    $('.abtbtn.hide').on('click', function() {
+    $('.abtbtn.hide').on('click', function () {
         $('.profolio-about-me-show').hide();
         $('.profolio-about-me-defualt').show();
     });
 
     //編輯按鈕
     var editModal = $('.member-edit-modal');
-    $('.edit-btn').click(function() {
+    $('.edit-btn').click(function () {
         editModal.addClass('is-visible');
     });
     //關掉編輯modal
 
-    editModal.click(function(event) {
+    editModal.click(function (event) {
         if ($(event.target).is(editModal)) {
             editModal.removeClass('is-visible');
         }
 
     });
-    $('.form-btn.submit').click(function() {
+    $('.form-btn.submit').click(function () {
         editModal.removeClass('is-visible');
     });
-    $(document).keyup(function(event) {
+    $(document).keyup(function (event) {
         if (event.which == '27') {
             editModal.removeClass('is-visible');
         }
@@ -333,14 +406,14 @@ jQuery(document).ready(function($) {
     //新增樂器專長欄位
     var maxInstruments = 0,
         instrumentId = 1;
-    $('.form-btn.instruments-plus').on('click', function() {
+    $('.form-btn.instruments-plus').on('click', function () {
         if (maxInstruments >= 5) return;
         maxInstruments++;
         $('.member-edit-instruments').append('<input type="text" class="member-input instruments" name="member-instruments' + instrumentId + '" id="member-instruments' + instrumentId + '">');
         instrumentId++;
     });
     //刪除樂器專長欄位
-    $('.form-btn.instruments-minus').on('click', function() {
+    $('.form-btn.instruments-minus').on('click', function () {
         $('.member-input.instruments').last().remove();
         if (maxInstruments > 0) maxInstruments--;
         if (instrumentId > 1) instrumentId--;
@@ -350,17 +423,30 @@ jQuery(document).ready(function($) {
     //新增個人影音連結
     var mediaId = 1,
         maxMedia = 0;
-    $('.form-btn.media-plus').click(function() {
+    $('.form-btn.media-plus').click(function () {
         if (maxMedia >= 6) return;
         maxMedia++;
         $('.member-edit-media').append('<input type="text" class="member-input media" name="member-media' + mediaId + '" id="member-media' + mediaId + '">');
         mediaId++;
     });
     //刪除個人影音連結
-    $('.form-btn.media-minus').on('click', function() {
+    $('.form-btn.media-minus').on('click', function () {
         $('.member-input.media').last().remove();
         if (maxMedia > 0) maxMedia--;
         if (mediaId > 1) mediaId--;
+    });
+
+
+    //--------------------------------------收件匣mailbox page-----------------------------------------------
+    //刪除全選
+    var deleteAll = $('#mail-del-all');
+    deleteAll.on('click', function () {
+        if (deleteAll.prop('checked')) {
+            $("input[name='mail-del']").prop('checked', true);
+        } else {
+            $("input[name='mail-del']").prop('checked', false);
+        }
+
     });
 
 

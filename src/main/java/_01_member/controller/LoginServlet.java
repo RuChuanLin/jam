@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 import _01_member.model.Member;
 import _01_member.model.MemberDAO;
-import _01_member.model.MemberService;
+import _01_member.model.MemberHBN;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-		MemberDAO dao = new MemberService();
+		MemberDAO dao = new MemberHBN();
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter pw = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
@@ -58,11 +58,9 @@ public class LoginServlet extends HttpServlet {
 		//沒問題
 		Member mb = dao.getMemberByAccount(account);
 		int id = mb.getUserId();
-		map.put("regSuccess", true);
-		map.put("userId", id);
-		map.put("nickName", mb.getAlias());
-//		map.put("messageNum",);
-		pw.write(new Gson().toJson(map));
+		
+		pw.write(new Gson().toJson(mb));
+		System.out.println(mb);
 		pw.flush();
 		System.out.println("成功登入");
 		session.setAttribute("LoginId", id);

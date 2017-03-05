@@ -173,20 +173,24 @@
                 <div class="member-edit-body">
                     <div class="member-edit-image">
                         <label for="member-name" class="member-form-label-text">個人照片</label>
-                        <input type="file" name="member-pic" id="member-pic">
+                        <input type="file" id="update-member-pic">
                     </div>
                     <div class="member-edit-name">
                         <label for="member-name" class="member-form-label-text">名稱</label>
-                        <input type="text" class="member-input name" name="member-name" id="member-name">
+                        <input type="text" class="member-input name" id="udpate-member-name">
                     </div>
                     <div class="member-edit-instruments">
                         <label for="member-instruments" class="member-form-label-text" id="member-instruments-label">樂器專長</label>
                         <button type="button" class="form-btn instruments-plus"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         <button type="button" class="form-btn instruments-minus"><i class="fa fa-minus" aria-hidden="true"></i></button>
                     </div>
+                    <div class="member-edit-name">
+                        <label for="member-name" class="member-form-label-text">備用信箱</label>
+                        <input type="text" class="member-input name" id="update-member-email">
+                    </div>
                     <div class="member-edit-intro">
                         <label for="member-edit-textarea" class="member-form-label-text">個人經歷簡介</label>
-                        <textarea name="" id="member-edit-textarea" class="member-edit-textarea"></textarea>
+                        <textarea class="member-edit-textarea" id="update-member-intro"></textarea>
                     </div>
                     <div class="member-edit-media">
                         <label for="member-media" class="member-form-label-text">個人影音連結(限Youtube、SoundCloud)</label>
@@ -196,7 +200,7 @@
                 </div>
             </form>
             <footer class="member-edit-footer">
-                <button class="form-btn submit" id="edit-submit" type="submit">儲存</button>
+                <button class="form-btn submit" id="update-member" type="button">儲存</button>
             </footer>
         </div>
     </div>
@@ -204,15 +208,15 @@
     <section class="profolio info">
         <div class="profolio-header">
             <div class="profolio-img-wrapper">
-                <img src="_996_image/teacher/t04.jpg" class="profolio-img">
+                <img class="profolio-img" id="member-pic">
             </div>
             <div class="edit-wrapper">
                 <button class="edit-btn"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></button>
             </div>
         </div>
         <div class="profolio-info-text">
-            <h1 class="member-nmae">強尼</h1>
-            <h2 class="member-skills">爵士鼓/鋼琴</h2>
+            <h1 class="member-name" id="member-name"></h1>
+            <h2 class="member-skills" id="member-instrument">爵士鼓/鋼琴</h2>
         </div>
         <div class="profolio-action">
             <button class="btn btn-primary mail-btn"><i class="fa fa-envelope-o" fa-4x aria-hidden="true"></i></button>
@@ -237,31 +241,7 @@
         </div>
         <div class="profolio-about-me-defualt">
             <p class="test">
-                <span class="firstline-wrapper">
-                <span class="firstline">
-                    2016
-                Oregon Shakespeare Festival, US 
-                Regis College, Boston, US 
-                Cervantino Festival Guanajuato, Mexico          
-                Festival Internacional de las Artes Julio Torri, Fernando Soler theater Saltillo, Mexico 
-                Festival Internacional de las Artes Julio Torri, Isauro Martínez theater Torreon, Mexico           
-                Puerto Peñasco Arts Festival, Mexico 
-                2015 
-                Paleo Festival, Switzerland 
-                Underneath the Stars Festival, England 
-                Warwick Folk Festival, England 
-                Bardentreffen, Germany 
-                North Michigan University, US 
-                Detroit Institute of Art, US 
-                Illinois University, Urbana-Champaign, US 
-                Williams College, MA, US 
-                Queens Museum, New York, US 
-                University of North Carolina, Asheville, US 
-                LEAF Festival, North Carolina, US 
-                REDCAT Roy and Edna Disney/Calarts Theater, Los Angeles, US 
-                </span>
-                <button class="abtbtn show">展開</button>
-                </span>
+                <span id="member-intro"></span>
             </p>
         </div>
         <div class="profolio-about-me-show">

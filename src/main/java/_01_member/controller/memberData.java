@@ -19,23 +19,25 @@ import _01_member.model.MemberDAO;
 import _01_member.model.MemberService;
 
 @WebServlet("/_01_member/controller/memberData.do")
-public class memberData extends HttpServlet {
+public class MemberData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		String account = session.getAttribute("LoginAcc").toString();
-		MemberDAO dao = new MemberService();
 		response.setContentType("application/json; charset=UTF-8");
+		HttpSession session = request.getSession();
+		MemberDAO dao = new MemberService();
 		PrintWriter pw = response.getWriter();
-		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
+		
+		String account = session.getAttribute("LoginAcc").toString();
+		Map<String, Object> map = new HashMap<>();
 		
 		Member mb = dao.getMemberByAccount(account);
 		map.put("pic", mb.getPic());
+		map.put("alias", mb.getAlias());
 //		map.put("instrument",);
 		map.put("intro", mb.getIntro());
 //		map.put("mediaLink",);
