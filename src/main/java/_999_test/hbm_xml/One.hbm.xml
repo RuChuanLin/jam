@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 08:14:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_99_test.model.hbm_xml.One" table="ONE_xml">
+        <id name="oneId" type="java.lang.Integer">
+            <column name="ONEID" />
+            <generator class="assigned" />
+        </id>
+        <set name="many" table="MANY" inverse="true" lazy="true">
+            <key>
+                <column name="ONEID" />
+            </key>
+            <one-to-many class="_99_test.model.hbm_xml.Many" />
+        </set>
+    </class>
+</hibernate-mapping>

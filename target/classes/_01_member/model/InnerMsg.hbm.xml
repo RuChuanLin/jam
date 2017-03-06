@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_01_member.model.InnerMsg" table="INNERMSG">
+        <id name="pk" type="int">
+            <column name="PK" />
+            <generator class="assigned" />
+        </id>
+        <property name="sender" type="int">
+            <column name="SENDER" />
+        </property>
+        <property name="receiver" type="int">
+            <column name="RECEIVER" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="article" type="java.sql.Clob">
+            <column name="ARTICLE" />
+        </property>
+        <property name="time" type="java.util.Calendar">
+            <column name="TIME" />
+        </property>
+    </class>
+</hibernate-mapping>
