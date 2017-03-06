@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialClob;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,16 +38,21 @@ public class UpdatePerson extends HttpServlet {
 		String alias = request.getParameter("alias");
 		String pic = request.getParameter("pic");
 		String intro = request.getParameter("intro");
-		
-		System.out.println(account+email+alias+pic+intro);
+		String instruments[] = request.getParameterValues("instruments[]");
+		System.out.println("---");
+		System.out.println(instruments);
+		for (int i = 0; i < instruments.length; i++) {
+			System.out.println(instruments[i]);
+		}
+		System.out.println("---");
 		MemberDAO memberDao = new MemberHBN();
-		
+
 		Member mem = new Member(account, "", null, true, email, true, alias, pic, intro);
 		memberDao.updateMember(mem);
 		Member memReturn = new Member("piano", true, email, true, alias, pic, intro);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String json = gson.toJson(mem);
-		
+
 		System.out.println(json);
 		PrintWriter pw = response.getWriter();
 		pw.write(json);

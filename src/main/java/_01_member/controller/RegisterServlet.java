@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
-import _01_member.model.MemberService;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {

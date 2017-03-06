@@ -1,13 +1,16 @@
 //初始化
 (function () {
     if (sessionStorage.getItem("account")) {
-        $("#member-pic").attr("src", sessionStorage.getItem("pic"));
+        ssPic = sessionStorage.getItem("pic");
+        ssAlias = sessionStorage.getItem("alias")
+        ssIntro = sessionStorage.getItem("intro");
+        $("#member-pic").attr("src", ssPic);
         // $("#member-instrument").html(sessionStorage.getItem("instrument"));
-        $("#member-name").html(sessionStorage.getItem("alias"));
-        $("#member-intro").html(sessionStorage.getItem("intro"));
+        $("#member-name").html(ssAlias);
+        $("#member-intro").html(ssIntro);
+
     }
 })();
-
 
 jQuery(document).ready(function ($) {
 
@@ -34,8 +37,10 @@ jQuery(document).ready(function ($) {
         termsAccept = $('#accept-terms'),
         regSubmit = $('#reg-submit'),
         loginSubmit = $('#login-submit'),
-        mailButton = $('.mail-btn');
-    memberUpdateButton = $('#update-member');
+        mailButton = $('.mail-btn'),
+        memberUpdateButton = $('#update-member'),
+        navSignButton = $('#nav-sign-button');
+    navLogoutButton = $('#nav-logout-button');
 
     //---------事件處理--------------
 
@@ -50,6 +55,16 @@ jQuery(document).ready(function ($) {
     $("#update-member-pic").change(function () {
         readImage(this);
     });
+
+    if (sessionStorage.getItem('account')) {
+        navSignButton.attr("style", "display:none!important");
+        navLogoutButton.attr("style", "display:inline; float:right;");
+    } else {
+        navSignButton.attr("style", "display:block; float:right;");
+        navLogoutButton.attr("style", "display:none!important");
+    }
+
+
     //---------------註冊ajax------------------
 
     //註冊帳號重複
@@ -169,13 +184,18 @@ jQuery(document).ready(function ($) {
         let intro = $('#update-member-intro').val();
         let email = $('#update-member-email').val();
         let alias = $('#udpate-member-name').val();
+        let instruments = [];
+        for (let i = 1; i <= maxInstruments; i++) {
+            instruments.push($(`#member-instrument${i}`).val());
+        }
+        console.log(instruments);
         let pic = pic_base64;
         $.ajax({
             url: `http://localhost:8080/Jam/updatePerson`,
             cache: true,
             dataType: 'json',
             type: 'POST',
-            data: { account: sessionStorage.getItem('account'), intro, email, alias, pic }
+            data: { account: sessionStorage.getItem('account'), instruments, intro, email, alias, pic }
         }).done((response) => {
             console.log(response);
             sessionStorage.setItem('alias', response.alias);
@@ -289,7 +309,7 @@ jQuery(document).ready(function ($) {
         formForgotPassword.removeClass('is-selected');
         tabLogin.addClass('selected');
         tabSignup.removeClass('selected');
-        $('#bs-example-navbar-collapse-1').removeClass('in').attr('aria-expanded', 'false');
+        $('#nav-sign-button').removeClass('in').attr('aria-expanded', 'false');
     }
 
     function signup_selected() {
@@ -300,7 +320,7 @@ jQuery(document).ready(function ($) {
         formForgotPassword.removeClass('is-selected');
         tabLogin.removeClass('selected');
         tabSignup.addClass('selected');
-        $('#bs-example-navbar-collapse-1').removeClass('in').attr('aria-expanded', 'false');
+        $('#nav-sign-button').removeClass('in').attr('aria-expanded', 'false');
 
     }
 
@@ -409,7 +429,7 @@ jQuery(document).ready(function ($) {
     $('.form-btn.instruments-plus').on('click', function () {
         if (maxInstruments >= 5) return;
         maxInstruments++;
-        $('.member-edit-instruments').append('<input type="text" class="member-input instruments" name="member-instruments' + instrumentId + '" id="member-instruments' + instrumentId + '">');
+        $('.member-edit-instruments').append(`<input type="text" class="member-input instruments" id="member-instrument${instrumentId}">`);
         instrumentId++;
     });
     //刪除樂器專長欄位
