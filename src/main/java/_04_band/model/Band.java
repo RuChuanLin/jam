@@ -3,16 +3,8 @@ package _04_band.model;
 import java.sql.Blob;
 import java.sql.Clob;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="band")
+
 public class Band {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pk;
 	private String category;
 	private String area;

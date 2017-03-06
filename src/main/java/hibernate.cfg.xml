@@ -20,19 +20,25 @@
 		<property name="hibernate.current_session_context_class">
 			org.hibernate.context.internal.ThreadLocalSessionContext
 		</property>
-		<mapping class="_01_member.model.Member" />
-		<mapping class="_01_member.model.InnerMsg" />
-		<mapping class="_01_member.model.PersonalVideo" />
-		<mapping class="_01_member.model.PublicVideo" />
-		<mapping class="_02_transaction.model.UsedItem" />
-		<mapping class="_02_transaction.model.NewItem" />
-		<mapping class="_02_transaction.model.OrderForm" />
-		<mapping class="_02_transaction.model.OrderItem" />
-		<mapping class="_02_transaction.model.BidRecord" />
-		<mapping class="_03_course.model.Course" />
-		<mapping class="_03_course.model.ReserveRecord" />
-		<mapping class="_04_band.model.Band" />
-		<mapping class="_05_forum.model.Forum" />
-		<mapping class="_05_forum.model.Comment" />
+		<mapping resource="_01_member/model/Member.hbm.xml" />
+		<mapping resource="_01_member/model/InnerMsg.hbm.xml" />
+		<mapping resource="_01_member/model/PersonalVideo.hbm.xml" />
+		<mapping resource="_01_member/model/PublicVideo.hbm.xml" />
+		<mapping resource="_02_transaction/model/UsedItem.hbm.xml" />
+		<mapping resource="_02_transaction/model/NewItem.hbm.xml" />
+		<mapping resource="_02_transaction/model/OrderForm.hbm.xml" />
+		<mapping resource="_02_transaction/model/OrderItem.hbm.xml" />
+		<mapping resource="_02_transaction/model/BidRecord.hbm.xml" />
+		<mapping resource="_03_course/model/Course.hbm.xml" />
+		<mapping resource="_03_course/model/ReserveRecord.hbm.xml" />
+		<mapping resource="_04_band/model/Band.hbm.xml" />
+		<mapping resource="_05_forum/model/Forum.hbm.xml" />
+		<mapping resource="_05_forum/model/Comment.hbm.xml" />
+		<!-- <mapping class="_99_test.model.hbm_ano.One" />
+		<mapping class="_99_test.model.hbm_ano.Many" /> 
+		<mapping resource="_99_test/model/hbm_xml/One.hbm.xml" />
+		<mapping resource="_99_test/model/hbm_xml/Many.hbm.xml" />-->
+		<mapping resource="_999_test/tx/model/TXObject.hbm.xml"/>
+		
 	</session-factory>
 </hibernate-configuration>

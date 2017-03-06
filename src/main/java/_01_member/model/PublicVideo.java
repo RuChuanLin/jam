@@ -1,16 +1,7 @@
 package _01_member.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="publicVideo")
 public class PublicVideo {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pk;
 	private int userId;
 	private String link;

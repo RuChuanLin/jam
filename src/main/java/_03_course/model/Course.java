@@ -3,17 +3,8 @@ package _03_course.model;
 import java.sql.Blob;
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "course")
 public class Course {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int courseId;
 	private int teacherId;
 	private String category;

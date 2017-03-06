@@ -2,17 +2,7 @@ package _01_member.model;
 
 import java.sql.Clob;
 import java.util.Calendar;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="innerMsg")
 public class InnerMsg {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pk;
 	private int sender;
 	private int receiver;
