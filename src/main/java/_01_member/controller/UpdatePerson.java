@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Clob;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialClob;
 
 import com.google.gson.Gson;
@@ -34,15 +37,17 @@ public class UpdatePerson extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		
-		String account = request.getParameter("account");
+		HttpSession session = request.getSession();
+		Map<String, Object> map = new HashMap<>();
+		Member sessionMb = (Member)session.getAttribute("Member");
+		String account = sessionMb.getAccount();
 		String email = request.getParameter("email");
 		String alias = request.getParameter("alias");
 		String pic = request.getParameter("pic");
 		String intro = request.getParameter("intro");
 		String instruments[] = request.getParameterValues("instruments[]");
 		String instru = "";
-		System.out.println(instruments);
+		System.out.println(account);
 		if (instruments != null) {
 			for (int i = 0; i < instruments.length; i++) {
 				instru += instruments[i] + " \\ ";
@@ -55,8 +60,9 @@ public class UpdatePerson extends HttpServlet {
 		memberDao.updateMember(mem);
 		Member memReturn = new Member(instru, true, email, true, alias, pic, intro);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String json = gson.toJson(memReturn);
-
+		session.setAttribute("Member", memReturn);
+		map.put("Member", memReturn);
+		String json = gson.toJson(map);
 		System.out.println(json);
 		PrintWriter pw = response.getWriter();
 		pw.write(json);

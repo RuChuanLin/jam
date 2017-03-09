@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="_997_framework/css/style.css">
     <link rel="stylesheet" href="_997_framework/css/queries.css">
     <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
+    <link rel="stylesheet" href="_997_framework/css/animate.css">
+
     <!--  <script src="login.js"></script> -->
     <title>index</title>
 </head>
@@ -127,7 +129,10 @@
                     <p class="fieldset" id="remember-me">
                         <input type="checkbox" id="remember-me" checked>
                         <label for="remember-me">記得我</label>
-                        
+                        <div class="error-IdPs">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            <span>無效的帳號或密碼</span>
+                        </div>
                     </p>
                     <p class="fieldset">
                         <input class="full-width" id="login-submit" type="button" value="登入">
@@ -383,11 +388,9 @@
         <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
         </p>
     </div>
-       <script src="_997_framework/jquery-3.1.1.min.js"></script>
-       <script src="_997_framework/jquery.cookie.js"></script>
+    <script src="_997_framework/jquery-3.1.1.min.js"></script>
+    <script src="_997_framework/jquery.cookie.js"></script>
     <script src="_997_framework/js/carousel.js"></script>
-    
-    
     <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
     <script src="_997_framework/js/main.js?ver=12"></script>
 </body>

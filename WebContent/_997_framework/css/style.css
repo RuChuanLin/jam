@@ -11,7 +11,7 @@ body {
 }
 
 
-/*navbar��ɫ����*/
+/*navbar顏色佈置*/
 
 .navbar-inverse {
     background-color: rgba(54, 75, 105, 0.3);
@@ -32,7 +32,7 @@ body {
 }
 
 
-/*������header�����c��Ч*/
+/*主頁面header佈置與特效*/
 
 header {
     margin-top: 0;
@@ -43,7 +43,7 @@ header {
 }
 
 
-/*����border�ָ�*/
+/*背景border分割*/
 
 .bg {
     width: 33%;
@@ -72,7 +72,7 @@ header {
 }
 
 
-/*�������ڶ��Ӆ^�K*/
+/*主頁面第二層區塊*/
 
 .block {
     position: relative;
@@ -103,7 +103,7 @@ header {
 }
 
 
-/*�����水Ť�^�K*/
+/*主頁面按扭區塊*/
 
 .button {
     position: absolute;
@@ -112,7 +112,7 @@ header {
 }
 
 
-/*�����水�o*/
+/*主頁面按鈕*/
 
 .btn-success {
     margin: 0;
@@ -131,7 +131,7 @@ header {
 }
 
 
-/*���ώ�carousel*/
+/*找老師carousel*/
 
 .theme {
     width: 100%;
@@ -199,7 +199,7 @@ h1 {
 }
 
 
-/*�̎��A�[վ���Ű��o*/
+/*教師預覽站內信按鈕*/
 
 .btn-primary {
     width: 100px;
@@ -210,7 +210,7 @@ h1 {
 }
 
 
-/*�����]�ԅ^�K*/
+/*登入註冊區塊*/
 
 .user-modal {
     position: fixed;
@@ -240,6 +240,7 @@ h1 {
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
     transform: translateY(0);
+    -webkit-animation-duration: 0.4s;
 }
 
 .user-modal-container {
@@ -409,7 +410,7 @@ h1 {
     color: #254146
 }
 
-.form input[type=submit] {
+.form input[type=button] {
     padding: 16px 0;
     cursor: pointer;
     background: #254146;
@@ -423,7 +424,7 @@ h1 {
     appearance: none;
 }
 
-input[type="submit"]:disabled {
+input[type="button"]:disabled {
     background: #353535;
     cursor: default;
 }
@@ -579,7 +580,28 @@ input[type="submit"]:disabled {
 }
 
 
-/* email���C�ɹ����Ԅӵ��뮋�� */
+/*登入錯誤提示*/
+
+.fa-exclamation-triangle {
+    color: #ffd810;
+}
+
+.error-IdPs {
+    color: #f3f3f3;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.error-IdPs.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*登入錯誤抖動動畫*/
+
+
+/* email驗證成功，自動登入畫面 */
 
 .confirm-success-container {
     position: fixed;
@@ -636,7 +658,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*վ�������P*/
+/*站內信相關*/
 
 .mailbox-modal {
     position: fixed;
@@ -740,7 +762,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*�^�K��ͬ�O��*/
+/*區塊共同設定*/
 
 .profolio {
     width: 1000px;
@@ -763,7 +785,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*���T�YӍ�ʬF�^�K*/
+/*會員資訊呈現區塊*/
 
 .profolio.info {
     margin: -60px auto 10px;
@@ -795,7 +817,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*mail�^�K*/
+/*mail區塊*/
 
 .profolio-action {
     width: 100px;
@@ -807,7 +829,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*������jam����*/
+/*建立的jam活動*/
 
 .my-jam-event {
     text-align: center;
@@ -818,7 +840,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*�ҵ�jam event ���o*/
+/*我的jam event 按鈕*/
 
 .my-jam-event-title {
     width: 200px;
@@ -848,7 +870,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*�B�Y��ɫ���w*/
+/*連結顏色字體*/
 
 .my-jam-event-link a:link {
     color: #80808D;
@@ -878,7 +900,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*introʡ�ԅ^�K*/
+/*intro省略區塊*/
 
 .profolio-about-me-defualt {
     display: visible;
@@ -913,7 +935,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*-----------------��݋�^---------------------*/
+/*-----------------編輯區---------------------*/
 
 .edit-wrapper {
     width: 50px;
@@ -1061,7 +1083,7 @@ input[type="submit"]:disabled {
 }
 
 
-/*-----------------����Ӱ�􌣅^------------------*/
+/*-----------------個人影音專區------------------*/
 
 .media-title {
     width: 800px;
@@ -1093,63 +1115,69 @@ iframe {
 }
 
 
-/*----------------------------------------�ռ�ϻ----------------------------------------*/
+/*----------------------------------------收件匣----------------------------------------*/
 
 .mailbox-page {
-    border: 1px solid red;
     width: 100%;
     min-height: 600px;
     margin-top: 50px;
 }
 
 .mailbox-container {
-     position: relative;
+    position: relative;
     width: 1000px;
-    height: 500px;
+    min-height: 500px;
     background-color: #363636;
     border-radius: 10px;
     color: #EEEEEE;
     margin: 10px auto 10px;
+    overflow-y: hidden;
 }
 
+
+/*mailbox list 收件匣列表*/
+
 .mailbox-list {
-   
     width: 100%;
     height: auto;
-
 }
 
 .mailbox-table-body {
     width: 100%;
     table-layout: fixed;
-    
-    
 }
-.mailbox-bottom{
-    border: 1px white solid;
+
+.mailbox-list-tr {
+    cursor: pointer;
+    border-top: 1px solid #645F5F;
+    border-bottom: 1px solid #645F5F;
+    display:  none;
+}
+
+.mailbox-bottom {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 50px;
-
 }
-.mailbox-bottom-inline{
-   
-    margin-top:12px; 
- 
-}
-.mailbox-btn{
 
+.mailbox-bottom-inline {
+    margin-top: 12px;
+}
+
+.mailist-btn {
     display: block;
     float: left;
     width: 30px;
     height: 30px;
     border-radius: 20%;
 }
-.mail-prev-btn{
+
+.mail-prev-btn {
     margin-left: 85%;
 }
-.mail-next-btn{
+
+.mail-next-btn {
     margin-left: 30px;
 }
 
@@ -1157,12 +1185,9 @@ iframe {
     background:
 }
 
-.mailbox-table-body tr:nth-child(odd) {
-
-}
+.mailbox-table-body tr:nth-child(odd) {}
 
 .mailbox-table-body tr td {
-    
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1181,4 +1206,59 @@ iframe {
 
 .mail-td-date {
     width: 150px;
+}
+
+
+/*收件匣內容*/
+
+.mailbox-content-wrapper {
+    display: none;
+}
+
+.mailbox-content-header {
+    position: absolute;
+    width: calc(100% - 20px);
+    top: 0;
+    margin: 10px;
+    line-height: 24px;
+}
+
+.mailbox-content {
+    position: absolute;
+    top: 50px;
+    width: calc(100% - 20px);
+    margin: 20px 10px;
+    max-height: 200px;
+    line-height: 24px;
+    overflow-y: auto;
+}
+
+.mailbox-reply {
+    width: calc(100% - 20px);
+    position: absolute;
+    bottom: 50px;
+    margin: 10px;
+}
+
+.mailbox-reply-textarea {
+    width: 100%;
+    min-height: 150px;
+    color: #000000;
+}
+
+.mailbox-reply-bottom {
+    width: calc(100% - 20px);
+    margin: 10px;
+    bottom: 0;
+    position: absolute;
+}
+
+.return-to-mailbox-list-btn {
+    margin-right: 20px;
+    width: 60px;
+}
+
+.mailbox-reply-btn {
+    width: 60px;
+    margin-left: 80%;
 }

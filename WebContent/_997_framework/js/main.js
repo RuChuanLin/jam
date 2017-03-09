@@ -1,23 +1,6 @@
-//初始化
-(function () {
-    if (sessionStorage.getItem("account")) {
-        ssPic = sessionStorage.getItem("pic");
-        ssAlias = sessionStorage.getItem("alias")
-        ssIntro = sessionStorage.getItem("intro");
-        ssInstru = sessionStorage.getItem("instrument");
-        $("#member-pic").attr("src", ssPic);
-        $("#member-instrument").html(ssInstru);
-        $("#member-name").html(ssAlias);
-        $("#member-intro").html(ssIntro);
-
-    }
-})();
-
+// 初始化拿掉了...
 jQuery(document).ready(function ($) {
-
-
     var pic_base64 = '';
-
     //------變數------------
     var formModal = $('.user-modal'),
         formLogin = formModal.find('#login'),
@@ -42,62 +25,73 @@ jQuery(document).ready(function ($) {
         memberUpdateButton = $('#update-member'),
         navSignButton = $('#nav-sign-button'),
         navLogoutButton = $('#nav-logout-button'),
-        logoutButton = $('#logout-button'),
+        logoutButton = $('#logout'),
         editMemberButton = $('#edit-member-btn')
 
     //---------事件處理--------------
 
+    //在頁面刷新時會執行此函式, 此函式前半段是前往/Jam/loadingMember撈資料
+    //撈完後執行onMemberLoading(), 也就是讓撈到的會員資料顯示在畫面上
 
+
+    //---------按註冊後--------------
     regSubmit.on("click", onSignupClick);
+    //---------按登入後--------------
     loginSubmit.on("click", () => {
-        onLoginClick().then((arg) => showInfo(arg));
+        onLoginClick().then((arg) => onMemberLoading(arg));
     });
-    logoutButton.on("click", onLogoutClick);
-    memberUpdateButton.on("click", onMemberUpdateClick);
+    // logoutButton.on("click", onLogoutClick);
+    memberUpdateButton.on("click", () => {
+        onMemberUpdateClick().then((arg) => onMemberLoading(arg));
+    });
     editMemberButton.on("click", onEditMemberClick);
     //------------------------------
     $("#update-member-pic").change(function () {
         readImage(this);
     });
 
-    if (sessionStorage.getItem('account')) {
-        navSignButton.attr("style", "display:none!important");
-        navLogoutButton.attr("style", "display:inline; float:right;");
-    } else {
-        navSignButton.attr("style", "display:block; float:right;");
-        navLogoutButton.attr("style", "display:none!important");
-    }
 
 
     //---------------註冊ajax------------------
 
     //註冊帳號重複
 
-
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
     signupEmail.on('keyup', function () {
         var account = $(this).val();
         console.log(account);
-        if (account != '') {
-            $.ajax({
-                type: "POST",
-                url: `http://localhost:8080/Jam/checkAcc`,
-                data: { account },
-                dataType: 'json'
-            })
-                .done(response => { //function(response){...}
-                    console.log(response);
-                    if (response) {
-                        signupEmail.next('span').addClass('is-visible');
-                        return false;
-                    } else {
-                        signupEmail.next('span').removeClass('is-visible');
-                    }
+        delay(function () {
+            if (account != '') {
+                $.ajax({
+                    type: "POST",
+                    url: `http://localhost:8080/Jam/checkAcc`,
+                    data: { account },
+                    dataType: 'json'
                 })
-                .fail();
-        } else {
-            signupEmail.removeClass('is-visible');
-        }
+                    .done(response => { //function(response){...}
+                        console.log(response);
+                        if (response.accExt) {
+                            signupEmail.next('span').addClass('is-visible');
+                            return false;
+                        } else {
+                            signupEmail.next('span').removeClass('is-visible');
+                        };
+
+                    })
+                    .fail();
+            } else {
+                signupEmail.removeClass('is-visible');
+            }
+        }, 1000);
+
     });
+
 
 
 
@@ -122,26 +116,27 @@ jQuery(document).ready(function ($) {
         });
     }
 
-
+    // 登入方法，並沒有後半段的顯示會員資料，因為會串接onMemberLoading()登入方法，並沒有後半段的顯示會員資料，因為會串接onMemberLoading
+    //來顯示會員資料
     function onLoginClick() {
         return new Promise((resolve, reject) => {
             var account = loginEmail.val();
             var password = loginPassword.val();
-            console.log(account + ' ' + password);
+            //            console.log(account + ' ' + password);
             $.ajax({
-                url: `http://localhost:8080/Jam/login`,
+                url: `/Jam/login`,
                 cache: false,
                 dataType: 'json',
                 type: 'POST',
                 data: { account, password }
             }).done((response) => {
-                console.log(response);
-                sessionStorage.setItem("account", response.account);
-                sessionStorage.setItem("alias", response.alias?response.alias:ssAlias||'');
-                sessionStorage.setItem("email", response.email||'');
-                sessionStorage.setItem("intro", response.intro?response.intro:ssIntro||'');
-                sessionStorage.setItem("pic", response.pic?response.pic:ssPic||'');
-                resolve(response);
+                if (response.loginSuccess) {
+                    login_Nav();
+                    closeModal();
+                    resolve(response);
+                } else {
+                    error_idps();
+                }
             }).fail((reason) => {
                 console.log('Ajax request 發生錯誤');
                 console.log(reason);
@@ -150,20 +145,28 @@ jQuery(document).ready(function ($) {
 
     };
 
-    function showInfo(arg) {
+    //將會員資料顯示在螢幕上~!!接收一個引數arg, 內容是MemberBean的JS物件
+    function onMemberLoading(arg) {
         return new Promise((resolve, reject) => {
-            $("#member-pic").attr("src", arg.pic);
-            $("#member-instrument").html(arg.instrument);
-            $("#member-name").html(arg.alias);
-            $("#member-intro").html(arg.intro);
-            window.location.reload(false);
+            console.log(arg);
+            $("#member-pic").attr("src", arg.Member.pic || sessionStorage.getItem('pic'));
+            $("#member-instrument").html(arg.Member.instrument);
+            $("#member-name").html(arg.Member.alias);
+            $("#member-intro").html(arg.Member.intro);
+            sessionStorage.setItem("pic", arg.Member.pic || '');
+            sessionStorage.setItem("instrument", arg.Member.instrument || '');
+            sessionStorage.setItem("alias", arg.Member.alias || '');
+            sessionStorage.setItem("intro", arg.Member.intro || '');
+            // window.location.reload(false);
         });
     }
 
 
     function onLogoutClick() {
-        console.log('hi');
-        sessionStorage.clear();
+        $.post({
+            url: '/logoutMember'
+        })
+        //登出畫面，以下寫程式碼
         window.location.reload(false);
         return;
     }
@@ -187,42 +190,35 @@ jQuery(document).ready(function ($) {
     }
 
     function onMemberUpdateClick() {
-        let intro = $('#update-member-intro').val();
-        let email = $('#update-member-email').val();
-        let alias = $('#udpate-member-name').val();
-        let instruments = [];
-        for (let i = 1; i <= maxInstruments; i++) {
-            instruments.push($(`#member-instrument${i}`).val());
-        }
-        console.log(instruments);
-        let pic = pic_base64;
-        $.ajax({
-            url: `http://localhost:8080/Jam/updatePerson`,
-            cache: true,
-            dataType: 'json',
-            type: 'POST',
-            data: { account: sessionStorage.getItem('account'), instruments, intro, email, alias, pic }
-        }).done((response) => {
-            console.log(response);
-            sessionStorage.setItem('alias', response.alias);
-            sessionStorage.setItem('email', response.email);
-            sessionStorage.setItem('pic', response.pic);
-            sessionStorage.setItem('intro', response.intro);
-            sessionStorage.setItem('instrument', response.instrument);
-            $("#member-pic").attr("src", response.pic);
-            $("#member-instrument").html(response.instrument);
-            $("#member-name").html(response.alias);
-            $("#member-intro").html(response.intro);
-        }).fail();
+        return new Promise((resolve, reject) => {
+            let intro = $('#update-member-intro').val();
+            let email = $('#update-member-email').val();
+            let alias = $('#udpate-member-name').val();
+            let instruments = [];
+            for (let i = 1; i <= maxInstruments; i++) {
+                instruments.push($(`#member-instrument${i}`).val());
+            }
+            console.log(instruments);
+            let pic = pic_base64;
+            $.ajax({
+                url: `/Jam/updatePerson`,
+                cache: true,
+                dataType: 'json',
+                type: 'POST',
+                data: { instruments, intro, email, alias, pic }
+            }).done((response) => {
+                resolve(response);
+            }).fail();
+        });
+
     }
 
 
     function onEditMemberClick() {
-        $('#preview-pic').attr('src', ssPic);
-        $('#udpate-member-name').html(ssAlias);
-        // $('#update-member-email').html(ss);
-        $('#update-member-intro').html(ssIntro);
-        // $('#').html();
+        $('#update-member-intro').val(sessionStorage.getItem('intro') || '');
+        $('#member-instruments-label').val(sessionStorage.getItem('') || '');
+        $('#udpate-member-name').val(sessionStorage.getItem('alias') || '');
+        $('#preview-pic').attr('src', sessionStorage.getItem('pic') || '');
     }
 
 
@@ -239,9 +235,12 @@ jQuery(document).ready(function ($) {
     navRight.on('click', '.login', login_selected);
 
     //close modal
+    function closeModal() {
+        formModal.removeClass('is-visible');
+    };
     formModal.on('click', function (event) {
         if ($(event.target).is(formModal) || $(event.target).is('.close-form')) {
-            formModal.removeClass('is-visible');
+            closeModal();
         }
     });
     //close modal when clicking the esc keyboard button
@@ -541,5 +540,51 @@ jQuery(document).ready(function ($) {
     function error_idps() {
         $('#remember-me').append('<div class="error-IdPs"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>');
     }
+    // ------------------ajax+servlet整合的畫面function----------------------
+    //登入後nav-bar右上角的顯示
 
+    var test1 = $('.test-btn1');
+    var test2 = $('.test-btn2');
+    var navbarRight = $('.navbar-right');
+
+    test1.click(login_Nav);
+    test2.click(logout_Nav);
+
+    function login_Nav() {
+
+        $('.login').remove();
+        $('.signup').remove();
+        navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
+        navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
+        navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
+        test1.addClass('animated shake');
+    }
+    //登出後nav-bar右上角的顯示
+    function logout_Nav() {
+        $('.navbar-right li').remove();
+        navbarRight.append('<li><a href="#" class="login">登入</a></li>');
+        navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
+    }
+
+    //登入帳密錯誤動畫
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    function error_idps() {
+        $('.error-IdPs').addClass('is-visible');
+        $('.user-modal-container').addClass('animated shake').one(animationEnd, function () {
+            $(this).removeClass('animated shake');
+        });
+    }
+    //mailbox 返回收件匣
+    $('#return-to-mailbox-list-btn').on('click', function () {
+
+        $('.mailbox-content-wrapper').hide();
+        $('.mailbox-list-wrapper').show();
+    });
+
+    //mailbox-list點擊進入mailbox-content
+    $('.mailbox-list-tr').on('click', function () {
+
+        $('.mailbox-list-wrapper').hide();
+        $('.mailbox-content-wrapper').show();
+    });
 });

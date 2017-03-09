@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-sign-button" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -27,21 +27,18 @@
                 <a class="navbar-brand" href="#">Jam</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="nav-sign-button">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>
+                    <!-- 登入前顯示 -->
                     <li><a href="#" class="login">登入</a></li>
                     <li><a href="#" class="signup">註冊</a></li>
+                    <!-- 登入後顯示 -->
+                    <!--                    <li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>
+                    <li><a href="member.html" class="member-link">我的 Jam</a></li>
+                    <li><a href="#" class="logout">登出</a></li> -->
                 </ul>
             </div>
-            <div style="float:right">
-                <div class="collapse navbar-collapse" id="nav-logout-button" style="display:none!important;">
-                    <input type="button" id="logout-button" value="登出">
-                </div>
-            </div>
         </div>
-
-
     </nav>
     <div class="member-bg-img">
     </div>
@@ -247,32 +244,18 @@
         </div>
         <div class="profolio-about-me-defualt">
             <p class="test">
-                <span id="member-intro"></span>
+                <span class="firstline-wrapper">
+                <span class="firstline" id="member-intro-hide">
+
+                </span>
+                <button class="abtbtn show">展開</button>
+                </span>
             </p>
         </div>
         <div class="profolio-about-me-show">
-            <p>
-                2016 Oregon Shakespeare Festival, US
-                <br> Regis College, Boston, US
-                <br> Cervantino Festival Guanajuato, Mexico...
-                <br> Festival Internacional de las Artes Julio Torri, Fernando Soler theater Saltillo, Mexico
-                <br> Festival Internacional de las Artes Julio Torri, Isauro Martínez theater Torreon, Mexico
-                <br> Puerto Peñasco Arts Festival, Mexico
-                <br> 2015
-                <br> Paleo Festival, Switzerland
-                <br> Underneath the Stars Festival, England
-                <br> Warwick Folk Festival, England
-                <br> Bardentreffen, Germany
-                <br> North Michigan University, US
-                <br> Detroit Institute of Art, US
-                <br> Illinois University, Urbana-Champaign, US
-                <br> Williams College, MA, US
-                <br> Queens Museum, New York, US
-                <br> University of North Carolina, Asheville, US
-                <br> LEAF Festival, North Carolina, US
-                <br> REDCAT Roy and Edna Disney/Calarts Theater, Los Angeles, US
-                <button class="abtbtn hide">收回</button>
+            <p id="member-intro-show">
             </p>
+            <button class="abtbtn hide">收回</button>
         </div>
     </section>
     <!-- 影音專區 -->
@@ -280,8 +263,8 @@
         <div class="media-title">
             <h2>個人影音專區</h2>
         </div>
-        <iframe src="https://www.youtube.com/embed/ZDr1WUr1obM" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/kwubmgAqLZ4" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ZDr1WUr1obM?t=1m25s" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kwubmgAqLZ4?t=1m25s" frameborder="0" allowfullscreen></iframe>
         <iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/78236440&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
         <iframe src="https://www.youtube.com/embed/hhxM3RJxJK0" frameborder="0" allowfullscreen></iframe>
         <iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/74232220&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
@@ -294,9 +277,8 @@
         <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
         </p>
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="_997_framework/jquery-3.1.1.min.js"></script>
+    <script src="_997_framework/jquery.cookie.js"></script>
     <script src="_997_framework/js/main.js"></script>
     <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
 </body>

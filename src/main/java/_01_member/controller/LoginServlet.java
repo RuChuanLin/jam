@@ -22,7 +22,6 @@ import _01_member.model.MemberHBN;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -34,32 +33,34 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
-		
+
 		// 檢查帳號是否輸入及是否存在
 		if (!dao.idExists(account)) {
 			map.put("loginSuccess", false);
 			System.out.println("帳號不存在");
-		}
-		
-		// 檢查密碼是否輸入及是否正確
-		if (!dao.checkPassword(account, password)) {
+		}else if (!dao.checkPassword(account, password)) {
 			map.put("loginSuccess", false);
 			System.out.println("密碼錯誤");
 		}
 
-		//有問題
+		// 有問題
 		if (!map.isEmpty()) {
 			pw.write(new Gson().toJson(map));
 			pw.flush();
 			System.out.println("登入失敗");
 			return;
 		}
+
+		// 沒問題
+		map.put("loginSuccess", true);
 		
-		//沒問題
 		Member mb = dao.getMemberByAccount(account);
 		int id = mb.getUserId();
-		
-		pw.write(new Gson().toJson(mb));
+		map.put("alias", mb.getAlias());
+		String json = new Gson().toJson(map);
+		System.out.println(json);
+		pw.write(json);
+		System.out.println("mb.getAlias(): " + mb.getAlias());
 		System.out.println(mb);
 		pw.flush();
 		System.out.println("成功登入");
