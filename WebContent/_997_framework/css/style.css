@@ -31,6 +31,18 @@ body {
     margin: 0;
 }
 
+#nav-myinbox-btn {
+    display: none;
+}
+
+#nav-my-member-link {
+    display: none;
+}
+
+#nav-logout {
+    display: none;
+}
+
 
 /*主頁面header佈置與特效*/
 
@@ -1151,7 +1163,7 @@ iframe {
     cursor: pointer;
     border-top: 1px solid #645F5F;
     border-bottom: 1px solid #645F5F;
-    display:  none;
+    display: none;
 }
 
 .mailbox-bottom {

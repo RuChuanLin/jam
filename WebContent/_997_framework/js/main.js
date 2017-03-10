@@ -1,5 +1,5 @@
 // 初始化拿掉了...
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
     var pic_base64 = '';
     //------變數------------
     var formModal = $('.user-modal'),
@@ -46,7 +46,7 @@ jQuery(document).ready(function ($) {
     });
     editMemberButton.on("click", onEditMemberClick);
     //------------------------------
-    $("#update-member-pic").change(function () {
+    $("#update-member-pic").change(function() {
         readImage(this);
     });
 
@@ -56,24 +56,24 @@ jQuery(document).ready(function ($) {
 
     //註冊帳號重複
 
-    var delay = (function () {
+    var delay = (function() {
         var timer = 0;
-        return function (callback, ms) {
+        return function(callback, ms) {
             clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
     })();
-    signupEmail.on('keyup', function () {
+    signupEmail.on('keyup', function() {
         var account = $(this).val();
         console.log(account);
-        delay(function () {
+        delay(function() {
             if (account != '') {
                 $.ajax({
-                    type: "POST",
-                    url: `http://localhost:8080/Jam/checkAcc`,
-                    data: { account },
-                    dataType: 'json'
-                })
+                        type: "POST",
+                        url: `http://localhost:8080/Jam/checkAcc`,
+                        data: { account },
+                        dataType: 'json'
+                    })
                     .done(response => { //function(response){...}
                         console.log(response);
                         if (response.accExt) {
@@ -111,7 +111,7 @@ jQuery(document).ready(function ($) {
                 //呈現成功畫面
             } else {
                 console.log('fail')
-                //呈現失敗畫面
+                    //呈現失敗畫面
             }
         });
     }
@@ -164,9 +164,9 @@ jQuery(document).ready(function ($) {
 
     function onLogoutClick() {
         $.post({
-            url: '/logoutMember'
-        })
-        //登出畫面，以下寫程式碼
+                url: '/logoutMember'
+            })
+            //登出畫面，以下寫程式碼
         window.location.reload(false);
         return;
     }
@@ -180,7 +180,7 @@ jQuery(document).ready(function ($) {
             // http://www.javascripture.com/FileReader
             var FR = new FileReader();
             console.log(FR.readyState);
-            FR.onload = function (e) {
+            FR.onload = function(e) {
                 //e.target.result = base64 format picture
                 $('#preview-pic').attr("src", e.target.result);
                 pic_base64 = e.target.result;
@@ -238,22 +238,22 @@ jQuery(document).ready(function ($) {
     function closeModal() {
         formModal.removeClass('is-visible');
     };
-    formModal.on('click', function (event) {
+    formModal.on('click', function(event) {
         if ($(event.target).is(formModal) || $(event.target).is('.close-form')) {
             closeModal();
         }
     });
     //close modal when clicking the esc keyboard button
-    $(document).keyup(function (event) {
+    $(document).keyup(function(event) {
         if (event.which == '27') {
             formModal.removeClass('is-visible');
         }
     });
 
     //switch from a tab to another
-    formModalTab.on('click', function (event) {
+    formModalTab.on('click', function(event) {
         event.preventDefault();
-        ($(event.target).is(tabLogin)) ? login_selected() : signup_selected();
+        ($(event.target).is(tabLogin)) ? login_selected(): signup_selected();
     });
 
     //hide or show password
@@ -268,13 +268,13 @@ jQuery(document).ready(function ($) {
     // });
 
     //show forgot-password form 
-    forgotPasswordLink.on('click', function (event) {
+    forgotPasswordLink.on('click', function(event) {
         event.preventDefault();
         forgot_password_selected();
     });
 
     //back to login from the forgot-password form
-    backToLoginLink.on('click', function (event) {
+    backToLoginLink.on('click', function(event) {
         event.preventDefault();
         login_selected();
     });
@@ -295,18 +295,18 @@ jQuery(document).ready(function ($) {
 
 
     //驗證畫面按確認後回到主畫面
-    $('.confirm-button').on('click', function () {
+    $('.confirm-button').on('click', function() {
         $('.confirm-success').toggleClass('is-visible');
     });
 
     //站內信modal彈出
-    mailButton.on('click', function () {
+    mailButton.on('click', function() {
         $('.mailbox-modal').addClass('is-visible');
     });
 
     //站內信modal關閉
     var mailModal = $('.mailbox-modal');
-    mailModal.click(function (event) {
+    mailModal.click(function(event) {
         if ($(event.target).is(mailModal)) {
             mailModal.removeClass('is-visible');
         }
@@ -389,12 +389,12 @@ jQuery(document).ready(function ($) {
     var myJamEvent = $('.my-jam-event-title');
     var linkDiv = $('.my-jam-event-link');
 
-    myJamEvent.on('mouseover', function () {
+    myJamEvent.on('mouseover', function() {
         myJamEvent.addClass('isopen');
         linkDiv.fadeIn("slow");
     });
 
-    linkDiv.on('mouseleave', function () {
+    linkDiv.on('mouseleave', function() {
         myJamEvent.removeClass('isopen');
         linkDiv.fadeOut("slow");
     });
@@ -402,33 +402,33 @@ jQuery(document).ready(function ($) {
 
 
     //..........會員資料展開收合...........
-    $('.abtbtn.show').on('click', function () {
+    $('.abtbtn.show').on('click', function() {
         $('.profolio-about-me-defualt').hide();
         $('.profolio-about-me-show').show();
     });
 
-    $('.abtbtn.hide').on('click', function () {
+    $('.abtbtn.hide').on('click', function() {
         $('.profolio-about-me-show').hide();
         $('.profolio-about-me-defualt').show();
     });
 
     //編輯按鈕
     var editModal = $('.member-edit-modal');
-    $('.edit-btn').click(function () {
+    $('.edit-btn').click(function() {
         editModal.addClass('is-visible');
     });
     //關掉編輯modal
 
-    editModal.click(function (event) {
+    editModal.click(function(event) {
         if ($(event.target).is(editModal)) {
             editModal.removeClass('is-visible');
         }
 
     });
-    $('.form-btn.submit').click(function () {
+    $('.form-btn.submit').click(function() {
         editModal.removeClass('is-visible');
     });
-    $(document).keyup(function (event) {
+    $(document).keyup(function(event) {
         if (event.which == '27') {
             editModal.removeClass('is-visible');
         }
@@ -438,14 +438,14 @@ jQuery(document).ready(function ($) {
     //新增樂器專長欄位
     var maxInstruments = 0,
         instrumentId = 1;
-    $('.form-btn.instruments-plus').on('click', function () {
+    $('.form-btn.instruments-plus').on('click', function() {
         if (maxInstruments >= 5) return;
         maxInstruments++;
         $('.member-edit-instruments').append(`<input type="text" class="member-input instruments" id="member-instrument${instrumentId}">`);
         instrumentId++;
     });
     //刪除樂器專長欄位
-    $('.form-btn.instruments-minus').on('click', function () {
+    $('.form-btn.instruments-minus').on('click', function() {
         $('.member-input.instruments').last().remove();
         if (maxInstruments > 0) maxInstruments--;
         if (instrumentId > 1) instrumentId--;
@@ -455,14 +455,14 @@ jQuery(document).ready(function ($) {
     //新增個人影音連結
     var mediaId = 1,
         maxMedia = 0;
-    $('.form-btn.media-plus').click(function () {
+    $('.form-btn.media-plus').click(function() {
         if (maxMedia >= 6) return;
         maxMedia++;
         $('.member-edit-media').append('<input type="text" class="member-input media" name="member-media' + mediaId + '" id="member-media' + mediaId + '">');
         mediaId++;
     });
     //刪除個人影音連結
-    $('.form-btn.media-minus').on('click', function () {
+    $('.form-btn.media-minus').on('click', function() {
         $('.member-input.media').last().remove();
         if (maxMedia > 0) maxMedia--;
         if (mediaId > 1) mediaId--;
@@ -472,7 +472,7 @@ jQuery(document).ready(function ($) {
     //--------------------------------------收件匣mailbox page-----------------------------------------------
     //刪除全選
     var deleteAll = $('#mail-del-all');
-    deleteAll.on('click', function () {
+    deleteAll.on('click', function() {
         if (deleteAll.prop('checked')) {
             $("input[name='mail-del']").prop('checked', true);
         } else {
@@ -551,38 +551,48 @@ jQuery(document).ready(function ($) {
     test2.click(logout_Nav);
 
     function login_Nav() {
-
-        $('.login').remove();
-        $('.signup').remove();
-        navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-        navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-        navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-        test1.addClass('animated shake');
+        $('#nav-login').hide();
+        $('#nav-signup').hide();
+        $('#nav-myinbox-btn').show().css("display", "block");
+        $('#nav-my-member-link').show().css("display", "block");
+        $('#nav-logout').show().css("display", "block");
+        // $('.login').remove();
+        // $('.signup').remove();
+        // navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
+        // navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
+        // navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
+        // test1.addClass('animated shake');
     }
     //登出後nav-bar右上角的顯示
     function logout_Nav() {
-        $('.navbar-right li').remove();
-        navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-        navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
+        $('#nav-login').show().css("display", "block");
+        $('#nav-signup').show().css("display", "block");
+        $('#nav-myinbox-btn').hide();
+        $('#nav-my-member-link').hide();
+        $('#nav-logout').hide();
+        // $('.navbar-right li').remove();
+        // navbarRight.append('<li><a href="#" class="login">登入</a></li>');
+        // navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
     }
 
     //登入帳密錯誤動畫
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
     function error_idps() {
         $('.error-IdPs').addClass('is-visible');
-        $('.user-modal-container').addClass('animated shake').one(animationEnd, function () {
+        $('.user-modal-container').addClass('animated shake').one(animationEnd, function() {
             $(this).removeClass('animated shake');
         });
     }
     //mailbox 返回收件匣
-    $('#return-to-mailbox-list-btn').on('click', function () {
+    $('#return-to-mailbox-list-btn').on('click', function() {
 
         $('.mailbox-content-wrapper').hide();
         $('.mailbox-list-wrapper').show();
     });
 
     //mailbox-list點擊進入mailbox-content
-    $('.mailbox-list-tr').on('click', function () {
+    $('.mailbox-list-tr').on('click', function() {
 
         $('.mailbox-list-wrapper').hide();
         $('.mailbox-content-wrapper').show();
