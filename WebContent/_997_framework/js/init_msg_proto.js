@@ -63,7 +63,7 @@ msg.showOnNewMessage=function(msg){
 		r.find(".nxx_msgSenderNk").html(msgs[i].sendNk);
 		r.find(".nxx_msgDate").html(msgs[i].msgDate);
 		r.find(".nxx_msgRead").html(msgs[i].msgState);
-		r.css("display","table-raw");
+		r.css("display","table-row");
 		r.addClass("nxx_msg");
 		r.prop("id","msgId_"+msgs[i].msgId.toString());
 		r.appendTo("#msgBox");

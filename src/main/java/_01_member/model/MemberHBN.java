@@ -63,8 +63,21 @@ public class MemberHBN implements MemberDAO {
 
 	@Override
 	public Member getMember(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "from Member where userId = :id";
+		Member mb = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("id", id);
+			mb = (Member) q.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return mb;
 	}
 
 	@Override

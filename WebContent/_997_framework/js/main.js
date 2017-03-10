@@ -1,4 +1,18 @@
 // 初始化拿掉了...
+
+var login_Nav = function () {
+        $('#nav-login').hide();
+        $('#nav-signup').hide();
+        $('#nav-myinbox-btn').show().css("display", "block");
+        $('#nav-my-member-link').show().css("display", "block");
+        $('#nav-logout').show().css("display", "block");
+        // $('.login').remove();
+        // $('.signup').remove();
+        // navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
+        // navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
+        // navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
+        // test1.addClass('animated shake');
+    }
 jQuery(document).ready(function($) {
     var pic_base64 = '';
     //------變數------------
@@ -26,7 +40,8 @@ jQuery(document).ready(function($) {
         navSignButton = $('#nav-sign-button'),
         navLogoutButton = $('#nav-logout-button'),
         logoutButton = $('#logout'),
-        editMemberButton = $('#edit-member-btn')
+        editMemberButton = $('#edit-member-btn'),
+        onMyJamButton = $('#my-jam')
 
     //---------事件處理--------------
 
@@ -48,6 +63,10 @@ jQuery(document).ready(function($) {
     //------------------------------
     $("#update-member-pic").change(function() {
         readImage(this);
+    });
+    //---------按下#my-jam時------------
+    onMyJamButton.on('click', function () {
+        onMemberPageClick(sessionStorage.getItem("LoginId"));
     });
 
 
@@ -131,9 +150,11 @@ jQuery(document).ready(function($) {
                 data: { account, password }
             }).done((response) => {
                 if (response.loginSuccess) {
+                    console.log(response);
                     login_Nav();
                     closeModal();
-                    resolve(response);
+                    sessionStorage.setItem("LoginId", response.LoginId || '');
+                    sessionStorage.setItem("alias", response.alias || '');
                 } else {
                     error_idps();
                 }
@@ -149,14 +170,10 @@ jQuery(document).ready(function($) {
     function onMemberLoading(arg) {
         return new Promise((resolve, reject) => {
             console.log(arg);
-            $("#member-pic").attr("src", arg.Member.pic || sessionStorage.getItem('pic'));
+            $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-instrument").html(arg.Member.instrument);
             $("#member-name").html(arg.Member.alias);
             $("#member-intro").html(arg.Member.intro);
-            sessionStorage.setItem("pic", arg.Member.pic || '');
-            sessionStorage.setItem("instrument", arg.Member.instrument || '');
-            sessionStorage.setItem("alias", arg.Member.alias || '');
-            sessionStorage.setItem("intro", arg.Member.intro || '');
             // window.location.reload(false);
         });
     }
@@ -193,7 +210,7 @@ jQuery(document).ready(function($) {
         return new Promise((resolve, reject) => {
             let intro = $('#update-member-intro').val();
             let email = $('#update-member-email').val();
-            let alias = $('#udpate-member-name').val();
+            let alias = $('#update-member-name').val();
             let instruments = [];
             for (let i = 1; i <= maxInstruments; i++) {
                 instruments.push($(`#member-instrument${i}`).val());
@@ -215,13 +232,35 @@ jQuery(document).ready(function($) {
 
 
     function onEditMemberClick() {
-        $('#update-member-intro').val(sessionStorage.getItem('intro') || '');
-        $('#member-instruments-label').val(sessionStorage.getItem('') || '');
-        $('#udpate-member-name').val(sessionStorage.getItem('alias') || '');
-        $('#preview-pic').attr('src', sessionStorage.getItem('pic') || '');
+        $.ajax({
+            url: '/Jam/memberEdit',
+            type: 'POST',
+            datatype: 'json'
+        }).done(response => {
+            console.log(response);
+            $('#preview-pic').attr('src', response.Member.pic);
+            $('#update-member-name').html(response.Member.alias);
+            $('#update-member-intro').html(response.Member.intro);
+            // $().html();
+        });
     }
+    //本行測試用, 已成功, 會員頁面跳轉完成後可刪
+    $('#nav-my-member-link').on('click', function () {
+        onMemberPageClick(sessionStorage.getItem("LoginId"));
+    })
+    // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
+    function onMemberPageClick(memberId) {
+        console.log(memberId);
+        $.ajax({
+            url: '/Jam/goMemberPage',
+            type: 'POST',
+            datatype: 'json',
+            data: { memberId }
+        }).done(response => {
+            window.location.replace("http://localhost:8080/Jam/member.html");
+        });
 
-
+    }
 
 
 
@@ -485,27 +524,27 @@ jQuery(document).ready(function($) {
     // ------------------待ajax+servlet整合的function----------------------
     //登入後nav-bar右上角的顯示
 
-    var test1 = $('.test-btn1');
-    var test2 = $('.test-btn2');
-    var navbarRight = $('.navbar-right');
+    // var test1 = $('.test-btn1');
+    // var test2 = $('.test-btn2');
+    // var navbarRight = $('.navbar-right');
 
-    test1.click(login_Nav);
-    test2.click(logout_Nav);
+    // test1.click(login_Nav);
+    // test2.click(logout_Nav);
 
-    function login_Nav() {
+    // function login_Nav() {
 
-        $('.login').remove();
-        $('.signup').remove();
-        navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-        navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-        navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-    }
-    //登出後nav-bar右上角的顯示
-    function logout_Nav() {
-        $('.navbar-right li').remove();
-        navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-        navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
-    }
+    //     $('.login').remove();
+    //     $('.signup').remove();
+    //     navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
+    //     navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
+    //     navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
+    // }
+    // //登出後nav-bar右上角的顯示
+    // function logout_Nav() {
+    //     $('.navbar-right li').remove();
+    //     navbarRight.append('<li><a href="#" class="login">登入</a></li>');
+    //     navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
+    // }
 
     //註冊帳號重複
 
@@ -550,19 +589,7 @@ jQuery(document).ready(function($) {
     test1.click(login_Nav);
     test2.click(logout_Nav);
 
-    function login_Nav() {
-        $('#nav-login').hide();
-        $('#nav-signup').hide();
-        $('#nav-myinbox-btn').show().css("display", "block");
-        $('#nav-my-member-link').show().css("display", "block");
-        $('#nav-logout').show().css("display", "block");
-        // $('.login').remove();
-        // $('.signup').remove();
-        // navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-        // navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-        // navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-        // test1.addClass('animated shake');
-    }
+    
     //登出後nav-bar右上角的顯示
     function logout_Nav() {
         $('#nav-login').show().css("display", "block");

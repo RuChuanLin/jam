@@ -19,6 +19,7 @@ import _01_member.model.Member;
 /**
  * Servlet implementation class LoadingMember
  */
+//快要不會用到了
 @WebServlet("/loadingMember")
 public class LoadingMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;

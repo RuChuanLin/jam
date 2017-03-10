@@ -39,8 +39,9 @@ public class UpdatePerson extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
 		Map<String, Object> map = new HashMap<>();
-		Member sessionMb = (Member)session.getAttribute("Member");
-		String account = sessionMb.getAccount();
+		Member sessionMb = (Member) session.getAttribute("Member");
+		String account = session.getAttribute("LoginAcc").toString();
+		System.out.println("account: " + account);
 		String email = request.getParameter("email");
 		String alias = request.getParameter("alias");
 		String pic = request.getParameter("pic");
