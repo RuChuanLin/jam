@@ -14,11 +14,12 @@
 </head>
 
 <body>
-     <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -180,7 +181,7 @@
                     </div>
                     <div class="member-edit-name">
                         <label for="member-name" class="member-form-label-text">名稱</label>
-                        <input type="text" class="member-input name" id="udpate-member-name">
+                        <input type="text" class="member-input name" id="update-member-name">
                     </div>
                     <div class="member-edit-instruments">
                         <label for="member-instruments" class="member-form-label-text" id="member-instruments-label">樂器專長</label>
@@ -275,12 +276,28 @@
         <span>Jam Corporation © 2017  </span>
         <span>連絡我們</span>
         <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
-        </p>
     </div>
     <script src="_997_framework/jquery-3.1.1.min.js"></script>
     <script src="_997_framework/jquery.cookie.js"></script>
     <script src="_997_framework/js/main.js"></script>
     <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        (function () {
+            console.log(8383838);
+            $.ajax({
+                url: '/Jam/loadingMember',
+                type: 'POST',
+                datatype: 'json',
+                data: { LoginId: sessionStorage.getItem('LoginId') }
+            }).done(response => {
+                console.log(response);
+                $("#member-pic").attr("src", response.Member.pic || '');
+                $("#member-instrument").html(response.Member.instrument);
+                $("#member-name").html(response.Member.alias);
+                $("#member-intro-hide").html(response.Member.intro);
+            });
+        })();
+    </script>
 </body>
 
 </html>

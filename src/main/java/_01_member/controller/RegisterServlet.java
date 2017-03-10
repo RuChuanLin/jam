@@ -29,6 +29,8 @@ public class RegisterServlet extends HttpServlet {
 //		 讀取輸入資料
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+		
+		String alias = account.split("@")[0];
 		System.out.print(account+password);
 		Gson gson = new Gson();
 		MemberDAO dao = new MemberHBN();
@@ -49,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		// 沒問題
-		Member mb = new Member(account, password, null, false, account, true, null, null, null);
+		Member mb = new Member(account, password, null, false, account, true, alias, null, null);
 		dao.saveMember(mb);
 		 
 		map.put("regSuccess", true);
