@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import _01_member.model.Member;
+import _01_member.model.MemberDAO;
+import _01_member.model.MemberHBN;
 
 /**
  * Servlet implementation class LoadingMember
@@ -31,6 +33,9 @@ public class LoadingMember extends HttpServlet {
 		Map<String, Object> map = new HashMap<>();
 		HttpSession session = request.getSession();
 		PrintWriter pw = response.getWriter();
+		int id = Integer.parseInt(request.getParameter("LoginId"));
+		System.out.println(id);
+		MemberDAO dao = new MemberHBN();
 		Gson gson = new Gson();
 		String json = "";
 		if (session.getAttribute("Member") != null) {
@@ -38,6 +43,12 @@ public class LoadingMember extends HttpServlet {
 			map.put("Member", mb);
 			json = gson.toJson(map);
 			System.out.println("json: " + json);
+		}else{
+			Member mb = dao.getMember(id);
+			mb.setPassword("");
+			map.put("Member", mb);
+			session.setAttribute("Member", map);
+			json = gson.toJson(map);
 		}
 		pw.write(json);
 	}
