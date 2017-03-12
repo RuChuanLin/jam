@@ -1,10 +1,5 @@
 ﻿package _01_member.model;
 
-import java.io.IOException;
-import java.sql.Clob;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public interface MemberDAO {
@@ -32,7 +27,12 @@ public interface MemberDAO {
 	// 檢查密碼是否正確
 	public boolean checkPassword(String account, String password);
 
-	// 搜尋所有用戶名
-	public Collection<Member> getAllMembers();
+	//查詢有幾封新信
+	public long newMsg(int userId);
+	
+	//查詢站內信
+	public List<InnerMsg> getMsg(int userId,int start);
+	
+	
 
 }

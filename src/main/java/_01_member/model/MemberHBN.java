@@ -1,12 +1,11 @@
 package _01_member.model;
 
-import java.io.IOException;
-import java.sql.Clob;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -15,12 +14,12 @@ import _00_init.HibernateUtil;
 public class MemberHBN implements MemberDAO {
 	private static List<String> accountList = null;
 
-	public MemberHBN() {
-		if (accountList == null) {
-			accountList = new ArrayList<>();
-			getAccountList();
-		}
-	}
+//	public MemberHBN() {
+//		if (accountList == null) {
+//			accountList = new ArrayList<>();
+//			getAccountList();
+//		}
+//	}
 
 	@Override
 	public void getAccountList() {
@@ -29,7 +28,7 @@ public class MemberHBN implements MemberDAO {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			list = session.createQuery("from Member").list();
+			list = session.createQuery("from Member").getResultList();
 			for (Object o : list) {
 				Member m = (Member) o;
 				String account = m.getAccount();
@@ -71,7 +70,7 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("id", id);
-			mb = (Member) q.uniqueResult();
+			mb = (Member) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -90,7 +89,7 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("account", account);
-			mb = (Member) q.uniqueResult();
+			mb = (Member) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -117,7 +116,6 @@ public class MemberHBN implements MemberDAO {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
-		;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
@@ -156,20 +154,46 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
-	public Collection<Member> getAllMembers() {
-		Collection<Member> allMembers = new ArrayList<>();
+	public List<InnerMsg> getMsg(int userId, int start) {
+		String hql = "from InnerMsg where receiver = :userId and pk <= :start order by time desc";
+		List<InnerMsg> list =null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			allMembers = session.createQuery("from Member").list();
+			TypedQuery<InnerMsg> q = session.createQuery(hql);
+			q.setParameter("userId",userId);
+			q.setParameter("start",start);
+			q.setMaxResults(11);
+			list = q.getResultList();
 			tx.commit();
-		} catch (Exception e) {
-			if (tx != null)
-				tx.rollback();
-			System.out.println(e.getMessage());
-		}
-		return allMembers;
+			} catch (Exception e) {
+				if (tx != null)
+					tx.rollback();
+				System.out.println(e.getMessage());
+			}
+			return list;
 	}
+
+	@Override
+	public long newMsg(int userId) {
+		long msg = 0 ;
+		String hql = "Select count(*) from InnerMsg where receiver = :userId and state = false";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("userId",userId);
+			msg = (long) q.getSingleResult();
+			tx.commit();
+			} catch (Exception e) {
+				if (tx != null)
+					tx.rollback();
+				System.out.println(e.getMessage());
+			}
+			return msg;
+	}
+	
 
 }

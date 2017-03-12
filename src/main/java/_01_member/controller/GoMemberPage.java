@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +18,6 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-/**
- * Servlet implementation class GoMemberPage
- */
 @WebServlet("/goMemberPage")
 public class GoMemberPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;

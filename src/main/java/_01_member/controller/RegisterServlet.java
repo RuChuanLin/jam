@@ -1,6 +1,9 @@
 package _01_member.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.codec.binary.Base64;
 
 import com.google.gson.Gson;
 
@@ -51,7 +56,22 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		// 沒問題
-		Member mb = new Member(account, password, null, false, account, true, alias, null, null);
+		
+		File file = new File("C:/_JSP/workspace/Jam/WebContent/_996_image/pic.png");
+		InputStream is = new FileInputStream(file);
+		long length = file.length();
+		byte[] bytes = new byte[(int)length];
+		int out = 0;
+		int num = 0;
+		while (out < bytes.length && (num=is.read(bytes, out, bytes.length-out)) >= 0) {
+			out += num;
+		}
+		is.close();
+		byte[] pic = Base64.encodeBase64(bytes);
+		String picString = new String(pic);
+		picString = "data:image/png;base64,"+ picString;
+		
+		Member mb = new Member(account, password, null, false, account, true, alias, picString, null, null);
 		dao.saveMember(mb);
 		 
 		map.put("regSuccess", true);

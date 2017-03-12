@@ -65,8 +65,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(mb);
 		pw.flush();
 		System.out.println("成功登入");
-		session.setAttribute("LoginId", id);
-		session.setAttribute("LoginAcc", account);
+		session.setAttribute("Member", mb);
 		return;
 	}
 

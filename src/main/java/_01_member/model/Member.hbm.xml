@@ -35,5 +35,8 @@
         <property name="intro" type="java.lang.String">
             <column name="INTRO" length="1000" />
         </property>
+        <property name="videoLink" type="java.lang.String">
+            <column name="VIDEOLINK" />
+        </property>       
     </class>
 </hibernate-mapping>
