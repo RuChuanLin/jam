@@ -26,6 +26,11 @@ body {
     color: white;
 }
 
+.fb-loging-name {
+    padding: 17px 15px;
+    color: white;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -818,6 +823,8 @@ input[type="button"]:disabled {
 }
 
 .profolio-img {
+    display: block;
+    margin: 0 auto;
     border-radius: 50%;
     border: 5px solid #fff;
     width: 140px;

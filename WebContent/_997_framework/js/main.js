@@ -1,5 +1,6 @@
 // 初始化拿掉了...
 
+<<<<<<< HEAD
 var login_Nav = function () {
         $('#nav-login').hide();
         $('#nav-signup').hide();
@@ -14,6 +15,34 @@ var login_Nav = function () {
         // test1.addClass('animated shake');
     }
     
+=======
+var login_Nav = function() {
+    $('#nav-login').hide();
+    $('#nav-signup').hide();
+    $('#nav-myinbox-btn').show().css("display", "block");
+    $('#nav-my-member-link').show().css("display", "block");
+    $('#nav-logout').show().css("display", "block");
+
+};
+
+//登出後nav-bar右上角的顯示
+
+var logout_Nav = function() {
+    $('#nav-login').show().css("display", "block");
+    $('#nav-signup').show().css("display", "block");
+    $('#nav-myinbox-btn').hide();
+    $('#nav-my-member-link').hide();
+    $('#nav-logout').hide();
+
+};
+//close modal
+var close_modal = function() {
+    $('.user-modal').removeClass('is-visible');
+};
+
+
+
+>>>>>>> 27a94e6124009678b61dcc3539dc2a97a107365a
 jQuery(document).ready(function($) {
     var pic_base64 = '';
     //------變數------------
@@ -40,9 +69,9 @@ jQuery(document).ready(function($) {
         memberUpdateButton = $('#update-member'),
         navSignButton = $('#nav-sign-button'),
         navLogoutButton = $('#nav-logout-button'),
-        logoutButton = $('#logout'),
+        logoutButton = $('.nav-logout'),
         editMemberButton = $('#edit-member-btn'),
-        onMyJamButton = $('#my-jam')
+        onMyJamButton = $('#my-jam');
 
     //---------事件處理--------------
 
@@ -57,7 +86,8 @@ jQuery(document).ready(function($) {
     loginSubmit.on("click", () => {
         onLoginClick().then((arg) => onMemberLoading(arg));
     });
-    // logoutButton.on("click", onLogoutClick);
+    //-------- 按登出後--------------
+    logoutButton.on("click", onLogoutClick);
     memberUpdateButton.on("click", () => {
         onMemberUpdateClick().then((arg) => onMemberLoading(arg));
     });
@@ -67,7 +97,7 @@ jQuery(document).ready(function($) {
         readImage(this);
     });
     //---------按下#my-jam時------------
-    onMyJamButton.on('click', function () {
+    onMyJamButton.on('click', function() {
         onMemberPageClick(sessionStorage.getItem("LoginId"));
     });
 
@@ -154,7 +184,7 @@ jQuery(document).ready(function($) {
                 if (response.loginSuccess) {
                     console.log(response);
                     login_Nav();
-                    closeModal();
+                    close_modal();
                     sessionStorage.setItem("LoginId", response.LoginId || '');
                     sessionStorage.setItem("alias", response.alias || '');
                 } else {
@@ -183,9 +213,11 @@ jQuery(document).ready(function($) {
 
     function onLogoutClick() {
         $.post({
-                url: '/logoutMember'
-            })
-            //登出畫面，以下寫程式碼
+            url: '/logoutMember'
+        });
+        //登出畫面，以下寫程式碼
+        console.log('logout');
+        logout_Nav();
         window.location.reload(false);
         return;
     }
@@ -247,10 +279,10 @@ jQuery(document).ready(function($) {
         });
     }
     //本行測試用, 已成功, 會員頁面跳轉完成後可刪
-    $('#nav-my-member-link').on('click', function () {
-        onMemberPageClick(sessionStorage.getItem("LoginId"));
-    })
-    // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
+    $('#nav-my-member-link').on('click', function() {
+            onMemberPageClick(sessionStorage.getItem("LoginId"));
+        })
+        // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
     function onMemberPageClick(memberId) {
         console.log(memberId);
         $.ajax({
@@ -275,13 +307,10 @@ jQuery(document).ready(function($) {
     //open login-form form
     navRight.on('click', '.login', login_selected);
 
-    //close modal
-    function closeModal() {
-        formModal.removeClass('is-visible');
-    };
+
     formModal.on('click', function(event) {
         if ($(event.target).is(formModal) || $(event.target).is('.close-form')) {
-            closeModal();
+            close_modal();
         }
     });
     //close modal when clicking the esc keyboard button
@@ -539,6 +568,7 @@ jQuery(document).ready(function($) {
     test1.click(login_Nav);
     test2.click(logout_Nav);
 
+<<<<<<< HEAD
     
     //登出後nav-bar右上角的顯示
     function logout_Nav() {
@@ -549,6 +579,9 @@ jQuery(document).ready(function($) {
         $('#nav-logout').hide();
        
     }
+=======
+
+>>>>>>> 27a94e6124009678b61dcc3539dc2a97a107365a
 
     //登入帳密錯誤動畫
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
