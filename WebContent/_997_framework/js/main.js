@@ -13,6 +13,7 @@ var login_Nav = function () {
         // navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
         // test1.addClass('animated shake');
     }
+    
 jQuery(document).ready(function($) {
     var pic_base64 = '';
     //------變數------------
@@ -48,6 +49,7 @@ jQuery(document).ready(function($) {
     //在頁面刷新時會執行此函式, 此函式前半段是前往/Jam/loadingMember撈資料
     //撈完後執行onMemberLoading(), 也就是讓撈到的會員資料顯示在畫面上
 
+    // 按Fb登入
 
     //---------按註冊後--------------
     regSubmit.on("click", onSignupClick);
@@ -521,59 +523,7 @@ jQuery(document).ready(function($) {
     });
 
 
-    // ------------------待ajax+servlet整合的function----------------------
-    //登入後nav-bar右上角的顯示
-
-    // var test1 = $('.test-btn1');
-    // var test2 = $('.test-btn2');
-    // var navbarRight = $('.navbar-right');
-
-    // test1.click(login_Nav);
-    // test2.click(logout_Nav);
-
-    // function login_Nav() {
-
-    //     $('.login').remove();
-    //     $('.signup').remove();
-    //     navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-    //     navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-    //     navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-    // }
-    // //登出後nav-bar右上角的顯示
-    // function logout_Nav() {
-    //     $('.navbar-right li').remove();
-    //     navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-    //     navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
-    // }
-
-    //註冊帳號重複
-
-
-    // signupEmail.on('keyup', function() {
-    //     if ($(this).val() !== '') {
-    //         $.ajax({
-    //             type: "POST",
-    //             url: `http://localhost:8080/Jam/register`,
-    //             data: { 'userEmail': $(this).val() },
-    //             dataType: 'html'
-    //         })
-    //         .done(email_repeat(data))
-    //         .fail();
-    //     } else {
-    //         signupEmail.removeClass('is-visible');
-    //     }
-    // });
-
-
-    // function email_repeat(data) {
-    //     if (data == 'exist') {
-    //         signupEmail.next('span').addClass('is-visible');
-    //         return false;
-    //     } else {
-    //         signupEmail.next('span').removeClass('is-visible');
-    //     }
-
-    // }
+    
 
     //登入帳密錯誤
     function error_idps() {
@@ -597,9 +547,7 @@ jQuery(document).ready(function($) {
         $('#nav-myinbox-btn').hide();
         $('#nav-my-member-link').hide();
         $('#nav-logout').hide();
-        // $('.navbar-right li').remove();
-        // navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-        // navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
+       
     }
 
     //登入帳密錯誤動畫

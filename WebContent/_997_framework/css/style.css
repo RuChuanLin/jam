@@ -822,6 +822,8 @@ input[type="button"]:disabled {
     border: 5px solid #fff;
     width: 140px;
     height: 140px;
+    margin: 0 auto;
+    display: block;
 }
 
 .profolio-info-text {
