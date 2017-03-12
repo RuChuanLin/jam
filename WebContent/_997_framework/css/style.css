@@ -47,6 +47,16 @@ body {
 #nav-logout {
     display: none;
 }
+.nav-pic {
+    
+    margin: 15px auto;
+    border-radius: 50%;
+    border: 0.5px solid #607fad;
+    width: 22px;
+    height: 22px;
+    display: none;
+}
+
 
 
 /*主頁面header佈置與特效*/

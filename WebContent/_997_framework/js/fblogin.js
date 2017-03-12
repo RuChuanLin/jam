@@ -9,9 +9,10 @@ window.fbAsyncInit = function() {
 
 
     FB.getLoginStatus(function(response) {
+        console.log(response)
      if (response.status === 'connected') {
-        showName();
-        login_Nav();
+        // showName();
+        // login_Nav();
         // Logged into your app and Facebook.
         console.log('connected');
     } else if (response.status === 'not_authorized') {
@@ -40,13 +41,15 @@ window.fbAsyncInit = function() {
       console.log('Successful login for: ' + response.first_name);
       document.getElementById('fb-loging-name').innerHTML =
         'Hi, ' + response.first_name + '!';
+        document.getElementById('nav-pic').setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=small");
     });
   }
 
-function check_user(fbId, fbName){
+function check_user(fbId, fbName, fbpicture){
     //這裡要寫ajax 傳值進server
     console.log(fbId);
     console.log(fbName);
+    console.log(fbpicture);
 
 }
 // 按fb登入鍵時做事
@@ -58,8 +61,8 @@ document.getElementById('fb-login-btn').addEventListener('click', function() {
         showName();
         login_Nav();
         close_modal();
-        FB.api('/me', {fields: 'first_name'},function(response) {
-        check_user(response.id,response.first_name);
+        FB.api('/me', {fields: 'first_name,picture'},function(response) {
+        check_user(response.id,response.first_name,response.picture);
     });
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
@@ -80,8 +83,8 @@ document.getElementById('fb-login-btn2').addEventListener('click', function() {
         showName();
         login_Nav();
         close_modal();
-        FB.api('/me', {fields: 'first_name'},function(response) {
-        check_user(response.id,response.first_name);
+        FB.api('/me', {fields: 'first_name,picture'},function(response) {
+        check_user(response.id,response.first_name, response.picture);
     });
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
@@ -96,9 +99,13 @@ document.getElementById('fb-login-btn2').addEventListener('click', function() {
 
 //按登出時也fb登出
 document.getElementById('nav-logout').addEventListener('click', function(){
+    console.log(262626);
     FB.getLoginStatus(function(response){
+        console.log(response);
         if(response.status==='connected'){
              FB.logout(function(response){
+                console.log(response);
+
         location.replace('http://localhost:8080/Jam');
     });
          }else {
