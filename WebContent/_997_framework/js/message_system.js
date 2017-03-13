@@ -8,35 +8,32 @@ linker element:
 	service_messagebox: chkMessage
 	sys_msg_limit :訊息最大長度，整數
 
-
-標示用css類別：
-	nxx_msgbody : .....	
 */
 
 
 
 
-var msg=makeMessage();
-	
-	
-	function makeMessage(){
+(window.msg=function(){
 		var methods={
 			checkNewMessage : checkNewMessage,//檢查是否有新訊息
 			getMessage :　getMessage,//取得完整訊息
 			sendMessage : sendMessage,//發送訊息給指定使用者
 			chkMsgBody : checkMsgBody,//發送訊息前檢查，檢查訊息本文是否符合規定
 			checkMailto :checkMailto ,//發送訊息前檢查或當下，檢查寄件對象是否存在
-			showOnCheck :showOnCheck, //檢查完成後改變顯示內容，在現場實作，接收回應json物件。
-			showOnNewMessage : showOnNewMessage,//如果有新訊息則將訊息顯示出來
 			checkMsgLength : checkMsgLength, //檢查長度設定
-			showOnMsgSent : showOnMsgSent,//送出成功後改變畫面
-			udata : null,
-			isChecking :false, //是否正在檢查，如果有，就不要執行第二次。
-			msgLng : 0 //已輸入的訊息長度
-			
+			msgLng : 0, //已輸入的訊息長度
+			msgAll : [],	//所有訊息id，每次換頁需要重新初始化。
+			msgRng :  [0,0],//陣列，本頁所有的訊息內容。 0:start 1:end
+			msgSelected:[],//已選取的信件編號，每次換頁時清空。
+			msgEndPage:[],//每一頁的最後一筆訊息的Id
+			totalInbox : 0, //信箱內的信件總數
+			msgLocal :0 ,//local已載入的訊息總數。
+			idStr :"msg_Id",
+			deleteMsg :deleteMsg
 		}
-		//檢查有沒有新信，如果有呼叫showOnNewMessage
-		function checkNewMessage(){
+		
+		//檢查有沒有新信，如果有呼叫callback function
+		function checkNewMessage(cbf){
 			var req={
 				servType : "newMsg"
 			};
@@ -49,7 +46,7 @@ var msg=makeMessage();
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
-								showOnCheck(resp);
+								cbf(resp);
 							}
 							
 					}break;
@@ -60,26 +57,16 @@ var msg=makeMessage();
 			
 			
 		}
-		//現場實作，接到是否有新訊息的結果後改變顯示狀態。接收回傳的json物件。
-		var showOnCheck=function(resp){
-			
-		}
-		
-		//現場實作，接到新訊息內容後改變顯示的內容。接收一個json物件，含有回傳訊息內容。
-		var showOnNewMessage=null;
-		
-		//訊息傳送後改變顯示的畫面
-		var showOnMsgSent=null;
 		
 		
-		//取得訊息本體，取得後呼叫showOnNewMessage將內容寫出
-		function getMessage(){
-			var req=new Object();
-			var info=mem.extractCookie(mem.cookieKey);
-			req={
+		
+		//取得訊息本體，取得後呼叫callback function將內容寫出
+		function getMessage(cbf){			
+			var info=kie.getCookieJson(mem.cookieKey);
+			var req={
 				user_id : info.user_id,
 				servType : "getMsg",
-				rngStart : 0
+				rngStart : msg.msgRng[0]
 				};
 			
 			var xhr=new XMLHttpRequest();
@@ -90,7 +77,9 @@ var msg=makeMessage();
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
-								showOnNewMessage(resp);
+								if(resp.result!= -1){
+								msg.totalInbox=resp.result;}
+								cbf(resp);
 							}
 							
 					}break;
@@ -103,7 +92,7 @@ var msg=makeMessage();
 		}
 		
 		//發送訊息，由btn_send_ms.onclick呼叫，info，由外部提供。info：物件，結構見下方
-		function sendMessage(info){
+		function sendMessage(info,cbf){
 			var req=new Object();
 			var xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(res){
@@ -113,7 +102,7 @@ var msg=makeMessage();
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
-								msg.showOnMsgSent(resp);
+								cbf(resp);
 							}
 							
 					}break;
@@ -151,7 +140,8 @@ var msg=makeMessage();
 				}else{
 					count+=1;
 				}
-			}
+				}
+			
 
 			msg.msgLng=count;
 			
@@ -160,9 +150,24 @@ var msg=makeMessage();
 				return true;
 			}else{
 				return false;
-				}
-			
 		}
+				
+			}
+			
+		function deleteMsg(){
+			for(var s=0;s<msgSelected.length;s++){
+					console.log(selected[s]);
+			}			
+		}
+			
+			
+			
+				return methods;
+		}())
+			
+			
+		
+		
 		
 
 		
@@ -170,7 +175,8 @@ var msg=makeMessage();
 		
 		
 		
-		return methods
-	}
+		
+		
+	
 
 

@@ -2,49 +2,58 @@ $(document).ready(setup);
 
 
 var msgModel=null;
-var currentPage=0;
+
 function setup(){
 	msgModel=$("#msgModel");
 	msgModel.find(".nxx_msgSelected").change(onSelectOne);
 	$("#selectAll").on("click",onSelectAll);
-	$(".nxx_pagecontrol").on("click",swapPage);
-	$("#deleteMail").on("click",deleteMsg);
+	$("#lastPage").on("click",lastPage);
+	$("#nextPage").on("click",nextPage);
+	$("#deleteMsg").on("click",deleteMsg);
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
-	$("#checkMail").on("click",chkMsg);
-	$("#getMail").on("click",getMail);
-	//基於測試需求複寫此方法
-	$("#checkMail").on("click",chkMsg);
-	msg.checkNewMessage=function(){
-		var obj={servType : "newMsg"};
-		msg.showOnCheck(liar.fakeMailbox(obj));
-	};
+	stater.checkState(doLoggedIn,doLoggedOut);
 	
-	msg.showOnCheck=function(resp){
-		if(resp.result!=-1){
-			$("#newMessage").html("amount"+resp.result.toString());
+	function doLoggedIn(){
+		console.log("ininin");
+		msg.checkNewMessage(function(resp){
+			if(resp.result>0){
+				msg.getMessage(showNewMessage);}
+		});
+		
+		
+		var bgt=[checkNewMsg];
+		bgts.activateBgt(30000,bgt);
+		
+		function checkNewMsg(){
+				msg.checkNewMessage(function(resp){
+					console.log("新信： "+resp.result);
+				});
 		}
-	}
-	
-	msg.getMessage=function(){
-			var req=new Object();
-			req={
-				user_id : 1,
-				servType : "getMsg",
-				rngStart :  msg.msgRng[1]
-				};
-				//這邊未來要以callback的方式呼叫
-			msg.showOnNewMessage(liar.fakeMailbox(req));
 		
 	}
 	
-	msg.sendMessage=function(msg){
-		msg.showOnMsgSent;
+	function doLoggedOut(){
+		console.log("You are not logged in");
 	}
 	
-	msg.showOnMsgSent=function(){
-		$("responder5").html("傳送成功");
+	function msgOnScreen(){
+		var onScr=$(".nxx_msg[value=onDisplay]").length;
+		var onHid=$(".nxx_msg[value=onHidden]").toArray();
+		var count=10-onScr;
+		var page=0;
+			//把抓回來，需要顯示出來的訊息設成可見
+		if(onScr==0 || onScr<10){
+			for(var p=0;p<count;p++){
+				console.log("asvs");
+				$(onHid[p]).css("display","block");
+				$(onHid[p]).attr("value","onPage");
+				$(onHid[p]).attr("value","onDisplay");
+			}		
+		}
 	}
+	
+
 	
 	function deleteMsg(){
 		var amtSelected=msg.msgSelected.length;
@@ -52,6 +61,7 @@ function setup(){
 			return null;
 		}
 		if(confirm("確定刪除所選訊息?")){
+				msg.deleteMsg();
 				for(var r=0;r<amtSelected;r++){
 				var msgId="#"+msg.idStr+msg.msgSelected[r];
 				$(msgId).remove();
@@ -61,15 +71,12 @@ function setup(){
 		}
 		msgOnScreen();
 		
-		
-
 	}
 
 	
 	function onSelectAll(event){
-		var selection=$("[id^='msgId_']").find(".nxx_msgId").get();
+		var selection=$("[id^='msgId_']").find(".nxx_msgId").html();
 		if(event.target.checked){
-				console.log("deleted");
 				for(var i=0;i<selection.length;i++){
 					selection[i].checked=false;
 				}
@@ -99,123 +106,93 @@ function setup(){
 		
 	}
 	
-	
-}
 
 
-msg.showOnCheck=function(chk){
-	$("#new_msg").html(chk.result);	
-}
-
-msg.showOnNewMessage=function(message){
-	var messages=message.msgs;
-	msg.totalInbox=message.result;
-	for(var i=0;i<messages.length;i++){
-		if(msg.msgRng[0]>messages[i].msgId){msg.msgRng[0]=messages[i].msgId;}
-		if(msg.msgRng[1]<messages[i].msgId){msg.msgRng[1]=messages[i].msgId;}
-		msg.msgAll.push(messages[i].msgId);
-		r=msgModel.clone(true);
-		msg.msgLocal+=1;
-		r.find(".nxx_msgTitle").html(messages[i].msgTitle);
-		r.find(".nxx_msgBody").html(messages[i].msgBody);
-		r.find(".nxx_msgId").html(messages[i].msgId);
-		r.find(".nxx_msgSender").html(messages[i].sendId);
-		r.find(".nxx_msgSenderNk").html(messages[i].sendNk);
-		r.find(".nxx_msgDate").html(messages[i].msgDate);
-		r.find(".nxx_msgRead").html(messages[i].msgState);
-		r.css("display","none");
-		r.addClass("nxx_msg");
-		r.attr("value","onHidden");
-		$(".nxx_pages").html(Math.ceil(i/10));
-		r.prop("id",msg.idStr+messages[i].msgId.toString());
-		r.appendTo("#msgBox");
-		
-	}
-	msgOnScreen();
-	
-	
-
-		
-	
-}
-
-	function msgOnScreen(){
-		var onScr=$(".nxx_msg[value=onDisplay]").length;
-		var onHid=$(".nxx_msg[value=onHidden]").toArray();
-		var count=10-onScr;
-		var page=0;
-			//把抓回來，需要顯示出來的訊息設成可見
-		if(onScr==0 || onScr<10){
-			for(var p=0;p<count;p++){
-				console.log("asvs");
-				$(onHid[p]).css("display","block");
-				$(onHid[p]).attr("value","onPage");
-				$(onHid[p]).attr("value","onDisplay");
-			}		
+    function showNewMessage(message){
+		var messages=message.msgs;
+		msg.totalInbox=message.result;
+		for(var i=0;i<messages.length;i++){
+			if(msg.msgRng[0]>messages[i].msgId){msg.msgRng[0]=messages[i].msgId;}
+			if(msg.msgRng[1]<messages[i].msgId){msg.msgRng[1]=messages[i].msgId;}
+			msg.msgAll.push(messages[i].msgId);
+			r=msgModel.clone(true);
+			msg.msgLocal+=1;
+			r.find(checkbox).attr("checked",false);
+			r.find(".nxx_msgTitle").html(messages[i].msgTitle);
+			r.find(".nxx_msgBody").html(messages[i].msgBody);
+			r.find(".nxx_msgId").html(messages[i].msgId);
+			r.find(".nxx_msgSender").html(messages[i].sendId);
+			r.find(".nxx_msgSenderNk").html(messages[i].sendNk);
+			r.find(".nxx_msgDate").html(messages[i].msgDate);
+			r.find(".nxx_msgRead").html(messages[i].msgState);
+			r.css("display","none");
+			r.addClass("nxx_msg");
+			r.attr("value","onHidden");
+			$(".nxx_pages").html(Math.ceil(i/10));
+			r.prop("id",msg.idStr+messages[i].msgId.toString());
+			r.appendTo("#msgBox");
+			
 		}
-		//把抓回來，不需要顯示出來的訊息設成不可見
-		/*for(var k=onScr;k<count;k++){
-			console.log("poaaa");
-			$(onHid[k]).attr("value","onHidden");
-		}*/
-	}
-
-
-function deleteMsg(){
-	//刪除訊息
-	for(var i=0;i<msg.msgSelected;i++){
-		var id="#"+"#"+msg.idStr+msg.msgSelected[i];
-		$(id).remove();
-		var tgt=msg.msgAll.indexOf(msg.msgSelected[i])
-		msg.msgAll.splice(tgt,1);
-		mag.totalInbox-1;
-	}
-	msgOnScreen();
-	
-	
-	
-}
-
-function checkLength(){
-	msg.checkMsgLength(this);
-	$("#responder4").html("message length :"+msg.msgLng);
-	console.log(msg.msgLng);
-}
-
-function sendMessage(){
-	var data=mem.extractCookie(mem.cookieKey);
-
-	var message={
-	sender: data.user_id,//寄件者id
-	toUser :$("#mailto").val() ,//傳送對象
-	title : $("#mesTitle").val() ,//訊息標題
-	msg : $("#msgArea").val() ,//訊息本體
+		msgOnScreen();
 		
-	};
-		if(msg.chkMsgBody(message)){
-			msg.sendMessage(message)
-		}else{console.log("blank in neccesary field");}
-	console.log(message);
-		msg.sendMessage(message);
+		
+
+			
 	
 }
 
 
-function chkMsg(){
-	msg.checkNewMessage();
-}
-
-function getMail(){
-	msg.getMessage();
-}
 
 
-function swapPage(event){
-
-	switch(event.target.value){
-			case "上一頁":lastPage();break;
-			case "下一頁":nextPage();break;
+	function deleteMsg(){
+		//刪除訊息
+		for(var i=0;i<msg.msgSelected;i++){
+			var id="#"+"#"+msg.idStr+msg.msgSelected[i];
+			$(id).remove();
+			var tgt=msg.msgAll.indexOf(msg.msgSelected[i])
+			msg.msgAll.splice(tgt,1);
+			mag.totalInbox-1;
+		}
+		msgOnScreen();
+		
+		
+		
 	}
+
+	function checkLength(){
+		msg.checkMsgLength(this);
+		$("#responder4").html("message length :"+msg.msgLng);
+		console.log(msg.msgLng);
+	}
+
+	function sendMessage(){
+		var data=mem.extractCookie(mem.cookieKey);
+
+		var message={
+		sender: data.user_id,//寄件者id
+		toUser :$("#mailto").val() ,//傳送對象
+		title : $("#mesTitle").val() ,//訊息標題
+		msg : $("#msgArea").val() ,//訊息本體
+			
+		};
+			if(msg.chkMsgBody(message)){
+				msg.sendMessage(message)
+			}else{console.log("blank in neccesary field");}
+		console.log(message);
+			msg.sendMessage(message);
+		
+	}
+
+
+	function chkMsg(){
+		msg.checkNewMessage();
+	}
+
+	function getMail(){
+		msg.getMessage();
+	}
+
+
 	
 	function nextPage(){
 		var onScr=$(".nxx_msg[value=onDisplay]").toArray();
@@ -227,15 +204,18 @@ function swapPage(event){
 		if(limit==0){
 			if(msg.msgLocal<msg.totalInbox){
 				console.log("getNewMessage");
-				msg.getMessage();
+				msg.getMessage(showNewMessage);
 			}else{
 				console.log("nomore on server");
 				return;
 			}
 			
 		}
+		
 		for(var g=0;g<onScr.length;g++){
 			$(onScr[g]).css("display","none");
+			$(onScr[g]).css("display","none");
+			$(onScr[g]).attr("checked","false");
 			$(onScr[g]).attr("value","onHidden");			
 		}
 		var st=start+limit;
@@ -244,10 +224,10 @@ function swapPage(event){
 				$(msgId).css("display","block");
 				$(msgId).attr("value","onDisplay");
 		}
-		
-		
-		
 	}
+		
+		
+		
 	function lastPage(){
 		var onScr=$(".nxx_msg[value=onDisplay]").toArray();
 		var seek=parseInt($(onScr[0]).find(".nxx_msgId").html());
@@ -262,6 +242,7 @@ function swapPage(event){
 		
 		
 		for(var g=0;g<onScr.length;g++){
+			$(onScr[g]).attr("checked","false");
 			$(onScr[g]).css("display","none");
 			$(onScr[g]).attr("value","onHidden");			
 		}
@@ -275,6 +256,7 @@ function swapPage(event){
 	
 	
 }
+
 
 
 
