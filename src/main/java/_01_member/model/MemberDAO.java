@@ -18,14 +18,14 @@ public interface MemberDAO {
 	// 檢查用戶是否已存在
 	public boolean idExists(String account);
 
+	// 檢查密碼是否正確
+	public boolean checkPassword(String account, String password);
+	
 	// 儲存修改的會員資料
 	public int updateMember(Member mem);
 
 	// 刪除會員資料
 	public int deleteMember(String pk);
-
-	// 檢查密碼是否正確
-	public boolean checkPassword(String account, String password);
 
 	//查詢有幾封新信
 	public long newMsg(int userId);

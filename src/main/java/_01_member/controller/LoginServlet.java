@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 		
 		Member mb = dao.getMemberByAccount(account);
 		int id = mb.getUserId();
+		map.put("mb",mb);
 		map.put("alias", mb.getAlias());
 		map.put("LoginId", id);
 		String json = new Gson().toJson(map);

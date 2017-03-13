@@ -20,7 +20,7 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-@WebServlet("goMemberPage")
+@WebServlet("MessageBox")
 public class MessageBox extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

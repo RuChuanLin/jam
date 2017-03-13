@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<Form Action="goMemberPage.do" method="POST">
+	<Form Action="MessageBox.do" method="POST">
     <Table>
          <TR>
              <TD align="RIGHT">辦法：</TD>

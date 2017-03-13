@@ -14,12 +14,12 @@ import _00_init.HibernateUtil;
 public class MemberHBN implements MemberDAO {
 	private static List<String> accountList = null;
 
-//	public MemberHBN() {
-//		if (accountList == null) {
-//			accountList = new ArrayList<>();
-//			getAccountList();
-//		}
-//	}
+	public MemberHBN() {
+		if (accountList == null) {
+			accountList = new ArrayList<>();
+			getAccountList();
+		}
+	}
 
 	@Override
 	public void getAccountList() {
@@ -109,6 +109,16 @@ public class MemberHBN implements MemberDAO {
 		}
 		return exists;
 	}
+	
+	@Override
+	public boolean checkPassword(String account, String password) {
+		boolean result = false;
+		Member mb = getMemberByAccount(account);
+		if (password.trim().equals(mb.getPassword())) {
+			result = true;
+		}
+		return result;
+	}
 
 	@Override
 	public int updateMember(Member mem) {
@@ -141,16 +151,6 @@ public class MemberHBN implements MemberDAO {
 	public int deleteMember(String pk) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public boolean checkPassword(String account, String password) {
-		boolean result = false;
-		Member mb = getMemberByAccount(account);
-		if (password.trim().equals(mb.getPassword())) {
-			result = true;
-		}
-		return result;
 	}
 
 	@Override
