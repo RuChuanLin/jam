@@ -30,6 +30,9 @@ public interface MemberDAO {
 	//查詢有幾封新信
 	public long newMsg(int userId);
 	
+	//查詢總共幾封信
+	public long allMsg(int userId);
+	
 	//查詢站內信
 	public List<InnerMsg> getMsg(int userId,int start);
 	

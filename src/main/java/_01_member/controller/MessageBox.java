@@ -34,9 +34,12 @@ public class MessageBox extends HttpServlet {
 		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
-
+		int start = 0;
 		String servType = request.getParameter("servType");
-		int rngStart = Integer.parseInt(request.getParameter("rngStart"));
+		String rngStart = request.getParameter("rngStart");
+		if (rngStart!= null){
+		start = Integer.parseInt(rngStart);
+		}
 //		int userId = mem.getUserId();
 		int userId = Integer.parseInt(request.getParameter("userId"));
 
@@ -51,15 +54,17 @@ public class MessageBox extends HttpServlet {
 
 		if (servType.equals("getMsg")) {
 			List<InnerMsg> msgs = null;
-			if (rngStart == -1) {
-				rngStart=Integer.MAX_VALUE;
-				msgs = dao.getMsg(userId, rngStart);
+			if (start == -1) {
+				start=Integer.MAX_VALUE;
+				msgs = dao.getMsg(userId, start);
 				if(msgs.size()>10)
 					msgs.remove(10);
 			}else {
-				msgs = dao.getMsg(userId, rngStart);
+				msgs = dao.getMsg(userId, start);
 				msgs.remove(0);
 			}
+			map.put("result",0);
+			map.put("msgs", msgs);
 			pw.write(gson.toJson(msgs));
 			pw.flush();
 			System.out.println("讀取站內信");

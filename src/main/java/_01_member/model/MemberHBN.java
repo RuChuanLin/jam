@@ -195,5 +195,25 @@ public class MemberHBN implements MemberDAO {
 			return msg;
 	}
 	
+	@Override
+	public long allMsg(int userId) {
+		long msg = 0 ;
+		String hql = "Select count(*) from InnerMsg where receiver = :userId and state = false";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("userId",userId);
+			msg = (long) q.getSingleResult();
+			tx.commit();
+			} catch (Exception e) {
+				if (tx != null)
+					tx.rollback();
+				System.out.println(e.getMessage());
+			}
+			return msg;
+	}
+	
 
 }

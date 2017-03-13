@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+
 		MemberDAO dao = new MemberHBN();
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter pw = response.getWriter();
@@ -55,10 +56,9 @@ public class LoginServlet extends HttpServlet {
 		map.put("loginSuccess", true);
 		
 		Member mb = dao.getMemberByAccount(account);
-		int id = mb.getUserId();
-		map.put("mb",mb);
 		map.put("alias", mb.getAlias());
-		map.put("LoginId", id);
+		map.put("LoginId", mb.getUserId());
+		map.put("pic", mb.getPic());
 		String json = new Gson().toJson(map);
 		System.out.println(json);
 		pw.write(json);
