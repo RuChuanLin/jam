@@ -26,10 +26,37 @@ body {
     color: white;
 }
 
+.fb-loging-name {
+    padding: 17px 15px;
+    color: white;
+}
+
 body {
     padding: 0;
     margin: 0;
 }
+
+#nav-myinbox-btn {
+    display: none;
+}
+
+#nav-my-member-link {
+    display: none;
+}
+
+#nav-logout {
+    display: none;
+}
+.nav-pic {
+    
+    margin: 15px auto;
+    border-radius: 50%;
+    border: 0.5px solid #607fad;
+    width: 22px;
+    height: 22px;
+    display: none;
+}
+
 
 
 /*主頁面header佈置與特效*/
@@ -806,6 +833,8 @@ input[type="button"]:disabled {
 }
 
 .profolio-img {
+    display: block;
+    margin: 0 auto;
     border-radius: 50%;
     border: 5px solid #fff;
     width: 140px;
@@ -836,7 +865,7 @@ input[type="button"]:disabled {
     width: 400px;
     height: auto;
     margin: 5px auto;
-    pointer-events:
+    /*pointer-events:*/
 }
 
 
@@ -1151,7 +1180,7 @@ iframe {
     cursor: pointer;
     border-top: 1px solid #645F5F;
     border-bottom: 1px solid #645F5F;
-    display:  none;
+    display: none;
 }
 
 .mailbox-bottom {
@@ -1182,7 +1211,7 @@ iframe {
 }
 
 .mailbox-table-body tr:nth-child(even) {
-    background:
+    /*background:*/
 }
 
 .mailbox-table-body tr:nth-child(odd) {}

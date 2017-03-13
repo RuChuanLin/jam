@@ -1,4 +1,33 @@
 // 初始化拿掉了...
+
+var login_Nav = function () {
+    $('#nav-login').hide();
+    $('#nav-signup').hide();
+    $('.nav-pic').show().css("display", "block");
+    $('#nav-myinbox-btn').show().css("display", "block");
+    $('#nav-my-member-link').show().css("display", "block");
+    $('#nav-logout').show().css("display", "block");
+
+};
+
+//登出後nav-bar右上角的顯示
+
+var logout_Nav = function () {
+    $('#nav-login').show().css("display", "block");
+    $('#nav-signup').show().css("display", "block");
+    $('.nav-pic').hide();
+    $('#nav-myinbox-btn').hide();
+    $('#nav-my-member-link').hide();
+    $('#nav-logout').hide();
+
+};
+//close modal
+var close_modal = function () {
+    $('.user-modal').removeClass('is-visible');
+};
+
+
+
 jQuery(document).ready(function ($) {
     var pic_base64 = '';
     //------變數------------
@@ -25,9 +54,9 @@ jQuery(document).ready(function ($) {
         memberUpdateButton = $('#update-member'),
         navSignButton = $('#nav-sign-button'),
         navLogoutButton = $('#nav-logout-button'),
-        logoutButton = $('#logout'),
+        logoutButton = $('.nav-logout'),
         editMemberButton = $('#edit-member-btn'),
-        onMyJamButton = $('#my-jam')
+        onMyJamButton = $('#my-jam');
 
     //---------事件處理--------------
 
@@ -38,14 +67,18 @@ jQuery(document).ready(function ($) {
     //---------按註冊後--------------
     regSubmit.on("click", onSignupClick);
     //---------按登入後--------------
-    loginSubmit.on("click", () => {
-        onLoginClick().then((arg) => onMemberLoading(arg));
-    });
-    // logoutButton.on("click", onLogoutClick);
+    // loginSubmit.on("click", () => {
+    //     onLoginClick().then((arg) => onMemberLoading(arg));
+    // });
+    loginSubmit.on("click", onLoginClick);
+    //-------- 按登出後--------------
+    logoutButton.on("click", onLogoutClick);
+    //--------會員編輯鈕------------
+    editMemberButton.on("click", onEditMemberClick);
+    //--------按會員更新-------------
     memberUpdateButton.on("click", () => {
         onMemberUpdateClick().then((arg) => onMemberLoading(arg));
     });
-    editMemberButton.on("click", onEditMemberClick);
     //------------------------------
     $("#update-member-pic").change(function () {
         readImage(this);
@@ -138,9 +171,10 @@ jQuery(document).ready(function ($) {
                 if (response.loginSuccess) {
                     console.log(response);
                     login_Nav();
-                    closeModal();
+                    close_modal();
                     sessionStorage.setItem("LoginId", response.LoginId || '');
                     sessionStorage.setItem("alias", response.alias || '');
+                    resolve(response);
                 } else {
                     error_idps();
                 }
@@ -156,8 +190,19 @@ jQuery(document).ready(function ($) {
     function onMemberLoading(arg) {
         return new Promise((resolve, reject) => {
             console.log(arg);
+            if (arg.Member.url) {
+                let url = arg.Member.url.split(' ');
+                console.log(url);
+                $('#media-video-list').empty();
+                url.map(v => {
+                    $('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`);
+                });
+            }
+            if (arg.Member.instrument) {
+                let instrument = arg.Member.instrument.split(' ');
+                $("#member-instrument").html(instrument.join(' / '));
+            }
             $("#member-pic").attr("src", arg.Member.pic || '');
-            $("#member-instrument").html(arg.Member.instrument);
             $("#member-name").html(arg.Member.alias);
             $("#member-intro").html(arg.Member.intro);
             // window.location.reload(false);
@@ -168,8 +213,10 @@ jQuery(document).ready(function ($) {
     function onLogoutClick() {
         $.post({
             url: '/logoutMember'
-        })
+        });
         //登出畫面，以下寫程式碼
+        console.log('logout');
+        logout_Nav();
         window.location.reload(false);
         return;
     }
@@ -192,23 +239,35 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    // 如川3/13完成，這裡非常複雜，如果你沒有十足把握千萬別動，萬一你動了回不來不要問我，直接GIT還原
     function onMemberUpdateClick() {
         return new Promise((resolve, reject) => {
             let intro = $('#update-member-intro').val();
             let email = $('#update-member-email').val();
             let alias = $('#update-member-name').val();
-            let instruments = [];
-            for (let i = 1; i <= maxInstruments; i++) {
-                instruments.push($(`#member-instrument${i}`).val());
-            }
+            let instruments = new Array;
             console.log(instruments);
+            let instru = sessionStorage.getItem('instrument')
+            instruments = instru.split(',');
+            console.log(instruments);
+            // for (let i = 1; i <= maxInstruments; i++) {
+            //     instruments.push($(`#member-instrument${i}`).val());
+            // }
+            let url_arr = [];
+            let raw_arr = sessionStorage.getItem('url');
+            raw_arr = raw_arr.split(',');
+            console.log(raw_arr);
+            raw_arr.map(v => {
+                v ? url_arr.push(v) : null;
+            });
+            console.log(url_arr);
             let pic = pic_base64;
             $.ajax({
                 url: `/Jam/updatePerson`,
                 cache: true,
                 dataType: 'json',
                 type: 'POST',
-                data: { instruments, intro, email, alias, pic }
+                data: { instruments, intro, email, alias, pic, url_arr }
             }).done((response) => {
                 resolve(response);
             }).fail();
@@ -216,8 +275,18 @@ jQuery(document).ready(function ($) {
 
     }
 
-
+    // 如川3/13完成，這裡非常複雜，如果你沒有十足把握千萬別動，萬一你動了回不來不要問我，直接GIT還原
     function onEditMemberClick() {
+        //刪除樂器專長欄位
+        $('.form-btn.instruments-minus').on('click', function () {
+            $('.member-input.instruments').last().remove();
+            if (instrumentId > 0) maxInstruments--;
+        });
+        //刪除個人影音連結
+        $('.form-btn.media-minus').on('click', function () {
+            $('.member-input.media').last().remove();
+            if (mediaId > 1) mediaId--;
+        });
         $.ajax({
             url: '/Jam/memberEdit',
             type: 'POST',
@@ -227,11 +296,87 @@ jQuery(document).ready(function ($) {
             $('#preview-pic').attr('src', response.Member.pic);
             $('#update-member-name').html(response.Member.alias);
             $('#update-member-intro').html(response.Member.intro);
-            // $().html();
+            //新增樂器專長欄位
+            let instrumentId, instrument;
+            let instrument_arr = [];
+            $('.member-edit-instruments.list').empty();
+            if (response.Member.instrument) {
+                instrument = response.Member.instrument.split(' ');
+                instrumentId = instrument.length + 1;
+                instrument.map((v, i) => {
+                    $('.member-edit-instruments.list').append(`<input type="text" class="member-input instruments ${i + 1}" id="member-instrument${i + 1}" value="${instrument[i]}">`);
+                });
+            } else {
+                instrumentId = 1
+            }
+            console.log(instrumentId);
+            $('.form-btn.instruments-plus').on('click', function () {
+                if (instrumentId > 5) return;
+                $('.member-edit-instruments.list').append(`<input type="text" class="member-input instruments ${instrumentId}" id="member-instrument${instrumentId}">`);
+                instrumentId++;
+            });
+            $(document).on('change', `.member-input.instruments`, function () {
+                let id = this.id;
+                let k = $(`#${id}`).val();//印出選取中的值
+                let n = this.className.substr(this.className.lastIndexOf(' ') + 1);//輸入列編號
+                if (k) {
+                    instrument_arr[n - 1] = k;
+                } else {
+                    instrument_arr[n - 1] = '';
+                }
+                sessionStorage.setItem('instrument', instrument_arr);
+            });
+            //-----以下是影音連結----
+            let url, mediaId;
+            let raw_arr = [];
+            $('.member-edit-media.list').empty();
+            if (response.Member.url) {
+                url = response.Member.url.split(' ');
+                url.map((v, i) => {
+                    $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${i + 1}" id="member-media${i + 1}" value="https://youtu.be/${url[i]}"><spam></spam></div>`);
+                });
+                mediaId = url.length + 1;
+            } else {
+                mediaId = 1
+            }
+            // -------以下是影音連結的新增按鈕, 包含新增、檢查網址、設定sessionStorage
+            // -------如果你不熟，拜託不要改---------
+
+            sessionStorage.setItem('url', url);
+            $(document).on('change', `.member-input.media`, function () {
+                // console.log(this.className);//本行印出選擇中的className
+                // console.log(this.id);//本行印出選擇中的id
+                let id = this.id;
+                let text = $(`#${id}`);
+                let k = $(`#${id}`).val();//印出選取中的值
+                let n = this.className.substr(this.className.lastIndexOf(' ') + 1);//輸入列編號
+                if (k.indexOf('https://www.youtube.com/watch?v=') === 0 && k.substr(k.indexOf('=') + 1).length === 11) {
+                    text.next().html(`OK!`);
+                    url[n - 1] = k.substr(k.indexOf('=') + 1);
+                } else if (k.indexOf('https://youtu.be/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
+                    text.next().html(`OK!`);
+                    url[n - 1] = k.substr(k.lastIndexOf('/') + 1);
+                } else if (k.indexOf('https://www.youtube.com/embed/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
+                    text.next().html(`OK!`);
+                    url[n - 1] = k.substr(k.lastIndexOf('/') + 1);
+                } else {
+                    text.next().html(`請確認網址`);
+                    url[n - 1] = '';
+                }
+                sessionStorage.setItem('url', url);
+            });
+            //新增個人影音連結
+            $('.form-btn.media-plus').click(function () {
+                if (mediaId > 6) return;
+                $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${mediaId}" id="member-media${mediaId}"><spam></spam></div>`);
+                mediaId++;
+            });
         });
     }
+
+
     //本行測試用, 已成功, 會員頁面跳轉完成後可刪
-    $('#test-member-page').on('click', function () {
+    $('#nav-my-member-link').on('click', function () {
         onMemberPageClick(sessionStorage.getItem("LoginId"));
     })
     // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
@@ -252,6 +397,7 @@ jQuery(document).ready(function ($) {
 
 
 
+
     //-------------------------------------
 
     //open sign-up form
@@ -259,13 +405,10 @@ jQuery(document).ready(function ($) {
     //open login-form form
     navRight.on('click', '.login', login_selected);
 
-    //close modal
-    function closeModal() {
-        formModal.removeClass('is-visible');
-    };
+
     formModal.on('click', function (event) {
         if ($(event.target).is(formModal) || $(event.target).is('.close-form')) {
-            closeModal();
+            close_modal();
         }
     });
     //close modal when clicking the esc keyboard button
@@ -460,40 +603,6 @@ jQuery(document).ready(function ($) {
     });
 
 
-    //新增樂器專長欄位
-    var maxInstruments = 0,
-        instrumentId = 1;
-    $('.form-btn.instruments-plus').on('click', function () {
-        if (maxInstruments >= 5) return;
-        maxInstruments++;
-        $('.member-edit-instruments').append(`<input type="text" class="member-input instruments" id="member-instrument${instrumentId}">`);
-        instrumentId++;
-    });
-    //刪除樂器專長欄位
-    $('.form-btn.instruments-minus').on('click', function () {
-        $('.member-input.instruments').last().remove();
-        if (maxInstruments > 0) maxInstruments--;
-        if (instrumentId > 1) instrumentId--;
-    });
-
-
-    //新增個人影音連結
-    var mediaId = 1,
-        maxMedia = 0;
-    $('.form-btn.media-plus').click(function () {
-        if (maxMedia >= 6) return;
-        maxMedia++;
-        $('.member-edit-media').append('<input type="text" class="member-input media" name="member-media' + mediaId + '" id="member-media' + mediaId + '">');
-        mediaId++;
-    });
-    //刪除個人影音連結
-    $('.form-btn.media-minus').on('click', function () {
-        $('.member-input.media').last().remove();
-        if (maxMedia > 0) maxMedia--;
-        if (mediaId > 1) mediaId--;
-    });
-
-
     //--------------------------------------收件匣mailbox page-----------------------------------------------
     //刪除全選
     var deleteAll = $('#mail-del-all');
@@ -510,27 +619,27 @@ jQuery(document).ready(function ($) {
     // ------------------待ajax+servlet整合的function----------------------
     //登入後nav-bar右上角的顯示
 
-    var test1 = $('.test-btn1');
-    var test2 = $('.test-btn2');
-    var navbarRight = $('.navbar-right');
+    // var test1 = $('.test-btn1');
+    // var test2 = $('.test-btn2');
+    // var navbarRight = $('.navbar-right');
 
-    test1.click(login_Nav);
-    test2.click(logout_Nav);
+    // test1.click(login_Nav);
+    // test2.click(logout_Nav);
 
-    function login_Nav() {
+    // function login_Nav() {
 
-        $('.login').remove();
-        $('.signup').remove();
-        navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-        navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-        navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-    }
-    //登出後nav-bar右上角的顯示
-    function logout_Nav() {
-        $('.navbar-right li').remove();
-        navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-        navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
-    }
+    //     $('.login').remove();
+    //     $('.signup').remove();
+    //     navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
+    //     navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
+    //     navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
+    // }
+    // //登出後nav-bar右上角的顯示
+    // function logout_Nav() {
+    //     $('.navbar-right li').remove();
+    //     navbarRight.append('<li><a href="#" class="login">登入</a></li>');
+    //     navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
+    // }
 
     //註冊帳號重複
 
@@ -575,24 +684,11 @@ jQuery(document).ready(function ($) {
     test1.click(login_Nav);
     test2.click(logout_Nav);
 
-    function login_Nav() {
 
-        $('.login').remove();
-        $('.signup').remove();
-        navbarRight.append('<li><a href="#"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>');
-        navbarRight.append('<li><a href="member.html" class="member-link">我的 Jam</a></li>');
-        navbarRight.append('<li><a href="#" class="logout">登出</a></li>');
-        test1.addClass('animated shake');
-    }
-    //登出後nav-bar右上角的顯示
-    function logout_Nav() {
-        $('.navbar-right li').remove();
-        navbarRight.append('<li><a href="#" class="login">登入</a></li>');
-        navbarRight.append('<li><a href="#" class="signup">註冊</a></li>');
-    }
 
     //登入帳密錯誤動畫
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
     function error_idps() {
         $('.error-IdPs').addClass('is-visible');
         $('.user-modal-container').addClass('animated shake').one(animationEnd, function () {

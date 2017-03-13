@@ -16,48 +16,9 @@ public class Member {
 	private String email;
 	private boolean isNoted;
 	private String alias;
+	private String url;
 	private String pic;
 	private String intro;
-	public Member(int userId, String account, String password, String instrument, boolean isOneClick, String email,
-			boolean isNoted, String alias, String pic, String intro) {
-		this.userId = userId;
-		this.account = account;
-		this.password = password;
-		this.instrument = instrument;
-		this.isOneClick = isOneClick;
-		this.email = email;
-		this.isNoted = isNoted;
-		this.alias = alias;
-		this.pic = pic;
-		this.intro = intro;
-	}
-	public Member() {
-	}
-	public Member(String account, String password, String instrument, boolean isOneClick, String email, boolean isNoted,
-			String alias, String pic, String intro) {
-		this.account = account;
-		this.password = password;
-		this.instrument = instrument;
-		this.isOneClick = isOneClick;
-		this.email = email;
-		this.isNoted = isNoted;
-		this.alias = alias;
-		this.pic = pic;
-		this.intro = intro;
-	}
-	public Member(int userId) {
-		this.userId = userId;
-	}
-	public Member(String instrument, boolean isOneClick, String email, boolean isNoted, String alias, String pic,
-			String intro) {
-		this.instrument = instrument;
-		this.isOneClick = isOneClick;
-		this.email = email;
-		this.isNoted = isNoted;
-		this.alias = alias;
-		this.pic = pic;
-		this.intro = intro;
-	}
 	public int getUserId() {
 		return userId;
 	}
@@ -106,6 +67,12 @@ public class Member {
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getPic() {
 		return pic;
 	}
@@ -117,6 +84,38 @@ public class Member {
 	}
 	public void setIntro(String intro) {
 		this.intro = intro;
+	}
+	public Member(int userId, String account, String password, String instrument, boolean isOneClick, String email,
+			boolean isNoted, String alias, String url, String pic, String intro) {
+		this.userId = userId;
+		this.account = account;
+		this.password = password;
+		this.instrument = instrument;
+		this.isOneClick = isOneClick;
+		this.email = email;
+		this.isNoted = isNoted;
+		this.alias = alias;
+		this.url = url;
+		this.pic = pic;
+		this.intro = intro;
+	}
+	public Member() {
+	}
+	public Member(String account, String password, String instrument, boolean isOneClick, String email, boolean isNoted,
+			String alias, String url, String pic, String intro) {
+		this.account = account;
+		this.password = password;
+		this.instrument = instrument;
+		this.isOneClick = isOneClick;
+		this.email = email;
+		this.isNoted = isNoted;
+		this.alias = alias;
+		this.url = url;
+		this.pic = pic;
+		this.intro = intro;
+	}
+	public Member(int userId) {
+		this.userId = userId;
 	}
 	
 	

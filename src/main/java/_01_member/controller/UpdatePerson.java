@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Clob;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,22 +48,29 @@ public class UpdatePerson extends HttpServlet {
 		String pic = request.getParameter("pic");
 		String intro = request.getParameter("intro");
 		String instruments[] = request.getParameterValues("instruments[]");
+		String url_arr[] = request.getParameterValues("url_arr[]");
+
 		String instru = "";
 		System.out.println(account);
 		if (instruments != null) {
 			for (int i = 0; i < instruments.length; i++) {
-				instru += instruments[i] + " \\ ";
+				instru += instruments[i] + " ";
 			}
-			instru = instru.substring(0, instru.length() - 3);
 		}
-		System.out.println(instru);
+		instru = instru.trim();
+		String url = "";
+		if (url_arr != null && url_arr.length != 0) {
+			for (int i = 0; i < url_arr.length; i++) {
+				url += url_arr[i] + " ";
+			}
+		}
+		url = url.trim();
 		MemberDAO memberDao = new MemberHBN();
-		Member mem = new Member(account, "", instru, true, email, true, alias, pic, intro);
+		Member mem = new Member(account, "", instru, true, email, true, alias, url, pic, intro);
 		memberDao.updateMember(mem);
-		Member memReturn = new Member(instru, true, email, true, alias, pic, intro);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		session.setAttribute("Member", memReturn);
-		map.put("Member", memReturn);
+		session.setAttribute("Member", mem);
+		map.put("Member", mem);
 		String json = gson.toJson(map);
 		System.out.println(json);
 		PrintWriter pw = response.getWriter();

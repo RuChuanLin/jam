@@ -113,7 +113,7 @@ public class MemberHBN implements MemberDAO {
 
 	@Override
 	public int updateMember(Member mem) {
-		String hql = "update Member set intro=:intro,isNoted=:isNoted, email=:email, isOneClick=:isOneClick,instrument=:instrument, alias=:alias, pic=:pic where account=:account";
+		String hql = "update Member set intro=:intro,isNoted=:isNoted, email=:email, isOneClick=:isOneClick,instrument=:instrument, alias=:alias, pic=:pic,url=:url where account=:account";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
@@ -129,6 +129,7 @@ public class MemberHBN implements MemberDAO {
 			q.setParameter("isOneClick", mem.isOneClick());
 			q.setParameter("instrument", mem.getInstrument());
 			q.setParameter("isNoted", mem.isNoted());
+			q.setParameter("url", mem.getUrl());
 			updateNumber = q.executeUpdate();
 			System.out.println("updateNumber: " + updateNumber);
 			tx.commit();
