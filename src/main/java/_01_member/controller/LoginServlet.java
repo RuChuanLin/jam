@@ -18,7 +18,7 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-@WebServlet("/login")
+@WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,6 +26,8 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+
+		String fbId = request.getParameter("fbId");
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 
@@ -36,12 +38,14 @@ public class LoginServlet extends HttpServlet {
 		Gson gson = new Gson();
 
 		// 檢查帳號是否輸入及是否存在
-		if (!dao.idExists(account)) {
-			map.put("loginSuccess", false);
-			System.out.println("帳號不存在");
-		}else if (!dao.checkPassword(account, password)) {
-			map.put("loginSuccess", false);
-			System.out.println("密碼錯誤");
+		if (fbId == null) {
+			if (!dao.idExists(account)) {
+				map.put("loginSuccess", false);
+				System.out.println("帳號不存在");
+			} else if (!dao.checkPassword(account, password)) {
+				map.put("loginSuccess", false);
+				System.out.println("密碼錯誤");
+			}
 		}
 
 		// 有問題
@@ -53,11 +57,10 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		// 沒問題
-		map.put("loginSuccess", true);
-		
 		Member mb = dao.getMemberByAccount(account);
+		map.put("loginSuccess", true);
 		map.put("alias", mb.getAlias());
-		map.put("LoginId", mb.getUserId());
+		map.put("userId", mb.getUserId());
 		map.put("pic", mb.getPic());
 		String json = new Gson().toJson(map);
 		System.out.println(json);
