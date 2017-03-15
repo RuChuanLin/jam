@@ -6,6 +6,8 @@ var msgModel=null;
 function setup(){
 	msgModel=$("#msgModel");
 	msgModel.find(".nxx_msgSelected").change(onSelectOne);
+	msgModel.click(showMsgContent);
+	
 	$("#selectAll").on("click",onSelectAll);
 	$("#lastPage").on("click",lastPage);
 	$("#nextPage").on("click",nextPage);
@@ -34,7 +36,19 @@ function setup(){
 	}
 	
 	function doLoggedOut(){
-		console.log("You are not logged in");
+		alert("You are not logged in");
+		window.location="index.html";
+	}
+	
+	function showMsgContent(){
+		var panel=$("#msgContent");
+		var title=$(this).find(".nxx_msgTitle").html();
+		var sender=$(this).find(".nxx_msgSender").html();
+		panet.find(".nxx_msgTitle").html(title);
+		panet.find(".nxx_msgSender").html(sender);
+		panet.find(".nxx_msgBody").html($(this).find(".nxx_msgBody").html());
+		$("#mailto").html(sender);
+		$("#mesTitle").html("Re : "+title);		
 	}
 	
 	function msgOnScreen(){
@@ -161,8 +175,8 @@ function setup(){
 
 	function checkLength(){
 		msg.checkMsgLength(this);
-		$("#responder4").html("message length :"+msg.msgLng);
-		console.log(msg.msgLng);
+		$("#msg_length").html("訊息長度 : "+msg.msgLng+" /3000 ");
+
 	}
 
 	function sendMessage(){
@@ -170,8 +184,8 @@ function setup(){
 
 		var message={
 		sender: data.user_id,//寄件者id
-		toUser :$("#mailto").val() ,//傳送對象
-		title : $("#mesTitle").val() ,//訊息標題
+		toUser :$("#mailto").html() ,//傳送對象
+		title : $("#mesTitle").html() ,//訊息標題
 		msg : $("#msgArea").val() ,//訊息本體
 			
 		};
