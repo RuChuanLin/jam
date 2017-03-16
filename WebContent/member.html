@@ -290,7 +290,7 @@
 				url: '/Jam/loadingMember',
 				type: 'POST',
 				datatype: 'json',
-				data: { LoginId: sessionStorage.getItem('LoginId') }
+				data: { member: sessionStorage.getItem('LoginId') }
 			}).done(response => {
 				console.log(response);
 				$("#member-pic").attr("src", response.Member.pic || '');

@@ -1090,7 +1090,7 @@ input[type="button"]:disabled {
     width: 95%;
     margin: 10px;
     vertical-align: middle;
-    height: 300px;
+    height: 15px; /*如川3/16改*/
 }
 
 .member-input.media {

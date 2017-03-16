@@ -1,8 +1,10 @@
 package _00_init;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
@@ -14,11 +16,17 @@ public class HibernateUtil {
 		try {
 			// 由組態檔(hibernate.cfg.xml)內的資訊來建立SessionFactory物件
 			// Hibernate 4.3 的寫法
-			Configuration configuration = new Configuration();
-			configuration.configure();
-			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-			return sessionFactory;
+//			Configuration configuration = new Configuration();
+//			configuration.configure();
+//			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+//			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+//			return sessionFactory;
+			//Hibernate 5.x 的寫法
+			StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+	                .configure("hibernate.cfg.xml").build();
+	        Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+	        SessionFactory sessionFactory  = metadata.getSessionFactoryBuilder().build();
+	        return sessionFactory; 
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);

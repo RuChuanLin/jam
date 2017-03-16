@@ -6,10 +6,13 @@
     <class name="_01_member.model.InnerMsg" table="INNERMSG">
         <id name="pk" type="int">
             <column name="PK" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="sender" type="int">
             <column name="SENDER" />
+        </property>
+        <property name="senderAlias" type="java.lang.String">
+            <column name="SENDERALIAS" />
         </property>
         <property name="receiver" type="int">
             <column name="RECEIVER" />
@@ -17,11 +20,14 @@
         <property name="title" type="java.lang.String">
             <column name="TITLE" />
         </property>
-        <property name="article" type="java.sql.Clob">
-            <column name="ARTICLE" />
+        <property name="article" type="java.lang.String">
+            <column name="ARTICLE" length="1000" />
         </property>
         <property name="time" type="java.util.Calendar">
             <column name="TIME" />
+        </property>
+                <property name="state" type="boolean" access="field">
+            <column name="STATE" />
         </property>
     </class>
 </hibernate-mapping>

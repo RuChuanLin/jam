@@ -172,7 +172,7 @@ jQuery(document).ready(function ($) {
                     console.log(response);
                     login_Nav();
                     close_modal();
-                    sessionStorage.setItem("LoginId", response.LoginId || '');
+                    sessionStorage.setItem("LoginId", response.loginId || '');
                     sessionStorage.setItem("alias", response.alias || '');
                     resolve(response);
                 } else {
@@ -241,24 +241,22 @@ jQuery(document).ready(function ($) {
 
     // 如川3/13完成，這裡非常複雜，如果你沒有十足把握千萬別動，萬一你動了回不來不要問我，直接GIT還原
     function onMemberUpdateClick() {
+
         return new Promise((resolve, reject) => {
             let intro = $('#update-member-intro').val();
             let email = $('#update-member-email').val();
             let alias = $('#update-member-name').val();
             let instruments = new Array;
-            console.log(instruments);
-            let instru = sessionStorage.getItem('instrument')
-            instruments = instru.split(',');
-            console.log(instruments);
-            // for (let i = 1; i <= maxInstruments; i++) {
-            //     instruments.push($(`#member-instrument${i}`).val());
-            // }
+            let instru_arr = [...$('.member-input.instruments')];
+            instru_arr.map(x => {
+                instruments.push(x.value);
+            })
+
             let url_arr = [];
-            let raw_arr = sessionStorage.getItem('url');
-            raw_arr = raw_arr.split(',');
+            let raw_arr = [...$('.member-input.media')];
             console.log(raw_arr);
-            raw_arr.map(v => {
-                v ? url_arr.push(v) : null;
+            raw_arr.map(x => {
+                url_arr.push(x.name);
             });
             console.log(url_arr);
             let pic = pic_base64;
@@ -277,10 +275,16 @@ jQuery(document).ready(function ($) {
 
     // 如川3/13完成，這裡非常複雜，如果你沒有十足把握千萬別動，萬一你動了回不來不要問我，直接GIT還原
     function onEditMemberClick() {
+        $('.form-btn.instruments-minus').unbind('click')
+        $('.form-btn.media-minus').unbind('click')
+        $('.form-btn.instruments-plus').unbind('click')
+        $('.form-btn.media-plus').unbind('click')
+        let instrumentId, instrument;
+        let instrument_arr = [];
         //刪除樂器專長欄位
         $('.form-btn.instruments-minus').on('click', function () {
             $('.member-input.instruments').last().remove();
-            if (instrumentId > 0) maxInstruments--;
+            instrumentId > 0 ? instrumentId-- : maxInstruments;
         });
         //刪除個人影音連結
         $('.form-btn.media-minus').on('click', function () {
@@ -297,8 +301,7 @@ jQuery(document).ready(function ($) {
             $('#update-member-name').html(response.Member.alias);
             $('#update-member-intro').html(response.Member.intro);
             //新增樂器專長欄位
-            let instrumentId, instrument;
-            let instrument_arr = [];
+
             $('.member-edit-instruments.list').empty();
             if (response.Member.instrument) {
                 instrument = response.Member.instrument.split(' ');
@@ -311,9 +314,10 @@ jQuery(document).ready(function ($) {
             }
             console.log(instrumentId);
             $('.form-btn.instruments-plus').on('click', function () {
-                if (instrumentId > 5) return;
-                $('.member-edit-instruments.list').append(`<input type="text" class="member-input instruments ${instrumentId}" id="member-instrument${instrumentId}">`);
-                instrumentId++;
+                if (instrumentId <= 5) {
+                    $('.member-edit-instruments.list').append(`<input type="text" class="member-input instruments ${instrumentId}" id="member-instrument${instrumentId}">`);
+                    instrumentId++;
+                }
             });
             $(document).on('change', `.member-input.instruments`, function () {
                 let id = this.id;
@@ -324,10 +328,9 @@ jQuery(document).ready(function ($) {
                 } else {
                     instrument_arr[n - 1] = '';
                 }
-                sessionStorage.setItem('instrument', instrument_arr);
             });
             //-----以下是影音連結----
-            let url, mediaId;
+            let url = [], mediaId;
             let raw_arr = [];
             $('.member-edit-media.list').empty();
             if (response.Member.url) {
@@ -342,7 +345,6 @@ jQuery(document).ready(function ($) {
             // -------以下是影音連結的新增按鈕, 包含新增、檢查網址、設定sessionStorage
             // -------如果你不熟，拜託不要改---------
 
-            sessionStorage.setItem('url', url);
             $(document).on('change', `.member-input.media`, function () {
                 // console.log(this.className);//本行印出選擇中的className
                 // console.log(this.id);//本行印出選擇中的id
@@ -352,18 +354,21 @@ jQuery(document).ready(function ($) {
                 let n = this.className.substr(this.className.lastIndexOf(' ') + 1);//輸入列編號
                 if (k.indexOf('https://www.youtube.com/watch?v=') === 0 && k.substr(k.indexOf('=') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    url[n - 1] = k.substr(k.indexOf('=') + 1);
+                    $(`.member-input.media.${n}`).attr('name', k.substr(k.indexOf('=') + 1));
                 } else if (k.indexOf('https://youtu.be/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    url[n - 1] = k.substr(k.lastIndexOf('/') + 1);
+                    $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
                 } else if (k.indexOf('https://www.youtube.com/embed/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    url[n - 1] = k.substr(k.lastIndexOf('/') + 1);
+                    $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
+                    // $(`.member-input.media`)[n - 1].val();
                 } else {
                     text.next().html(`請確認網址`);
-                    url[n - 1] = '';
+                    $(`.member-input.media.${n}`).attr('name', '');
                 }
-                sessionStorage.setItem('url', url);
+                // sessionStorage.setItem('url', url);
+
+                console.log([...$('.member-input.media')]);
             });
             //新增個人影音連結
             $('.form-btn.media-plus').click(function () {
@@ -375,18 +380,19 @@ jQuery(document).ready(function ($) {
     }
 
 
+
     //本行測試用, 已成功, 會員頁面跳轉完成後可刪
-    $('#nav-my-member-link').on('click', function () {
-        onMemberPageClick(sessionStorage.getItem("LoginId"));
-    })
+    // $('#nav-my-member-link').on('click', function () {
+    //     onMemberPageClick(sessionStorage.getItem("LoginId"));
+    // })
     // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
-    function onMemberPageClick(memberId) {
-        console.log(memberId);
+    function onMemberPageClick(member) {
+        console.log(member);
         $.ajax({
             url: '/Jam/goMemberPage',
             type: 'POST',
             datatype: 'json',
-            data: { memberId }
+            data: { member }
         }).done(response => {
             window.location.replace("http://localhost:8080/Jam/member.html");
         });

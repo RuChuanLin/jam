@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017/3/6 ?W?? 10:36:18 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017/3/16 ?U?? 06:00:41 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="_01_member.model.Member" table="MEMBER">
         <id name="userId" type="int">
@@ -30,10 +30,13 @@
             <column name="ALIAS" />
         </property>
         <property name="pic" type="java.lang.String">
-            <column name="PIC" length="262144"/>
+            <column name="PIC" length="200000" />
         </property>
         <property name="intro" type="java.lang.String">
-            <column name="INTRO" length="1000" />
+            <column name="INTRO" />
+        </property>
+        <property name="url" type="java.lang.String" access="field">
+            <column name="URL" />
         </property>
     </class>
 </hibernate-mapping>
