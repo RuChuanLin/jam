@@ -26,7 +26,6 @@ import _01_member.model.MemberDAO;
 public class MemberEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -35,42 +34,18 @@ public class MemberEdit extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
-		
-		Member mb = (Member)session.getAttribute("Member");
+
+		Member mb = (Member) session.getAttribute("Member");
 		System.out.println(mb.getAccount());
 		System.out.println(mb.getPassword());
-		
+
 		session.setAttribute("Member", mb);
+		// 不回傳密碼
+		mb.setPassword("");
 		map.put("Member", mb);
 		String json = gson.toJson(map);
 		pw.write(json);
-		
-//		String account = session.getAttribute("LoginAcc").toString();
-//		String pic = request.getParameter("pic");
-//		String alias = request.getParameter("alias");
-//		String intro = request.getParameter("intro");
-//		Clob pic_clob = null;
-//		Clob intro_clob = null;
-//		Map<String, Object> map = new HashMap<>();
-//		
-//		try {
-//			pic_clob = new SerialClob(pic.toCharArray());
-//			intro_clob = new SerialClob(intro.toCharArray());
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		Member mb = dao.getMemberByAccount(account);
-//		mb.setPic(pic_clob);
-//		mb.setAlias(alias);
-//		mb.setIntro(intro_clob);
-//		dao.updateMember(mb);
-//
-//		map.put("UpdataSuccess", true);
-//		pw.println(new Gson().toJson(map));
-//		pw.flush();
-//		System.out.println("成功修改");
-//		return;
+
 	}
 
 }

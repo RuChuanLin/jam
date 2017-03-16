@@ -6,7 +6,7 @@
     <class name="_01_member.model.InnerMsg" table="INNERMSG">
         <id name="pk" type="int">
             <column name="PK" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="sender" type="int">
             <column name="SENDER" />

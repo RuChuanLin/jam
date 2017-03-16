@@ -20,7 +20,7 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-@WebServlet("/MessageBox")
+@WebServlet("/messageBox")
 public class MessageBox extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,35 +35,36 @@ public class MessageBox extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 		int start = 0;
+
 		String servType = request.getParameter("servType");
 		String rngStart = request.getParameter("rngStart");
-		if (rngStart!= null){
-		start = Integer.parseInt(rngStart);
+		if (rngStart != null) {
+			start = Integer.parseInt(rngStart);
 		}
-//		int userId = mem.getUserId();
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		
+		int userId = mem.getUserId();
+		int result = 0;
+		// int userId = Integer.parseInt(request.getParameter("userId"));
 
 		if (servType.equals("newMsg")) {
-			long result = 0;
 			result = dao.newMsg(userId);
 			pw.write(gson.toJson(result));
 			pw.flush();
-			System.out.println("未讀信件數"+result);
+			System.out.println("未讀信件數" + result);
 			return;
-		}
-
-		if (servType.equals("getMsg")) {
+		} else if (servType.equals("getMsg")) {
 			List<InnerMsg> msgs = null;
+			result = dao.allMsg(userId);
 			if (start == -1) {
-				start=Integer.MAX_VALUE;
+				start = Integer.MAX_VALUE;
 				msgs = dao.getMsg(userId, start);
-				if(msgs.size()>10)
+				if (msgs.size() > 10)
 					msgs.remove(10);
-			}else {
+			} else {
 				msgs = dao.getMsg(userId, start);
 				msgs.remove(0);
 			}
-			map.put("result",0);
+			map.put("result", 0);
 			map.put("msgs", msgs);
 			pw.write(gson.toJson(msgs));
 			pw.flush();

@@ -109,7 +109,7 @@ public class MemberHBN implements MemberDAO {
 		}
 		return exists;
 	}
-	
+
 	@Override
 	public boolean checkPassword(String account, String password) {
 		boolean result = false;
@@ -148,72 +148,123 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
-	public int deleteMember(String pk) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<InnerMsg> getMsg(int userId, int start) {
 		String hql = "from InnerMsg where receiver = :userId and pk <= :start order by time desc";
-		List<InnerMsg> list =null;
+		List<InnerMsg> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			TypedQuery<InnerMsg> q = session.createQuery(hql);
-			q.setParameter("userId",userId);
-			q.setParameter("start",start);
+			q.setParameter("userId", userId);
+			q.setParameter("start", start);
 			q.setMaxResults(11);
 			list = q.getResultList();
 			tx.commit();
-			} catch (Exception e) {
-				if (tx != null)
-					tx.rollback();
-				System.out.println(e.getMessage());
-			}
-			return list;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
 
 	@Override
-	public long newMsg(int userId) {
-		long msg = 0 ;
+	public int newMsg(int userId) {
+		int msg = 0;
 		String hql = "Select count(*) from InnerMsg where receiver = :userId and state = false";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
-			q.setParameter("userId",userId);
-			msg = (long) q.getSingleResult();
+			q.setParameter("userId", userId);
+			msg = (int) q.getSingleResult();
 			tx.commit();
-			} catch (Exception e) {
-				if (tx != null)
-					tx.rollback();
-				System.out.println(e.getMessage());
-			}
-			return msg;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return msg;
 	}
-	
+
 	@Override
-	public long allMsg(int userId) {
-		long msg = 0 ;
-		String hql = "Select count(*) from InnerMsg where receiver = :userId and state = false";
+	public int allMsg(int userId) {
+		int msg = 0;
+		String hql = "Select count(*) from InnerMsg where receiver = :userId";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
-			q.setParameter("userId",userId);
-			msg = (long) q.getSingleResult();
+			q.setParameter("userId", userId);
+			msg = (int) q.getSingleResult();
 			tx.commit();
-			} catch (Exception e) {
-				if (tx != null)
-					tx.rollback();
-				System.out.println(e.getMessage());
-			}
-			return msg;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return msg;
 	}
-	
+
+	@Override
+	public int setMsg(InnerMsg msg) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			session.save(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
+
+	@Override
+	public int deleteMsg(InnerMsg msg) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			session.delete(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
+
+	@Override
+	public int changeState(int id) {
+		String hql = "from InnerMsg where pk = :pk";
+		InnerMsg msg = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("pk", id);
+			msg = (InnerMsg) q.getSingleResult();
+			msg.setState(true);
+			session.update(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
 
 }

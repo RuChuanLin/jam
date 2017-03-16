@@ -22,9 +22,6 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-/**
- * Servlet implementation class UpdatePerson
- */
 @WebServlet("/updatePerson")
 public class UpdatePerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +35,9 @@ public class UpdatePerson extends HttpServlet {
 		Member mem = (Member) session.getAttribute("Member");
 		MemberDAO dao = new MemberHBN();
 		String account = mem.getAccount();
-				
+
 		System.out.println("account: " + account);
-		
+
 		String email = request.getParameter("email");
 		String alias = request.getParameter("alias");
 		String pic = request.getParameter("pic");
@@ -61,24 +58,24 @@ public class UpdatePerson extends HttpServlet {
 			}
 			video = video.substring(0, video.length() - 3);
 		}
-				
-		if(email.trim()!= null && email.trim().length()!=0){
+
+		if (email.trim() != null && email.trim().length() != 0) {
 			mem.setEmail(email);
 		}
-		if(alias.trim()!= null && alias.trim().length()!=0){
+		if (alias.trim() != null && alias.trim().length() != 0) {
 			mem.setAlias(alias);
 		}
-		if(pic.trim()!= null && pic.trim().length()!=0){
+		if (pic.trim() != null && pic.trim().length() != 0) {
 			mem.setPic(pic);
 		}
 		mem.setIntro(intro);
 		mem.setInstrument(instru);
-				
+
 		dao.updateMember(mem);
 		session.setAttribute("Member", mem);
-		
+
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		//因安全性的原因而不回傳密碼
+		// 不回傳密碼
 		mem.setPassword("");
 		map.put("Member", mem);
 		String json = gson.toJson(map);

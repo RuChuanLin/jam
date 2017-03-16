@@ -18,24 +18,23 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
-@WebServlet("/login.do")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
+		MemberDAO dao = new MemberHBN();
+		PrintWriter pw = response.getWriter();
+		Map<String, Object> map = new HashMap<>();
+		Gson gson = new Gson();
 
 		String fbId = request.getParameter("fbId");
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-
-		MemberDAO dao = new MemberHBN();
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter pw = response.getWriter();
-		Map<String, Object> map = new HashMap<>();
-		Gson gson = new Gson();
 
 		// 檢查帳號是否輸入及是否存在
 		if (fbId == null) {
@@ -60,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 		Member mb = dao.getMemberByAccount(account);
 		map.put("loginSuccess", true);
 		map.put("alias", mb.getAlias());
-		map.put("userId", mb.getUserId());
+		map.put("loginId", mb.getUserId());
 		map.put("pic", mb.getPic());
 		String json = new Gson().toJson(map);
 		System.out.println(json);

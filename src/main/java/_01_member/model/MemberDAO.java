@@ -24,18 +24,23 @@ public interface MemberDAO {
 	// 儲存修改的會員資料
 	public int updateMember(Member mem);
 
-	// 刪除會員資料
-	public int deleteMember(String pk);
-
 	//查詢有幾封新信
-	public long newMsg(int userId);
+	public int newMsg(int userId);
 	
 	//查詢總共幾封信
-	public long allMsg(int userId);
+	public int allMsg(int userId);
 	
 	//查詢站內信
 	public List<InnerMsg> getMsg(int userId,int start);
 	
+	//儲存站內信
+	public int setMsg(InnerMsg msg);
 	
+	//刪除站內信
+	public int deleteMsg(InnerMsg msg);
+	
+	//改變信件已讀狀態
+	public int changeState(int id);
+		
 
 }

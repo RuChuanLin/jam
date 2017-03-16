@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<Form Action="sendMsg" method="POST">
+	<Form Action="msgRead" method="POST">
     <Table>
          <TR>
              <TD align="RIGHT">sender：</TD>
-             <TD align="LEFT"><input	type="text" name="sender" ></TD>
+             <TD align="LEFT"><input	type="text" name="msgId" ></TD>
          </TR>
          <TR>
              <TD align="RIGHT">alias：</TD>
