@@ -195,7 +195,9 @@ jQuery(document).ready(function ($) {
                 console.log(url);
                 $('#media-video-list').empty();
                 url.map(v => {
-                    $('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`);
+                    if (v) {
+                        $('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`)
+                    }
                 });
             }
             if (arg.Member.instrument) {
@@ -256,7 +258,8 @@ jQuery(document).ready(function ($) {
             let raw_arr = [...$('.member-input.media')];
             console.log(raw_arr);
             raw_arr.map(x => {
-                url_arr.push(x.name);
+                let url = x.value.includes('=') ? x.value.substr(x.value.indexOf('=') + 1) : x.value.substr(x.value.lastIndexOf('/') + 1);
+                url_arr.push(url);
             });
             console.log(url_arr);
             let pic = pic_base64;
@@ -265,7 +268,7 @@ jQuery(document).ready(function ($) {
                 cache: true,
                 dataType: 'json',
                 type: 'POST',
-                data: { instruments, intro, email, alias, pic, url_arr }
+                data: { instruments, intro, email, alias, pic, url: url_arr }
             }).done((response) => {
                 resolve(response);
             }).fail();
@@ -281,6 +284,8 @@ jQuery(document).ready(function ($) {
         $('.form-btn.media-plus').unbind('click')
         let instrumentId, instrument;
         let instrument_arr = [];
+        let url = [], mediaId;
+        let raw_arr = [];
         //刪除樂器專長欄位
         $('.form-btn.instruments-minus').on('click', function () {
             $('.member-input.instruments').last().remove();
@@ -330,13 +335,14 @@ jQuery(document).ready(function ($) {
                 }
             });
             //-----以下是影音連結----
-            let url = [], mediaId;
-            let raw_arr = [];
+
             $('.member-edit-media.list').empty();
             if (response.Member.url) {
                 url = response.Member.url.split(' ');
                 url.map((v, i) => {
-                    $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${i + 1}" id="member-media${i + 1}" value="https://youtu.be/${url[i]}"><spam></spam></div>`);
+                    if (v) {
+                        $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${i + 1}" id="member-media${i + 1}" value="https://youtu.be/${url[i]}"><spam></spam></div>`);
+                    }
                 });
                 mediaId = url.length + 1;
             } else {
@@ -354,17 +360,17 @@ jQuery(document).ready(function ($) {
                 let n = this.className.substr(this.className.lastIndexOf(' ') + 1);//輸入列編號
                 if (k.indexOf('https://www.youtube.com/watch?v=') === 0 && k.substr(k.indexOf('=') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    $(`.member-input.media.${n}`).attr('name', k.substr(k.indexOf('=') + 1));
+                    // $(`.member-input.media.${n}`).attr('name', k.substr(k.indexOf('=') + 1));
                 } else if (k.indexOf('https://youtu.be/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
+                    // $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
                 } else if (k.indexOf('https://www.youtube.com/embed/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
                     text.next().html(`OK!`);
-                    $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
+                    // $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
                     // $(`.member-input.media`)[n - 1].val();
                 } else {
                     text.next().html(`請確認網址`);
-                    $(`.member-input.media.${n}`).attr('name', '');
+                    // $(`.member-input.media.${n}`).attr('name', '');
                 }
                 // sessionStorage.setItem('url', url);
 
