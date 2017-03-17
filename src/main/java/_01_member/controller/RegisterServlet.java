@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
 
 		// 沒問題
 		ServletContext context = getServletContext();
-		URL url = context.getResource("/images/pic.png");
+		URL url = context.getResource("/_996_image/pic.png");
 		File file = new File(url.getFile());
 		System.out.println(file);
 		InputStream is = new FileInputStream(file);
