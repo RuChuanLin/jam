@@ -10,6 +10,9 @@
 		loggedin :loggedin,
 		validateAcc : validateAcc,
 		register : register,
+		updateData : updateData,
+		getMemberData : getMemberData
+		
 		
 	};
 	function login(info,cbf){
@@ -136,6 +139,55 @@
 				}
 
 		}
+		
+	function updateData(data,cbf){
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			
+				switch(xhr.readyState){
+					case 1:xhr.send(data);break;
+					case 4:
+						if(xhr.status==200){
+							var resp=xhr.responseText;
+							var info=JSON.parse(resp);
+							if(info["updateSuccess"]){
+								cbf(true);
+							}
+								}else{
+								console.log("strange  "+xhr.status);
+								cbf(false);
+								}break;	
+				}
+			}
+		xhr.open("POST",base_url+service_update,true);
+	}
+	
+	function getMemberData(userId,onDataReceive){
+		var param="?memberId="+userId;
+		if(userId==""){param="";}
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			
+				switch(xhr.readyState){
+					case 1:xhr.send();break;
+					case 4:
+						if(xhr.status==200){
+							var resp=xhr.responseText;
+							var info=JSON.parse(resp);
+							if(info["updateSuccess"]){
+								onDataReceive(info);
+							}
+								}else{
+								console.log("strange a "+xhr.status);
+								}break;	
+				}
+			}
+		xhr.open("GET",base_url+service_memberdata+param,true);
+		
+		
+	}
+		
+	
 	
 	
 	return methods;

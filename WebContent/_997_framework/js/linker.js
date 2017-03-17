@@ -53,6 +53,7 @@ const base_url="http://localhost:8080/jamTest";
 const service_login="/login";
 const service_checkACC="/checkAcc";
 const service_register="/register";
+const service_memberdata="/goMemberPage";
 const msg_length_limit=3000;
 const service_messsagebox="";
 const show_userName="";

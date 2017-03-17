@@ -25,17 +25,17 @@ linker element:
 			msgAll : [],	//所有訊息id，每次換頁需要重新初始化。
 			msgRng :  [0,0],//陣列，本頁所有的訊息內容。 0:start 1:end
 			msgSelected:[],//已選取的信件編號，每次換頁時清空。
-			msgEndPage:[],//每一頁的最後一筆訊息的Id
+			msgEndPage:0,//當頁的最後一筆訊息的Id
 			totalInbox : 0, //信箱內的信件總數
 			msgLocal :0 ,//local已載入的訊息總數。
 			idStr :"msg_Id",
-			deleteMsg :deleteMsg,
-			isChecking :false,
+			deleteMsg :deleteMsg, //刪除訊息(畫面與資料庫)
+			isChecking :false,	//是否正在檢查新信(避免多次觸發)
 			msgOnScr : msgOnScr, //調整訊息在畫面上的顯示狀態
 			nextPage : nextPage,
-			lastPage : lastPage,
-			deleteMSg : deleteMsg, //刪除訊息(畫面與資料庫)
-			amt : 10 //每頁要顯示的資料筆數
+			lastPage : lastPage, 
+			amt : 10, //每頁要顯示的資料筆數
+			isSending : false //訊息是否已傳送且未獲得回應(避免多次傳送使用)
 		}
 		
 		//檢查有沒有新信，如果有呼叫callback function
@@ -124,6 +124,7 @@ linker element:
 		
 		//發送訊息，由btn_send_ms.onclick呼叫，info，由外部提供。info：物件，結構見下方
 		function sendMessage(info,cbf){
+			if(msg.isSending){return;}
 			var req=new Object();
 			var xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(res){
@@ -133,8 +134,13 @@ linker element:
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
+								msg.isSending=false;
 								cbf(resp);
-							}
+								
+							}else{
+								console.log("wrong  :"+xhr.status);
+								msg.isSending=false;
+								}
 							
 					}break;
 					default :console.log(xhr.status);break;
@@ -185,11 +191,7 @@ linker element:
 				
 			}
 			
-		function deleteMsg(){
-			for(var s=0;s<msgSelected.length;s++){
-					console.log(selected[s]);
-			}			
-		}
+
 		
 		
 				
@@ -255,21 +257,24 @@ linker element:
 				
 		
 		
-		function deleteMsg(selected){
+		function deleteMsg(){
 				var amtSelected=msg.msgSelected.length;
 				if(msg.msgSelected.length==0){
 					return null;
 					}
 					if(confirm("確定刪除所選訊息?")){
-						msg.deleteMsg();
-						for(var r=0;r<amtSelected;r++){
+						
+						for(var r=0;r<msg.msgSelected.length;r++){
 						var msgId="#"+msg.idStr+msg.msgSelected[r];
 						$(msgId).remove();
-						msg.msgSelected.splice(r,1);
+						console.log("remove    "+msgId);
 					}
+					msg.msgSelected=[];
 					
 				}
-				msg.msgOnScreen();
+				
+				
+				msg.msgOnScr();
 		}
 		
 		function msgOnScr(){
@@ -280,11 +285,14 @@ linker element:
 					//把抓回來，需要顯示出來的訊息設成可見
 				if(onScr==0 || onScr<10){
 					for(var p=0;p<count;p++){
-						console.log("asvs");
-						$(onHid[p]).css("display","block");
-						$(onHid[p]).attr("value","onPage");
-						$(onHid[p]).attr("value","onDisplay");
-					}		
+						var a=$(onHid[p]);
+						a.css("display","block");
+						a.attr("value","onDisplay");
+						a.find(":checkbox").prop("checked",false)
+						
+					}
+					
+					
 				}
 		}
 		

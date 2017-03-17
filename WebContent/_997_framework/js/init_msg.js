@@ -8,14 +8,16 @@ function setup_message(){
 	$("#lastPage").on("click",msg.lastPage);
 	$("#nextPage").on("click",msg.nextPage);
 	$("#deleteMsg").on("click",msg.deleteMsg);
+	$("#mail-del-all").on("click",onSelectAll);
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
 	
+	$("#mail-del-all").prop("checked",false);
 	//把方法放全域變數中方便取用。
 	msg.showNewMessage=function(message){
 			var msgModel=$("#msgModel");
 			var messages=message.msgs;
-			msgModel.find(".mail-td-delete").change(onSelectOne);
+			msgModel.find(".mail-td-delete").click(onSelectOne);
 			msg.totalInbox=message.result;
 				for(var i=0;i<messages.length;i++){
 					if(msg.msgRng[0]>messages[i].msgId){msg.msgRng[0]=messages[i].msgId;}
@@ -23,7 +25,7 @@ function setup_message(){
 					msg.msgAll.push(messages[i].msgId);
 					r=msgModel.clone(true);
 					msg.msgLocal+=1;
-					r.find("checkbox").attr("checked",false);
+					$(r).find(":checkbox").prop("checked",false);
 					r.find(".nxx_msgTitle").html(messages[i].msgTitle);
 					r.find(".nxx_msgBody").html(messages[i].msgBody);
 					r.find(".nxx_msgId").html(messages[i].msgId);
@@ -102,12 +104,31 @@ function setup_message(){
 		var tgt=$(event.target).siblings(".nxx_msgId").html();
 		if(!event.target.checked){
 			msg.msgSelected.splice(msg.msgSelected.indexOf(tgt),1);
-			console.log("del : "+msg.msgSelected);
 		}
 		else{
 		msg.msgSelected.push($(event.target).siblings(".nxx_msgId").html());
-		console.log("add : "+msg.msgSelected);
 		}
+		
+	}
+	
+	function onSelectAll(event){
+		var selection=$("[value='onDisplay']").find(".nxx_msgId").toArray();
+		if(!event.target.checked){
+				for(var i=0;i<selection.length;i++){
+				var msgr="#"+msg.idStr+selection[i].innerHTML;
+				$(msgr).find(":checkbox").attr("checked",false);
+				}
+				msg.msgSelected=[];
+		}
+		else{
+			for(var i=0;i<selection.length;i++){
+				var msgr="#"+msg.idStr+selection[i].innerHTML;
+				$(msgr).find(":checkbox").attr("checked",true);
+				msg.msgSelected.push(selection[i].innerHTML);
+				}
+			}
+
+			
 		
 	}
 	
