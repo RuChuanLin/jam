@@ -27,31 +27,38 @@ public class LoadingMember extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
-		Map<String, Object> map = new HashMap<>();
+//		Map<String, Object> map = new HashMap<>();
 		PrintWriter pw = response.getWriter();
-		MemberDAO dao = new MemberHBN();
+//		MemberDAO dao = new MemberHBN();
 		Gson gson = new Gson();
-		String json = "";
-		Member mb = (Member) session.getAttribute("Member");
-		String member = request.getParameter("member");
-		boolean myself = false;
-		int id;
-
-		if (member == null) {
-			id = 0;
-		} else {
-			id = Integer.parseInt(request.getParameter("member"));
+		boolean status = false;
+		Object obj = session.getAttribute("Member");
+		if(obj!=null){
+			status = true;
 		}
-		System.out.println(id);
-
-		if (id != 0 && id != mb.getUserId()) {
-			mb = dao.getMember(id);
-			myself = true;
-		}
-
-		map.put("Member", mb);
-		map.put("myself", myself);
-		pw.write(gson.toJson(map));
+		pw.write(gson.toJson(status));
+		pw.flush();
+		pw.close();
+//		String member = request.getParameter("member");
+//		System.out.println(member);
+//		boolean myself = true;
+//		int id = -1;
+//		if (mb == null) {
+//			return;
+//		}
+//		if (member != null) {
+//			id = Integer.parseInt(member);
+//		}
+//		System.out.println(id);
+//
+//		if (id != -1 && id != mb.getUserId()) {
+//			mb = dao.getMember(id);
+//			myself = false;
+//		}
+//		mb.setPassword("");
+//		map.put("Member", mb);
+//		map.put("myself", myself);
+//		pw.write(gson.toJson(map));
 	}
 
 }

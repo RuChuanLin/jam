@@ -65,11 +65,11 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(json);
 		pw.write(json);
 		System.out.println("mb.getAlias(): " + mb.getAlias());
+		System.out.println("mb.getUserId(): " + mb.getUserId());
 		System.out.println(mb);
 		pw.flush();
 		System.out.println("成功登入");
 		session.setAttribute("Member", mb);
 		return;
 	}
-
 }

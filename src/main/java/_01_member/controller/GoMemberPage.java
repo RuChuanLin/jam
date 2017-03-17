@@ -48,7 +48,7 @@ public class GoMemberPage extends HttpServlet {
 			mb = dao.getMember(id);
 			myself = true;
 		}
-
+		mb.setPassword("");
 		map.put("Member", mb);
 		map.put("myself", myself);
 		pw.write(gson.toJson(map));

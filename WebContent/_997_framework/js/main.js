@@ -53,8 +53,7 @@ jQuery(document).ready(function ($) {
         mailButton = $('.mail-btn'),
         memberUpdateButton = $('#update-member'),
         navSignButton = $('#nav-sign-button'),
-        navLogoutButton = $('#nav-logout-button'),
-        logoutButton = $('.nav-logout'),
+        logoutButton = $('#nav-logout'),
         editMemberButton = $('#edit-member-btn'),
         onMyJamButton = $('#my-jam');
 
@@ -213,9 +212,11 @@ jQuery(document).ready(function ($) {
 
 
     function onLogoutClick() {
-        $.post({
-            url: '/logoutMember'
-        });
+       $.post({
+           url: '/Jam/logoutMember',
+           type:'POST',
+           datatype:'json'
+       });
         //登出畫面，以下寫程式碼
         console.log('logout');
         logout_Nav();
