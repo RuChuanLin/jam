@@ -34,7 +34,7 @@ public class LoadingMember extends HttpServlet {
 		String json = "";
 		Member mb = (Member) session.getAttribute("Member");
 		String member = request.getParameter("member");
-		boolean myself = false;
+		boolean myself = true;
 		int id;
 
 		if (member == null) {
@@ -46,7 +46,7 @@ public class LoadingMember extends HttpServlet {
 
 		if (id != 0 && id != mb.getUserId()) {
 			mb = dao.getMember(id);
-			myself = true;
+			myself = false;
 		}
 
 		map.put("Member", mb);
