@@ -54,6 +54,7 @@ const service_login="/login";
 const service_checkACC="/checkAcc";
 const service_register="/register";
 const service_memberdata="/goMemberPage";
+const service_logout="/logoutMember";
 const msg_length_limit=3000;
 const service_messsagebox="";
 const show_userName="";

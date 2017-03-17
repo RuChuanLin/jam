@@ -157,31 +157,27 @@ jQuery(document).ready(function($) {
         return new Promise((resolve, reject) => {
             var account = loginEmail.val();
             var password = loginPassword.val();
+			var info={
+				type : "normal",
+				acc :loginEmail.val(),
+				pw :loginPassword.val()
+			};
             //            console.log(account + ' ' + password);
-            $.ajax({
-                url: `/Jam/login`,
-                cache: false,
-                dataType: 'json',
-                type: 'POST',
-                data: { account, password }
-            }).done((response) => {
-                if (response.loginSuccess) {
+			mem.login(info,function(resp){
+				if (response.loginSuccess) {
                     console.log(response);
                     login_Nav();
                     close_modal();
-                    sessionStorage.setItem("LoginId", response.LoginId || '');
-                    sessionStorage.setItem("alias", response.alias || '');
-                } else {
-                    error_idps();
-                }
-            }).fail((reason) => {
-                console.log('Ajax request 發生錯誤');
-                console.log(reason);
-            })
+                   kie.setCookieObj(jam_cookie_key,response);
+                } else{
+					close_modal();
+				}				
+			})
+
         });
 
     };
-
+/*
     //將會員資料顯示在螢幕上~!!接收一個引數arg, 內容是MemberBean的JS物件
     function onMemberLoading(arg) {
         return new Promise((resolve, reject) => {
@@ -193,7 +189,7 @@ jQuery(document).ready(function($) {
             // window.location.reload(false);
         });
     }
-
+*/
 
     function onLogoutClick() {
         $.post({

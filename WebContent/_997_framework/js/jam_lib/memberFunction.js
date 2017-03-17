@@ -24,7 +24,15 @@
 	
 	function logout(){
 	//這邊需要增加server log out 的方法
-	kie.cleanCookie(mem.cookieKey,"");
+		kie.cleanCookie(mem.cookieKey,"");
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange(){
+			if(xhr.readyState==0){
+				xhr.send();
+			}
+		xhr.open("POST",base_url+service_logout,"true")
+	
+		}
 	}
 		
 	//登入並且檢查cookie及session是否均有效，若其中一方無效則回傳false，若有傳入callback則呼叫callback	
@@ -37,9 +45,9 @@
 	}
 	
 	
-	function validateAcc(cbf){
+	function validateAcc(vAcc,cbf){
 		var data=new Object();
-		data.acc=document.getElementById(field_ACC).value;
+		data.acc=vAcc;
 		var xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(resp){
 			switch(xhr.readyState){
