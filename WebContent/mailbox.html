@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="_997_framework/css/queries.css">
     <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
     <link rel="stylesheet" href="_997_framework/css/animate.css">
-    <!--  <script src="login.js"></script> -->
-    <title>index</title>
+    <title>mailbox</title>
 </head>
 
 <body>
@@ -68,9 +67,15 @@
                                 </td>
                             </tr>
                             <tr  id="msgModel" class="mailbox-list-tr">
-                                <td class="mail-td-delete" id="mail-del">
+								<td class="nxx" style="display:hidden">
+								<!--↓hideen data field↓-->
+								<p class="nxx_msgId"  ></p>
+								<p class="nxx_msgBody" ></p>
+                                <p class="nxx_msgSenderNk" ></p>
+								</td>
+								<!--↑hideen data field↑-->
+                                <td class="mail-td-delete">
                                     <input name="mail-del" type="checkbox">
-									<p class="nxx_msgId" style="display:none;" ></p>
                                 </td>
                                 <td class="mail-td-sender nxx_msgSender">
                                     abc1345676455asd1123asdasdasdasdda
@@ -80,57 +85,13 @@
                                 </td>
                                 <td class="mail-td-date nxx_msgDate">
                                     2017/03/05
-                                    <p class="nxx_msgBody" style="display:none;"></p>
-                                    <p class="nxx_msgSenderNk" style="display:none;"></p>
-									
-                                </td>
-
-                            </tr>
-                            <tr class="mailbox-list-tr">
-                                <td class="mail-td-delete" id="mail-del">
-                                    <input name="mail-del" type="checkbox">
-                                </td>
-                                <td class="mail-td-sender">
-                                    abc1345676455asd1123asdasdasdasdda
-                                </td>
-                                <td class="mail-td-subject">
-                                    [徵才] 台北種子團隊徵前後端/UIUX 正/兼職 實習
-                                </td>
-                                <td class="mail-td-date">
-                                    2017/03/05
-                                </td>
-                            </tr>
-                            <tr class="mailbox-list-tr">
-                                <td class="mail-td-delete" id="mail-del">
-                                    <input name="mail-del" type="checkbox">
-                                </td>
-                                <td class="mail-td-sender">
-                                    abc1345676455asd1123asdasdasdasdda
-                                </td>
-                                <td class="mail-td-subject">
-                                    [徵才] 台北種子團隊徵前後端/UIUX 正/兼職 實習
-                                </td>
-                                <td class="mail-td-date">
-                                    2017/03/05
-                                </td>
-                            </tr>
-                            <tr class="mailbox-list-tr">
-                                <td class="mail-td-delete" id="mail-del">
-                                    <input name="mail-del" type="checkbox">
-                                </td>
-                                <td class="mail-td-sender">
-                                    abc1345676455asd1123asdasdasdasdda
-                                </td>
-                                <td class="mail-td-subject">
-                                    [徵才] 台北種子團隊徵前後端/UIUX 正/兼職 實習
-                                </td>
-                                <td class="mail-td-date">
-                                    2017/03/05
                                 </td>
                             </tr>
                         </table>
                     </form>
-    <!-- 登入/註冊畫面 -->
+
+
+	<!-- 登入/註冊畫面 -->
     <div class="user-modal">
         <!-- this is the entire modal form, including the background -->
         <div class="user-modal-container">
@@ -292,7 +253,9 @@
     <script src="_997_framework/js/jam_lib/adv_cookie.js"></script>
     <script src="_997_framework/js/carousel.js"></script>
     <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
-    <script src="_997_framework/js/main_altering.js"></script>
+    <script src="_997_framework/js/nav.js"></script>
+    <script src="_997_framework/js/init_msg.js"></script>
+	
  
 </body>
 

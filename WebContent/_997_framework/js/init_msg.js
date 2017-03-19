@@ -1,8 +1,27 @@
 
-$(document).ready(setup_message);
+$(document).ready(init_message);
 
 
-function setup_message(){
+function init_message(){
+	stater.checkState(onLoggedIn,onLoggedOut);
+	function onLoggedIn(){
+		setup_nav();
+		setup_msg();
+	}
+	
+	function onLoggedOut(){
+		alert("you are not logged in");
+		kie.cleanCookie(jam_cookie_key);
+		sessionStorage.clear();
+		localStorage.clear();
+		window.location="index.html";
+	}
+	
+	
+}
+
+
+function setup_msg(){
 	//設置相關監聽器
 	$("#selectAll").on("click",msg.onSelectAll);
 	$("#lastPage").on("click",msg.lastPage);
@@ -131,7 +150,6 @@ function setup_message(){
 			
 		
 	}
-	
 	
 	
 	
