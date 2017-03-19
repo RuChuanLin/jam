@@ -26,7 +26,7 @@
 	//這邊需要增加server log out 的方法
 		kie.cleanCookie(mem.cookieKey,"");
 		var xhr=new XMLHttpRequest();
-		xhr.onreadystatechange(){
+		xhr.onreadystatechange=function(){
 			if(xhr.readyState==0){
 				xhr.send();
 			}
