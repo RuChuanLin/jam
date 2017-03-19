@@ -1,10 +1,5 @@
 ﻿package _01_member.model;
 
-import java.io.IOException;
-import java.sql.Clob;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public interface MemberDAO {
@@ -23,16 +18,29 @@ public interface MemberDAO {
 	// 檢查用戶是否已存在
 	public boolean idExists(String account);
 
+	// 檢查密碼是否正確
+	public boolean checkPassword(String account, String password);
+	
 	// 儲存修改的會員資料
 	public int updateMember(Member mem);
 
-	// 刪除會員資料
-	public int deleteMember(String pk);
-
-	// 檢查密碼是否正確
-	public boolean checkPassword(String account, String password);
-
-	// 搜尋所有用戶名
-	public Collection<Member> getAllMembers();
+	//查詢有幾封新信
+	public int newMsg(int userId);
+	
+	//查詢總共幾封信
+	public int allMsg(int userId);
+	
+	//查詢站內信
+	public List<InnerMsg> getMsg(int userId,int start);
+	
+	//儲存站內信
+	public int setMsg(InnerMsg msg);
+	
+	//刪除站內信
+	public int deleteMsg(InnerMsg msg);
+	
+	//改變信件已讀狀態
+	public int changeState(int id);
+		
 
 }

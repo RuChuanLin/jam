@@ -37,11 +37,11 @@ public class checkAcc extends HttpServlet {
 
 		
 		map.put("accExt", dao.idExists(account));
-		System.out.println("該帳號已存在");
+		System.out.println("檢查該帳號是否存在");
 
 		pw.write(new Gson().toJson(map));
 		pw.flush();
-		System.out.println("註冊");
+
 		return;
 
 	}

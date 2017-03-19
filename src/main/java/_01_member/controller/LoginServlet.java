@@ -25,22 +25,26 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		String account = request.getParameter("account");
-		String password = request.getParameter("password");
-		MemberDAO dao = new MemberHBN();
 		response.setContentType("application/json; charset=UTF-8");
+		HttpSession session = request.getSession();
+		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
 
+		String fbId = request.getParameter("fbId");
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+
 		// 檢查帳號是否輸入及是否存在
-		if (!dao.idExists(account)) {
-			map.put("loginSuccess", false);
-			System.out.println("帳號不存在");
-		}else if (!dao.checkPassword(account, password)) {
-			map.put("loginSuccess", false);
-			System.out.println("密碼錯誤");
+		if (fbId == null) {
+			if (!dao.idExists(account)) {
+				map.put("loginSuccess", false);
+				System.out.println("帳號不存在");
+			} else if (!dao.checkPassword(account, password)) {
+				map.put("loginSuccess", false);
+				System.out.println("密碼錯誤");
+			}
 		}
 
 		// 有問題
@@ -52,12 +56,11 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		// 沒問題
-		map.put("loginSuccess", true);
-		
 		Member mb = dao.getMemberByAccount(account);
-		int id = mb.getUserId();
+		map.put("loginSuccess", true);
 		map.put("alias", mb.getAlias());
-		map.put("LoginId", id);
+		map.put("loginId", mb.getUserId());
+		map.put("pic", mb.getPic());
 		String json = new Gson().toJson(map);
 		System.out.println(json);
 		pw.write(json);
@@ -65,8 +68,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(mb);
 		pw.flush();
 		System.out.println("成功登入");
-		session.setAttribute("LoginId", id);
-		session.setAttribute("LoginAcc", account);
+		session.setAttribute("Member", mb);
 		return;
 	}
 

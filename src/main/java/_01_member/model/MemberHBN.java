@@ -1,12 +1,11 @@
 package _01_member.model;
 
-import java.io.IOException;
-import java.sql.Clob;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -29,7 +28,7 @@ public class MemberHBN implements MemberDAO {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			list = session.createQuery("from Member").list();
+			list = session.createQuery("from Member").getResultList();
 			for (Object o : list) {
 				Member m = (Member) o;
 				String account = m.getAccount();
@@ -71,7 +70,7 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("id", id);
-			mb = (Member) q.uniqueResult();
+			mb = (Member) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -90,7 +89,7 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("account", account);
-			mb = (Member) q.uniqueResult();
+			mb = (Member) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -112,12 +111,21 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
+	public boolean checkPassword(String account, String password) {
+		boolean result = false;
+		Member mb = getMemberByAccount(account);
+		if (password.trim().equals(mb.getPassword())) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
 	public int updateMember(Member mem) {
 		String hql = "update Member set intro=:intro,isNoted=:isNoted, email=:email, isOneClick=:isOneClick,instrument=:instrument, alias=:alias, pic=:pic where account=:account";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
-		;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
@@ -140,36 +148,123 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
-	public int deleteMember(String pk) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean checkPassword(String account, String password) {
-		boolean result = false;
-		Member mb = getMemberByAccount(account);
-		if (password.trim().equals(mb.getPassword())) {
-			result = true;
-		}
-		return result;
-	}
-
-	@Override
-	public Collection<Member> getAllMembers() {
-		Collection<Member> allMembers = new ArrayList<>();
+	public List<InnerMsg> getMsg(int userId, int start) {
+		String hql = "from InnerMsg where receiver = :userId and pk <= :start order by time desc";
+		List<InnerMsg> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			allMembers = session.createQuery("from Member").list();
+			TypedQuery<InnerMsg> q = session.createQuery(hql);
+			q.setParameter("userId", userId);
+			q.setParameter("start", start);
+			q.setMaxResults(11);
+			list = q.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
 			System.out.println(e.getMessage());
 		}
-		return allMembers;
+		return list;
+	}
+
+	@Override
+	public int newMsg(int userId) {
+		int msg = 0;
+		String hql = "Select count(*) from InnerMsg where receiver = :userId and state = false";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("userId", userId);
+			msg = (int) q.getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return msg;
+	}
+
+	@Override
+	public int allMsg(int userId) {
+		int msg = 0;
+		String hql = "Select count(*) from InnerMsg where receiver = :userId";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("userId", userId);
+			msg = (int) q.getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return msg;
+	}
+
+	@Override
+	public int setMsg(InnerMsg msg) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			session.save(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
+
+	@Override
+	public int deleteMsg(InnerMsg msg) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			session.delete(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
+
+	@Override
+	public int changeState(int id) {
+		String hql = "from InnerMsg where pk = :pk";
+		InnerMsg msg = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setParameter("pk", id);
+			msg = (InnerMsg) q.getSingleResult();
+			msg.setState(true);
+			session.update(msg);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
 	}
 
 }

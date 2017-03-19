@@ -46,12 +46,13 @@ p.s "|(直線)"代表or，或。
 		msgs:[{msg},{msg},{msg},{msg}....]}
 msg 格式
 {
-	sendId :""//寄件者id
-	sendNk :""//寄件者nickname	
-	msgBody :"" //訊息本體
-	msgId :"" //訊息id
-	msgDate : //發信日期
-	msgState: true | false //已讀未讀
+	sender :""//寄件者id
+	senderAlias :""//寄件者nickname	
+	title :""//訊息標題
+	article :"" //訊息本體
+	pk :"" //訊息id
+	time : //發信日期
+	state: true | false //已讀未讀
 }
 
 ------------------------------------------------------------
@@ -60,8 +61,8 @@ msg 格式
 	請求json物件格式
 {
 	sender: sender id,//寄件者id
-	toUser :user_id ,//傳送對象
-	title : "" ,//收件者
+	receiver :user_id ,//傳送對象
+	title : "" ,//訊息標題
 	msg : ..... ,//訊息本體
 }
 
