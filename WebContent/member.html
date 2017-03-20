@@ -6,14 +6,25 @@
 	<link href="_997_framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="_997_framework/font-awesome-4.7.0/css/font-awesome.min.css">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="_997_framework/css/reset.css">
-	<link rel="stylesheet" href="_997_framework/css/style.css">
-	<link rel="stylesheet" href="_997_framework/css/queries.css">
-	<link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
+	<link rel="stylesheet" href="_997_framework/css/reset.css?ver=5">
+	<link rel="stylesheet" href="_997_framework/css/queries.css?ver=5">
+	<link rel="stylesheet" href="_997_framework/css/bootstrap-social.css?ver=5">
+	<link rel="stylesheet" href="_997_framework/css/croppie.css?ver=5">
+	<link rel="stylesheet" href="_997_framework/css/style.css?ver=12">
 	<title>Member</title>
 </head>
 
 <body>
+	<!--croppie installation-->
+	<div>
+		<div id="cropArea" class="cropArea">
+			<input id="crop" class="form-btn crop-btn" type="button" value="裁切圖片">
+			<button id="crop-cancel" class="crop-cancel-btn"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+
+			<canvas id="cropboard" class="cropboard" style="display:none;" width="140" height="140">You shouldn't see this.</canvas>
+		</div>
+
+	</div>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -60,15 +71,13 @@
 					</a>
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signin-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="signin-email" type="email
-                           " placeholder="E-mail">
+						<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
 						<span class="error-message">Error message here!</span>
 					</p>
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
-						<input class="full-width has-padding has-border" id="signin-password" type="text
-                           " placeholder="密碼"> <span class="error-message">Error
-							message here!</span>
+						<input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="密碼"> 
+						<span class="error-message">Error message here!</span>
 					</p>
 					<p class="fieldset">
 						<input type="checkbox" id="remember-me" checked> <label for="remember-me">記得我</label>
@@ -175,7 +184,9 @@
 			<form class="member-edit-form">
 				<div class="member-edit-body">
 					<div class="member-edit-image">
-						<img class="profolio-img" id="preview-pic" /> <label for="member-name" class="member-form-label-text">個人照片</label>						<input type="file" id="update-member-pic">
+						<img class="profolio-img" id="preview-pic" src="_996_image/user.png" />
+                        <label for="fake-update-input" id="update-member-pic" class="update-member-pic"><i class="fa fa-camera-retro fa-2x"></i></label>
+                        <input type="file" class="fake-update-input" id="fake-update-input">
 					</div>
 					<div class="member-edit-name">
 						<label for="member-name" class="member-form-label-text">名稱</label>
@@ -220,7 +231,7 @@
 	<section class="profolio info">
 		<div class="profolio-header">
 			<div class="profolio-img-wrapper">
-				<img class="profolio-img" id="member-pic">
+				<img class="profolio-img" id="member-pic" src="_996_image/user.png">
 			</div>
 			<div class="edit-wrapper" id="edit-member-btn">
 				<button class="edit-btn">
@@ -283,6 +294,9 @@
 	<script src="_997_framework/jquery.cookie.js"></script>
 	<script src="_997_framework/js/main.js"></script>
 	<script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
+	<script src="_997_framework/js/croppie.js"></script>
+	<script src="_997_framework/js/croppie_inst.js?ver=12"></script>
+    
 	<script>
 		(function () {
 			$.ajax({

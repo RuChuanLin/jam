@@ -47,8 +47,8 @@ body {
 #nav-logout {
     display: none;
 }
+
 .nav-pic {
-    
     margin: 15px auto;
     border-radius: 50%;
     border: 0.5px solid #607fad;
@@ -56,7 +56,6 @@ body {
     height: 22px;
     display: none;
 }
-
 
 
 /*主頁面header佈置與特效*/
@@ -217,9 +216,10 @@ h1 {
     background-color: #272121;
 }
 
-.thumbnail {
+
+/*.thumbnail {
     background-color: #403939;
-}
+}*/
 
 .caption {
     color: #F0EBEB;
@@ -865,7 +865,7 @@ input[type="button"]:disabled {
     width: 400px;
     height: auto;
     margin: 5px auto;
-    /*pointer-events:*/
+    pointer-events:
 }
 
 
@@ -1040,8 +1040,79 @@ input[type="button"]:disabled {
     border-bottom: 1px #AEADAD solid;
 }
 
+
+/*上傳照片按鈕*/
+
+#fake-update-input {
+    display: none;
+}
+
+.update-member-pic {
+    position: relative;
+    top: -28px;
+    left: 50%;
+    margin-left: -3px;
+    padding: 8px;
+    cursor: pointer;
+    color: #497375;
+}
+
 .member-form-label-text {
     margin: 5px 0 5px;
+}
+
+
+/*----裁切器布局----*/
+
+.cropArea {
+    display: none;
+}
+
+.croppie-container {
+    position: fixed;
+    z-index: 30;
+    width: 744px;
+    height: 350px;
+    left: 50%;
+    margin-left: -372px;
+    margin-top: 55px;
+    background: #ffffff;
+    display: none;
+}
+
+
+/*.cropboard {
+    display: none;
+    width: 140px;
+    height: 140px;
+}*/
+
+
+/*裁切按鈕*/
+
+.crop-btn {
+    display: block;
+    position: fixed;
+    z-index: 31;
+    width: 80px;
+    height: 30px;
+    top: 424px;
+    margin-left: -40px;
+    left: 50%
+}
+
+
+/*裁切取消按鈕*/
+
+.crop-cancel-btn {
+    display: block;
+    position: fixed;
+    background-color: #8b8b8b;
+    border: none;
+    z-index: 31;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
 }
 
 .member-input {
@@ -1055,7 +1126,7 @@ input[type="button"]:disabled {
 
 .member-edit-image {
     width: 100px;
-    margin: 0 auto 10px;
+    margin: 0 auto 50px;
     height: 100px;
 }
 
@@ -1088,9 +1159,9 @@ input[type="button"]:disabled {
 
 .member-edit-media {
     width: 95%;
-    margin: 10px;
+    margin: 25px;
     vertical-align: middle;
-    height: 15px; /*如川3/16改*/
+    height: 15px;
 }
 
 .member-input.media {
@@ -1211,7 +1282,7 @@ iframe {
 }
 
 .mailbox-table-body tr:nth-child(even) {
-    /*background:*/
+    background:
 }
 
 .mailbox-table-body tr:nth-child(odd) {}
@@ -1290,4 +1361,108 @@ iframe {
 .mailbox-reply-btn {
     width: 60px;
     margin-left: 80%;
+}
+
+
+/*---------------二手商品頁面-----------------*/
+
+.view {
+    padding-top: 156px;
+}
+
+.searchbar {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1030;
+}
+
+.quicksearch-wrapper {
+    float: left;
+    position: absolute;
+    bottom: 0;
+    margin-left: 50px;
+}
+
+.quicksearch {
+    border-radius: 5px;
+}
+
+.post-btn {
+    float: left;
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin: 10px;
+    left: -webkit-calc(100% - 150px);
+    left: -moz-calc(100% - 150px);
+    left: calc(100% - 150px);
+}
+
+.grid {
+    border: 1px white solid;
+    margin: 20px 50px;
+    padding: 20px;
+}
+
+.secondhand-preview-thumbnail {
+    text-align: center;
+    background-color: #2A2828;
+    /*border: none;*/
+    margin: 10px 25px;
+    width: 20%
+    min-width:300px;
+    height: 400PX;
+    padding: 20PX;
+}
+
+.thumbnail .caption.view-caption {
+    color: #F6F6F6;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.caption.view-caption h4 {
+    font-weight: 700;
+}
+
+.secondhand-price {
+    font-weight: 900;
+}
+
+.thumbnail>.thumbnail-image {
+    border-radius: 5px;
+    height: 220px;
+    width: 220px;
+}
+
+/*---------------三大編輯頁面共同部分------------------*/
+.edit-container{
+    width: 800px;
+    height: 1000px;
+    margin: 50px auto;
+    background-color: #FAF8F8;
+    border-radius: 5px;
+}
+.edit-header{
+    width: 100%;
+    height: 50px;
+    background-color: #3D4759;
+    color: #DFD8D8;
+}
+.edit-title{
+    display: block;
+    margin: 10px auto;
+    font-weight: 900;
+    width: 100px;
+
+}
+.edit-body{
+    border: 1px black solid;
+    width:750px;
+    height: 900px;
+    margin:10px auto;
 }
