@@ -1,17 +1,3 @@
-//這個腳本需要用到linker.js
-//不使用jquery
-
-
-
-/*
-linker element:
-	service_messagebox: chkMessage
-	sys_msg_limit :訊息最大長度，整數
-
-*/
-
-
-
 
 (window.msg=function(){
 		var methods={
@@ -257,23 +243,27 @@ linker element:
 				
 		
 		
-		function deleteMsg(){
-				var amtSelected=msg.msgSelected.length;
-				if(msg.msgSelected.length==0){
-					return null;
-					}
-					if(confirm("確定刪除所選訊息?")){
-						
-						for(var r=0;r<msg.msgSelected.length;r++){
-						var msgId="#"+msg.idStr+msg.msgSelected[r];
-						$(msgId).remove();
-						console.log("remove    "+msgId);
-					}
-					msg.msgSelected=[];
-					
+		function deleteMsg(msgc){
+			var msgId=null;
+			var amtSelected=msg.msgSelected.length;
+			if(msgc!=undefined | msgc!=null){
+				if(confirm("確定刪除這則訊息?")){
+					msgId="#"+msg.idStr+msgc;
+					msg.msgSelected.splice(msg.msgSelected.indexOf(msgc),1);
+					$(msgId).remove();
 				}
-				
-				
+				}else{
+					if(msg.msgSelected.length==0){return null;}
+					if(confirm("確定刪除所選訊息?")){
+						for(var r=0;r<msg.msgSelected.length;r++){
+							var msgId="#"+msg.idStr+msg.msgSelected[r];
+							$(msgId).remove();
+							console.log("remove    "+msgId);
+						}
+						msg.msgSelected=[];
+					}
+					
+				}				
 				msg.msgOnScr();
 		}
 		

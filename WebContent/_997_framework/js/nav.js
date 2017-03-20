@@ -69,7 +69,7 @@ function setup_nav() {
     loginSubmit.on("click",onLoginClick);
     logoutButton.on("click",function(){
 		index_methods.logout_Nav();
-		window.reload(true);}
+		location.reload(true);}
 		);
 	termsAccept.prop("checked",termsAccepted);
     signupEmail.on('keyup', function(ev) {

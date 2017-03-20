@@ -30,10 +30,29 @@ function setup_msg(){
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
 	$("#mail-del-all").prop("checked",false);
+	$("#deleteThisMsg").click(function(ev){
+		msg.deleteMsg($(ev).siblings(".nxx_msgId").html());
+		hideMessage();
+		}
+	);
+	$("#fastReply").click(onFastReply);
+	$("#return-to-mailbox-list-btn").click(hideMessage);
+	
+	function onFastReply(){
+		//檢查完所有內容後送出。
+	}
+	
+	function hideMessage(){
+			$('.mailbox-list-wrapper').show();
+			$('.mailbox-content-wrapper').hide();});
+		}
+
 	
 	var msgModel=$("#msgModel");
 	msgModel.find(":checkbox").on("change",onSelectOne);
-	msgModel.click(showMessage);
+	msgModel.children().not(".mail-td-delete").click(showMessage);
+	
+	
 	
 	function showMessage(ev){
 		$('.mailbox-list-wrapper').hide();
@@ -117,9 +136,10 @@ function setup_msg(){
 		};
 			if(msg.chkMsgBody(message)){
 				msg.sendMessage(message)
-			}else{console.log("blank in neccesary field");}
-				console.log(message);
-				msg.sendMessage(message);
+			}else{console.log("blank in neccesary field");
+					console.log(message);
+			}
+
 		
 	}
 	
