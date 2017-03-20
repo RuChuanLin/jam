@@ -67,16 +67,15 @@
                                 </td>
                             </tr>
                             <tr  id="msgModel" class="mailbox-list-tr">
-								<td class="nxx" style="display:hidden">
-								<!--↓hideen data field↓-->
-								<p class="nxx_msgId"  ></p>
-								<p class="nxx_msgBody" ></p>
-                                <p class="nxx_msgSenderNk" ></p>
-								</td>
-								<!--↑hideen data field↑-->
                                 <td class="mail-td-delete">
-                                    <input name="mail-del" type="checkbox">
-                                </td>
+                                    <input name="mail-del" type="checkbox">								
+									<!--↓hideen data field↓-->
+									<p class="nxx_msgId" style="display:none"  ></p>
+									<p class="nxx_msgBody" style="display:none" ></p>
+									<p class="nxx_msgSenderNk" style="display:none" ></p>
+									<!--↑hideen data field↑-->
+								</td>
+
                                 <td class="mail-td-sender nxx_msgSender">
                                     abc1345676455asd1123asdasdasdasdda
                                 </td>
@@ -89,6 +88,13 @@
                             </tr>
                         </table>
                     </form>
+				<div class="mailbox-bottom">
+                    <div class="mailbox-bottom-inline">
+                        <button id="deleteMsg" class="form-btn mailist-btn mail-delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button id="lastPage" class="form-btn mailist-btn mail-prev-btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+                        <button id="nextPage" class="form-btn mailist-btn mail-next-btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+                    </div>
+                </div>
 
 
 	<!-- 登入/註冊畫面 -->
@@ -183,29 +189,21 @@
         </div>
     </div>
     <!-- 站內信modal -->
-    <div class="mailbox-modal">
+    <div id="mail_detail" class="mailbox-modal">
         <div class="mailbox-modal-container">
             <div class="mailbox-body">
                 <div class="mailbox-header">
                     <form action="">
                         <div class="mail-title">
-                            <label for="mail-title">主旨</label>
-                            <br>
-                            <label for="recipient">收件者</label>
-                            <br>
+                            <label for="mail-title">主旨</label><br>
+                            <label for="recipient">收件者</label><br>
                         </div>
                         <div class="mail-input">
-                            <input type="text" class="mail-input" id="mail-title">
-                            <br>
-                            <input type="text" class="mail-input" id="recipient">
-                            <br>
+                            <input type="text" class="mail-input" id="mail-title"><br>
+                            <input type="text" class="mail-input" id="recipient"><br>
                         </div>
+					</form>
                 </div>
-                <div class="mailbox-bottom">
-                    <div class="mailbox-bottom-inline">
-                        <button id="deleteMsg"class="form-btn mailist-btn mail-delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                        <button id="lastPage" class="form-btn mailist-btn mail-prev-btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
-                        <button id="nextPage" class="form-btn mailist-btn mail-next-btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
                 <div class="mail-content">
                     <div class="mail-title">
                         <label for="mail-content">內容</label>
@@ -214,7 +212,7 @@
                         <textarea name="" class="mail-textarea" id="mail-content"></textarea>
                     </div>
                 </div>
-                </form>
+                
             </div>
             <div id="msgContent" class="mailbox-content-wrapper">
                 <div class="mailbox-content-header">
@@ -241,8 +239,8 @@
         </div>
     </div>
     </div>
-    <script src="_997_framework/js/initFB.js"></script>
 	<script src="_997_framework/js/linker.js"></script>
+    <script src="_997_framework/js/initFB.js"></script>
 	<script src="_997_framework/jquery-3.1.1.min.js"></script>
     <script src="_997_framework/js/jam_lib/liar.js"></script>
     <script src="_997_framework/js/jam_lib/memberFunction.js"></script>

@@ -181,7 +181,9 @@
 						if(xhr.status==200){
 							var resp=xhr.responseText;
 							var info=JSON.parse(resp);
+							if(info["updateSuccess"]){
 								onDataReceive(info);
+							}
 								}else{
 								console.log("strange a "+xhr.status);
 								}break;	

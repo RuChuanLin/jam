@@ -14,7 +14,7 @@ function init_message(){
 		kie.cleanCookie(jam_cookie_key);
 		sessionStorage.clear();
 		localStorage.clear();
-		window.location="index.html";
+		//window.location="index.html";
 	}
 	
 	
@@ -30,13 +30,14 @@ function setup_msg(){
 	$("#mail-del-all").on("click",onSelectAll);
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
-	
 	$("#mail-del-all").prop("checked",false);
+	var msgModel=$("#msgModel");
+	msgModel.find(":checkbox").on("change",onSelectOne);
+	msgModel.children().not(".mail-td-delete").on("click",showMessage);
 	//把方法放全域變數中方便取用。
 	msg.showNewMessage=function(message){
-			var msgModel=$("#msgModel");
 			var messages=message.msgs;
-			msgModel.find(".mail-td-delete").click(onSelectOne);
+			
 			msg.totalInbox=message.result;
 				for(var i=0;i<messages.length;i++){
 					if(msg.msgRng[0]>messages[i].msgId){msg.msgRng[0]=messages[i].msgId;}
@@ -120,12 +121,15 @@ function setup_msg(){
 	
 		
 	function onSelectOne(event){
-		var tgt=$(event.target).siblings(".nxx_msgId").html();
+		var tgt=$(event.target).parent().find(".nxx_msgId").html();
+		
+		console.log(tgt);
+		console.log($(event.target).parent());
 		if(!event.target.checked){
 			msg.msgSelected.splice(msg.msgSelected.indexOf(tgt),1);
 		}
 		else{
-		msg.msgSelected.push($(event.target).siblings(".nxx_msgId").html());
+			msg.msgSelected.push(tgt);
 		}
 		
 	}
@@ -147,7 +151,11 @@ function setup_msg(){
 				}
 			}
 
-			
+	}
+	
+	
+	function showMessage(){
+		$("#mail_detail").addClass("is-visible");
 		
 	}
 	

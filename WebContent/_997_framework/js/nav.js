@@ -63,6 +63,7 @@ function setup_nav() {
 
 
 
+
 	
     regSubmit.on("click", onSignupClick);
     loginSubmit.on("click",onLoginClick);
@@ -245,7 +246,6 @@ function setup_nav() {
         formForgotPassword.removeClass('is-selected');
         tabLogin.removeClass('selected');
         tabSignup.addClass('selected');
-		regSubmit.attr("disabled",true);
         $('#nav-sign-button').removeClass('in').attr('aria-expanded', 'false');
 
     }

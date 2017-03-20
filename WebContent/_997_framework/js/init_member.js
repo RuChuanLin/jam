@@ -1,25 +1,46 @@
 
-$(document).ready(init_member);
+$(document).ready(setup_member);
 
-
-function init_member(){
-	setup_nav();
-	setup_member();
-	
-}
 
 function setup_member(){
-	if(localStorage.getItem("request_user")=="isMySelf"){
-		$("#edit-member-btn").on("click",function(){
-			setup_member_edit(data);
-		});
-	}else{
-		$("#edit-member-btn").remove();
+	
+	stater.checkState(loggedin,loggedout);
+	function loggedin(){
+		if(sessionStorage.getItem("requestUser")!="myself"){
+				mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
+		}else{mem.getMemberData("",insertData);}
+		
+			
+	}
+			
+		
+		
 	}
 	
-	
-}
+	function loggedout(){
+		mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
+	}
 
-function setup_member_edit(data){
+	
+	
+	function insertData(data){
+		//insert data into tags
+		fetchTag(showForm);
+		if(data.myself){fetchTag(editForm);}
+		
+		function fetchTag(formRoot){
+			
+			
+			
+		}
+		
+		
+		
+	}
+
+	
+	
+	
+	
 	
 }

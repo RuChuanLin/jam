@@ -1241,7 +1241,7 @@ iframe {
 /*收件匣內容*/
 
 .mailbox-content-wrapper {
-    display: none;
+     display: none; 
 }
 
 .mailbox-content-header {
