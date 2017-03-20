@@ -1159,7 +1159,7 @@ input[type="button"]:disabled {
 
 .member-edit-media {
     width: 95%;
-    margin: 25px;
+    margin: 25px 10px;
     vertical-align: middle;
     height: 15px;
 }
