@@ -1,0 +1,37 @@
+diff a/WebContent/mailbox.html b/WebContent/mailbox.html	(rejected hunks)
+@@ -189,29 +189,21 @@
+         </div>
+     </div>
+     <!-- 站內信modal -->
+-    <div class="mailbox-modal">
++    <div id="mail_detail" class="mailbox-modal">
+         <div class="mailbox-modal-container">
+             <div class="mailbox-body">
+                 <div class="mailbox-header">
+                     <form action="">
+                         <div class="mail-title">
+-                            <label for="mail-title">主旨</label>
+-                            <br>
+-                            <label for="recipient">收件者</label>
+-                            <br>
++                            <label for="mail-title">主旨</label><br>
++                            <label for="recipient">收件者</label><br>
+                         </div>
+                         <div class="mail-input">
+-                            <input type="text" class="mail-input" id="mail-title">
+-                            <br>
+-                            <input type="text" class="mail-input" id="recipient">
+-                            <br>
++                            <input type="text" class="mail-input" id="mail-title"><br>
++                            <input type="text" class="mail-input" id="recipient"><br>
+                         </div>
++					</form>
+                 </div>
+-                <div class="mailbox-bottom">
+-                    <div class="mailbox-bottom-inline">
+-                        <button id="deleteMsg"class="form-btn mailist-btn mail-delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+-                        <button id="lastPage" class="form-btn mailist-btn mail-prev-btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+-                        <button id="nextPage" class="form-btn mailist-btn mail-next-btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+                 <div class="mail-content">
+                     <div class="mail-title">
+                         <label for="mail-content">內容</label>

@@ -171,7 +171,7 @@
 	
 	function getMemberData(userId,onDataReceive){
 		var param="?memberId="+userId;
-		if(userId==""){param="";}
+		if(userId=="isMySelf"){param="";}
 		var xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			

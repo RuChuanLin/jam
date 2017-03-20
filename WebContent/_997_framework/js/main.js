@@ -177,19 +177,7 @@ jQuery(document).ready(function($) {
         });
 
     };
-/*
-    //將會員資料顯示在螢幕上~!!接收一個引數arg, 內容是MemberBean的JS物件
-    function onMemberLoading(arg) {
-        return new Promise((resolve, reject) => {
-            console.log(arg);
-            $("#member-pic").attr("src", arg.Member.pic || '');
-            $("#member-instrument").html(arg.Member.instrument);
-            $("#member-name").html(arg.Member.alias);
-            $("#member-intro").html(arg.Member.intro);
-            // window.location.reload(false);
-        });
-    }
-*/
+
 
     function onLogoutClick() {
         $.post({

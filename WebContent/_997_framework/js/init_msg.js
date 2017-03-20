@@ -4,11 +4,7 @@ $(document).ready(init_message);
 
 function init_message(){
 	stater.checkState(onLoggedIn,onLoggedOut);
-	function onLoggedIn(){
-		setup_nav();
-		setup_msg();
-	}
-	
+
 	function onLoggedOut(){
 		alert("you are not logged in");
 		kie.cleanCookie(jam_cookie_key);
@@ -17,20 +13,10 @@ function init_message(){
 		//window.location="index.html";
 	}
 	
-	    //站內信modal彈出 
-		$('.mail-btn').on('click', function() {
-			$('.mailbox-modal').addClass('is-visible');
-		});
-
-		//站內信modal關閉
-		$('.mailbox-modal').click(function(event) {
-			if ($(event.target).is(mailModal)) {
-				mailModal.removeClass('is-visible');
-			}
-
-		});
-	
-	
+	function onLoggedIn(){
+		setup_nav();
+		setup_msg();
+		}
 }
 
 
@@ -44,9 +30,22 @@ function setup_msg(){
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
 	$("#mail-del-all").prop("checked",false);
+	
 	var msgModel=$("#msgModel");
 	msgModel.find(":checkbox").on("change",onSelectOne);
-	msgModel.children().not(".mail-td-delete").on("click",showMessage);
+	msgModel.click(showMessage);
+	
+	function showMessage(ev){
+		$('.mailbox-list-wrapper').hide();
+        $('.mailbox-content-wrapper').show();
+		var panel=$("#msgContent");
+		var src=ev.target;
+		panel.find(".nxx_msgTitle").html($(src).parent().find(".nxx_msgTitle").html());
+		panel.find(".nxx_msgSenderNk").html($(src).parent().find(".nxx_msgSenderNk").html());
+		panel.find(".nxx_msgBody").html($(src).parent().find(".nxx_msgBody").html());
+		panel.find(".nxx_msgDate").html($(src).parent().find(".nxx_msgDate").html());
+		
+	}
 	//把方法放全域變數中方便取用。
 	msg.showNewMessage=function(message){
 			var messages=message.msgs;
@@ -80,8 +79,6 @@ function setup_msg(){
 			
 		};
 		
-	//檢查登入狀況並取得信件
-	stater.checkState(onLoggedIn,onLoggedOut);
 	
 	
 	
@@ -102,12 +99,6 @@ function setup_msg(){
 		msg.getMessage(msg.showNewMessage);		
 	}
 	
-	function onLoggedOut(){
-		bgts.deActivateBgts();
-		alert("您尚未登入");
-		window.location="index.html";
-	}
-	
 	function checkLength(){
 		msg.checkMsgLength(this);
 		$("#msg_length").html("訊息長度 : "+msg.msgLng+" /3000 ");
@@ -121,7 +112,7 @@ function setup_msg(){
 			sender: data.user_id,//寄件者id
 			toUser :$("#mailto").html() ,//傳送對象
 			title : $("#mesTitle").html() ,//訊息標題
-			msg : $("#msgArea").val() ,//訊息本體
+			msg : $("#msgArea").val() //訊息本體
 			
 		};
 			if(msg.chkMsgBody(message)){
@@ -167,10 +158,7 @@ function setup_msg(){
 	}
 	
 	
-	function showMessage(){
-		$("#mail_detail").addClass("is-visible");
-		
-	}
+
 	
 	
 	
