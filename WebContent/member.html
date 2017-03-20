@@ -296,7 +296,7 @@
 						url: '/Jam/goMemberPage',
 						type: 'POST',
 						datatype: 'json',
-						data: { member }
+						data: { member: sessionStorage.getItem('LoginId') }
 					}).done(response => {
 						login_Nav();
 						$("#member-pic").attr("src", response.Member.pic || '');
@@ -308,7 +308,7 @@
 							$('#media-video-list').empty();
 							url.map(v => {
 								if (v) {
-									$('#media-video-list').append(`<iframe src="https://www.youtube.com/emxbed/${v}" frameborder="0" allowfullscreen></iframe>`);
+									$('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`);
 								}
 							});
 						}
