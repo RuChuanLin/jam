@@ -17,6 +17,19 @@ function init_message(){
 		//window.location="index.html";
 	}
 	
+	    //站內信modal彈出 
+		$('.mail-btn').on('click', function() {
+			$('.mailbox-modal').addClass('is-visible');
+		});
+
+		//站內信modal關閉
+		$('.mailbox-modal').click(function(event) {
+			if ($(event.target).is(mailModal)) {
+				mailModal.removeClass('is-visible');
+			}
+
+		});
+	
 	
 }
 
