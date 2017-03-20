@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import _01_member.model.Member;
+import _01_member.model.MemberDAO;
+import _01_member.model.MemberHBN;
 
-@WebServlet("/memberEdit")
-public class MemberEdit extends HttpServlet {
+@WebServlet("/loadingMember")
+public class LoadingMemberPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,21 +27,29 @@ public class MemberEdit extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
-		PrintWriter pw = response.getWriter();
 		Map<String, Object> map = new HashMap<>();
+		PrintWriter pw = response.getWriter();
+		MemberDAO dao = new MemberHBN();
 		Gson gson = new Gson();
-
 		Member mb = (Member) session.getAttribute("Member");
-		System.out.println(mb.getAccount());
-		System.out.println(mb.getPassword());
+		String memberId = request.getParameter("memberId");
+		boolean myself = true;
+		int id = -1;
 
-		session.setAttribute("Member", mb);
-		// 不回傳密碼
+		if (memberId != null && memberId.trim().length() != 0) {
+			id = Integer.parseInt(memberId);
+		}
+		System.out.println(id);
+
+		if (id != -1 && id != mb.getUserId()) {
+			mb = dao.getMember(id);
+			myself = false;
+		}
+
 		mb.setPassword("");
 		map.put("Member", mb);
-		String json = gson.toJson(map);
-		pw.write(json);
-
+		map.put("myself", myself);
+		pw.write(gson.toJson(map));
 	}
 
 }

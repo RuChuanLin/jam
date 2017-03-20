@@ -11,7 +11,7 @@ public class InnerMsg {
 	private String article;
 	private Calendar time;
 	private boolean state;
-
+	
 	public int getPk() {
 		return pk;
 	}
