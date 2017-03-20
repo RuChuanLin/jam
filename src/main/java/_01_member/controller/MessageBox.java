@@ -2,9 +2,7 @@ package _01_member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +17,7 @@ import _01_member.model.InnerMsg;
 import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
+import _01_member.model.MessageReturn;
 
 @WebServlet("/messageBox")
 public class MessageBox extends HttpServlet {
@@ -29,7 +28,6 @@ public class MessageBox extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
-		Map<String, Object> map = new HashMap<>();
 		Member mem = (Member) session.getAttribute("Member");
 		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
@@ -64,9 +62,11 @@ public class MessageBox extends HttpServlet {
 				msgs = dao.getMsg(userId, start);
 				msgs.remove(0);
 			}
-			map.put("result", 0);
-			map.put("msgs", msgs);
-			pw.write(gson.toJson(msgs));
+			
+			MessageReturn msg = new MessageReturn();
+			msg.setResult(result);
+			msg.setMsgs(msgs);			
+			pw.write(gson.toJson(msg));
 			pw.flush();
 			System.out.println("讀取站內信");
 			return;

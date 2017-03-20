@@ -3,8 +3,6 @@ package _01_member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,10 +29,10 @@ public class MessageSend extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
 		Member mem = (Member) session.getAttribute("Member");
-		Map<String, Object> map = new HashMap<>();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 		MemberDAO dao = new MemberHBN();
+		boolean sent = false;
 
 		int sender = mem.getUserId();
 		String alias = mem.getAlias();
@@ -47,8 +45,9 @@ public class MessageSend extends HttpServlet {
 
 		InnerMsg imsg = new InnerMsg(sender, alias, receiver, title, msg, time, false);
 		dao.setMsg(imsg);
-		map.put("sent", true);
-		pw.write(gson.toJson(map));
+		
+		sent = true ;
+		pw.write(gson.toJson(sent));
 		pw.flush();
 
 	}
