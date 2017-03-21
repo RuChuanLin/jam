@@ -184,19 +184,20 @@
             <div class="member-edit-header">
                 <h1>會員簡介編輯</h1>
             </div>
-            <form class="member-edit-form">
+            <form id="memberEdit" class="member-edit-form">
                 <div class="member-edit-body">
                     <div class="member-edit-image">
-                        <img class="profolio-img" id="preview-pic" />
+                        <img class="profolio-img mX_pic" />
                         <label for="member-name" class="member-form-label-text">個人照片</label>
                         <input type="file" id="update-member-pic">
                     </div>
                     <div class="member-edit-name">
                         <label for="member-name" class="member-form-label-text">名稱</label>
-                        <input type="text" class="member-input name" id="update-member-name">
+                        <input type="text" class="member-input name mX_alias" >
                     </div>
                     <div class="member-edit-instruments">
                         <label for="member-instruments" class="member-form-label-text" id="member-instruments-label">樂器專長</label>
+						<p class="mX_instrument"></p>
                         <button type="button" class="form-btn instruments-plus"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         <button type="button" class="form-btn instruments-minus"><i class="fa fa-minus" aria-hidden="true"></i></button>
                     </div>
@@ -221,18 +222,18 @@
         </div>
     </div>
     <!-- 會員資料主頁面 -->
-    <section class="profolio info">
+    <section id="memberData" class="profolio info">
         <div class="profolio-header">
             <div class="profolio-img-wrapper">
-                <img class="profolio-img" id="member-pic">
+                <img class="profolio-img mX_pic">
             </div>
             <div class="edit-wrapper" id="edit-member-btn">
                 <button class="edit-btn"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="profolio-info-text">
-            <h1 class="member-name" id="member-name"></h1>
-            <h2 class="member-skills" id="member-instrument"></h2>
+        <div class="profolio-info-text ">
+            <h1 class="member-name mX_alias"></h1>
+            <h2 class="member-skills mX_instrument" ></h2>
         </div>
         <div class="profolio-action">
             <button class="btn btn-primary mail-btn"><i class="fa fa-envelope-o" fa-4x aria-hidden="true"></i></button>
@@ -254,14 +255,14 @@
         <div class="profolio-about-me-defualt">
             <p class="test">
                 <span class="firstline-wrapper">
-                <span class="firstline" id="member-intro-hide">
+                <span class="firstline mX_intro" id="member-intro-hide">
 
                 </span>
                 <button class="abtbtn show">展開</button>
                 </span>
             </p>
         </div>
-        <div class="profolio-about-me-show">
+        <div class="profolio-about-me-show mX_intro">
             <p id="member-intro-show">
             </p>
             <button class="abtbtn hide">收回</button>

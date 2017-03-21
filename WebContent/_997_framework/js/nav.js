@@ -76,13 +76,14 @@ function setup_nav() {
 			if(chk_email(ev.target.value)){
 					mem.validateAcc(vAcc,function(response){
 					  if (response.accExt) {
-							signupEmail.find(".error-message").addClass('is-visible');
+							signupEmail.find(".error-message").hide();
 							  return false;
 						 } else {
-							signupEmail.find(".error-message").removeClass('is-visible');
+							signupEmail.find(".error-message").show();
 						 };	
 					});				
 			}else{
+				signupEmail.find(".error-message").show();
 				console.log("wrong email format");	
 			}
     });
@@ -210,7 +211,7 @@ function setup_nav() {
 		var pwcfn=passwordConfirm.val();		
 		if(pwsu.length==pwcfn.length){
 			if(!password_rule(pwsu) || !password_rule(pwcfn)){
-				passwordConfirm.find("error-message").show();
+				passwordConfirm.find(".error-message").show();
 				return false;}
 			if (val[0].toString() === val[1].toString()) {
 			passwordConfirm.find("error-message").hide();

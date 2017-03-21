@@ -16,6 +16,7 @@
 			msgLocal :0 ,//local已載入的訊息總數。
 			idStr :"msg_Id",
 			deleteMsg :deleteMsg, //刪除訊息(畫面與資料庫)
+			deleteCurMsg :deleteCurMsg, //刪除當下正在閱讀的訊息
 			isChecking :false,	//是否正在檢查新信(避免多次觸發)
 			msgOnScr : msgOnScr, //調整訊息在畫面上的顯示狀態
 			nextPage : nextPage,
@@ -110,13 +111,19 @@
 		
 		//發送訊息，由btn_send_ms.onclick呼叫，info，由外部提供。info：物件，結構見下方
 		function sendMessage(info,cbf){
+			console.log(info);
 			if(msg.isSending){return;}
+			console.log("b");
 			var req=new Object();
 			var xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(res){
 				
 				switch(xhr.readyState){
-					case 1:xhr.send();break;
+					case 1:
+					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.send(JSON.stringify(info));
+					console.log(info);
+					break;
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
@@ -132,6 +139,7 @@
 					default :console.log(xhr.status);break;
 				}
 			}
+			
 			xhr.open("POST",base_url+service_sendMsg,true);
 			
 		}
@@ -139,11 +147,14 @@
 		
 		
 		
-//檢查訊息是否有弊田欄位沒有田寫
+		//檢查訊息是否有必填欄位沒有田寫
 		function checkMsgBody(message){
-			console.log("checked");
-			return true;
-			
+			console.log(msg.msgLng);
+			if(message.toUser==null ||message.title==null|| msg.msgLng==0){
+				return false;
+			}else{
+				return true;
+			}
 		}
 		//檢查寄件對象是否存在、格式是否正確
 		//這邊可能需要另一個API，把我自己用的測試API也丟進主Repo?
@@ -164,16 +175,15 @@
 					count+=1;
 				}
 			}
-			
-
 			this.msgLng=count;
-			
 			
 			if(count<sys_msg_limit){
 				return true;
+			}else if(count ==0){
+				return false;
 			}else{
 				return false;
-		}
+			}
 				
 			}
 			
@@ -239,20 +249,23 @@
 				}
 				
 			}
+			
+			
+		function deleteCurMsg(curMsg){
+			var msgId="#"+msg.idStr+curMsg;
+			console.log(msgId);
+			$(msgId).remove();
+			msg.msgAll.splice(msg.msgAll.indexOf(curMsg),1);
+			msg.msgSelected.splice(msg.msgSelected.indexOf(curMsg),1);
+			msg.msgOnScr();
+		}
 				
 				
 		
 		
-		function deleteMsg(msgc){
+		function deleteMsg(){
 			var msgId=null;
 			var amtSelected=msg.msgSelected.length;
-			if(msgc!=undefined | msgc!=null){
-				if(confirm("確定刪除這則訊息?")){
-					msgId="#"+msg.idStr+msgc;
-					msg.msgSelected.splice(msg.msgSelected.indexOf(msgc),1);
-					$(msgId).remove();
-				}
-				}else{
 					if(msg.msgSelected.length==0){return null;}
 					if(confirm("確定刪除所選訊息?")){
 						for(var r=0;r<msg.msgSelected.length;r++){
@@ -263,7 +276,6 @@
 						msg.msgSelected=[];
 					}
 					
-				}				
 				msg.msgOnScr();
 		}
 		

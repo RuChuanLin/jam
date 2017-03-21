@@ -30,21 +30,39 @@ function setup_msg(){
 	$("#msgArea").on("keyup",checkLength);
 	$("#send_msg" ).on("click",sendMessage);
 	$("#mail-del-all").prop("checked",false);
-	$("#deleteThisMsg").click(function(ev){
-		msg.deleteMsg($(ev).siblings(".nxx_msgId").html());
-		hideMessage();
-		}
-	);
+	$("#deleteThisMsg").click(deleteOnRead);
 	$("#fastReply").click(onFastReply);
 	$("#return-to-mailbox-list-btn").click(hideMessage);
+	$("#mail-reply-content").on("keyup",checkLength);
 	
-	function onFastReply(){
+	function deleteOnRead(ev){
+		msg.deleteCurMsg($(ev.target).siblings(".nxx_msgId").html());
+		hideMessage();
+	}
+	
+	function onFastReply(ev){
 		//檢查完所有內容後送出。
+		var msgId="#msg_Id"+$(ev.target).siblings(".nxx_msgId").html();
+		var rMsg={
+			title : "Re :"+$(msgId).find(".nxx_msgId").html(),
+			toUser : $(msgId).find(".nxx_msgSender").html(),
+			msg : $("#mail-reply-content").val()
+		}
+		if(msg.chkMsgBody(rMsg)){
+			msg.sendMessage(rMsg,function(resp){
+			console.log(resp);
+			});
+			console.log("sent   "+resp)
+		}else{
+			console.log("problem2");
+		}
+		
+		
 	}
 	
 	function hideMessage(){
 			$('.mailbox-list-wrapper').show();
-			$('.mailbox-content-wrapper').hide();});
+			$('.mailbox-content-wrapper').hide();
 		}
 
 	
@@ -55,16 +73,21 @@ function setup_msg(){
 	
 	
 	function showMessage(ev){
+		msg.msgLng=0;
 		$('.mailbox-list-wrapper').hide();
         $('.mailbox-content-wrapper').show();
 		var panel=$("#msgContent");
-		var src=ev.target;
-		panel.find(".nxx_msgTitle").html($(src).parent().find(".nxx_msgTitle").html());
-		panel.find(".nxx_msgSenderNk").html($(src).parent().find(".nxx_msgSenderNk").html());
-		panel.find(".nxx_msgBody").html($(src).parent().find(".nxx_msgBody").html());
-		panel.find(".nxx_msgDate").html($(src).parent().find(".nxx_msgDate").html());
+		var src=$(ev.target).parent();
+		console.log(src);
+		//panel.find(".nxx_msgTitle").html(src.find(".nxx_msgTitle").html());
+		panel.find(".nxx_msgTitle").html(src.find(".nxx_msgTitle").html());
+		panel.find(".nxx_msgId").html(src.find(".nxx_msgId").html());
+		panel.find(".nxx_msgSenderNk").html(src.find(".nxx_msgSenderNk").html());
+		panel.find(".nxx_msgBody").html(src.find(".nxx_msgBody").html());
+		panel.find(".nxx_msgDate").html(src.find(".nxx_msgDate").html());
 		
-	}
+    };
+	
 	//把方法放全域變數中方便取用。
 	msg.showNewMessage=function(message){
 			var messages=message.msgs;
@@ -120,7 +143,7 @@ function setup_msg(){
 	
 	function checkLength(){
 		msg.checkMsgLength(this);
-		$("#msg_length").html("訊息長度 : "+msg.msgLng+" /3000 ");
+		console.log("訊息長度 : "+msg.msgLng+" /3000 ");
 
 	}
 	
@@ -136,8 +159,8 @@ function setup_msg(){
 		};
 			if(msg.chkMsgBody(message)){
 				msg.sendMessage(message)
-			}else{console.log("blank in neccesary field");
-					console.log(message);
+			}else{
+				console.log("problem");
 			}
 
 		

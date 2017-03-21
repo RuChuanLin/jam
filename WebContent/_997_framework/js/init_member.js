@@ -7,14 +7,14 @@ function setup_member(){
 	stater.checkState(loggedin,loggedout);
 	
 	function loggedin(){
-		if(sessionStorage.getItem("requestUser")!="isMySelf")
+		if(sessionStorage.getItem("requestUser")!="isMySelf"){
 				mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
 		}else{mem.getMemberData("isMySelf",insertData);}
-				
+	}
 	function loggedout(){
 		mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
 	}
-}
+
 	
 	
 	function insertData(data){
