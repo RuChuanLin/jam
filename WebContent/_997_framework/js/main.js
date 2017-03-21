@@ -88,7 +88,12 @@ jQuery(document).ready(function ($) {
     onMyJamButton.on('click', function () {
         onMemberPageClick(sessionStorage.getItem("LoginId"));
     });
-
+    //--------按別人頁面測試-------------
+    $('#river-test').attr('name', 1)
+    $('#river-test').on('click', () => {
+        console.log($('#river-test').attr('name'));
+        onMemberPageClick($('#river-test').attr('name')).then((arg) => onMemberLoading(arg))
+    })
 
 
     //---------------註冊ajax------------------
@@ -209,6 +214,7 @@ jQuery(document).ready(function ($) {
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
             $("#member-intro").html(arg.Member.intro);
+
             // window.location.reload(false);
         });
     }
@@ -267,7 +273,6 @@ jQuery(document).ready(function ($) {
             });
             console.log(url_arr);
             let pic = $("#preview-pic").attr("src");
-            $('#river-test').attr("src", pic);
             $.ajax({
                 url: `/Jam/updatePerson`,
                 cache: true,
@@ -398,19 +403,22 @@ jQuery(document).ready(function ($) {
     //     onMemberPageClick(sessionStorage.getItem("LoginId"));
     // })
     // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
+
     function onMemberPageClick(member) {
-        console.log(member);
-        $.ajax({
-            url: '/Jam/goMemberPage',
-            type: 'POST',
-            datatype: 'json',
-            data: { member }
-        }).done(response => {
-            window.location.replace("http://localhost:8080/Jam/member.html");
-        });
+        return new Promise((resolve, reject) => {
+            console.log(member);
+            $.ajax({
+                url: '/Jam/goMemberPage',
+                type: 'POST',
+                datatype: 'json',
+                data: { member }
+            }).done(response => {
+                // window.location.replace("http://localhost:8080/Jam/member.html");
+                resolve(response)
+            });
+        })
 
     }
-
 
 
 

@@ -36,16 +36,16 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function showName() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', { fields: 'first_name' }, function (response) {
-        console.log(response);
-        console.log('Successful login for: ' + response.first_name);
-        document.getElementById('fb-loging-name').innerHTML =
-            'Hi, ' + response.first_name + '!';
-        document.getElementById('nav-pic').setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=small");
-    });
-}
+// function showName() {
+//     console.log('Welcome!  Fetching your information.... ');
+//     FB.api('/me', { fields: 'first_name' }, function (response) {
+//         console.log(response);
+//         console.log('Successful login for: ' + response.first_name);
+//         document.getElementById('fb-loging-name').innerHTML =
+//             'Hi, ' + response.first_name + '!';
+//         document.getElementById('nav-pic').setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=small");
+//     });
+// }
 
 function check_user(fbId, fbName, fbpicture) {
     //這裡要寫ajax 傳值進server
