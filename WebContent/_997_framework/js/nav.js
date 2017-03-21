@@ -171,18 +171,18 @@ function setup_nav() {
     //確認註冊密碼是否符合規則
     signupPassword.on('keyup',function(){
 		if(password_rule(this.value)){
-			signupPassword.find(".error-message").removeClass("is-visible");
+			signupPassword.find(".error-message").hide();
 		}else{
-			signupPassword.find(".error-message").addClass("is-visible");
+			signupPassword.find(".error-message").show();
 		}
 	});
 
     //註冊確認密碼不一致
     passwordConfirm.on('keyup',function(){
 	if(password_different([this.value,signupPassword.val()])){
-            signupPassword.find(".error-message").removeClass("is-visible");
+            signupPassword.find(".error-message").hide();
 	}else{
-			signupPassword.find(".error-message").addClass("is-visible");
+			signupPassword.find(".error-message").show();
 	}
 		check_all_field();
 	});
@@ -214,10 +214,10 @@ function setup_nav() {
 				passwordConfirm.find(".error-message").show();
 				return false;}
 			if (val[0].toString() === val[1].toString()) {
-			passwordConfirm.find("error-message").hide();
+			passwordConfirm.find(".error-message").hide();
             return true;
 			} else {
-				passwordConfirm.find("error-message").show();
+				passwordConfirm.find(".error-message").show();
 				return false;}
 		}else{return false;}
     }
