@@ -6,6 +6,7 @@
     }).done(response => {
         console.log(response);
         if (response) {
+            console.log(response);
             login_Nav();
         } else {
             logout_Nav();

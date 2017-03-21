@@ -7,7 +7,9 @@ var login_Nav = function () {
     $('#nav-myinbox-btn').show().css("display", "block");
     $('#nav-my-member-link').show().css("display", "block");
     $('#nav-logout').show().css("display", "block");
-
+    document.getElementById('fb-loging-name').innerHTML =
+        'Hi, ' + sessionStorage.getItem('alias') + '!';
+    document.getElementById('nav-pic').setAttribute("src", sessionStorage.getItem('pic'));
 };
 
 //登出後nav-bar右上角的顯示
@@ -136,7 +138,7 @@ jQuery(document).ready(function ($) {
         var account = signupEmail.val();
         var password = signupPassword.val();
         $.ajax({
-            url: `http://localhost:8080/Jam/register`,
+            url: `/Jam/register`,
             data: { account, password },
             type: 'POST',
             cache: false,
@@ -173,6 +175,7 @@ jQuery(document).ready(function ($) {
                     close_modal();
                     sessionStorage.setItem("LoginId", response.loginId || '');
                     sessionStorage.setItem("alias", response.alias || '');
+                    sessionStorage.setItem("pic", response.pic || '')
                     resolve(response);
                 } else {
                     error_idps();
@@ -212,11 +215,11 @@ jQuery(document).ready(function ($) {
 
 
     function onLogoutClick() {
-       $.post({
-           url: '/Jam/logoutMember',
-           type:'POST',
-           datatype:'json'
-       });
+        $.post({
+            url: '/Jam/logoutMember',
+            type: 'POST',
+            datatype: 'json'
+        });
         //登出畫面，以下寫程式碼
         console.log('logout');
         logout_Nav();
