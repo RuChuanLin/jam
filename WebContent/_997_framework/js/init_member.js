@@ -4,14 +4,18 @@ $(document).ready(setup_member);
 
 function setup_member(){
 	
-	stater.checkState(loggedin,loggedout);
+	stater.checkState(function(){setup_nav();loggedin();},function(){setup_nav();loggedout();});
 	
 	function loggedin(){
+		setup_nav();
+		
 		if(sessionStorage.getItem("requestUser")!="isMySelf"){
 				mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
 		}else{mem.getMemberData("isMySelf",insertData);}
 	}
 	function loggedout(){
+		setup_nav();
+		
 		mem.getMemberData(sessionStorage.getItem("requestUser"),insertData);
 	}
 

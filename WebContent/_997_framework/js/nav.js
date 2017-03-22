@@ -71,19 +71,20 @@ function setup_nav() {
 		index_methods.logout_Nav();
 		location.reload(true);}
 		);
-	termsAccept.prop("checked",termsAccepted);
+	termsAccept.prop("checked",termsAccepted);	
     signupEmail.on('keyup', function(ev) {
-			if(chk_email(ev.target.value)){
+		signupEmail.next('span').addClass('is-visible');
+    	var vAcc=ev.target.value;
+    		if(chk_email(vAcc)){
 					mem.validateAcc(vAcc,function(response){
 					  if (response.accExt) {
-							signupEmail.find(".error-message").hide();
+							signupEmail.next('span').addClass('is-visible');
 							  return false;
 						 } else {
-							signupEmail.find(".error-message").show();
+							signupEmail.next('span').addClass('is-visible');
 						 };	
-					});				
+					});
 			}else{
-				signupEmail.find(".error-message").show();
 				console.log("wrong email format");	
 			}
     });

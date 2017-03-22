@@ -1,6 +1,7 @@
 //這個腳本需要FB sdk方能運作
-//這個腳本需要使用linker.js的內容
+//這個腳本需要使用linker.js的內容var 
 //這個腳本的內容在外界以mem呼叫
+var mem=.....
 
 (window.mem=function(){
 	var methods={
@@ -12,6 +13,7 @@
 		register : register,
 		updateData : updateData,
 		getMemberData : getMemberData
+		isValidating : false //是否正在檢查code
 		
 		
 	};
@@ -53,9 +55,9 @@
 		var xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(resp){
 			switch(xhr.readyState){
-				case 1:xhr.send(data);break;
+				case 1:xhr.send(JSON.stringify(data));break;
 				case 4:if(xhr.status==200){
-					var rs=SON.parse(xhr.responseText);
+					var rs=JSON.parse(xhr.responseText);
 					cbf(rs.accExt);
 				}break;
 			}
