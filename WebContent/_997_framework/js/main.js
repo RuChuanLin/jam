@@ -7,9 +7,7 @@ var login_Nav = function () {
     $('#nav-myinbox-btn').show().css("display", "block");
     $('#nav-my-member-link').show().css("display", "block");
     $('#nav-logout').show().css("display", "block");
-    document.getElementById('fb-loging-name').innerHTML =
-        'Hi, ' + sessionStorage.getItem('alias') + '!';
-    document.getElementById('nav-pic').setAttribute("src", sessionStorage.getItem('pic'));
+    
 };
 
 //登出後nav-bar右上角的顯示
@@ -61,7 +59,6 @@ jQuery(document).ready(function ($) {
 
     //---------事件處理--------------
 
-    //在頁面刷新時會執行此函式, 此函式前半段是前往/Jam/loadingMember撈資料
     //撈完後執行onMemberLoading(), 也就是讓撈到的會員資料顯示在畫面上
 
 
@@ -213,8 +210,16 @@ jQuery(document).ready(function ($) {
             }
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
-            $("#member-intro").html(arg.Member.intro);
-
+            const {intro} = response.Member;
+			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
+			if (intro.length > intro_show_number && intro_show_number!==-1){
+				$('#intro-original').html(intro.substr(0,intro_show_number))
+				$('#intro-expended').html(intro.substr(intro_show_number))
+			}else{
+				$('#intro-original').html(intro)
+			}
+            // $('#nav-pic').attr("src", sessionStorage.getItem('pic') || '');
+            // $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
             // window.location.reload(false);
         });
     }
@@ -280,6 +285,8 @@ jQuery(document).ready(function ($) {
                 type: 'POST',
                 data: { instruments, intro, email, alias, pic, url: url_arr }
             }).done((response) => {
+                // sessionStorage.setItem('')
+                // sessionStorage.setItem()
                 resolve(response);
             }).fail();
         });

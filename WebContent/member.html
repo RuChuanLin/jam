@@ -98,14 +98,12 @@
 					</a>
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signup-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="signup-email" type="email
-                           " placeholder="E-mail">
+						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
 						<span class="error-message">此帳號已被註冊!</span>
 					</p>
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password" type="text
-                           " placeholder="密碼">
+						<input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="密碼">
 						<!-- <a href="#0" class="hide-password">隱藏密碼</a> -->
 						<span class="error-message">請使用8位元-16位元的英文及數字組成密碼!</span>
 					</p>
@@ -158,16 +156,17 @@
 							<input type="text" class="mail-input" id="mail-title"> <br>
 							<input type="text" class="mail-input" id="recipient"> <br>
 						</div>
+
+						<div class="mail-content">
+							<div class="mail-title">
+								<label for="mail-content">內容</label>
+							</div>
+							<div class="mail-input content">
+								<textarea name="" class="mail-textarea" id="mail-content"></textarea>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="mail-content">
-					<div class="mail-title">
-						<label for="mail-content">內容</label>
-					</div>
-					<div class="mail-input content">
-						<textarea name="" class="mail-textarea" id="mail-content"></textarea>
-					</div>
-				</div>
-				</form>
 			</div>
 			<div class="mail-footer">
 				<button class="form-btn send" id="mail-submit" type="submit">寄出</button>
@@ -265,7 +264,17 @@
 				</ul>
 			</div>
 		</div>
-		<div class="profolio-about-me-defualt">
+		<button type="button" class="abtbtn show" data-toggle="collapse" data-target="#intro-expended">展開 / 收回</button>
+
+		<pre wrap="physical">
+			<div id="intro-original">
+11
+			</div>
+       		<div id="intro-expended" class="collapse" wrap="physical">
+        	
+        	</div>
+		</pre>
+		<!--<div class="profolio-about-me-defualt" wrap="physical">
 			<p class="test">
 				<span class="firstline-wrapper"> <span class="firstline"
 					id="member-intro-hide"> </span>
@@ -276,7 +285,7 @@
 		<div class="profolio-about-me-show">
 			<p id="member-intro-show"></p>
 			<button class="abtbtn hide">收回</button>
-		</div>
+		</div>-->
 	</section>
 	<!-- 影音專區 -->
 	<section class="profolio media">
@@ -299,44 +308,47 @@
 	<script src="_997_framework/js/fblogin.js"></script>
 	<script src="_997_framework/js/login-status.js"></script>
 	<script>
-		(function () {
-			$.ajax({
-				url: '/Jam/loadingMember',
-				type: 'POST',
-				datatype: 'json',
-				data: { member: sessionStorage.getItem('LoginId') }
-			}).done(response => {
-				if (response) {
-					$.ajax({
-						url: '/Jam/goMemberPage',
-						type: 'POST',
-						datatype: 'json',
-						data: { member: sessionStorage.getItem('LoginId') }
-					}).done(response => {
-						login_Nav();
-						$("#member-pic").attr("src", response.Member.pic || '');
-						$("#member-name").html(response.Member.alias);
-						$("#member-intro-hide").html(response.Member.intro);
-						if (response.Member.url) {
-							let url = response.Member.url.split(' ');
-							console.log(url);
-							$('#media-video-list').empty();
-							url.map(v => {
-								if (v) {
-									$('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`);
-								}
-							});
-						}
-						if (response.Member.instrument) {
-							let instrument = response.Member.instrument.split(' ');
-							$("#member-instrument").html(instrument.join(' / '));
-						}
-					});
-				} else {
-					logout_Nav();
+		$.ajax({
+			url: '/Jam/goMemberPage',
+			type: 'POST',
+			datatype: 'json',
+			data: { member: sessionStorage.getItem('LoginId') }
+		}).done(response => {
+			console.log(response);
+			// login_Nav();
+			$("#member-pic").attr("src", response.Member.pic || '');
+			$("#member-name").html(response.Member.alias);
+			// $("#member-intro-hide").html();
+			$('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
+			$('#nav-pic').attr('src', sessionStorage.getItem('pic'))
+			if (response.Member.url) {
+				let url = response.Member.url.split(' ');
+				console.log(url);
+				$('#media-video-list').empty();
+				url.map(v => {
+					if (v) {
+						$('#media-video-list').append(`<iframe src="https://www.youtube.com/embed/${v}" frameborder="0" allowfullscreen></iframe>`);
+					}
+				});
+			}
+			const {intro} = response.Member;
+			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
+			if (intro.length > intro_show_number && intro_show_number!==-1){
+				$('#intro-original').html(intro.substr(0,intro_show_number))
+				$('#intro-expended').html(intro.substr(intro_show_number))
+			}else{
+				$('#intro-original').html(intro)
+			}
+
+
+
+
+
+				if (response.Member.instrument) {
+					let instrument = response.Member.instrument.split(' ');
+					$("#member-instrument").html(instrument.join(' / '));
 				}
-			});
-		})();
+		});
 	</script>
 </body>
 
