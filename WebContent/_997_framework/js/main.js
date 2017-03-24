@@ -210,7 +210,8 @@ jQuery(document).ready(function ($) {
             }
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
-            const {intro} = response.Member;
+            const {intro} = arg.Member;
+            console.log(intro);
 			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
 			if (intro.length > intro_show_number && intro_show_number!==-1){
 				$('#intro-original').html(intro.substr(0,intro_show_number))

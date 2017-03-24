@@ -333,21 +333,16 @@
 			}
 			const {intro} = response.Member;
 			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
-			if (intro.length > intro_show_number && intro_show_number!==-1){
-				$('#intro-original').html(intro.substr(0,intro_show_number))
+			if (intro.length > intro_show_number && intro_show_number !== -1) {
+				$('#intro-original').html(intro.substr(0, intro_show_number))
 				$('#intro-expended').html(intro.substr(intro_show_number))
-			}else{
+			} else {
 				$('#intro-original').html(intro)
 			}
-
-
-
-
-
-				if (response.Member.instrument) {
-					let instrument = response.Member.instrument.split(' ');
-					$("#member-instrument").html(instrument.join(' / '));
-				}
+			if (response.Member.instrument) {
+				let instrument = response.Member.instrument.split(' ');
+				$("#member-instrument").html(instrument.join(' / '));
+			}
 		});
 	</script>
 </body>
