@@ -263,7 +263,8 @@ jQuery(document).ready(function ($) {
                 url_arr.push(url);
             });
             console.log(url_arr);
-            let pic = pic_base64;
+            let pic = $("#preview-pic").attr("src");
+            $('#river-test').attr("src", pic);
             $.ajax({
                 url: `/Jam/updatePerson`,
                 cache: true,
@@ -304,8 +305,9 @@ jQuery(document).ready(function ($) {
         }).done(response => {
             console.log(response);
             $('#preview-pic').attr('src', response.Member.pic);
-            $('#update-member-name').html(response.Member.alias);
-            $('#update-member-intro').html(response.Member.intro);
+            $('#update-member-name').val(response.Member.alias);
+            $('#update-member-email').val(response.Member.email);
+            $('#update-member-intro').val(response.Member.intro);
             //新增樂器專長欄位
 
             $('.member-edit-instruments.list').empty();

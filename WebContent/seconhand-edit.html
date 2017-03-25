@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>seconhand-edit</title>
+    <link href="_997_framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="_997_framework/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
+    <link rel="stylesheet" href="_997_framework/css/style.css">
+</head>
+
+<body class="edit">
+	<!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Jam</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- 登入前顯示 -->
+                    <li><a href="#" class="login" id="nav-login">登入</a></li>
+                    <li><a href="#" class="signup" id="nav-signup">註冊</a></li>
+                    <!-- 登入後顯示 -->
+                    <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
+                    <li class="fb-loging-name" id="fb-loging-name"></li>
+                    <li>
+                        <a href="mailbox.html" " id="nav-myinbox-btn "><i  class="fa fa-envelope-o " fa-5x aria-hidden="true " ></i><span class="badge ">1<span></a></li>
+                    <li><a id="nav-my-member-link " href="member.html " class="my-member-link ">我的 Jam</a></li>
+                    <li><a id="nav-logout " href="# " class="logout ">登出</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- edit page container -->
+	<div class="edit-container seconhand-edit-container">
+		<div class="edit-header seconhand-edit-header">
+			<div class="edit-title">
+			<h1>Sell</h1>
+			</div>
+		</div>
+		<div class="edit-body seconhand-edit-body">
+			<div class="edit-row">
+				<div class="edit-col-4">
+					<label >品牌*</label>
+					<input class="edit-input" type="text">
+				</div>
+				<div class="edit-col-8"> 
+					<label >型號*</label>
+					<input class="edit-input" type="text">
+				</div>
+			</div>
+			<div class="edit-row">
+				<div class="edit-col-4">
+					<label for="seconhand-condition" >狀態*</label>
+					<select class="edit-select-col" name="" id="seconhand-condition">
+						<option selected disabled>請選擇</option>
+						<option value="brand-new">全新</option>
+						<option value="mint">像新的一樣</option>
+						<option value="good">良好</option>
+						<option value="poor">外觀微損</option>
+						<option value="malfunction">部分功能損壞</option>
+					</select>
+				</div>
+				<div class="edit-col-4"> 
+					<label >使用年份</label>
+					<input class="edit-input" type="text">
+				</div>
+			</div>
+			<div class="edit-row">
+				<div class="edit-col-12">
+					<label >販售標題*</label>
+					<input class="edit-input" type="text">
+				</div>			
+			</div>
+			<div class="edit-row">
+				<div class="edit-col-4">
+					<label >價格*</label>
+					<input class="edit-input" type="text">
+				</div>
+				<div class="edit-col-4"> 
+					<label >可否議價*</label><br>
+					
+					<label class="secondhand-offer-agree" for="secondhand-offer-check">
+							<input type="checkbox" id="secondhand-offer-check" checked="checked">
+					同意議價</label>
+				</div>
+			</div>
+			<div class="edit-row">
+				<div class="edit-col-8">
+					<label for="seconhand-condition" >樂器品項分類*</label>
+					<select class="edit-select-col" name="" id="seconhand-condition">
+						<option selected disabled>請選擇</option>
+						<option value="guitar">吉他類</option>
+						<option value="bass">貝斯類</option>
+						<option value="drums&percussion">鼓及打擊類</option>
+						<option value="keyboard&sync">鍵盤與合成器類</option>
+						<option value="strings">古典弦樂類</option>
+						<option value="wind">管樂類</option>
+						<option value="amp">音箱類</option>
+						<option value="dj-controller">DJ控制器類</option>
+						<option value="effect">效果器類</option>
+						<option value="recording">錄音界面類</option>
+						<option value="other">其他</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="edit-row">
+				<div class="seconhand-edit-description">
+				<label for="seconhand-edit-description">描述你的商品*</label>
+				<textarea name="" id="seconhand-edit-description" class="member-edit-textarea"></textarea> 
+				</div>
+			</div>
+			<div class="seconhand-edit-upload-div">				
+					上傳你的商品圖片*<span class="note">第一張將預設為封面</span><br>
+					<div class="seconhand-edit-upload-btn-wrapper">
+						<label for="seconhand-edit-upload-btn1"><img src="_996_image/upload1.svg"></label>
+						<input type="file" id="seconhand-edit-upload-btn1">
+						<label for="seconhand-edit-upload-btn2"><img src="_996_image/upload.png"></label>
+						<input type="file" id="seconhand-edit-upload-btn2">
+						<label for="seconhand-edit-upload-btn3 "><img src="_996_image/upload.png"></label>
+						<input type="file" id="seconhand-edit-upload-btn3">
+						<label for="seconhand-edit-upload-btn4 "><img src="_996_image/upload.png"></label>
+						<input type="file" id="seconhand-edit-upload-btn4">
+						<label for="seconhand-edit-upload-btn5 "><img src="_996_image/upload.png"></label>
+						<input type="file" id="seconhand-edit-upload-btn5">
+					</div>
+			</div>
+			<button class="form-btn edit-submit">確認出售</button>
+		</div>
+	</div>
+    <div class="footer-wrapper">
+        <!--        <button class="form-btn test-btn1 ">test1</button>
+        <button class="form-btn test-btn2 ">test2</button>    -->
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <i class="fa fa-facebook-square " aria-hidden="true ">粉絲頁</i>
+        </p>
+    </div>
+    <script src="_997_framework/jquery-3.1.1.min.js "></script>
+    <script src="_997_framework/isotope.pkgd.min.js "></script>
+    <script src="_997_framework/bootstrap/js/bootstrap.min.js "></script>
+    <script src="_997_framework/js/main.js?ver=12 "></script>
+    <script src="_997_framework/js/secondhand_filter.js "></script>
+</body>
+
+</html>

@@ -16,14 +16,11 @@ function setup() {
             showZommer: true
         }
         cropper = new Croppie($("#cropArea")[0], opts);
-
-
-
     }
 
-    function closeCroppie(){
+    function closeCroppie() {
         $("#cropArea").css("display", "none");
-    	  cropper.destroy();
+        cropper.destroy();
     }
 
 
@@ -33,7 +30,7 @@ function setup() {
         console.log("on");
         $("#cropArea").css("display", "block");
         fr = new FileReader();
-        fr.onload = function(e) {
+        fr.onload = function (e) {
             var pic = {
                 url: e.target.result,
                 points: [200, 200, 400, 400],
@@ -55,10 +52,10 @@ function setup() {
             quality: 1,
             circle: true
         }
-        cropper.result(opts).then(function(e) {
+        cropper.result(opts).then(function (e) {
             var img = new Image();
             img.src = e;
-            img.onload = function() {
+            img.onload = function () {
                 var cns = $("#cropboard")[0];
                 var ctx = cns.getContext("2d");
                 ctx.clearRect(0, 0, cns.width, cns.height);
@@ -68,14 +65,12 @@ function setup() {
                 ctx.drawImage(this, 0, 0, 140, 140);
                 var rst = cns.toDataURL();
                 // $("#member-pic").attr("src", rst);
+                console.log(112233);
                 $("#preview-pic").attr("src", rst);
+                console.log('cropiie: ', $("#preview-pic").attr("src"));
                 cropper.destroy();
             }
         });
         $("#cropArea").css("display", "none");
     }
-
-
-
-
 }
