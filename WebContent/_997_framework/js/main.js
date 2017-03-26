@@ -25,8 +25,22 @@ var logout_Nav = function () {
 var close_modal = function () {
     $('.user-modal').removeClass('is-visible');
 };
+//navbar動畫
+function checkScroll(){
+    var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
 
+    if($(window).scrollTop() > startY){
+        $('.navbar-inverse').addClass("scrolled");
+    }else{
+        $('.navbar-inverse').removeClass("scrolled");
+    }
+}
 
+if($('.navbar').length > 0){
+    $(window).on("scroll load resize", function(){
+        checkScroll();
+    });
+}
 
 jQuery(document).ready(function ($) {
     var pic_base64 = '';
