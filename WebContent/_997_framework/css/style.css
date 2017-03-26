@@ -1686,7 +1686,7 @@ iframe {
     font-weight: 500;
     
 }
-.seconhand-edit-description{
+.secondhand-edit-description{
     float: left;
     clear: none;
     width: 100%;
@@ -1699,7 +1699,7 @@ iframe {
     font-weight: 500;
     font-size: 18px;
 }
-.seconhand-edit-upload-div{
+.secondhand-edit-upload-div{
    clear:left;
     font-weight: 700;
    
@@ -1708,19 +1708,19 @@ iframe {
     height: 200px;
     box-sizing: border-box;
 }
-.seconhand-edit-upload-btn-wrapper{
+.secondhand-edit-upload-btn-wrapper{
     margin-top: 50px;
 }
-.seconhand-edit-upload-btn-wrapper input{
+.secondhand-edit-upload-btn-wrapper input{
     display: none;
 }
-.seconhand-edit-upload-btn-wrapper label{
+.secondhand-edit-upload-btn-wrapper label{
     display: inline-block;
     width: 120px;
     margin: 9px;
     cursor: pointer;
 }
-.seconhand-edit-upload-btn-wrapper label img{
+.secondhand-edit-upload-btn-wrapper label img{
     width: 120px;
     height: 120px;
 }
@@ -1907,13 +1907,13 @@ iframe {
     padding: 2px 6px;
 }
 /*二手商品輪播區*/
-.seconhand-full-pic-div{
+.secondhand-full-pic-div{
     width: 500px;
     height: 500px;
     margin: 10px auto;
     
 }
-.seconhand-full-pic{
+.secondhand-full-pic{
     width:500px;
     height:500px;
     border-radius: 5px;
@@ -1925,14 +1925,14 @@ iframe {
    
      border-radius: 5px;
 }
-.seconhand-small-pic{
+.secondhand-small-pic{
     display: block;
     margin: 0 auto;
     width: 50px;
     height: 50px;
      border-radius: 5px;
 }
-.seconhand-small-pic-div{
+.secondhand-small-pic-div{
     width: 50px;
     height: 50px;
      border-radius: 5px;
