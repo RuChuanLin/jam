@@ -9,6 +9,7 @@
 body {
     background-color: #2A2828;
 }
+<<<<<<< HEAD
 
 
 /*navbar顏色佈置*/
@@ -16,6 +17,91 @@ body {
 .navbar-inverse {
     background-color: rgba(54, 75, 105, 0.3);
     margin-bottom: 0;
+=======
+/*捲軸樣式*/
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #ffffff;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px solid #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+
+/*---------------navbar佈置-------------*/
+.navbar{
+    z-index: 1100;
+}
+.navbar-header{
+    height: 56px;
+}
+.menu-wrapper{
+   display: block;
+   margin-top: 5px;
+   
+}
+@media (max-width: 792px){
+    .menu-wrapper{
+   display: block;
+   margin-top: 5px;
+   padding-left: 5px;
+}
+}
+
+/*.menu-wrapper{
+    width: 450px;
+    height: 50px;
+}*/
+
+.navbar-inverse {
+    background: rgba(69, 81, 84, 0.38);
+    border-color:  rgba(69, 81, 84, 0);
+    margin-bottom: 0;
+     -webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+}
+.navbar-inverse:hover{
+    background-color: rgb(40, 49, 62);
+    border-color:rgb(40, 49, 62);
+}
+.navbar-inverse.scrolled {
+    /*background: rgb(68, 68, 68); //IE*/
+    
+    background-color: rgb(40, 49, 62);
+    border-color:rgb(40, 49, 62);
+    
+>>>>>>> River
 }
 
 .navbar-inverse .navbar-brand {
@@ -25,6 +111,70 @@ body {
 .navbar-inverse .navbar-nav>li>a {
     color: white;
 }
+<<<<<<< HEAD
+=======
+/*---------------menu部分------------------*/
+
+ul#menu-funtion >li{
+    list-style: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+}
+ul#menu-funtion a{
+    text-decoration: none;
+    color: #fff;    
+    display: block;
+    padding: 10px 10px 21px;
+    z-index: 1100;
+    
+}
+@media(max-width:530px){
+    ul#menu-funtion a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    padding: 10px 10px 21px;
+    z-index: 1100;
+    
+}
+}
+ul#menu-funtion >li>ul>li>a,ul#menu-funtion >li>ul>li>ul>li>a{
+    background-color: rgb(40, 49, 62);
+}
+ul#menu-funtion >li>ul>li>a:hover,ul#menu-funtion >li>ul>li>ul>li>a:hover{
+    background-color: #2a2828;
+}
+ul#menu-funtion > li ul.drop{
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    
+}
+ul#menu-funtion > li ul.drop ul{
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    left: 300px;
+    top: 0;    
+}
+ul#menu-funtion > li ul li
+{
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
+}
+>>>>>>> River
 
 .fb-loging-name {
     padding: 17px 15px;
@@ -235,7 +385,13 @@ h1 {
     background-color: #406C6E;
     border-color: #406C6E;
 }
+<<<<<<< HEAD
 
+=======
+.mail-btn{
+    padding: 0;
+}
+>>>>>>> River
 
 /*登入註冊區塊*/
 
@@ -735,6 +891,11 @@ input[type="button"]:disabled {
     height: 100px;
 }
 
+<<<<<<< HEAD
+=======
+/*--小站內modal--*/
+
+>>>>>>> River
 .mail-title {
     float: left;
     width: 20%;
@@ -770,7 +931,15 @@ input[type="button"]:disabled {
     border-radius: 3px;
     width: 90%;
 }
+<<<<<<< HEAD
 
+=======
+.mail-footer{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+>>>>>>> River
 .form-btn.send {
     display: block;
     margin: 2px auto;
@@ -865,7 +1034,11 @@ input[type="button"]:disabled {
     width: 400px;
     height: auto;
     margin: 5px auto;
+<<<<<<< HEAD
     pointer-events:
+=======
+    
+>>>>>>> River
 }
 
 
@@ -1107,7 +1280,11 @@ input[type="button"]:disabled {
 .crop-cancel-btn {
     display: block;
     position: fixed;
+<<<<<<< HEAD
     background-color: #8b8b8b;
+=======
+    background-color: #a1a1a1;
+>>>>>>> River
     border: none;
     z-index: 31;
     width: 20px;
@@ -1148,7 +1325,11 @@ input[type="button"]:disabled {
     width: 95%;
     margin: 10px;
     vertical-align: middle;
+<<<<<<< HEAD
     height: 300px;
+=======
+    height: 250px;
+>>>>>>> River
 }
 
 .member-edit-textarea {
@@ -1168,7 +1349,11 @@ input[type="button"]:disabled {
     width: 80%;
 }
 
+<<<<<<< HEAD
 .member-edit-footer {}
+=======
+
+>>>>>>> River
 
 .form-btn {
     color: #FDFDFD;
@@ -1212,6 +1397,12 @@ iframe {
     height: 200px;
     padding: 10px;
     text-align: center;
+<<<<<<< HEAD
+=======
+    display: flex;
+    align-items: center;
+    justify-content: center;
+>>>>>>> River
 }
 
 
@@ -1281,11 +1472,17 @@ iframe {
     margin-left: 30px;
 }
 
+<<<<<<< HEAD
 .mailbox-table-body tr:nth-child(even) {
     background:
 }
 
 .mailbox-table-body tr:nth-child(odd) {}
+=======
+
+
+
+>>>>>>> River
 
 .mailbox-table-body tr td {
     overflow: hidden;
@@ -1302,7 +1499,11 @@ iframe {
     width: 200px;
 }
 
+<<<<<<< HEAD
 .mail-td-subject {}
+=======
+
+>>>>>>> River
 
 .mail-td-date {
     width: 150px;
@@ -1372,42 +1573,87 @@ iframe {
 
 .searchbar {
     position: fixed;
+<<<<<<< HEAD
     top: 50px;
+=======
+    top: 56px;
+>>>>>>> River
     left: 0;
     width: 100%;
     height: 100px;
     z-index: 1030;
+<<<<<<< HEAD
+=======
+    background-color: #292929;
+>>>>>>> River
 }
 
 .quicksearch-wrapper {
     float: left;
     position: absolute;
     bottom: 0;
+<<<<<<< HEAD
     margin-left: 50px;
+=======
+    margin: 20px 50px;
+>>>>>>> River
 }
 
 .quicksearch {
     border-radius: 5px;
 }
+<<<<<<< HEAD
 
 .post-btn {
     float: left;
     position: fixed;
     height: 100px;
     width: 100px;
+=======
+.search-btn{
+    display: block;
+    float: left;
+    position: absolute;
+    left: 280px;
+    top:37px;
+    color: snow;
+    border: snow ;
+    border-radius: 5px;
+    background: #304546;
+}
+
+.post-btn {
+    background-color: #304546;
+    border: #304546;
+    color: #ffffff;
+    float: left;
+    position: fixed;
+    height: 70px;
+    width: 120px;
+>>>>>>> River
     border-radius: 50%;
     margin: 10px;
     left: -webkit-calc(100% - 150px);
     left: -moz-calc(100% - 150px);
     left: calc(100% - 150px);
 }
+<<<<<<< HEAD
 
 .grid {
     border: 1px white solid;
+=======
+.post-btn:hover{
+    background-color: #295450;
+}
+
+.grid {
+    /*border: 1px white solid;*/
+>>>>>>> River
     margin: 20px 50px;
     padding: 20px;
 }
 
+<<<<<<< HEAD
 .secondhand-preview-thumbnail {
     text-align: center;
     background-color: #2A2828;
@@ -1417,6 +1663,18 @@ iframe {
     min-width:300px;
     height: 400PX;
     padding: 20PX;
+=======
+.preview-thumbnail {
+    text-align: center;
+    background-color: #2A2828;
+    border: none;
+    margin: 10px 20px;
+    width: 20% ;
+    min-width: 300px;
+    height: 400PX;
+    padding: 20PX;
+    cursor: pointer;
+>>>>>>> River
 }
 
 .thumbnail .caption.view-caption {
@@ -1433,31 +1691,59 @@ iframe {
     font-weight: 900;
 }
 
+<<<<<<< HEAD
 .thumbnail>.thumbnail-image {
+=======
+.thumbnail>.secondhand-thumbnail-image {
+>>>>>>> River
     border-radius: 5px;
     height: 220px;
     width: 220px;
 }
 
+<<<<<<< HEAD
 /*---------------三大編輯頁面共同部分------------------*/
 .edit-container{
     width: 800px;
     height: 1000px;
+=======
+
+
+/*---------------三大編輯頁面共同部分------------------*/
+.edit{
+    margin-top:100px; 
+}
+.edit-container {
+    width: 800px;
+    min-height:800px;
+    max-height: 1000px;
+>>>>>>> River
     margin: 50px auto;
     background-color: #FAF8F8;
     border-radius: 5px;
 }
+<<<<<<< HEAD
 .edit-header{
+=======
+
+.edit-header {
+>>>>>>> River
     width: 100%;
     height: 50px;
     background-color: #3D4759;
     color: #DFD8D8;
 }
+<<<<<<< HEAD
 .edit-title{
+=======
+
+.edit-title {
+>>>>>>> River
     display: block;
     margin: 10px auto;
     font-weight: 900;
     width: 100px;
+<<<<<<< HEAD
 
 }
 .edit-body{
@@ -1465,4 +1751,454 @@ iframe {
     width:750px;
     height: 900px;
     margin:10px auto;
+=======
+}
+
+.edit-body {
+  
+    /*width: 750px;*/
+    min-height: 700px;
+    max-height: 800px;
+    margin: 10px auto;
+    padding: 10px 15px;;
+    overflow-y: auto;
+}
+.edit-footer{
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*表單row*/
+
+.edit-row {
+    display: block;
+    margin:10px;
+    width: 700px;
+    height: 60px;
+}
+
+.edit-col-4 {
+    float: left;
+    clear: none;
+    width: 31%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+
+.edit-col-8 {
+    float: left;
+    clear: none;
+    width: 66%;
+    margin-left: 0%;
+    margin-right: 0%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+
+.edit-col-12{
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+.edit-input{
+    width: 100%;
+    border-radius: 5px;
+    border:1px #8F8A8A solid;
+}
+.edit-select-col{
+    width: 100%;
+    border-radius: 5px;
+    border:1px #8F8A8A solid;
+}
+
+/*提示*/
+.note{
+    font-size: 12px;
+    font-weight: 500;
+    
+}
+.secondhand-edit-description{
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+.secondhand-offer-agree{
+    font-weight: 500;
+    font-size: 18px;
+}
+.secondhand-edit-upload-div{
+   clear:left;
+    font-weight: 700;
+   
+    margin: 10px;
+    width: 730px;
+    height: 200px;
+    box-sizing: border-box;
+}
+.secondhand-edit-upload-btn-wrapper{
+    margin-top: 50px;
+}
+.secondhand-edit-upload-btn-wrapper input{
+    display: none;
+}
+.secondhand-edit-upload-btn-wrapper label{
+    display: inline-block;
+    width: 120px;
+    margin: 9px;
+    cursor: pointer;
+}
+.secondhand-edit-upload-btn-wrapper label img{
+    width: 120px;
+    height: 120px;
+}
+.edit-submit{
+    display: block;
+    margin: 30px auto;
+    font-weight: 600;
+}
+
+/*------------------------二手詳細頁面-------------------------*/
+.detail-show-container{
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+    color: #f4f4f0;
+    
+}
+.detail-show.title{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    
+}
+.detail-show.title h1{
+    max-width: 700px;
+    max-height:150px; 
+    font-size: 32px;
+    margin: 0;
+}
+/*二手買賣上半部排版設定*/
+.detail-show-upper{
+    width: 1000px;
+    height: 550px;    
+}
+.slider-for{
+     width: 520px;
+     margin: 10px 38px;
+    float: left;
+}
+/*賣方原po區塊*/
+.detail-show-op{
+    margin: 20px 20px 95px;
+    float: left;
+    width: 300px;
+    height: 300px;
+    padding-top: 10px;
+    border-radius: 5px;
+    background: #e4e4e4;
+    text-align: center;
+    -webkit-animation-name: ShineAnimation;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.12,.89,.98,.47);
+    
+}
+/*閃亮亮特效*/
+@-webkit-keyframes ShineAnimation{
+    from {
+        background-repeat:no-repeat;
+        background-image:-webkit-linear-gradient(
+            top left,
+            rgba(255, 255, 255, 0.0) 0%,
+            rgba(255, 255, 255, 0.0) 45%,
+            rgba(255, 255, 255, 0.5) 48%,
+            rgba(255, 255, 255, 0.8) 50%,
+            rgba(255, 255, 255, 0.5) 52%,
+            rgba(255, 255, 255, 0.0) 57%,
+            rgba(255, 255, 255, 0.0) 100%
+        );
+        background-position:-250px -250px;
+        background-size: 600px 600px
+    }
+    to {
+        background-repeat:no-repeat;
+        background-position:250px 250px;
+    }
+}
+.detail-show-op a{    
+    text-decoration: none;        
+    color: #567dd8;
+    font-weight: 700; 
+}
+ a:hover{
+    color: #285468;
+}
+.detail-show-op-mail{
+    
+    margin: 10px 30px;
+}
+.detail-show-op-buy{
+    
+    margin: 10px;
+}
+.buy-btn{
+    padding: 2px 6px;
+}
+
+/*賣家商品編輯+確認購買資訊區塊*/
+.detail-client-edit{
+    margin: 20px -15px;
+    float: left;
+    width: 360px;
+    height: 400px;
+    border-radius: 5px;
+    background: #e4e4e4;
+   
+}
+.detail-client-edit-header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4.5px 4.5px 0 0;
+    background: -webkit-linear-gradient(left,#297273,#2b4c3a);
+    background: linear-gradient(to right,#297273,#2b4c3a);
+   
+}
+.detail-client-edit-header h4{
+    color: white;
+    font-size: 20px;
+}
+.detail-client-info-wrapper{
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    background:#f5f7f8;
+    padding-right: 5px;
+}
+.detail-client-info-wrapper dt{
+    float: left;
+    width: 4rem;
+}
+.detail-client-info{
+    width: auto;
+    height: 50px;
+    border-top: 1px #afb1b8 solid;
+    background: #f5f7f8;
+    font-size: 16px;
+    color: #1d1b1b;
+   
+}
+.detail-client-info a{
+    text-decoration: none;
+    font-size: 16px;
+}
+.member-small-pic{
+    margin: 12px ;
+    border-radius: 50%;
+    border: 0.5px solid #607fad;
+    width: 25px;
+    height: 25px;
+}
+.client-btn-wrapper{
+    float:right;
+    margin-top:5px;
+
+}
+.client-btn{
+   display: inline-block;
+    width:40px;
+    height:20px;
+    font-size: 12px; 
+    padding: 1px 6px;
+    margin: 10px 1px 14px;
+}
+.refuse-btn{
+    background: #7c0523;
+    border: #7c0523;
+}
+.refuse-btn:hover{
+    background: #ca0939;
+    border: #ca0939;
+}
+.detail-edit-btn{
+    display: block;
+    margin: 7px auto;
+    padding: 2px 6px;
+}
+/*二手商品輪播區*/
+.secondhand-full-pic-div{
+    width: 500px;
+    height: 500px;
+    margin: 10px auto;
+    
+}
+.secondhand-full-pic{
+    width:500px;
+    height:500px;
+    border-radius: 5px;
+}
+.slider-nav{
+    width: 280px;
+    margin: 20px 30px 10px;
+    float:left;
+   
+     border-radius: 5px;
+}
+.secondhand-small-pic{
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+     border-radius: 5px;
+}
+.secondhand-small-pic-div{
+    width: 50px;
+    height: 50px;
+     border-radius: 5px;
+}
+.detail-show-text-wrapper{
+    width: 800px;
+    height:auto;
+    background-color: #293235;
+    margin: 10px auto;   
+    border-radius: 5px;
+    
+}
+.detail-show-text-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right,#1f1f21,#4e4e4e );
+    background: -webkit-linear-gradient(left,#1f1f21,#4e4e4e );
+    width:100%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+}
+.detail-show-text-title h4{
+    
+    
+    font-weight: 700;
+    font-size: 24px;
+}
+.detail-show-text-body{
+    
+    min-height: 300px;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+.detail-show-text-wrapper dt {
+    float: left;
+    width: 15rem;
+    padding-left: 10px;
+}
+.detail-show-text-wrapper dd{
+    display: block;
+    margin: 20px ;
+}
+.detail-show-description{
+    width: 100%;
+    min-height:300px; 
+}
+
+/*教學編輯頁面設定*/
+.edit-pm-btn-wrapper{
+    margin: 33px 10px;
+    display: inline-block;
+}
+
+/*教學詳細頁面設定*/
+.tutor-detail-container{
+    margin: 200px auto 10px;
+}
+.tutor-detail-header{
+    position: absolute;
+    width: 800px;
+}
+.tutor-description{
+    clear: left;
+    width: 725px;
+    padding: 16px;
+    margin:10px 50px 10px 20px;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    color: #353535;
+    box-shadow:10px 10px 5px #444444;
+}
+.tutor-info{
+    width: 300px;
+    display: inline-block;
+    margin: 10px 20px 10px 40px;
+}
+.tutor-op{
+    margin: 20px 20px 30px;
+}
+.first-dt{
+    margin-top:19px;
+}
+.media-zone{
+    padding: 0;
+}
+.media-zone-header{
+    width: 100%;
+    background-color: #454545;
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.media-zone-body{
+    border: 1px soli black;
+    display: flex;
+     align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 5px auto;
+}
+.media-style{
+    border-radius: 5px;
+}
+.media-zone .slick-prev:before, .media-zone .slick-next::before{
+    color: #363636;
+}
+.tutor-detail-client-edit{
+    margin: 20px 20px ;
+}
+
+/*教學瀏覽頁面*/
+.tutor-thumbnail-image{
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    
+}
+
+/*以下是如川加的*/
+
+.secondhand-edit-upload-pic{
+    display: inline;
+>>>>>>> River
 }

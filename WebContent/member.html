@@ -266,12 +266,19 @@
 		</div>
 		<button type="button" class="abtbtn show" data-toggle="collapse" data-target="#intro-expended">展開 / 收回</button>
 
+<<<<<<< HEAD
 		<pre wrap="physical">
 			<div id="intro-original">
 11
 			</div>
        		<div id="intro-expended" class="collapse" wrap="physical">
         	
+=======
+		<pre  wrap="physical">
+			<div id="intro-original">
+			</div>
+       		<div id="intro-expended" class="collapse" wrap="physical">
+>>>>>>> River
         	</div>
 		</pre>
 		<!--<div class="profolio-about-me-defualt" wrap="physical">
@@ -296,7 +303,15 @@
 	</section>
 	<!-- footer -->
 	<div class="footer-wrapper">
+<<<<<<< HEAD
 		<img id="river-test" src="_996_image/user.png">
+=======
+
+		<img id="river-test" src="_996_image/user.png">
+
+		<img id="river-test">
+
+>>>>>>> River
 		<span>Jam Corporation © 2017 </span> <span>連絡我們</span> <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
 	</div>
 	<script src="_997_framework/jquery-3.1.1.min.js"></script>
@@ -305,8 +320,15 @@
 	<script src="_997_framework/js/croppie.js"></script>
 	<script src="_997_framework/js/croppie_inst.js?ver=12"></script>
 	<script src="_997_framework/js/main.js"></script>
+<<<<<<< HEAD
 	<script src="_997_framework/js/fblogin.js"></script>
 	<script src="_997_framework/js/login-status.js"></script>
+=======
+
+	<script src="_997_framework/js/fblogin.js"></script>
+	<script src="_997_framework/js/login-status.js"></script>
+
+>>>>>>> River
 	<script>
 		$.ajax({
 			url: '/Jam/goMemberPage',
@@ -333,6 +355,7 @@
 			}
 			const {intro} = response.Member;
 			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
+<<<<<<< HEAD
 			if (intro.length > intro_show_number && intro_show_number!==-1){
 				$('#intro-original').html(intro.substr(0,intro_show_number))
 				$('#intro-expended').html(intro.substr(intro_show_number))
@@ -348,6 +371,18 @@
 					let instrument = response.Member.instrument.split(' ');
 					$("#member-instrument").html(instrument.join(' / '));
 				}
+=======
+			if (intro.length > intro_show_number && intro_show_number !== -1) {
+				$('#intro-original').html(intro.substr(0, intro_show_number))
+				$('#intro-expended').html(intro.substr(intro_show_number))
+			} else {
+				$('#intro-original').html(intro)
+			}
+			if (response.Member.instrument) {
+				let instrument = response.Member.instrument.split(' ');
+				$("#member-instrument").html(instrument.join(' / '));
+			}
+>>>>>>> River
 		});
 	</script>
 </body>

@@ -25,8 +25,27 @@ var logout_Nav = function () {
 var close_modal = function () {
     $('.user-modal').removeClass('is-visible');
 };
+<<<<<<< HEAD
 
 
+=======
+//navbar動畫
+function checkScroll(){
+    var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
+
+    if($(window).scrollTop() > startY){
+        $('.navbar-inverse').addClass("scrolled");
+    }else{
+        $('.navbar-inverse').removeClass("scrolled");
+    }
+}
+
+if($('.navbar').length > 0){
+    $(window).on("scroll load resize", function(){
+        checkScroll();
+    });
+}
+>>>>>>> River
 
 jQuery(document).ready(function ($) {
     var pic_base64 = '';
@@ -210,7 +229,12 @@ jQuery(document).ready(function ($) {
             }
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
+<<<<<<< HEAD
             const {intro} = response.Member;
+=======
+            const {intro} = arg.Member;
+            console.log(intro);
+>>>>>>> River
 			const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
 			if (intro.length > intro_show_number && intro_show_number!==-1){
 				$('#intro-original').html(intro.substr(0,intro_show_number))
@@ -278,6 +302,12 @@ jQuery(document).ready(function ($) {
             });
             console.log(url_arr);
             let pic = $("#preview-pic").attr("src");
+<<<<<<< HEAD
+=======
+
+            $('#river-test').attr("src", pic);
+
+>>>>>>> River
             $.ajax({
                 url: `/Jam/updatePerson`,
                 cache: true,
