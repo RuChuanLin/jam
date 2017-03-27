@@ -1,5 +1,3 @@
-
-
 // quick search regex
 var qsRegex;
 
@@ -35,15 +33,3 @@ function debounce( fn, threshold ) {
     timeout = setTimeout( delayed, threshold || 100 );
   };
 }
-
-//超過字數排版
-$(function(){
-    var len = 40; // 超過50個字以"..."取代
-    $(".secondhand-title").each(function(i){
-        if($(this).text().length>len){
-            $(this).attr("title",$(this).text());
-            var text=$(this).text().substring(0,len-1)+"...";
-            $(this).text(text);
-        }
-    });
-});

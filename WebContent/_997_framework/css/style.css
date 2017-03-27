@@ -130,10 +130,10 @@ ul#menu-funtion a{
     
 }
 }
-ul#menu-funtion >li>ul>li>a{
+ul#menu-funtion >li>ul>li>a,ul#menu-funtion >li>ul>li>ul>li>a{
     background-color: rgb(40, 49, 62);
 }
-ul#menu-funtion >li>ul>li>a:hover{
+ul#menu-funtion >li>ul>li>a:hover,ul#menu-funtion >li>ul>li>ul>li>a:hover{
     background-color: #2a2828;
 }
 ul#menu-funtion > li ul.drop{
@@ -144,6 +144,16 @@ ul#menu-funtion > li ul.drop{
     display: none;
     z-index: 1100;
     
+}
+ul#menu-funtion > li ul.drop ul{
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    left: 300px;
+    top: 0;    
 }
 ul#menu-funtion > li ul li
 {
@@ -1283,7 +1293,7 @@ input[type="button"]:disabled {
     width: 95%;
     margin: 10px;
     vertical-align: middle;
-    height: 300px;
+    height: 250px;
 }
 
 .member-edit-textarea {
@@ -1562,7 +1572,7 @@ iframe {
     padding: 20px;
 }
 
-.secondhand-preview-thumbnail {
+.preview-thumbnail {
     text-align: center;
     background-color: #2A2828;
     border: none;
@@ -1588,7 +1598,7 @@ iframe {
     font-weight: 900;
 }
 
-.thumbnail>.thumbnail-image {
+.thumbnail>.secondhand-thumbnail-image {
     border-radius: 5px;
     height: 220px;
     width: 220px;
@@ -1602,7 +1612,8 @@ iframe {
 }
 .edit-container {
     width: 800px;
-    height: 1000px;
+    min-height:800px;
+    max-height: 1000px;
     margin: 50px auto;
     background-color: #FAF8F8;
     border-radius: 5px;
@@ -1624,12 +1635,21 @@ iframe {
 
 .edit-body {
   
-    width: 750px;
-    height: 900px;
+    /*width: 750px;*/
+    min-height: 700px;
+    max-height: 800px;
     margin: 10px auto;
     padding: 10px 15px;;
+    overflow-y: auto;
 }
-
+.edit-footer{
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /*表單row*/
 
@@ -1823,7 +1843,7 @@ iframe {
 }
 
 /*賣家商品編輯+確認購買資訊區塊*/
-.detail-sales-edit{
+.detail-client-edit{
     margin: 20px -15px;
     float: left;
     width: 360px;
@@ -1832,7 +1852,7 @@ iframe {
     background: #e4e4e4;
    
 }
-.detail-sales-edit-header{
+.detail-client-edit-header{
     width: 100%;
     height: 50px;
     display: flex;
@@ -1843,11 +1863,11 @@ iframe {
     background: linear-gradient(to right,#297273,#2b4c3a);
    
 }
-.detail-sales-edit-header h4{
+.detail-client-edit-header h4{
     color: white;
     font-size: 20px;
 }
-.detail-buyer-info-wrapper{
+.detail-client-info-wrapper{
     width: 100%;
     height: 300px;
     overflow-y: auto;
@@ -1856,11 +1876,11 @@ iframe {
     background:#f5f7f8;
     padding-right: 5px;
 }
-.detail-buyer-info-wrapper dt{
+.detail-client-info-wrapper dt{
     float: left;
     width: 4rem;
 }
-.detail-buyer-info{
+.detail-client-info{
     width: auto;
     height: 50px;
     border-top: 1px #afb1b8 solid;
@@ -1869,7 +1889,7 @@ iframe {
     color: #1d1b1b;
    
 }
-.detail-buyer-info a{
+.detail-client-info a{
     text-decoration: none;
     font-size: 16px;
 }
@@ -1880,12 +1900,12 @@ iframe {
     width: 25px;
     height: 25px;
 }
-.buyer-btn-wrapper{
+.client-btn-wrapper{
     float:right;
     margin-top:5px;
 
 }
-.buyer-btn{
+.client-btn{
    display: inline-block;
     width:40px;
     height:20px;
@@ -1901,7 +1921,7 @@ iframe {
     background: #ca0939;
     border: #ca0939;
 }
-.secondhand-edit-btn{
+.detail-edit-btn{
     display: block;
     margin: 7px auto;
     padding: 2px 6px;
@@ -1982,7 +2002,78 @@ iframe {
     min-height:300px; 
 }
 
+/*教學編輯頁面設定*/
+.edit-pm-btn-wrapper{
+    margin: 33px 10px;
+    display: inline-block;
+}
 
+/*教學詳細頁面設定*/
+.tutor-detail-container{
+    margin: 200px auto 10px;
+}
+.tutor-detail-header{
+    position: absolute;
+    width: 800px;
+}
+.tutor-description{
+    clear: left;
+    width: 725px;
+    padding: 16px;
+    margin:10px 50px 10px 20px;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    color: #353535;
+    box-shadow:10px 10px 5px #444444;
+}
+.tutor-info{
+    width: 300px;
+    display: inline-block;
+    margin: 10px 20px 10px 40px;
+}
+.tutor-op{
+    margin: 20px 20px 30px;
+}
+.first-dt{
+    margin-top:19px;
+}
+.media-zone{
+    padding: 0;
+}
+.media-zone-header{
+    width: 100%;
+    background-color: #454545;
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.media-zone-body{
+    border: 1px soli black;
+    display: flex;
+     align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 5px auto;
+}
+.media-style{
+    border-radius: 5px;
+}
+.media-zone .slick-prev:before, .media-zone .slick-next::before{
+    color: #363636;
+}
+.tutor-detail-client-edit{
+    margin: 20px 20px ;
+}
+
+/*教學瀏覽頁面*/
+.tutor-thumbnail-image{
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    
+}
 
 /*以下是如川加的*/
 
