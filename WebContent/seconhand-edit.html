@@ -66,11 +66,11 @@
 					<label for="secondhand-condition">狀態*</label>
 					<select class="edit-select-col" name="" id="secondhand-condition">
 						<option selected disabled>請選擇</option>
-						<option value="brand-new">全新</option>
-						<option value="mint">像新的一樣</option>
-						<option value="good">良好</option>
-						<option value="poor">外觀微損</option>
-						<option value="malfunction">部分功能損壞</option>
+						<option value="0">全新</option>
+						<option value="1">像新的一樣</option>
+						<option value="2">良好</option>
+						<option value="3">外觀微損</option>
+						<option value="4">部分功能損壞</option>
 					</select>
 				</div>
 				<div class="edit-col-4">
@@ -89,22 +89,15 @@
 					<label>價格*</label>
 					<input class="edit-input" type="text" id="secondhand-price">
 				</div>
-				<div class="edit-col-4">
-					<label>可否議價*</label><br>
-
-					<label class="secondhand-offer-agree" for="secondhand-offer-check">
-							<input type="checkbox" id="secondhand-offer-check" checked="checked">
-					同意議價</label>
-				</div>
 			</div>
 			<div class="edit-row">
 				<div class="edit-col-8">
 					<label for="secondhand-condition">樂器品項分類*</label>
-					<select class="edit-select-col" name="" id="secondhand-class">
+					<select class="edit-select-col" name="" id="secondhand-category">
 						<option selected disabled>請選擇</option>
 						<option value="guitar">吉他類</option>
 						<option value="bass">貝斯類</option>
-						<option value="drums&percussion">鼓及打擊類</option>
+						<option value="drums&percussion">鼓及打https://github.com/RuChuanLin/jam.git擊類</option>
 						<option value="keyboard&sync">鍵盤與合成器類</option>
 						<option value="strings">古典弦樂類</option>
 						<option value="wind">管樂類</option>
@@ -126,16 +119,26 @@
 			<div class="secondhand-edit-upload-div">
 				上傳你的商品圖片*<span class="note">第一張將預設為封面</span><br>
 				<div class="secondhand-edit-upload-btn-wrapper">
-					<label for="secondhand-edit-upload-btn1"><img src="_996_image/upload1.svg"></label>
-					<input type="file" id="secondhand-edit-upload-btn1">
-					<label for="secondhand-edit-upload-btn2"><img src="_996_image/upload.png"></label>
-					<input type="file" id="secondhand-edit-upload-btn2">
-					<label for="secondhand-edit-upload-btn3"><img src="_996_image/upload.png"></label>
-					<input type="file" id="secondhand-edit-upload-btn3">
-					<label for="secondhand-edit-upload-btn4"><img src="_996_image/upload.png"></label>
-					<input type="file" id="secondhand-edit-upload-btn4">
-					<label for="secondhand-edit-upload-btn5"><img src="_996_image/upload.png"></label>
-					<input type="file" id="secondhand-edit-upload-btn5">
+					<div class="secondhand-edit-upload-pic">
+						<label for="secondhand-edit-upload-btn1"><img src="_996_image/upload1.svg"></label>
+						<input type="file" id="secondhand-edit-upload-btn1">
+					</div>
+					<div class="secondhand-edit-upload-pic">
+						<label for="secondhand-edit-upload-btn2"><img src="_996_image/upload.png"></label>
+						<input type="file" id="secondhand-edit-upload-btn2">
+					</div>
+					<div class="secondhand-edit-upload-pic">
+						<label for="secondhand-edit-upload-btn3"><img src="_996_image/upload.png"></label>
+						<input type="file" id="secondhand-edit-upload-btn3">
+					</div>
+					<div class="secondhand-edit-upload-pic">
+						<label for="secondhand-edit-upload-btn4"><img src="_996_image/upload.png"></label>
+						<input type="file" id="secondhand-edit-upload-btn4">
+					</div>
+					<div class="secondhand-edit-upload-pic">
+						<label for="secondhand-edit-upload-btn5"><img src="_996_image/upload.png"></label>
+						<input type="file" id="secondhand-edit-upload-btn5">
+					</div>
 				</div>
 			</div>
 			<button class="form-btn edit-submit" id="sellButton">確認出售</button>

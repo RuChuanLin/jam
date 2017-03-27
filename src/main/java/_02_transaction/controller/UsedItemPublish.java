@@ -27,7 +27,7 @@ import _02_transaction.model.UsedItemPic;
 public class UsedItemPublish extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
@@ -37,7 +37,7 @@ public class UsedItemPublish extends HttpServlet {
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();
 		PrintWriter pw = response.getWriter();
-		
+
 		// 品牌
 		String brand = request.getParameter("brand");
 		// 型號
@@ -51,31 +51,31 @@ public class UsedItemPublish extends HttpServlet {
 		// 價錢
 		int expectedPrice = Integer.parseInt(request.getParameter("expectedPrice"));
 		// 交易方式
-		byte preference = Byte.parseByte(request.getParameter("preference"));
+		// byte preference = Byte.parseByte(request.getParameter("preference"));
+		byte preference = 0;
 		// 樂器品項
 		String category = request.getParameter("category");
 		// 描述
 		String description = request.getParameter("description");
 		// 賣家ID
-		int seller = mem.getUserId();
+		// int seller = mem.getUserId();
+		int seller = 2;
 		// 上架日期
 		Calendar updatedDate = Calendar.getInstance();
-		
 
 		// 新增商品
-		UsedItem uim = new UsedItem(category, brand, usedTime, 
-				description, status, preference, expectedPrice, title,
+		UsedItem uim = new UsedItem(category, brand, usedTime, description, status, preference, expectedPrice, title,
 				model, 0, seller, updatedDate, (byte) 0);
 		dao.saveItem(uim);
-		//透過搜尋該用戶最後一筆新增的資料來取得剛剛新增的itemId
+		// 透過搜尋該用戶最後一筆新增的資料來取得剛剛新增的itemId
 		int itemId = dao.getNewId(seller);
-
+		System.out.println(itemId);
 		// 獲得圖片+存入
-		String pic;
-		for (int i = 1; i <= 5; i++) {
-			pic = request.getParameter("pic" + i );
-			if (pic != null) {
-				UsedItemPic uip = new UsedItemPic(itemId, i, pic);
+		String pic_arr[] = request.getParameterValues("pic_arr[]");
+		for (int i = 0; i < pic_arr.length; i++) {
+			if (pic_arr[i].trim().length() != 0) {
+				System.out.println(i + " " + pic_arr[i]);
+				UsedItemPic uip = new UsedItemPic(itemId, i + 1, pic_arr[i]);
 				dao.savePic(uip);
 			}
 		}

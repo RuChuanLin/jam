@@ -15,7 +15,7 @@
             <column name="PICORDER" />
         </property>
         <property name="picBase64" type="java.lang.String">
-            <column name="PICBASE64" />
+            <column name="PICBASE64" length="200000" />
         </property>
     </class>
 </hibernate-mapping>

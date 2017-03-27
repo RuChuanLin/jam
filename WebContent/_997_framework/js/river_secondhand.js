@@ -1,12 +1,51 @@
-(function () {
-
-    $('#sellButton').on('click', onSellClick)
-
+{
+    $('#sellButton').on('click', onSellClick);
+    console.log($('#sellButton'))
+    $('.secondhand-edit-upload-pic').change(function () {
+        const self = this;
+        const input = $(self).children('input')[0];
+        if (input.files && input.files[0]) {
+            var FR = new FileReader();
+            console.log(FR.readyState);
+            FR.onload = function (e) {
+                $(self).children('label').children('img').attr("src", e.target.result);
+            };
+            FR.readAsDataURL(input.files[0]);
+        }
+    })
     function onSellClick() {
-        const brand = $('#secondhand-brand').val()
-        const model = $('#secondhand-model').val()
-        console.log(this)
-        console.log(1, brand, model);
+        const [brand, model, condition, age, title, price, category, desc] = [$('#secondhand-brand').val(), $('#secondhand-model').val(), $('#secondhand-condition').val(), $('#secondhand-age').val(), $('#secondhand-title').val(), $('#secondhand-price').val(), $('#secondhand-category').val(), $('#secondhand-edit-description').val()]
+        const pic_arr = [];
+        $('.secondhand-edit-upload-pic img').map((n, pic) => {
+            if ($(pic).attr('src').substr(0, 10) === `data:image`) {
+                pic_arr.push($(pic).attr('src'));
+            }else{
+                pic_arr.push('');
+            }
+        });
+        $.ajax({
+            url: '/Jam/usedItemPublish',
+            type: 'POST',
+            data: { brand, model, status: condition, usedTime: age, title, expectedPrice: price, category, description: desc, pic_arr },
+            dataType: 'json'
+        });
     }
-    //    console.log(2, brand, model);
-})()
+
+    function readImage(input) {
+        console.log(input);
+        if (input.files && input.files[0]) {
+            // FileReader 文件
+            // https://developer.mozilla.org/zh-TW/docs/Web/API/FileReader
+            // http://www.javascripture.com/FileReader
+            var FR = new FileReader();
+            console.log(FR.readyState);
+            FR.onload = function (e) {
+                //e.target.result = base64 format picture
+                $('#test1').attr("src", e.target.result);
+                pic_base64 = e.target.result;
+            };
+            FR.readAsDataURL(input.files[0]);
+        }
+    }
+}
+

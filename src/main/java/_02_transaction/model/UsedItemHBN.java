@@ -50,7 +50,7 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public int[] getAllpage(String key) {
 		int msg[] = new int[2];
-		String hql = "select count(*) from USEDITEM where title like :key && onSale in :onSale";
+		String hql = "select count(*) from UsedItem where title like :key && onSale in :onSale";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
@@ -117,7 +117,7 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public int getNewId(int seller) {
 		int itemId = 0;
-		String hql = "select usedItemId from USEDITEM where seller = :seller order by usedItemId desc";
+		String hql = "select usedItemId from UsedItem where seller = :seller order by usedItemId desc";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
@@ -138,7 +138,7 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public String getFirstPic(int itemId) {
 		String pic = null;
-		String hql = "select picBase64 from USEDITEMPIC where itemId = :itemId && picOrder = 1";
+		String hql = "select picBase64 from UsedItemPic where itemId = :itemId && picOrder = 1";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
@@ -158,7 +158,7 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public UsedItem getItem(int itemId) {
 		UsedItem ui = null;
-		String hql = "from USEDITEM where itemId = :itemId ";
+		String hql = "from UsedItem where itemId = :itemId ";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
@@ -175,10 +175,10 @@ public class UsedItemHBN implements UsedItemDAO {
 		}
 		return ui;
 	}
-	
+
 	@Override
 	public List<String> getAllPic(int itemId) {
-		String hql = "select picBase64 from USEDITEMPIC where itemId = :itemId";
+		String hql = "select picBase64 from UsedItemPic where itemId = :itemId";
 		List<String> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
@@ -216,8 +216,8 @@ public class UsedItemHBN implements UsedItemDAO {
 
 	@Override
 	public int updatePic(int itemId, String[] pic) {
-		String updatahql = "update USEDITEMPIC set picBase64=:pic where itemId=:itemId && picOrder=:picOrder";
-		String deletehql = "delete USEDITEMPIC where itemId=:itemId && picOrder=:picOrder";
+		String updatahql = "update UsedItemPic set picBase64=:pic where itemId=:itemId && picOrder=:picOrder";
+		String deletehql = "delete UsedItemPic where itemId=:itemId && picOrder=:picOrder";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
@@ -225,17 +225,17 @@ public class UsedItemHBN implements UsedItemDAO {
 			tx = session.beginTransaction();
 			Query q = null;
 			for (int i = 0; i < pic.length; i++) {
-				if(pic[i]!=null){
+				if (pic[i].trim().length() != 0) {
 					q = session.createQuery(updatahql);
 					q.setParameter("pic", pic[i]);
 					q.setParameter("itemId", itemId);
-					q.setParameter("picOrder", i+1);
+					q.setParameter("picOrder", i + 1);
 					q.executeUpdate();
 					updateNumber++;
-				}else{
+				} else {
 					q = session.createQuery(deletehql);
 					q.setParameter("itemId", itemId);
-					q.setParameter("picOrder", i+1);
+					q.setParameter("picOrder", i + 1);
 					q.executeUpdate();
 					updateNumber++;
 				}
@@ -249,8 +249,8 @@ public class UsedItemHBN implements UsedItemDAO {
 	}
 
 	@Override
-	public int offItem(int itemId,byte onSale) {
-		String hql = "update USEDITEM set onSale=:onSale where itemId=:itemId";
+	public int offItem(int itemId, byte onSale) {
+		String hql = "update UsedItem set onSale=:onSale where itemId=:itemId";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
@@ -259,7 +259,7 @@ public class UsedItemHBN implements UsedItemDAO {
 			Query q = session.createQuery(hql);
 			q.setParameter("onSale", onSale);
 			q.setParameter("itemId", itemId);
-			updateNumber=q.executeUpdate();
+			updateNumber = q.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -287,7 +287,7 @@ public class UsedItemHBN implements UsedItemDAO {
 
 	@Override
 	public List<BidRecord> getBid(int itemId) {
-		String hql = "from BIDRECORD where itemId = :itemId";
+		String hql = "from BidRecord where itemId = :itemId";
 		List<BidRecord> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
