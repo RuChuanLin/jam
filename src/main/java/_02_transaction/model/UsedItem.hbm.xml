@@ -6,7 +6,7 @@
     <class name="_02_transaction.model.UsedItem" table="USEDITEM">
         <id name="usedItemId" type="int">
             <column name="USEDITEMID" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="category" type="java.lang.String">
             <column name="CATEGORY" />
@@ -14,14 +14,14 @@
         <property name="brand" type="java.lang.String">
             <column name="BRAND" />
         </property>
-        <property name="image" type="java.sql.Blob">
-            <column name="IMAGE" />
-        </property>
         <property name="usedTime" type="java.lang.String">
             <column name="USEDTIME" />
         </property>
-        <property name="description" type="java.sql.Clob">
-            <column name="DESCRIPTION" />
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" length="262144"/>
+        </property>
+        <property name="status" type="byte">
+            <column name="STATUS" />
         </property>
         <property name="preference" type="byte">
             <column name="PREFERENCE" />

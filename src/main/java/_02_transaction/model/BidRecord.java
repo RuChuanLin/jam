@@ -6,7 +6,7 @@ public class BidRecord {
 	private int itemId;
 	private int bidder;
 	private int price;
-	private java.util.Calendar time;
+	private Calendar time;
 	public int getPk() {
 		return pk;
 	}
@@ -31,10 +31,10 @@ public class BidRecord {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public java.util.Calendar getTime() {
+	public Calendar getTime() {
 		return time;
 	}
-	public void setTime(java.util.Calendar time) {
+	public void setTime(Calendar time) {
 		this.time = time;
 	}
 	
