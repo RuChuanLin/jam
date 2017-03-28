@@ -9,7 +9,7 @@
 body {
     background-color: #2A2828;
 }
-<<<<<<< HEAD
+
 
 
 /*navbar顏色佈置*/
@@ -17,7 +17,7 @@ body {
 .navbar-inverse {
     background-color: rgba(54, 75, 105, 0.3);
     margin-bottom: 0;
-=======
+
 /*捲軸樣式*/
 
 ::-webkit-scrollbar {
@@ -101,7 +101,7 @@ body {
     background-color: rgb(40, 49, 62);
     border-color:rgb(40, 49, 62);
     
->>>>>>> River
+
 }
 
 .navbar-inverse .navbar-brand {
@@ -111,8 +111,8 @@ body {
 .navbar-inverse .navbar-nav>li>a {
     color: white;
 }
-<<<<<<< HEAD
-=======
+
+
 /*---------------menu部分------------------*/
 
 ul#menu-funtion >li{
@@ -174,7 +174,7 @@ ul#menu-funtion > li ul li
     list-style:none;
     position:relative;
 }
->>>>>>> River
+
 
 .fb-loging-name {
     padding: 17px 15px;
@@ -385,13 +385,13 @@ h1 {
     background-color: #406C6E;
     border-color: #406C6E;
 }
-<<<<<<< HEAD
 
-=======
+
+
 .mail-btn{
     padding: 0;
 }
->>>>>>> River
+
 
 /*登入註冊區塊*/
 
@@ -891,11 +891,11 @@ input[type="button"]:disabled {
     height: 100px;
 }
 
-<<<<<<< HEAD
-=======
+
+
 /*--小站內modal--*/
 
->>>>>>> River
+
 .mail-title {
     float: left;
     width: 20%;
@@ -931,15 +931,15 @@ input[type="button"]:disabled {
     border-radius: 3px;
     width: 90%;
 }
-<<<<<<< HEAD
 
-=======
+
+
 .mail-footer{
     width: 100px;
     height: 100px;
     margin: 0 auto;
 }
->>>>>>> River
+
 .form-btn.send {
     display: block;
     margin: 2px auto;
@@ -1034,11 +1034,11 @@ input[type="button"]:disabled {
     width: 400px;
     height: auto;
     margin: 5px auto;
-<<<<<<< HEAD
+
     pointer-events:
-=======
+
     
->>>>>>> River
+
 }
 
 
@@ -1280,11 +1280,11 @@ input[type="button"]:disabled {
 .crop-cancel-btn {
     display: block;
     position: fixed;
-<<<<<<< HEAD
+
     background-color: #8b8b8b;
-=======
+
     background-color: #a1a1a1;
->>>>>>> River
+
     border: none;
     z-index: 31;
     width: 20px;
@@ -1325,11 +1325,11 @@ input[type="button"]:disabled {
     width: 95%;
     margin: 10px;
     vertical-align: middle;
-<<<<<<< HEAD
+
     height: 300px;
-=======
+
     height: 250px;
->>>>>>> River
+
 }
 
 .member-edit-textarea {
@@ -1349,11 +1349,11 @@ input[type="button"]:disabled {
     width: 80%;
 }
 
-<<<<<<< HEAD
-.member-edit-footer {}
-=======
 
->>>>>>> River
+.member-edit-footer {}
+
+
+
 
 .form-btn {
     color: #FDFDFD;
@@ -1397,12 +1397,12 @@ iframe {
     height: 200px;
     padding: 10px;
     text-align: center;
-<<<<<<< HEAD
-=======
+
+
     display: flex;
     align-items: center;
     justify-content: center;
->>>>>>> River
+
 }
 
 
@@ -1472,17 +1472,17 @@ iframe {
     margin-left: 30px;
 }
 
-<<<<<<< HEAD
+
 .mailbox-table-body tr:nth-child(even) {
     background:
 }
 
 .mailbox-table-body tr:nth-child(odd) {}
-=======
 
 
 
->>>>>>> River
+
+
 
 .mailbox-table-body tr td {
     overflow: hidden;
@@ -1499,11 +1499,11 @@ iframe {
     width: 200px;
 }
 
-<<<<<<< HEAD
-.mail-td-subject {}
-=======
 
->>>>>>> River
+.mail-td-subject {}
+
+
+
 
 .mail-td-date {
     width: 150px;
@@ -1573,43 +1573,43 @@ iframe {
 
 .searchbar {
     position: fixed;
-<<<<<<< HEAD
+
     top: 50px;
-=======
+
     top: 56px;
->>>>>>> River
+
     left: 0;
     width: 100%;
     height: 100px;
     z-index: 1030;
-<<<<<<< HEAD
-=======
+
+
     background-color: #292929;
->>>>>>> River
+
 }
 
 .quicksearch-wrapper {
     float: left;
     position: absolute;
     bottom: 0;
-<<<<<<< HEAD
+
     margin-left: 50px;
-=======
+
     margin: 20px 50px;
->>>>>>> River
+
 }
 
 .quicksearch {
     border-radius: 5px;
 }
-<<<<<<< HEAD
+
 
 .post-btn {
     float: left;
     position: fixed;
     height: 100px;
     width: 100px;
-=======
+
 .search-btn{
     display: block;
     float: left;
@@ -1630,30 +1630,30 @@ iframe {
     position: fixed;
     height: 70px;
     width: 120px;
->>>>>>> River
+
     border-radius: 50%;
     margin: 10px;
     left: -webkit-calc(100% - 150px);
     left: -moz-calc(100% - 150px);
     left: calc(100% - 150px);
 }
-<<<<<<< HEAD
+
 
 .grid {
     border: 1px white solid;
-=======
+
 .post-btn:hover{
     background-color: #295450;
 }
 
 .grid {
     /*border: 1px white solid;*/
->>>>>>> River
+
     margin: 20px 50px;
     padding: 20px;
 }
 
-<<<<<<< HEAD
+
 .secondhand-preview-thumbnail {
     text-align: center;
     background-color: #2A2828;
@@ -1663,7 +1663,7 @@ iframe {
     min-width:300px;
     height: 400PX;
     padding: 20PX;
-=======
+
 .preview-thumbnail {
     text-align: center;
     background-color: #2A2828;
@@ -1674,7 +1674,7 @@ iframe {
     height: 400PX;
     padding: 20PX;
     cursor: pointer;
->>>>>>> River
+
 }
 
 .thumbnail .caption.view-caption {
@@ -1691,22 +1691,22 @@ iframe {
     font-weight: 900;
 }
 
-<<<<<<< HEAD
+
 .thumbnail>.thumbnail-image {
-=======
+
 .thumbnail>.secondhand-thumbnail-image {
->>>>>>> River
+
     border-radius: 5px;
     height: 220px;
     width: 220px;
 }
 
-<<<<<<< HEAD
+
 /*---------------三大編輯頁面共同部分------------------*/
 .edit-container{
     width: 800px;
     height: 1000px;
-=======
+
 
 
 /*---------------三大編輯頁面共同部分------------------*/
@@ -1717,33 +1717,33 @@ iframe {
     width: 800px;
     min-height:800px;
     max-height: 1000px;
->>>>>>> River
+
     margin: 50px auto;
     background-color: #FAF8F8;
     border-radius: 5px;
 }
-<<<<<<< HEAD
+
 .edit-header{
-=======
+
 
 .edit-header {
->>>>>>> River
+
     width: 100%;
     height: 50px;
     background-color: #3D4759;
     color: #DFD8D8;
 }
-<<<<<<< HEAD
+
 .edit-title{
-=======
+
 
 .edit-title {
->>>>>>> River
+
     display: block;
     margin: 10px auto;
     font-weight: 900;
     width: 100px;
-<<<<<<< HEAD
+
 
 }
 .edit-body{
@@ -1751,7 +1751,7 @@ iframe {
     width:750px;
     height: 900px;
     margin:10px auto;
-=======
+
 }
 
 .edit-body {
@@ -2200,5 +2200,5 @@ iframe {
 
 .secondhand-edit-upload-pic{
     display: inline;
->>>>>>> River
+
 }

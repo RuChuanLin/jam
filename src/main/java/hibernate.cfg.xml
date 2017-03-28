@@ -29,11 +29,10 @@
 		<mapping resource="_02_transaction/model/OrderForm.hbm.xml" />
 		<mapping resource="_02_transaction/model/OrderItem.hbm.xml" />
 		<mapping resource="_02_transaction/model/BidRecord.hbm.xml" />
-<<<<<<< HEAD
-=======
+
 		<mapping resource="_02_transaction/model/UsedItemPic.hbm.xml" />
 		
->>>>>>> River
+
 		<mapping resource="_03_course/model/Course.hbm.xml" />
 		<mapping resource="_03_course/model/ReserveRecord.hbm.xml" />
 		<mapping resource="_04_band/model/Band.hbm.xml" />

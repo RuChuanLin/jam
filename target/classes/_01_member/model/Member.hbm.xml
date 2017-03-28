@@ -33,6 +33,7 @@
             <column name="PIC" length="200000" />
         </property>
         <property name="intro" type="java.lang.String">
+            <column name="INTRO" />
             <column name="INTRO" length="3000"/>
         </property>
         <property name="url" type="java.lang.String" access="field">
