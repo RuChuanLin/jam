@@ -27,7 +27,7 @@
 				nickname :"Josh"
 					};
 				var resp=JSON.stringify(data);
-				document.cookie=kie.getCookieStr(mem.cookieKey,resp);
+				document.cookie=mem.getCookieString(mem.cookieKey,resp);
 		}
 			//覆寫stater.showOnLogin
 			stater.showOnLogIn=function(){

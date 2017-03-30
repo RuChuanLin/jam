@@ -114,12 +114,12 @@ function setup_nav() {
     //來顯示會員資料
     function onLoginClick() {
 			var info={
-				type : "normal",
+				type : "Normal",
 				acc :loginEmail.val(),
 				pw :loginPassword.val()
 			};
 			
-			mem.login(info,function(resp){
+			mem.login(info,function(response){
 				if(response == undefined){console.log("failed");return;}
 				if (response.loginSuccess) {
                     console.log(response);
@@ -130,8 +130,9 @@ function setup_nav() {
                 } else{
 					alert("login failed");
 				}				
-			})
-
+			});
+			console.log("onloginCkick");
+				
     }
 
 

@@ -9,13 +9,89 @@
 body {
     background-color: #2A2828;
 }
+/*捲軸樣式*/
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #ffffff;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px solid #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 
-/*navbar顏色佈置*/
+
+/*---------------navbar佈置-------------*/
+.navbar{
+    z-index: 1100;
+}
+.navbar-header{
+    height: 56px;
+}
+.menu-wrapper{
+   display: block;
+   margin-top: 5px;
+   
+}
+@media (max-width: 792px){
+    .menu-wrapper{
+   display: block;
+   margin-top: 5px;
+   padding-left: 5px;
+}
+}
+
+/*.menu-wrapper{
+    width: 450px;
+    height: 50px;
+}*/
 
 .navbar-inverse {
-    background-color: rgba(54, 75, 105, 0.3);
+    background: rgba(69, 81, 84, 0.38);
+    border-color:  rgba(69, 81, 84, 0);
     margin-bottom: 0;
+     -webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+}
+.navbar-inverse:hover{
+    background-color: rgb(40, 49, 62);
+    border-color:rgb(40, 49, 62);
+}
+.navbar-inverse.scrolled {
+    /*background: rgb(68, 68, 68); //IE*/
+    
+    background-color: rgb(40, 49, 62);
+    border-color:rgb(40, 49, 62);
+    
 }
 
 .navbar-inverse .navbar-brand {
@@ -24,6 +100,67 @@ body {
 
 .navbar-inverse .navbar-nav>li>a {
     color: white;
+}
+/*---------------menu部分------------------*/
+
+ul#menu-funtion >li{
+    list-style: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+}
+ul#menu-funtion a{
+    text-decoration: none;
+    color: #fff;    
+    display: block;
+    padding: 10px 10px 21px;
+    z-index: 1100;
+    
+}
+@media(max-width:530px){
+    ul#menu-funtion a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    padding: 10px 10px 21px;
+    z-index: 1100;
+    
+}
+}
+ul#menu-funtion >li>ul>li>a,ul#menu-funtion >li>ul>li>ul>li>a{
+    background-color: rgb(40, 49, 62);
+}
+ul#menu-funtion >li>ul>li>a:hover,ul#menu-funtion >li>ul>li>ul>li>a:hover{
+    background-color: #2a2828;
+}
+ul#menu-funtion > li ul.drop{
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    
+}
+ul#menu-funtion > li ul.drop ul{
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    left: 300px;
+    top: 0;    
+}
+ul#menu-funtion > li ul li
+{
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
 }
 
 .fb-loging-name {
@@ -47,8 +184,8 @@ body {
 #nav-logout {
     display: none;
 }
+
 .nav-pic {
-    
     margin: 15px auto;
     border-radius: 50%;
     border: 0.5px solid #607fad;
@@ -56,7 +193,6 @@ body {
     height: 22px;
     display: none;
 }
-
 
 
 /*主頁面header佈置與特效*/
@@ -217,9 +353,10 @@ h1 {
     background-color: #272121;
 }
 
-.thumbnail {
+
+/*.thumbnail {
     background-color: #403939;
-}
+}*/
 
 .caption {
     color: #F0EBEB;
@@ -235,7 +372,9 @@ h1 {
     background-color: #406C6E;
     border-color: #406C6E;
 }
-
+.mail-btn{
+    padding: 0;
+}
 
 /*登入註冊區塊*/
 
@@ -735,6 +874,8 @@ input[type="button"]:disabled {
     height: 100px;
 }
 
+/*--小站內modal--*/
+
 .mail-title {
     float: left;
     width: 20%;
@@ -770,7 +911,11 @@ input[type="button"]:disabled {
     border-radius: 3px;
     width: 90%;
 }
-
+.mail-footer{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
 .form-btn.send {
     display: block;
     margin: 2px auto;
@@ -865,7 +1010,7 @@ input[type="button"]:disabled {
     width: 400px;
     height: auto;
     margin: 5px auto;
-    pointer-events:
+    
 }
 
 
@@ -1040,8 +1185,79 @@ input[type="button"]:disabled {
     border-bottom: 1px #AEADAD solid;
 }
 
+
+/*上傳照片按鈕*/
+
+#fake-update-input {
+    display: none;
+}
+
+.update-member-pic {
+    position: relative;
+    top: -28px;
+    left: 50%;
+    margin-left: -3px;
+    padding: 8px;
+    cursor: pointer;
+    color: #497375;
+}
+
 .member-form-label-text {
     margin: 5px 0 5px;
+}
+
+
+/*----裁切器布局----*/
+
+.cropArea {
+    display: none;
+}
+
+.croppie-container {
+    position: fixed;
+    z-index: 30;
+    width: 744px;
+    height: 350px;
+    left: 50%;
+    margin-left: -372px;
+    margin-top: 55px;
+    background: #ffffff;
+    display: none;
+}
+
+
+/*.cropboard {
+    display: none;
+    width: 140px;
+    height: 140px;
+}*/
+
+
+/*裁切按鈕*/
+
+.crop-btn {
+    display: block;
+    position: fixed;
+    z-index: 31;
+    width: 80px;
+    height: 30px;
+    top: 424px;
+    margin-left: -40px;
+    left: 50%
+}
+
+
+/*裁切取消按鈕*/
+
+.crop-cancel-btn {
+    display: block;
+    position: fixed;
+    background-color: #a1a1a1;
+    border: none;
+    z-index: 31;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
 }
 
 .member-input {
@@ -1055,7 +1271,7 @@ input[type="button"]:disabled {
 
 .member-edit-image {
     width: 100px;
-    margin: 0 auto 10px;
+    margin: 0 auto 50px;
     height: 100px;
 }
 
@@ -1077,7 +1293,7 @@ input[type="button"]:disabled {
     width: 95%;
     margin: 10px;
     vertical-align: middle;
-    height: 300px;
+    height: 250px;
 }
 
 .member-edit-textarea {
@@ -1088,16 +1304,16 @@ input[type="button"]:disabled {
 
 .member-edit-media {
     width: 95%;
-    margin: 10px;
+    margin: 25px 10px;
     vertical-align: middle;
-    height: 300px;
+    height: 15px;
 }
 
 .member-input.media {
     width: 80%;
 }
 
-.member-edit-footer {}
+
 
 .form-btn {
     color: #FDFDFD;
@@ -1141,6 +1357,9 @@ iframe {
     height: 200px;
     padding: 10px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -1210,11 +1429,9 @@ iframe {
     margin-left: 30px;
 }
 
-.mailbox-table-body tr:nth-child(even) {
-    background:
-}
 
-.mailbox-table-body tr:nth-child(odd) {}
+
+
 
 .mailbox-table-body tr td {
     overflow: hidden;
@@ -1231,7 +1448,7 @@ iframe {
     width: 200px;
 }
 
-.mail-td-subject {}
+
 
 .mail-td-date {
     width: 150px;
@@ -1241,7 +1458,7 @@ iframe {
 /*收件匣內容*/
 
 .mailbox-content-wrapper {
-     display: none; 
+    display: none;
 }
 
 .mailbox-content-header {
@@ -1290,4 +1507,570 @@ iframe {
 .mailbox-reply-btn {
     width: 60px;
     margin-left: 80%;
+}
+
+
+/*---------------二手商品頁面-----------------*/
+
+.view {
+    padding-top: 156px;
+}
+
+.searchbar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1030;
+    background-color: #292929;
+}
+
+.quicksearch-wrapper {
+    float: left;
+    position: absolute;
+    bottom: 0;
+    margin: 20px 50px;
+}
+
+.quicksearch {
+    border-radius: 5px;
+}
+.search-btn{
+    display: block;
+    float: left;
+    position: absolute;
+    left: 280px;
+    top:37px;
+    color: snow;
+    border: snow ;
+    border-radius: 5px;
+    background: #304546;
+}
+
+.post-btn {
+    background-color: #304546;
+    border: #304546;
+    color: #ffffff;
+    float: left;
+    position: fixed;
+    height: 70px;
+    width: 120px;
+    border-radius: 50%;
+    margin: 10px;
+    left: -webkit-calc(100% - 150px);
+    left: -moz-calc(100% - 150px);
+    left: calc(100% - 150px);
+}
+.post-btn:hover{
+    background-color: #295450;
+}
+
+.grid {
+    /*border: 1px white solid;*/
+    margin: 20px 50px;
+    padding: 20px;
+}
+
+.preview-thumbnail {
+    text-align: center;
+    background-color: #2A2828;
+    border: none;
+    margin: 10px 20px;
+    width: 20% ;
+    min-width: 300px;
+    height: 400PX;
+    padding: 20PX;
+    cursor: pointer;
+}
+
+.thumbnail .caption.view-caption {
+    color: #F6F6F6;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.caption.view-caption h4 {
+    font-weight: 700;
+}
+
+.secondhand-price {
+    font-weight: 900;
+}
+
+.thumbnail>.secondhand-thumbnail-image {
+    border-radius: 5px;
+    height: 220px;
+    width: 220px;
+}
+
+
+
+/*---------------三大編輯頁面共同部分------------------*/
+.edit{
+    margin-top:100px; 
+}
+.edit-container {
+    width: 800px;
+    min-height:800px;
+    max-height: 1000px;
+    margin: 50px auto;
+    background-color: #FAF8F8;
+    border-radius: 5px;
+}
+
+.edit-header {
+    width: 100%;
+    height: 50px;
+    background-color: #3D4759;
+    color: #DFD8D8;
+}
+
+.edit-title {
+    display: block;
+    margin: 10px auto;
+    font-weight: 900;
+    width: 100px;
+}
+
+.edit-body {
+  
+    /*width: 750px;*/
+    min-height: 700px;
+    max-height: 800px;
+    margin: 10px auto;
+    padding: 10px 15px;;
+    overflow-y: auto;
+}
+.edit-footer{
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*表單row*/
+
+.edit-row {
+    display: block;
+    margin:10px;
+    width: 700px;
+    height: 60px;
+}
+
+.edit-col-4 {
+    float: left;
+    clear: none;
+    width: 31%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+
+.edit-col-8 {
+    float: left;
+    clear: none;
+    width: 66%;
+    margin-left: 0%;
+    margin-right: 0%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+
+.edit-col-12{
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+.edit-input{
+    width: 100%;
+    border-radius: 5px;
+    border:1px #8F8A8A solid;
+}
+.edit-select-col{
+    width: 100%;
+    border-radius: 5px;
+    border:1px #8F8A8A solid;
+}
+
+/*提示*/
+.note{
+    font-size: 12px;
+    font-weight: 500;
+    
+}
+.secondhand-edit-description{
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+.secondhand-offer-agree{
+    font-weight: 500;
+    font-size: 18px;
+}
+.secondhand-edit-upload-div{
+   clear:left;
+    font-weight: 700;
+   
+    margin: 10px;
+    width: 730px;
+    height: 200px;
+    box-sizing: border-box;
+}
+.secondhand-edit-upload-btn-wrapper{
+    margin-top: 50px;
+}
+.secondhand-edit-upload-btn-wrapper input{
+    display: none;
+}
+.secondhand-edit-upload-btn-wrapper label{
+    display: inline-block;
+    width: 120px;
+    margin: 9px;
+    cursor: pointer;
+}
+.secondhand-edit-upload-btn-wrapper label img{
+    width: 120px;
+    height: 120px;
+}
+.edit-submit{
+    display: block;
+    margin: 30px auto;
+    font-weight: 600;
+}
+
+/*------------------------二手詳細頁面-------------------------*/
+.detail-show-container{
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+    color: #f4f4f0;
+    
+}
+.detail-show.title{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    
+}
+.detail-show.title h1{
+    max-width: 700px;
+    max-height:150px; 
+    font-size: 32px;
+    margin: 0;
+}
+/*二手買賣上半部排版設定*/
+.detail-show-upper{
+    width: 1000px;
+    height: 550px;    
+}
+.slider-for{
+     width: 520px;
+     margin: 10px 38px;
+    float: left;
+}
+/*賣方原po區塊*/
+.detail-show-op{
+    margin: 20px 20px 95px;
+    float: left;
+    width: 300px;
+    height: 300px;
+    padding-top: 10px;
+    border-radius: 5px;
+    background: #e4e4e4;
+    text-align: center;
+    -webkit-animation-name: ShineAnimation;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.12,.89,.98,.47);
+    
+}
+/*閃亮亮特效*/
+@-webkit-keyframes ShineAnimation{
+    from {
+        background-repeat:no-repeat;
+        background-image:-webkit-linear-gradient(
+            top left,
+            rgba(255, 255, 255, 0.0) 0%,
+            rgba(255, 255, 255, 0.0) 45%,
+            rgba(255, 255, 255, 0.5) 48%,
+            rgba(255, 255, 255, 0.8) 50%,
+            rgba(255, 255, 255, 0.5) 52%,
+            rgba(255, 255, 255, 0.0) 57%,
+            rgba(255, 255, 255, 0.0) 100%
+        );
+        background-position:-250px -250px;
+        background-size: 600px 600px
+    }
+    to {
+        background-repeat:no-repeat;
+        background-position:250px 250px;
+    }
+}
+.detail-show-op a{    
+    text-decoration: none;        
+    color: #567dd8;
+    font-weight: 700; 
+}
+ a:hover{
+    color: #285468;
+}
+.detail-show-op-mail{
+    
+    margin: 10px 30px;
+}
+.detail-show-op-buy{
+    
+    margin: 10px;
+}
+.buy-btn{
+    padding: 2px 6px;
+}
+
+/*賣家商品編輯+確認購買資訊區塊*/
+.detail-client-edit{
+    margin: 20px -15px;
+    float: left;
+    width: 360px;
+    height: 400px;
+    border-radius: 5px;
+    background: #e4e4e4;
+   
+}
+.detail-client-edit-header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4.5px 4.5px 0 0;
+    background: -webkit-linear-gradient(left,#297273,#2b4c3a);
+    background: linear-gradient(to right,#297273,#2b4c3a);
+   
+}
+.detail-client-edit-header h4{
+    color: white;
+    font-size: 20px;
+}
+.detail-client-info-wrapper{
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    background:#f5f7f8;
+    padding-right: 5px;
+}
+.detail-client-info-wrapper dt{
+    float: left;
+    width: 4rem;
+}
+.detail-client-info{
+    width: auto;
+    height: 50px;
+    border-top: 1px #afb1b8 solid;
+    background: #f5f7f8;
+    font-size: 16px;
+    color: #1d1b1b;
+   
+}
+.detail-client-info a{
+    text-decoration: none;
+    font-size: 16px;
+}
+.member-small-pic{
+    margin: 12px ;
+    border-radius: 50%;
+    border: 0.5px solid #607fad;
+    width: 25px;
+    height: 25px;
+}
+.client-btn-wrapper{
+    float:right;
+    margin-top:5px;
+
+}
+.client-btn{
+   display: inline-block;
+    width:40px;
+    height:20px;
+    font-size: 12px; 
+    padding: 1px 6px;
+    margin: 10px 1px 14px;
+}
+.refuse-btn{
+    background: #7c0523;
+    border: #7c0523;
+}
+.refuse-btn:hover{
+    background: #ca0939;
+    border: #ca0939;
+}
+.detail-edit-btn{
+    display: block;
+    margin: 7px auto;
+    padding: 2px 6px;
+}
+/*二手商品輪播區*/
+.secondhand-full-pic-div{
+    width: 500px;
+    height: 500px;
+    margin: 10px auto;
+    
+}
+.secondhand-full-pic{
+    width:500px;
+    height:500px;
+    border-radius: 5px;
+}
+.slider-nav{
+    width: 280px;
+    margin: 20px 30px 10px;
+    float:left;
+   
+     border-radius: 5px;
+}
+.secondhand-small-pic{
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+     border-radius: 5px;
+}
+.secondhand-small-pic-div{
+    width: 50px;
+    height: 50px;
+     border-radius: 5px;
+}
+.detail-show-text-wrapper{
+    width: 800px;
+    height:auto;
+    background-color: #293235;
+    margin: 10px auto;   
+    border-radius: 5px;
+    
+}
+.detail-show-text-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right,#1f1f21,#4e4e4e );
+    background: -webkit-linear-gradient(left,#1f1f21,#4e4e4e );
+    width:100%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+}
+.detail-show-text-title h4{
+    
+    
+    font-weight: 700;
+    font-size: 24px;
+}
+.detail-show-text-body{
+    
+    min-height: 300px;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+.detail-show-text-wrapper dt {
+    float: left;
+    width: 15rem;
+    padding-left: 10px;
+}
+.detail-show-text-wrapper dd{
+    display: block;
+    margin: 20px ;
+}
+.detail-show-description{
+    width: 100%;
+    min-height:300px; 
+}
+
+/*教學編輯頁面設定*/
+.edit-pm-btn-wrapper{
+    margin: 33px 10px;
+    display: inline-block;
+}
+
+/*教學詳細頁面設定*/
+.tutor-detail-container{
+    margin: 200px auto 10px;
+}
+.tutor-detail-header{
+    position: absolute;
+    width: 800px;
+}
+.tutor-description{
+    clear: left;
+    width: 725px;
+    padding: 16px;
+    margin:10px 50px 10px 20px;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    color: #353535;
+    box-shadow:10px 10px 5px #444444;
+}
+.tutor-info{
+    width: 300px;
+    display: inline-block;
+    margin: 10px 20px 10px 40px;
+}
+.tutor-op{
+    margin: 20px 20px 30px;
+}
+.first-dt{
+    margin-top:19px;
+}
+.media-zone{
+    padding: 0;
+}
+.media-zone-header{
+    width: 100%;
+    background-color: #454545;
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.media-zone-body{
+    border: 1px soli black;
+    display: flex;
+     align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 5px auto;
+}
+.media-style{
+    border-radius: 5px;
+}
+.media-zone .slick-prev:before, .media-zone .slick-next::before{
+    color: #363636;
+}
+.tutor-detail-client-edit{
+    margin: 20px 20px ;
+}
+
+/*教學瀏覽頁面*/
+.tutor-thumbnail-image{
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    
 }

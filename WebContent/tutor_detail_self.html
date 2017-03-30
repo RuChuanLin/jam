@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tutor_detail</title>
+    <link rel="stylesheet" href="_997_framework/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="_997_framework/slick/slick.css">
+    <link rel="stylesheet" href="_997_framework/slick/slick-theme.css">
+    <link rel="stylesheet" href="_997_framework/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
+    <link rel="stylesheet" href="_997_framework/css/style.css">
+</head>
+
+<body class="edit">
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Jam</a>
+                <ul id="menu-funtion" class="navbar-nav menu-wrapper ">
+                    <li><a href="#">Jam二手</a>
+                        <ul class="drop">
+                            <li><a href="#">吉他類</a></li>
+                            <li><a href="#">貝斯類</a></li>
+                            <li><a href="#">鼓及打擊類</a></li>
+                            <li><a href="#">鍵盤與合成器類</a></li>
+                            <li><a href="#">古典弦樂類</a></li>
+                            <li><a href="#">管樂類</a></li>
+                            <li><a href="#">音箱類</a></li>
+                            <li><a href="#">DJ控制器類</a></li>
+                            <li><a href="#">效果器類</a></li>
+                            <li><a href="#">錄音界面類</a></li>
+                            <li><a href="#">其他</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Jam新品</a>
+                        <ul class="drop">
+                            <li><a href="#">吉他類</a></li>
+                            <li><a href="#">貝斯類</a></li>
+                            <li><a href="#">鼓及打擊類</a></li>
+                            <li><a href="#">鍵盤與合成器類</a></li>
+                            <li><a href="#">古典弦樂類</a></li>
+                            <li><a href="#">管樂類</a></li>
+                            <li><a href="#">音箱類</a></li>
+                            <li><a href="#">DJ控制器類</a></li>
+                            <li><a href="#">效果器類</a></li>
+                            <li><a href="#">錄音界面類</a></li>
+                            <li><a href="#">其他</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Jam教學</a></li>
+                    <li><a href="#">Jam組團</a></li>
+                </ul>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- 登入前顯示 -->
+                    <!--<li><a href="#" class="login" id="nav-login">登入</a></li>
+                    <li><a href="#" class="signup" id="nav-signup">註冊</a></li>-->
+                    <!-- 登入後顯示 -->
+                    <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
+                    <li class="fb-loging-name" id="fb-loging-name"></li>
+                    <li>
+                        <a href="mailbox.html" id="nav-myinbox-btn "><i  class="fa fa-envelope-o " fa-5x aria-hidden="true " ></i><span class="badge ">1<span></a></li>
+                    <li><a id="nav-my-member-link " href="member.html " class="my-member-link ">我的 Jam</a></li>
+                    <li><a id="nav-logout " href="# " class="logout ">登出</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="detail-show-container">
+        <div class="detail-show-text-wrapper">
+            <div class="detail-show-text-title">
+                <h4>開課資訊</h4>
+            </div>
+            <div class="detail-show-text-body">
+                <dl class="tutor-info">
+                    <dt class="first-dt">教學項目：</dt>
+                    <dd>電吉他</dd>
+                    <dt>教學地區：</dt>
+                    <dd>Fender</dd>
+                    <dt>教學經驗：</dt>
+                    <dd>三年以上</dd>
+                    <dt>願意試教時間：</dt>
+                    <dd>60分鐘</dd>
+                    <dt>收費標準：</dt>
+                    <dd>600<span class="note">NT/HR</span></dd>
+                    <dt>教學對象：</dt>
+                    <dd>不限</dd>
+                </dl>
+               <div class="detail-client-edit tutor-detail-client-edit">
+                <div class="detail-client-edit-header">
+                    <h4>誰想試聽課程</h4>
+                </div>                
+                    <div class="detail-client-info-wrapper">
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t01.jpg">
+                            <a href="">大寶</a>
+                            想跟您預約試聽
+                            <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>                            
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t02.jpg">
+                            <a href="">小帆</a>
+                            想跟您預約試聽
+                            <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t03.jpg">
+                            <a href="">蕭敬騰</a>
+                            想跟您預約試聽
+                            <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t04.jpg">
+                            <a href="">李守信</a>
+                            想跟您預約試聽
+                           <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t05.jpg">
+                            <a href="">飛老師</a>
+                            想跟您預約試聽
+                           <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t06.jpg">
+                            <a href="">金木義則</a>
+                            想跟您預約試聽
+                           <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                        <div class="detail-client-info">
+                            <img class="member-small-pic" src="_996_image/teacher/t07.jpg">
+                            <a href="">東尼大木</a>
+                            想跟您預約試聽
+                           <div class="client-btn-wrapper">
+                                <button class="btn btn-primary client-btn">確認</button>
+                                <button class="btn btn-primary client-btn refuse-btn">拒絕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary detail-edit-btn">編輯課程</button>
+                
+            </div>
+                <!--這裡放教學文案-->
+                <div class="detail-show-description tutor-description">
+                    擅長曲風：Pop、Rock、Metal<br><br> 樂團經歷：暴君樂團現場演出吉他手，現任Masquerader樂團吉他手。
+
+                    <br><br> 教學經歷：草屯商工熱音社指導老師、中興高中熱音社指導老師、同德家商熱音社指導老師。
+
+                    <br><br> 演出經歷：韓國 EXTREME CAMP Vol.1金屬音樂祭、泰國曼谷 ASIAN METAL ALLIANCE - Thrasher Commandos in Bangkok、泰國泰北
+                    PHITLOK METAL FORCE 2013、「Samurai Assault 武士的逆襲」巡迴演唱會、Drown In Metal金屬音樂祭、鞭擊大屠殺 vol.1、各大Live House及校園演出。<br><br>                    教學簡介：以系統式教學引導學生學習，強調基本功的扎實訓練，擅長速彈與掃弦技巧的提升與編曲應用。
+                </div>
+                <div class="tutor-description media-zone">
+                    <div class="media-zone-header">
+                        <h4>教學及演出影音參考</h4>
+                    </div>
+                    <div class="media-zone-body">
+                        <iframe class="media-style" src="https://www.youtube.com/embed/T4YszA5trGw?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/mMv6TGyjpec?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/OzeoJlzkkPE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/Yjarkl3VWPE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <!--        <button class="form-btn test-btn1 ">test1</button>
+        <button class="form-btn test-btn2 ">test2</button>    -->
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <i class="fa fa-facebook-square " aria-hidden="true ">粉絲頁</i>
+        </p>
+    </div>
+    <script src="_997_framework/jquery-3.1.1.min.js "></script>
+    <script src="_997_framework/isotope.pkgd.min.js "></script>
+    <script src="_997_framework/bootstrap/js/bootstrap.min.js "></script>
+    <script src="_997_framework/js/main.js?ver=12 "></script>
+    <script src="_997_framework/js/secondhand_filter.js "></script>
+    <script src="_997_framework/js/slick_media.js?ver=12 "></script>
+    <script src="_997_framework/slick/slick.min.js"></script>
+    <script src="_997_framework/js/menufunction.js "></script>
+</body>
+
+</html>

@@ -114,6 +114,7 @@ public class MemberHBN implements MemberDAO {
 	public boolean checkPassword(String account, String password) {
 		boolean result = false;
 		Member mb = getMemberByAccount(account);
+		System.out.println(mb.getPassword());
 		if (password.trim().equals(mb.getPassword())) {
 			result = true;
 		}

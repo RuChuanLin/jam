@@ -7,7 +7,7 @@ public class ReserveRecord {
 	private int pk;
 	private int teacherId;
 	private int studentId;
-	private java.util.Calendar time;
+	private Calendar time;
 	private byte status;
 	public ReserveRecord(int pk) {
 		this.pk = pk;
@@ -45,10 +45,10 @@ public class ReserveRecord {
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
-	public java.util.Calendar getTime() {
+	public Calendar getTime() {
 		return time;
 	}
-	public void setTime(java.util.Calendar time) {
+	public void setTime(Calendar time) {
 		this.time = time;
 	}
 	public byte getStatus() {

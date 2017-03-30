@@ -12,10 +12,10 @@ public class Member {
 	private String alias;
 	private String pic;
 	private String intro;
-	private String videoLink;
+	private String url;
 
 	public Member(int userId, String account, String password, String instrument, boolean isOneClick, String email,
-			boolean isNoted, String alias, String pic, String intro, String videoLink) {
+			boolean isNoted, String alias, String pic, String intro, String url) {
 		this.userId = userId;
 		this.account = account;
 		this.password = password;
@@ -26,14 +26,14 @@ public class Member {
 		this.alias = alias;
 		this.pic = pic;
 		this.intro = intro;
-		this.videoLink = videoLink;
+		this.url = url;
 	}
 
 	public Member() {
 	}
 
 	public Member(String account, String password, String instrument, boolean isOneClick, String email, boolean isNoted,
-			String alias, String pic, String intro, String videoLink) {
+			String alias, String pic, String intro, String url) {
 		this.account = account;
 		this.password = password;
 		this.instrument = instrument;
@@ -43,15 +43,29 @@ public class Member {
 		this.alias = alias;
 		this.pic = pic;
 		this.intro = intro;
-		this.videoLink = videoLink;
+		this.url = url;
 	}
+        
+        public Member(String account,String password, boolean isOneClick){
+            	this.account = account;
+		this.password = password;
+		this.instrument = null;
+		this.isOneClick = isOneClick;
+		this.email =account;
+		this.isNoted = false;
+		this.alias = account;
+		this.pic = null;
+		this.intro = null;
+		this.url = null;
+        
+        }
 
 	public Member(int userId) {
 		this.userId = userId;
 	}
 
 	public Member(String instrument, boolean isOneClick, String email, boolean isNoted, String alias, String pic,
-			String intro, String videoLink) {
+			String intro, String url) {
 		this.instrument = instrument;
 		this.isOneClick = isOneClick;
 		this.email = email;
@@ -59,7 +73,7 @@ public class Member {
 		this.alias = alias;
 		this.pic = pic;
 		this.intro = intro;
-		this.videoLink = videoLink;
+		this.url = url;
 	}
 
 	public int getUserId() {
@@ -72,6 +86,16 @@ public class Member {
 
 	public String getAccount() {
 		return account;
+
+	}
+	
+	public String getvideoLink() {
+		return "videoLink";
+	}
+	
+	
+	public void setvideoLink(String videoLink) {
+		String dvideoLink=videoLink;
 	}
 
 	public void setAccount(String account) {
@@ -142,12 +166,12 @@ public class Member {
 		this.intro = intro;
 	}
 
-	public String getVideoLink() {
-		return videoLink;
+	public String getURL() {
+		return url;
 	}
 
-	public void setVideoLink(String videoLink) {
-		this.videoLink = videoLink;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
