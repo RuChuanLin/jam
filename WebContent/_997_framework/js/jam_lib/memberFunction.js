@@ -2,7 +2,6 @@
 //這個腳本需要使用linker.js的內容var 
 //這個腳本的內容在外界以mem呼叫
 
-
 (window.mem=function(){
 	var methods={
 		cookieKey : jam_cookie_key,
@@ -19,9 +18,8 @@
 	};
 	function login(info,cbf){
 			switch(info.type){
-				case "FB" :jamLogin(getFbInfo(),cbf);console.log("login");break;
-				case "Normal":jamLogin(info,cbf);console.log("login");break;
-				default : console.log("login");
+				case "FB" :jamLogin(getFbInfo(),cbf);break;
+				case "normal":jamLogin(info,cbf);break;
 			}
 	}
 	
@@ -56,10 +54,8 @@
 		var xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(resp){
 			switch(xhr.readyState){
-				case 1:
-					xhr.send(data);break;
+				case 1:xhr.send(JSON.stringify(data));break;
 				case 4:if(xhr.status==200){
-					console.log(xhr.responseText);
 					var rs=JSON.parse(xhr.responseText);
 					cbf(rs.accExt);
 				}break;
@@ -67,7 +63,6 @@
 		}
 	
 	xhr.open("POST",base_url+service_checkACC,true);
-	xhr.setRequestHeader("Content-Type","application/json");
 	}
 	
 	
@@ -88,7 +83,7 @@
 				case 1:xhr.send(JSON.stringify(rInfo));break;
 				case 4:if(xhr.status==200){
 					var rs=JSON.parse(xhr.responseText);
-					console.log(rs.regSuccess);
+					cbf(rs.regSuccess);
 				}break;
 			}
 		}
@@ -129,9 +124,7 @@
 			var xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(){
 				switch(xhr.readyState){
-					case 1:
-						xhr.setRequestHeader("Content-Type","text/plain");
-						xhr.send(JSON.stringify(uInfo));break;
+					case 1:xhr.send(JSON.stringify(uInfo));break;
 					case 4:
 						if(xhr.status==200){
 							var resp=xhr.responseText;
@@ -148,7 +141,6 @@
 			}
 			if(uInfo!=null){
 				xhr.open("POST",base_url+service_login,true);
-				
 			}
 			else{
 				cbf(false);
@@ -161,7 +153,7 @@
 		xhr.onreadystatechange=function(){
 			
 				switch(xhr.readyState){
-					case 1:xhr.send(data);break;
+					case 1:xhr.send(JSON.stringify(data));break;
 					case 4:
 						if(xhr.status==200){
 							var resp=xhr.responseText;

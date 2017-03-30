@@ -21,7 +21,6 @@ public class CheckAcc extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//req.setCharacterEncoding("utf-8");
-		req.
 		JsonObject requestInfo=(JsonObject)new JsonParser().parse(new InputStreamReader(req.getInputStream(),"UTF-8"));
 		JsonObject returnInfo=new JsonObject();
 		System.out.println("CheckAcc");
