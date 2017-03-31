@@ -42,7 +42,8 @@
 								console.log("no more");
 								break;
 							}
-							xhr.send();
+							xhr.setRequestHeader("Content-Type","application/json");
+							xhr.send(JSON.stringify(req));
 							msg.isChecking=true;
 							break;
 					case 4: if(xhr.status==200){
@@ -91,7 +92,8 @@
 			xhr.onreadystatechange=function(res){
 				
 				switch(xhr.readyState){
-					case 1:xhr.send(req);break;
+					case 1:xhr.send(JSON.stringify(req));
+							break;
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
 							if(resp.result>0){
@@ -111,7 +113,7 @@
 		
 		//發送訊息，由btn_send_ms.onclick呼叫，info，由外部提供。info：物件，結構見下方
 		function sendMessage(info,cbf){
-			console.log(info);
+			console.log("msg.sendMessage :" +info);
 			if(msg.isSending){return;}
 			console.log("b");
 			var req=new Object();
@@ -120,13 +122,13 @@
 				
 				switch(xhr.readyState){
 					case 1:
-					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.setRequestHeader("Content-type", "applicatoin/json");
 					xhr.send(JSON.stringify(info));
 					console.log(info);
 					break;
 					case 4: if(xhr.status==200){
 							var resp=JSON.parse(xhr.responseText);
-							if(resp.result>0){
+							if(resp.sent){
 								msg.isSending=false;
 								cbf(resp);
 								
@@ -149,8 +151,13 @@
 		
 		//檢查訊息是否有必填欄位沒有田寫
 		function checkMsgBody(message){
-			console.log(msg.msgLng);
-			if(message.toUser==null ||message.title==null|| msg.msgLng==0){
+			console.log(message);
+			chkMsgLng(message.article);
+			console.log("checkMsgBody");
+			if(message.receiver==null ||message.title==null|| msg.msgLng==0){
+				console.log("receiver"+message.reciver);
+				console.log("title"+message.title);
+				console.log("length"+msg.msgLng);
 				return false;
 			}else{
 				return true;
@@ -167,16 +174,9 @@
 		//檢查訊息長度，並回傳長度(單位：字元數)，由textarea.onkeyup呼叫
 		function checkMsgLength(ta){
 		var cmt=ta.value;
-			var count=0;	
-			for(var i=0;i< cmt.length;i++){
-				if(cmt.charCodeAt(i)>127){
-					count+=3;
-				}else{
-					count+=1;
-				}
-			}
-			this.msgLng=count;
-			
+		console.log("chkMessageLen");
+		console.log("ta.value  "+ta.value);
+		var count=chkMsgLng(cmt);
 			if(count<sys_msg_limit){
 				return true;
 			}else if(count ==0){
@@ -186,6 +186,23 @@
 			}
 				
 			}
+			
+		function chkMsgLng(ctn){
+			var count=0;
+			console.log(ctn.length);
+			for(var i=0;i< ctn.length;i++){
+				if(ctn.charCodeAt(i)>127){
+					count+=3;
+				}else{
+					count+=1;
+				}
+			}
+			
+			msg.msgLng=count;
+			console.log("ret");
+			return count;
+
+		}
 			
 
 		
@@ -255,6 +272,7 @@
 			var msgId="#"+msg.idStr+curMsg;
 			console.log(msgId);
 			$(msgId).remove();
+			deleteMsgReq([curMsg]);
 			msg.msgAll.splice(msg.msgAll.indexOf(curMsg),1);
 			msg.msgSelected.splice(msg.msgSelected.indexOf(curMsg),1);
 			msg.msgOnScr();
@@ -266,8 +284,11 @@
 		function deleteMsg(){
 			var msgId=null;
 			var amtSelected=msg.msgSelected.length;
-					if(msg.msgSelected.length==0){return null;}
+					if(msg.msgSelected.length==0){
+						console.log("msgselecte.Length ==0")
+						return null;}
 					if(confirm("確定刪除所選訊息?")){
+						deleteMsgReq(msg.msgSelected);
 						for(var r=0;r<msg.msgSelected.length;r++){
 							var msgId="#"+msg.idStr+msg.msgSelected[r];
 							$(msgId).remove();
@@ -277,6 +298,30 @@
 					}
 					
 				msg.msgOnScr();
+		}
+		
+		function deleteMsgReq(msgs){
+			var xhr=new XMLHttpRequest();
+			var delReq={
+					msgDelete :msgs
+			};
+			xhr.onreadystatechange=function(resp){
+				switch(xhr.readyState){
+					case 1:
+						xhr.setRequestHeader("Content-Type","application/json");
+						xhr.send(JSON.stringify(delReq));
+						console.log("del sent");
+						break;
+					case 4:
+						var rst=JSON.parse(resp.responseText);
+						console.log("rst.delete : "+resp.delSuccess);
+						break;
+				
+				}
+				
+			}
+			xhr.open("POST",base_url+"/deleteMsg",true);
+			
 		}
 		
 		function msgOnScr(){

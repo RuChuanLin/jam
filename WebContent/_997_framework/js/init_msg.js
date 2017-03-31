@@ -10,13 +10,33 @@ function init_message(){
 		kie.cleanCookie(jam_cookie_key);
 		sessionStorage.clear();
 		localStorage.clear();
-		//window.location="index.html";
+		window.location="index.html";
 	}
 	
 	function onLoggedIn(){
 		setup_nav();
 		setup_msg();
+		activate_bgt();
+		
 		}
+	
+	function activate_bgt(){
+		bgts.activateBgt(30000,[getMsgEveryTYsec]);
+		function getMsgEveryTYsec(){
+			msg.checkNewMessage(function(resp){
+				console.log(resp);
+				if(resp.result<0){
+					$("#msgNum").html("ds");
+					console.log(resp);
+				}else{
+					$("#msgNum").html(resp.result);
+					console.log(resp);
+					}
+			});				
+		}
+		msg.getMessage(msg.showNewMessage);
+		
+	}
 }
 
 
@@ -45,15 +65,17 @@ function setup_msg(){
 		var msgId="#msg_Id"+$(ev.target).siblings(".nxx_msgId").html();
 		var rMsg={
 			title : "Re :"+$(msgId).find(".nxx_msgId").html(),
-			toUser : $(msgId).find(".nxx_msgSender").html(),
-			msg : $("#mail-reply-content").val()
+			receiver : $(msgId).find(".nxx_msgSender").html(),
+			article : $("#mail-reply-content").val()
 		}
 		if(msg.chkMsgBody(rMsg)){
 			msg.sendMessage(rMsg,function(resp){
 			console.log(resp);
+			hideMessage();
 			});
 			console.log("sent   "+resp)
 		}else{
+			alert("信件寄送發生問題，請聯繫克服或稍後再試");
 			console.log("problem2");
 		}
 		
@@ -94,24 +116,24 @@ function setup_msg(){
 			
 			msg.totalInbox=message.result;
 				for(var i=0;i<messages.length;i++){
-					if(msg.msgRng[0]>messages[i].msgId){msg.msgRng[0]=messages[i].msgId;}
-					if(msg.msgRng[1]<messages[i].msgId){msg.msgRng[1]=messages[i].msgId;}
-					msg.msgAll.push(messages[i].msgId);
+					if(msg.msgRng[0]>messages[i].pk){msg.msgRng[0]=messages[i].pk;}
+					if(msg.msgRng[1]<messages[i].pk){msg.msgRng[1]=messages[i].pk;}
+					msg.msgAll.push(messages[i].pk);
 					r=msgModel.clone(true);
 					msg.msgLocal+=1;
 					$(r).find(":checkbox").prop("checked",false);
-					r.find(".nxx_msgTitle").html(messages[i].msgTitle);
-					r.find(".nxx_msgBody").html(messages[i].msgBody);
-					r.find(".nxx_msgId").html(messages[i].msgId);
-					r.find(".nxx_msgSender").html(messages[i].sendId);
+					r.find(".nxx_msgTitle").html(messages[i].title);
+					r.find(".nxx_msgBody").html(messages[i].article);
+					r.find(".nxx_msgId").html(messages[i].pk);
+					r.find(".nxx_msgSender").html(messages[i].sender);
 					r.find(".nxx_msgSenderNk").html(messages[i].sendNk);
-					r.find(".nxx_msgDate").html(messages[i].msgDate);
-					r.find(".nxx_msgRead").html(messages[i].msgState);
+					//r.find(".nxx_msgDate").html(messages[i].msgDate);
+					r.find(".nxx_msgRead").html(messages[i].state);
 					r.css("display","none");
 					r.addClass("nxx_msg");
 					r.attr("value","onHidden");
 					$(".nxx_pages").html(Math.ceil(i/10));
-					r.prop("id",msg.idStr+messages[i].msgId.toString());
+					r.prop("id",msg.idStr+messages[i].pk.toString());
 					r.appendTo("#msgBox");
 					
 				}
@@ -124,7 +146,7 @@ function setup_msg(){
 	
 	
 	
-	function onLoggedIn(){
+	function setBgt(){
 		bgts.activateBgt(30000,[getMsgEveryTYsec]);
 				function getMsgEveryTYsec(){
 					msg.checkNewMessage(function(resp){

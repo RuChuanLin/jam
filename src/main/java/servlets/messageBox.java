@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/msgbox")
+@WebServlet("/msgBox")
 public class messageBox extends HttpServlet {
 	private static final String TYPE_NEWMSG="newMsg";
 	private static final String TYPE_GETMSG="getMsg";
@@ -29,20 +29,22 @@ public class messageBox extends HttpServlet {
 		JsonObject result;
 		HttpSession ses=req.getSession(false);
                 resp.setHeader("Access-Control-Allow-Origin", "*");
+                resp.setHeader("Content-Type", "application/json");
                 InnerMsg imsg=new InnerMsg();
-                Member mem=(Member)req.getSession(false).getAttribute("Member");
-		if(ses!=null){
-		switch(msgReq.get("servType").getAsString()){
-			case TYPE_NEWMSG:
-				result=countNewMessage(msgReq,mem);
-				break;
-			case TYPE_GETMSG:
-				result=getMessage(msgReq,mem);
-				break;
-			default:
-                                    result=onMsgFailed(-2);
-				break;
-				}
+                Member mem=(Member)ses.getAttribute("Member");
+		if(mem!=null){
+
+				switch(msgReq.get("servType").getAsString()){
+					case TYPE_NEWMSG:
+						result=countNewMessage(msgReq,mem);
+						break;
+					case TYPE_GETMSG:
+						result=getMessage(msgReq,mem);
+						break;
+					default:
+						result=onMsgFailed(-2);
+						break;
+						}
 			}else{result=onMsgFailed(-3);}
 		
 		PrintWriter pw=resp.getWriter();
@@ -82,9 +84,9 @@ public class messageBox extends HttpServlet {
                JsonObject tmp=new JsonObject();
                tmp.addProperty("pk", msgs[u].getPk());
                tmp.addProperty("sender", msgs[u].getSender());
-               tmp.addProperty("senderAlias", msgs[u].getSenderAlias());
+               //tmp.addProperty("senderAlias", msgs[u].getSenderAlias());
                tmp.addProperty("title", msgs[u].getTitle());
-               tmp.addProperty("time", msgs[u].getTime().toString());
+               //tmp.addProperty("time", msgs[u].getTime().toString());
                tmp.addProperty("article", msgs[u].getArticle());
                tmp.addProperty("state", msgs[u].getState());
                msgArr.add(tmp);

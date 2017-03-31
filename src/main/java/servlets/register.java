@@ -33,11 +33,11 @@ public class register extends HttpServlet{
                     if(!mhn.idExists(acc)){
                         mem= new Member(acc, null, true);
                         mhn.saveMember(mem);
-                    }else if(!mhn.idExists(acc)){
-                        mem= new Member(acc, pwd, false);
-                        mhn.saveMember(mem);
                     }
-                }
+	                	}else if(!mhn.idExists(acc)){
+	                    mem= new Member(acc, pwd, false);
+	                    mhn.saveMember(mem);
+	                	}
                     if(mem!=null){
                         rst.addProperty("regSuccess",true);
                     }else{
@@ -46,6 +46,7 @@ public class register extends HttpServlet{
                     
 			PrintWriter pw=resp.getWriter();
 			pw.write(rst.toString());
+			pw.close();
 		}
 
 }

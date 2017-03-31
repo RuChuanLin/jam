@@ -120,13 +120,17 @@ function setup_nav() {
 			};
 			
 			mem.login(info,function(resp){
-				if(response == undefined){console.log("failed");return;}
-				if (response.loginSuccess) {
-                    console.log(response);
-                    index_methods.index_methods.login_Nav();
-                   index_methods.close_modal();
+				if(resp == undefined){console.log("failed");return;}
+				if (resp) {
+					var cookie=kie.getCookieJson(jam_cookie_key);
+                    console.log(resp);
+                    index_methods.login_Nav();
+                    index_methods.close_modal();
+                    $("fb-loging-name").html(cookie.alias);
                     kie.setCookieObj(jam_cookie_key,{ user_id : resp.id, user_alias : resp.alias});
 				    stater.checkState(index_methods.login_Nav,index_methods.logout_Nav);
+				    index_methods.close_modal();
+				    console.log("login call back function");
                 } else{
 					alert("login failed");
 				}				

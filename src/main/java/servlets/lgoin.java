@@ -37,7 +37,7 @@ public class lgoin extends HttpServlet  {
                         mem=mhn.getMemberByAccount(acc);
                     }else if(mhn.checkPassword(acc, pwd)){
                         mem=mhn.getMemberByAccount(acc);
-                }
+                }else{  mem=mhn.getMemberByAccount(acc);}
                 
                 if(mem==null){
                     returnInfo.addProperty("loginSuccess",false);
@@ -49,11 +49,14 @@ public class lgoin extends HttpServlet  {
                     returnInfo.addProperty("alias", mem.getAlias());
                     returnInfo.addProperty("pic",mem.getPic());
                 }
-
+                
+        resp.setHeader("Content-Type", "multipart/mixed");
 		PrintWriter pw=resp.getWriter();
 		pw.write(returnInfo.toString());
 		pw.close();
 	}
+	
+
 
 }
 

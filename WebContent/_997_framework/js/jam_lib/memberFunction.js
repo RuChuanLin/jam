@@ -74,7 +74,7 @@
 				break;
 			case "normal":reg(rInfo);break;
 			}
-		}
+		
 	
 	function reg(rInfo){
 		var xhr=new XMLHttpRequest();
@@ -90,6 +90,7 @@
 	
 		xhr.open("POST",base_url+service_register,true);	
 		
+		}
 	}
 
 			
@@ -130,7 +131,7 @@
 							var resp=xhr.responseText;
 							var info=JSON.parse(resp);
 							if(info["loginSuccess"]){
-								kie.setCookieJson(mem.cookieKey,resp);
+								kie.setCookieObj(mem.cookieKey,resp);
 								cbf(true);
 							}
 						}
