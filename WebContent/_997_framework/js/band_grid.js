@@ -16,7 +16,7 @@ $(window).scroll(function () {
 
 function createTutorElement(n) {
   var $item = $('<div class="thumbnail preview-thumbnail"></div>');
-  $item.append('<img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" /><div class="caption view-caption"><h4 class="tutor-place">台北/板橋</h4><h4 class="tutor-instrument">民謠吉他</h4><h3 class="tutor-name">江吉米</h3></div>');
+  $item.append('<img class="tutor-thumbnail-image" src="images/test/b01.jpg" alt="Image" /><div class="caption view-caption"><h4 class="thumbnail-title">台北練功團</h4><h4 class="band-place">士林/信義</h4><h4 class="band-style">indie Rock/後搖</h4><h4 class="band-instrument"><span class="band-wanted">徵 </span>電貝斯、主唱</h4></div>');
   return $item;
 }
 // loading動畫
@@ -48,6 +48,17 @@ if ($('#back-to-top').length) {
         }, 700);
     });
 }
+//糾團主旨超過字數排版
+$(function () {
+  var len = 40; // 超過40個字以"..."取代
+  $(".thumbnail-title").each(function (i) {
+    if ($(this).text().length > len) {
+      $(this).attr("title", $(this).text());
+      var text = $(this).text().substring(0, len - 1) + "...";
+      $(this).text(text);
+    }
+  });
+});
 
 
 //-------以下為前端搜尋版本  可以更改為後端搜尋版本----- 

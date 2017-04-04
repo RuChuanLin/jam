@@ -989,7 +989,10 @@ input[type="button"]:disabled {
 .profolio-info-text {
     text-align: center;
 }
-
+.member-intro-wrapper{
+    margin: 10px 60px;
+    padding: 10px;
+}
 
 /*mail區塊*/
 
@@ -1103,9 +1106,10 @@ input[type="button"]:disabled {
     background-color: transparent;
     border: 0;
     color: #BED5D6;
-    display: inline-block!important;
-    margin: 0;
+    margin: 8px 66px;
     padding-left: 4px;
+    display: block;
+    
 }
 
 
@@ -1547,23 +1551,40 @@ iframe {
     border-radius: 5px;
     background: #304546;
 }
+.search-btn:hover{
+     background-color: #295450;
+}
+.top-btn{
+   left: -webkit-calc(100% - 200px);
+    left: -moz-calc(100% - 200px);
+    left: calc(100% - 200px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out;
+}
+.top-btn.is-visible{
+    opacity: 1;
+    visibility:visible;
+}
+
 
 .post-btn {
-    background-color: #304546;
-    border: #304546;
-    color: #ffffff;
+
     float: left;
-    position: fixed;
-    height: 70px;
+    
     width: 120px;
-    border-radius: 50%;
-    margin: 10px;
+   
     left: -webkit-calc(100% - 150px);
     left: -moz-calc(100% - 150px);
     left: calc(100% - 150px);
 }
-.post-btn:hover{
-    background-color: #295450;
+.post-btn>a{
+    text-decoration: none;
+    color: snow;
+}
+.post-btn>a:hover{
+    
+    color: snow;
 }
 
 .grid {
@@ -1603,8 +1624,18 @@ iframe {
     height: 220px;
     width: 220px;
 }
-
-
+.loading-ajax{
+    display: none;
+    margin: -50px auto 50px;
+     width: 100px;
+    height: 100px;
+}
+.loading-gif{
+    display: block;
+    margin: -50px auto 20px;
+    width: 100px;
+    height: 100px;
+}
 
 /*---------------三大編輯頁面共同部分------------------*/
 .edit{
@@ -1675,7 +1706,7 @@ iframe {
     clear: none;
     width: 66%;
     margin-left: 0%;
-    margin-right: 0%;
+    margin-right: 2%;
     min-height: 2px;
     box-sizing: border-box;
 }
@@ -2073,4 +2104,74 @@ iframe {
     height: 140px;
     width: 140px;
     
+}
+.logo-brand{
+    display: block;
+    width: 74px;
+    height: 49px;
+    margin: -11px -6px;
+    
+}
+
+/*以下是如川加的*/
+
+.secondhand-edit-upload-pic{
+    display: inline;
+}
+
+/*樂團view微調*/
+.band-wanted{
+    color: snow;
+    font-size: 14px;
+    
+}
+
+/*樂團詳細頁面*/
+.band-host{
+    color: black;
+    width: 250PX;
+    margin: 0 auto;
+    padding: 0;
+    text-align:center;
+   
+}
+.band-host dd{
+   height: 50px;
+   padding-left: -10px;
+    width: 17rem;
+ margin: 0 auto;
+ vertical-align: middle;
+ display: table-cell;
+  text-align: left;
+    
+}
+.band-op-img{
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+   
+}
+.band-mail-btn{
+    display: inline-block;
+    width: 50px;
+    margin: 5px;
+}
+.band-players-img{
+    margin: 0px;
+    margin: 2px;
+    cursor: pointer;
+}
+.band-host dt{
+    width: 8rem;
+    height: 50px;
+    padding-top: 10px;
+    text-align: left;
+    vertical-align: middle;
+   
+}
+.band-info{
+    width: 400px;
+    display: inline-block;
+    margin: 10px;
 }

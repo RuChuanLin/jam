@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>secondhand-view</title>
+    <title>tutor-view</title>
     <link href="_997_framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="_997_framework/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">Jam</a>
-                <ul id="menu-funtion" class="navbar-nav menu-wrapper">
+                <ul id="menu-funtion" class="navbar-nav menu-wrapper ">
                     <li><a href="#">Jam二手</a>
                         <ul class="drop">
                             <li><a href="#">吉他類</a></li>
@@ -55,7 +55,7 @@
                             <li><a href="#">其他</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Jam教學</a>
+                   <li><a href="#">Jam教學</a>
                         <ul class="drop">
                             <li><a href="#">北部</a>
                                 <ul>
@@ -127,9 +127,9 @@
                     <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
                     <li class="fb-loging-name" id="fb-loging-name"></li>
                     <li>
-                        <a href="mailbox.html" id="nav-myinbox-btn"><i  class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>
-                    <li><a id="nav-my-member-link" href="member.html" class="my-member-link">我的 Jam</a></li>
-                    <li><a id="nav-logout" href="#" class="logout">登出</a></li>
+                        <a href="mailbox.html" id="nav-myinbox-btn "><i  class="fa fa-envelope-o " fa-5x aria-hidden="true " ></i><span class="badge ">1<span></a></li>
+                    <li><a id="nav-my-member-link " href="member.html " class="my-member-link ">我的 Jam</a></li>
+                    <li><a id="nav-logout " href="# " class="logout ">登出</a></li>
 
                 </ul>
             </div>
@@ -140,12 +140,9 @@
         <div class="quicksearch-wrapper">
             <p><input type="text" class="quicksearch" placeholder="快速搜尋" /></p>
         </div>
-
         <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-
-
-
-        <button class="post-btn">我要開課</button>
+        <button id="back-to-top" class="search-btn top-btn"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
+        <button class="search-btn post-btn">我要開課</button>
     </div>
     <!-- secondhand-view -->
     <div class="grid">
@@ -246,9 +243,10 @@
             </div>
         </div>
     </div>
+    <div id="loading-ajax" class="loading-ajax">
+        <img id="loading-svg" class="loading-svg" src="_996_image/loading.svg">
+    </div>
     <div class="footer-wrapper">
-        <!--        <button class="form-btn test-btn1">test1</button>
-        <button class="form-btn test-btn2">test2</button>    -->
         <span>Jam Corporation © 2017  </span>
         <span>連絡我們</span>
         <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>

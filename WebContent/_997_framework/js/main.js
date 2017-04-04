@@ -7,7 +7,8 @@ var login_Nav = function () {
     $('#nav-myinbox-btn').show().css("display", "block");
     $('#nav-my-member-link').show().css("display", "block");
     $('#nav-logout').show().css("display", "block");
-
+    $('#nav-pic').attr("src", sessionStorage.getItem('pic') || '');
+    $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
 };
 
 //登出後nav-bar右上角的顯示
@@ -26,18 +27,18 @@ var close_modal = function () {
     $('.user-modal').removeClass('is-visible');
 };
 //navbar動畫
-function checkScroll(){
+function checkScroll() {
     var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
 
-    if($(window).scrollTop() > startY){
+    if ($(window).scrollTop() > startY) {
         $('.navbar-inverse').addClass("scrolled");
-    }else{
+    } else {
         $('.navbar-inverse').removeClass("scrolled");
     }
 }
 
-if($('.navbar').length > 0){
-    $(window).on("scroll load resize", function(){
+if ($('.navbar').length > 0) {
+    $(window).on("scroll load resize", function () {
         checkScroll();
     });
 }
@@ -73,9 +74,16 @@ jQuery(document).ready(function ($) {
 
     //---------事件處理--------------
 
-    //在頁面刷新時會執行此函式, 此函式前半段是前往/Jam/loadingMember撈資料
     //撈完後執行onMemberLoading(), 也就是讓撈到的會員資料顯示在畫面上
+    //--------按左上logo回首頁------
+    $('.navbar-brand').click(() => {
+        window.location.assign("/Jam");
+    })
 
+    //---------按主頁面超連結!!!-----
+    $('.block.block2').click(() => {
+        window.location.assign("/Jam/secondhand_view.html");
+    })
 
     //---------按註冊後--------------
     regSubmit.on("click", onSignupClick);
@@ -100,7 +108,12 @@ jQuery(document).ready(function ($) {
     onMyJamButton.on('click', function () {
         onMemberPageClick(sessionStorage.getItem("LoginId"));
     });
-
+    //--------按別人頁面測試-------------
+    $('#river-test').attr('name', 1)
+    $('#river-test').on('click', () => {
+        console.log($('#river-test').attr('name'));
+        onMemberPageClick($('#river-test').attr('name')).then((arg) => onMemberLoading(arg))
+    })
 
 
     //---------------註冊ajax------------------
@@ -150,7 +163,7 @@ jQuery(document).ready(function ($) {
         var account = signupEmail.val();
         var password = signupPassword.val();
         $.ajax({
-            url: `http://localhost:8080/Jam/register`,
+            url: `/Jam/register`,
             data: { account, password },
             type: 'POST',
             cache: false,
@@ -183,10 +196,11 @@ jQuery(document).ready(function ($) {
             }).done((response) => {
                 if (response.loginSuccess) {
                     console.log(response);
-                    login_Nav();
-                    close_modal();
                     sessionStorage.setItem("LoginId", response.loginId || '');
                     sessionStorage.setItem("alias", response.alias || '');
+                    sessionStorage.setItem("pic", response.pic || '')
+                    login_Nav();
+                    close_modal();
                     resolve(response);
                 } else {
                     error_idps();
@@ -215,22 +229,41 @@ jQuery(document).ready(function ($) {
             }
             if (arg.Member.instrument) {
                 let instrument = arg.Member.instrument.split(' ');
-                $("#member-instrument").html(instrument.join(' / '));
+                $("#member-instrument").html(instrument.join(' | '));
             }
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
-            $("#member-intro").html(arg.Member.intro);
-            // window.location.reload(false);
+            let { intro } = arg.Member;
+            console.log(intro);
+            const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
+            intro = ReplaceAll(intro,"\n","<br />");
+            if (intro.length > intro_show_number && intro_show_number !== -1) {
+                $('#intro-original').html(intro.substr(0, intro_show_number))
+                $('#intro-expended').html(intro.substr(intro_show_number))
+            } else {
+                $('#intro-original').html(intro)
+            }
+            //            $('#nav-pic').attr("src", sessionStorage.getItem('pic') || '');
+            //            $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
+            window.location.reload(false);
         });
     }
 
+    function ReplaceAll(strOrg, strFind, strReplace) {
+        var index = 0;
+        while (strOrg.indexOf(strFind, index) != -1) {
+            strOrg = strOrg.replace(strFind, strReplace);
+            index = strOrg.indexOf(strFind, index);
+        }
+        return strOrg
+    }
 
     function onLogoutClick() {
-       $.post({
-           url: '/Jam/logoutMember',
-           type:'POST',
-           datatype:'json'
-       });
+        $.post({
+            url: '/Jam/logoutMember',
+            type: 'POST',
+            datatype: 'json'
+        });
         //登出畫面，以下寫程式碼
         console.log('logout');
         logout_Nav();
@@ -278,7 +311,9 @@ jQuery(document).ready(function ($) {
             });
             console.log(url_arr);
             let pic = $("#preview-pic").attr("src");
-            $('#river-test').attr("src", pic);
+            sessionStorage.setItem('pic', pic);
+            sessionStorage.setItem('alias', alias);
+
             $.ajax({
                 url: `/Jam/updatePerson`,
                 cache: true,
@@ -286,6 +321,8 @@ jQuery(document).ready(function ($) {
                 type: 'POST',
                 data: { instruments, intro, email, alias, pic, url: url_arr }
             }).done((response) => {
+                // sessionStorage.setItem('')
+                // sessionStorage.setItem()
                 resolve(response);
             }).fail();
         });
@@ -409,19 +446,22 @@ jQuery(document).ready(function ($) {
     //     onMemberPageClick(sessionStorage.getItem("LoginId"));
     // })
     // 本方法是用會員ID去資料庫撈資料, 目前只對應到myjam按鈕, 但未來本方法可用在看其他會員資料
+
     function onMemberPageClick(member) {
-        console.log(member);
-        $.ajax({
-            url: '/Jam/goMemberPage',
-            type: 'POST',
-            datatype: 'json',
-            data: { member }
-        }).done(response => {
-            window.location.replace("http://localhost:8080/Jam/member.html");
-        });
+        return new Promise((resolve, reject) => {
+            console.log(member);
+            $.ajax({
+                url: '/Jam/goMemberPage',
+                type: 'POST',
+                datatype: 'json',
+                data: { member }
+            }).done(response => {
+                // window.location.assign("http://localhost:8080/Jam/member.html");
+                resolve(response)
+            });
+        })
 
     }
-
 
 
 

@@ -33,8 +33,13 @@ public class GoMemberPage extends HttpServlet {
 		Gson gson = new Gson();
 		String json = "";
 		Member mb = (Member) session.getAttribute("Member");
+
+		int myId = 0;
+		if (mb != null) {
+			myId = mb.getUserId();
+		}
 		String member = request.getParameter("member");
-		boolean myself = false;
+		boolean myself = true;
 		int id;
 
 		if (member == null) {
@@ -44,10 +49,10 @@ public class GoMemberPage extends HttpServlet {
 		}
 		System.out.println(id);
 
-		if (id != 0 && id != mb.getUserId()) {
+		if (id != 0 && id != myId) {
 			mb = dao.getMember(id);
-			myself = true;
-		}
+			myself = false;
+		} 
 		mb.setPassword("");
 		map.put("Member", mb);
 		map.put("myself", myself);

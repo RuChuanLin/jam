@@ -1,3 +1,4 @@
+// console.log('this is from fblogin.js');
 window.fbAsyncInit = function () {
     FB.init({
         appId: "1215937141808423",
@@ -35,15 +36,16 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function showName() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', { fields: 'first_name' }, function (response) {
-        console.log('Successful login for: ' + response.first_name);
-        document.getElementById('fb-loging-name').innerHTML =
-            'Hi, ' + response.first_name + '!';
-        document.getElementById('nav-pic').setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=small");
-    });
-}
+// function showName() {
+//     console.log('Welcome!  Fetching your information.... ');
+//     FB.api('/me', { fields: 'first_name' }, function (response) {
+//         console.log(response);
+//         console.log('Successful login for: ' + response.first_name);
+//         document.getElementById('fb-loging-name').innerHTML =
+//             'Hi, ' + response.first_name + '!';
+//         document.getElementById('nav-pic').setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=small");
+//     });
+// }
 
 function check_user(fbId, fbName, fbpicture) {
     //這裡要寫ajax 傳值進server
@@ -53,37 +55,32 @@ function check_user(fbId, fbName, fbpicture) {
 
 }
 // 按fb登入鍵時做事
-document.getElementById('fb-login-btn').addEventListener('click', function () {
+$('.btn.btn-block.btn-social.btn-facebook').on('click', () => {
     //do the login
     FB.login(function (response) {
         if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            showName();
-            login_Nav();
-            close_modal();
-            FB.api('/me', { fields: 'first_name,picture' }, function (response) {
-                check_user(response.id, response.first_name, response.picture);
-            });
-        } else if (response.status === 'not_authorized') {
-            // The person is logged into Facebook, but not your app.
-            console.log('The person is logged into Facebook, but not your app');
-        } else {
-            // The person is not logged into Facebook, so we're not sure if
-            // they are logged into this app or not.
-            console.log("The person is not logged into Facebook ");
-        }
-    }, { scope: 'email,public_profile', return_scopes: true });
-}, false);
 
-document.getElementById('fb-login-btn2').addEventListener('click', function () {
-    //do the login
-    FB.login(function (response) {
-        if (response.status === 'connected') {
             // Logged into your app and Facebook.
-            showName();
-            login_Nav();
+            // showName();
+            // login_Nav();
             close_modal();
-            FB.api('/me', { fields: 'first_name,picture' }, function (response) {
+            FB.api('/me', { fields: 'first_name, picture, email' }, function (response) {
+                console.log(response);
+                console.log(response.picture.data.url);
+                $.ajax({
+                    url: `/Jam/FB`,
+                    data: { account: response.email, alias: response.first_name, pic: response.picture.data.url },
+                    type: 'POST',
+                    dataType: 'json'
+                }).done(response => {
+                    console.log(response);
+                    login_Nav();
+                    window.location.reload(false);
+                    sessionStorage.setItem("LoginId", response.loginId || '');
+                    sessionStorage.setItem("alias", response.alias || '');
+                    sessionStorage.setItem("pic",response.pic||'')
+                    
+                })
                 check_user(response.id, response.first_name, response.picture);
             });
         } else if (response.status === 'not_authorized') {
@@ -95,23 +92,23 @@ document.getElementById('fb-login-btn2').addEventListener('click', function () {
             console.log("The person is not logged into Facebook ");
         }
     }, { scope: 'email,public_profile', return_scopes: true });
-}, false);
+});
 
 //按登出時也fb登出
-document.getElementById('nav-logout').addEventListener('click', function () {
-    FB.getLoginStatus(function (response) {
-        console.log(response);
-        if (response.status === 'connected') {
-            FB.logout(function (response) {
-                console.log(response);
+// document.getElementById('nav-logout').addEventListener('click', function () {
+//     FB.getLoginStatus(function (response) {
+//         console.log(response);
+//         if (response.status === 'connected') {
+//             FB.logout(function (response) {
+//                 console.log(response);
 
-                location.replace('http://localhost:8080/Jam');
-            });
-        } else {
-            //這裡只有畫面的呈現 
+//                 location.replace('http://localhost:8080/Jam');
+//             });
+//         } else {
+//             //這裡只有畫面的呈現 
 
-            logout_Nav();
-        }
-    });
+//             logout_Nav();
+//         }
+//     });
 
-});
+// });
