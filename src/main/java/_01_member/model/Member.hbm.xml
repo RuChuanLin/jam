@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/3/16 ?U?? 06:00:41 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_01_member.model.Member" table="MEMBER">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="increment" />
+        </id>
+        <property name="account" type="java.lang.String">
+            <column name="ACCOUNT" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="instrument" type="java.lang.String">
+            <column name="INSTRUMENT" />
+        </property>
+        <property name="isOneClick" type="boolean" access="field">
+            <column name="ISONECLICK" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="isNoted" type="boolean" access="field">
+            <column name="ISNOTED" />
+        </property>
+        <property name="alias" type="java.lang.String">
+            <column name="ALIAS" />
+        </property>
+        <property name="pic" type="java.lang.String">
+            <column name="PIC" length="200000" />
+        </property>
+        <property name="intro" type="java.lang.String">
+            <column name="INTRO" length="3000"/>
+        </property>
+        <property name="url" type="java.lang.String" access="field">
+            <column name="URL" />
+        </property>
+    </class>
+</hibernate-mapping>
