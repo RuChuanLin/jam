@@ -23,6 +23,8 @@ public class LogoutMember extends HttpServlet {
 		while (em.hasMoreElements()) {
 			request.getSession().removeAttribute(em.nextElement().toString());
 		}
+		System.out.println(4848);
+		System.out.println(request.getSession());
 		return;
 	}
 

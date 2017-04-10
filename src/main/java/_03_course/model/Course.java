@@ -1,38 +1,23 @@
 package _03_course.model;
 
-import java.sql.Blob;
-import java.sql.Date;
-
+import java.util.Calendar;
 
 public class Course {
 	private int courseId;
 	private int teacherId;
 	private String category;
+	private String instruments;
+	private String area;
 	private String expectedArea;
 	private byte duration;
 	private byte experience;
 	private int charge;
 	private String expectedStudent;
-	private int video;
-	private java.sql.Blob picture;
+	private String video;
 	private String intro;
-	private java.sql.Date time;
-
-	public Course(int courseId, int teacherId, String category, String expectedArea, byte duration, byte experience,
-			int charge, String expectedStudent, int video, Blob picture, String intro, Date time) {
-		this.courseId = courseId;
-		this.teacherId = teacherId;
-		this.category = category;
-		this.expectedArea = expectedArea;
-		this.duration = duration;
-		this.experience = experience;
-		this.charge = charge;
-		this.expectedStudent = expectedStudent;
-		this.video = video;
-		this.picture = picture;
-		this.intro = intro;
-		this.time = time;
-	}
+	private Calendar updatetime;
+	//開課狀態 1是顯示開課  0是不顯示
+	private boolean status;
 
 	public int getCourseId() {
 		return courseId;
@@ -56,6 +41,22 @@ public class Course {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getInstruments() {
+		return instruments;
+	}
+
+	public void setInstruments(String instruments) {
+		this.instruments = instruments;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	public String getExpectedArea() {
@@ -98,20 +99,12 @@ public class Course {
 		this.expectedStudent = expectedStudent;
 	}
 
-	public int getVideo() {
+	public String getVideo() {
 		return video;
 	}
 
-	public void setVideo(int video) {
+	public void setVideo(String video) {
 		this.video = video;
-	}
-
-	public java.sql.Blob getPicture() {
-		return picture;
-	}
-
-	public void setPicture(java.sql.Blob picture) {
-		this.picture = picture;
 	}
 
 	public String getIntro() {
@@ -122,33 +115,63 @@ public class Course {
 		this.intro = intro;
 	}
 
-	public java.sql.Date getTime() {
-		return time;
+	public Calendar getUpdatetime() {
+		return updatetime;
 	}
 
-	public void setTime(java.sql.Date time) {
-		this.time = time;
+	public void setUpdatetime(Calendar updatetime) {
+		this.updatetime = updatetime;
 	}
 
-	public Course(int courseId) {
-		this.courseId = courseId;
+	
+	public boolean isStatus() {
+		return status;
 	}
 
-	public Course(int teacherId, String category, String expectedArea, byte duration, byte experience, int charge,
-			String expectedStudent, int video, Blob picture, String intro, Date time) {
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public Course(int teacherId, String category, String instruments, String area, String expectedArea, byte duration,
+			byte experience, int charge, String expectedStudent, String video, String intro, Calendar updatetime, boolean status) {
+		super();
 		this.teacherId = teacherId;
 		this.category = category;
+		this.instruments = instruments;
+		this.area = area;
 		this.expectedArea = expectedArea;
 		this.duration = duration;
 		this.experience = experience;
 		this.charge = charge;
 		this.expectedStudent = expectedStudent;
 		this.video = video;
-		this.picture = picture;
 		this.intro = intro;
-		this.time = time;
+		this.updatetime = updatetime;
+		this.status = status;
 	}
 
 	public Course() {
+		super();
 	}
+
+	public Course(int courseId, int teacherId, String category, String instruments, String area, String expectedArea,
+			byte duration, byte experience, int charge, String expectedStudent, String video, String intro,
+			Calendar updatetime,boolean status) {
+		super();
+		this.courseId = courseId;
+		this.teacherId = teacherId;
+		this.category = category;
+		this.instruments = instruments;
+		this.area = area;
+		this.expectedArea = expectedArea;
+		this.duration = duration;
+		this.experience = experience;
+		this.charge = charge;
+		this.expectedStudent = expectedStudent;
+		this.video = video;
+		this.intro = intro;
+		this.updatetime = updatetime;
+		this.status = status;
+	}
+
 }

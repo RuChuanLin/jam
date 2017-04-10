@@ -1,25 +1,41 @@
 package _04_band.model;
 
-import java.sql.Blob;
-import java.sql.Clob;
-
+import java.util.Calendar;
 
 public class Band {
-	private int pk;
+	private int bandId;
+	private int author;
+	private String title;
 	private String category;
+	private String instruments;
 	private String area;
-	private byte style;
-	private java.sql.Clob description;
+	private String detailedArea;
+	private String style;
 	private byte isGrouped;
-	private int videoId;
 	private String mateLink;
-	private java.sql.Blob image;
+	private String video;
+	private String description;
+	private String image;
+	private Calendar updatetime;
 	private byte bandStatus;
-	public int getPk() {
-		return pk;
+	
+	public int getBandId() {
+		return bandId;
 	}
-	public void setPk(int pk) {
-		this.pk = pk;
+	public void setBandId(int bandId) {
+		this.bandId = bandId;
+	}
+	public int getAuthor() {
+		return author;
+	}
+	public void setAuthor(int author) {
+		this.author = author;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getCategory() {
 		return category;
@@ -27,23 +43,29 @@ public class Band {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public String getInstruments() {
+		return instruments;
+	}
+	public void setInstruments(String instruments) {
+		this.instruments = instruments;
+	}
 	public String getArea() {
 		return area;
 	}
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public byte getStyle() {
+	public String getDetailedArea() {
+		return detailedArea;
+	}
+	public void setDetailedArea(String detailedArea) {
+		this.detailedArea = detailedArea;
+	}
+	public String getStyle() {
 		return style;
 	}
-	public void setStyle(byte style) {
+	public void setStyle(String style) {
 		this.style = style;
-	}
-	public java.sql.Clob getDescription() {
-		return description;
-	}
-	public void setDescription(java.sql.Clob description) {
-		this.description = description;
 	}
 	public byte getIsGrouped() {
 		return isGrouped;
@@ -51,22 +73,28 @@ public class Band {
 	public void setIsGrouped(byte isGrouped) {
 		this.isGrouped = isGrouped;
 	}
-	public int getVideoId() {
-		return videoId;
-	}
-	public void setVideoId(int videoId) {
-		this.videoId = videoId;
-	}
 	public String getMateLink() {
 		return mateLink;
 	}
 	public void setMateLink(String mateLink) {
 		this.mateLink = mateLink;
 	}
-	public java.sql.Blob getImage() {
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getImage() {
 		return image;
 	}
-	public void setImage(java.sql.Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	public byte getBandStatus() {
@@ -75,34 +103,35 @@ public class Band {
 	public void setBandStatus(byte bandStatus) {
 		this.bandStatus = bandStatus;
 	}
-	public Band(String category, String area, byte style, Clob description, byte isGrouped, int videoId,
-			String mateLink, Blob image, byte bandStatus) {
+	public Calendar getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(Calendar updatetime) {
+		this.updatetime = updatetime;
+	}
+	public Band(int author, String title, String category, String instruments, String area, String detailedArea,
+			String style, byte isGrouped, String mateLink, String video, String description, String image,
+			Calendar updatetime, byte bandStatus) {
+		super();
+		this.author = author;
+		this.title = title;
 		this.category = category;
+		this.instruments = instruments;
 		this.area = area;
+		this.detailedArea = detailedArea;
 		this.style = style;
-		this.description = description;
 		this.isGrouped = isGrouped;
-		this.videoId = videoId;
 		this.mateLink = mateLink;
+		this.video = video;
+		this.description = description;
 		this.image = image;
 		this.bandStatus = bandStatus;
-	}
-	public Band(int pk) {
-		this.pk = pk;
+		this.updatetime = updatetime;
 	}
 	public Band() {
+		super();
 	}
-	public Band(int pk, String category, String area, byte style, Clob description, byte isGrouped, int videoId,
-			String mateLink, Blob image, byte bandStatus) {
-		this.pk = pk;
-		this.category = category;
-		this.area = area;
-		this.style = style;
-		this.description = description;
-		this.isGrouped = isGrouped;
-		this.videoId = videoId;
-		this.mateLink = mateLink;
-		this.image = image;
-		this.bandStatus = bandStatus;
-	}
+	
+	
+	
 }

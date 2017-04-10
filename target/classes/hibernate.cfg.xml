@@ -5,7 +5,7 @@
 	<session-factory>
 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.password">password</property>
+		<property name="hibernate.connection.password">12345</property>
 		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1/jamdb?useUnicode=true&amp;characterEncoding=utf-8</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
@@ -29,6 +29,8 @@
 		<mapping resource="_02_transaction/model/OrderForm.hbm.xml" />
 		<mapping resource="_02_transaction/model/OrderItem.hbm.xml" />
 		<mapping resource="_02_transaction/model/BidRecord.hbm.xml" />
+		<mapping resource="_02_transaction/model/UsedItemPic.hbm.xml" />
+		
 		<mapping resource="_03_course/model/Course.hbm.xml" />
 		<mapping resource="_03_course/model/ReserveRecord.hbm.xml" />
 		<mapping resource="_04_band/model/Band.hbm.xml" />

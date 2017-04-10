@@ -5,24 +5,24 @@ import java.util.Calendar;
 
 public class ReserveRecord {
 	private int pk;
-	private int teacherId;
+	private int courseId;
 	private int studentId;
-	private java.util.Calendar time;
+	private Calendar time;
 	private byte status;
 	public ReserveRecord(int pk) {
 		this.pk = pk;
 	}
-	public ReserveRecord(int teacherId, int studentId, Calendar time, byte status) {
-		this.teacherId = teacherId;
+	public ReserveRecord(int courseId, int studentId, Calendar time, byte status) {
+		this.courseId = courseId;
 		this.studentId = studentId;
 		this.time = time;
 		this.status = status;
 	}
 	public ReserveRecord() {
 	}
-	public ReserveRecord(int pk, int teacherId, int studentId, Calendar time, byte status) {
+	public ReserveRecord(int pk, int courseId, int studentId, Calendar time, byte status) {
 		this.pk = pk;
-		this.teacherId = teacherId;
+		this.courseId = courseId;
 		this.studentId = studentId;
 		this.time = time;
 		this.status = status;
@@ -33,11 +33,11 @@ public class ReserveRecord {
 	public void setPk(int pk) {
 		this.pk = pk;
 	}
-	public int getTeacherId() {
-		return teacherId;
+	public int getCourseId() {
+		return courseId;
 	}
-	public void setTeacherId(int teacherId) {
-		this.teacherId = teacherId;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 	public int getStudentId() {
 		return studentId;
@@ -45,10 +45,10 @@ public class ReserveRecord {
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
-	public java.util.Calendar getTime() {
+	public Calendar getTime() {
 		return time;
 	}
-	public void setTime(java.util.Calendar time) {
+	public void setTime(Calendar time) {
 		this.time = time;
 	}
 	public byte getStatus() {

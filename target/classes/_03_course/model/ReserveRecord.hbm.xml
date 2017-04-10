@@ -4,14 +4,14 @@
 <!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="_03_course.model.ReserveRecord" table="RESERVERECORD">
-        <id name="studentId" type="int">
-            <column name="STUDENTID" />
-            <generator class="assigned" />
-        </id>
-        <property name="pk" type="int">
+        <id name="pk" type="int">
             <column name="PK" />
+            <generator class="increment" />
+        </id>
+        <property name="studentId" type="int">
+            <column name="STUDENTID" />
         </property>
-        <property name="teacherId" type="int">
+        <property name="courseId" type="int">
             <column name="TEACHERID" />
         </property>
         <property name="time" type="java.util.Calendar">

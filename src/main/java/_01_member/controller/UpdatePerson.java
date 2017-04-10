@@ -44,19 +44,19 @@ public class UpdatePerson extends HttpServlet {
 		String intro = request.getParameter("intro");
 		String instruments[] = request.getParameterValues("instruments[]");
 		String instru = "";
-		String videoLink[] = request.getParameterValues("video[]");
-		String video = "";
+		String url[] = request.getParameterValues("url[]");
+		String urlString = "";
 		if (instruments != null) {
 			for (int i = 0; i < instruments.length; i++) {
-				instru += instruments[i] + " \\ ";
+				instru += instruments[i] + " ";
 			}
-			instru = instru.substring(0, instru.length() - 3);
+			instru = instru.trim();
 		}
-		if (videoLink != null) {
-			for (int i = 0; i < videoLink.length; i++) {
-				video += videoLink[i] + " \\ ";
+		if (url != null) {
+			for (int i = 0; i < url.length; i++) {
+				urlString += url[i] + " ";
 			}
-			video = video.substring(0, video.length() - 3);
+			urlString = urlString.trim();
 		}
 
 		if (email.trim() != null && email.trim().length() != 0) {
@@ -70,6 +70,7 @@ public class UpdatePerson extends HttpServlet {
 		}
 		mem.setIntro(intro);
 		mem.setInstrument(instru);
+		mem.setUrl(urlString);
 
 		dao.updateMember(mem);
 		session.setAttribute("Member", mem);

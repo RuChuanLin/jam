@@ -4,18 +4,15 @@
 <!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="_02_transaction.model.NewItem" table="NEWITEM">
-        <id name="usedItemId" type="int">
-            <column name="USEDITEMID" />
-            <generator class="assigned" />
+        <id name="newItemId" type="int">
+            <column name="NEWITEMID" />
+            <generator class="increment" />
         </id>
         <property name="category" type="java.lang.String">
             <column name="CATEGORY" />
         </property>
         <property name="brand" type="java.lang.String">
             <column name="BRAND" />
-        </property>
-        <property name="image" type="java.sql.Blob">
-            <column name="IMAGE" />
         </property>
         <property name="price" type="int">
             <column name="PRICE" />
@@ -26,13 +23,7 @@
         <property name="model" type="java.lang.String">
             <column name="MODEL" />
         </property>
-        <property name="browsedCount" type="int">
-            <column name="BROWSEDCOUNT" />
-        </property>
-        <property name="updatedDate" type="java.util.Calendar">
-            <column name="UPDATEDDATE" />
-        </property>
-        <property name="onSale" type="char">
+        <property name="onSale" type="byte">
             <column name="ONSALE" />
         </property>
         <property name="itemCount" type="int">

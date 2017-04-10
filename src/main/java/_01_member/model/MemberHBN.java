@@ -122,7 +122,7 @@ public class MemberHBN implements MemberDAO {
 
 	@Override
 	public int updateMember(Member mem) {
-		String hql = "update Member set intro=:intro,isNoted=:isNoted, email=:email, isOneClick=:isOneClick,instrument=:instrument, alias=:alias, pic=:pic where account=:account";
+		String hql = "update Member set intro=:intro,isNoted=:isNoted, email=:email, isOneClick=:isOneClick,instrument=:instrument, alias=:alias, pic=:pic, url=:url where account=:account";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		int updateNumber = 0;
@@ -137,6 +137,7 @@ public class MemberHBN implements MemberDAO {
 			q.setParameter("isOneClick", mem.isOneClick());
 			q.setParameter("instrument", mem.getInstrument());
 			q.setParameter("isNoted", mem.isNoted());
+			q.setParameter("url", mem.getURL());
 			updateNumber = q.executeUpdate();
 			System.out.println("updateNumber: " + updateNumber);
 			tx.commit();
@@ -148,8 +149,8 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
-	public List<InnerMsg> getMsg(int userId, int start) {
-		String hql = "from InnerMsg where receiver = :userId and pk <= :start order by time desc";
+	public List<InnerMsg> getMsg(int userId) {
+		String hql = "from InnerMsg where receiver = :userId order by time desc";
 		List<InnerMsg> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
@@ -157,7 +158,6 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			TypedQuery<InnerMsg> q = session.createQuery(hql);
 			q.setParameter("userId", userId);
-			q.setParameter("start", start);
 			q.setMaxResults(11);
 			list = q.getResultList();
 			tx.commit();

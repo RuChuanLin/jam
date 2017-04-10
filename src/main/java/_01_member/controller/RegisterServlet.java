@@ -1,11 +1,8 @@
 package _01_member.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 		password = request.getParameter("password");
 
 		alias = account.split("@")[0];
-		System.out.println(account +"/"+ password);
+		System.out.print(account + password);
 
 		// 檢查帳號是否輸入及是否已存在
 		if (dao.idExists(account)) {
@@ -70,18 +67,23 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		}
 
-		// 沒問題
 		ServletContext context = getServletContext();
-		URL url = context.getResource("/_996_image/pic.png");
-		File file = new File(url.getFile());
-		System.out.println(file);
-		InputStream is = new FileInputStream(file);
-		long length = file.length();
+		InputStream is = context.getResourceAsStream("/_996_image/user.png");
+		// 沒問題
+		// File file = new File(request.getRequestURL()+"/_996_image/pic.png");
+		// InputStream is = new FileInputStream(file);
+		long length = is.available();
+		;
 		byte[] bytes = new byte[(int) length];
-		is.read(bytes, 0, bytes.length);
+		int out = 0;
+		int num = 0;
+		while (out < bytes.length && (num = is.read(bytes, out, bytes.length - out)) >= 0) {
+			out += num;
+		}
 		is.close();
 		byte[] picb64 = Base64.encodeBase64(bytes);
-		pic = "data:image/png;base64," + new String(picb64);
+		pic = new String(picb64);
+		pic = "data:image/png;base64," + pic;
 		// }
 
 		Member mb = new Member(account, password, null, false, account, true, alias, pic, null, null);

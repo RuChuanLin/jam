@@ -3,6 +3,8 @@ package _01_member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,26 +31,32 @@ public class MessageSend extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
 		Member mem = (Member) session.getAttribute("Member");
+		Map<String, Object> map = new HashMap<>();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 		MemberDAO dao = new MemberHBN();
-		boolean sent = false;
-
+		
+		
 		int sender = mem.getUserId();
 		String alias = mem.getAlias();
-//		int sender = Integer.parseInt(request.getParameter("sender"));
-//		String alias = request.getParameter("alias");
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		String title = request.getParameter("title");
 		String msg = request.getParameter("msg");
+		//給買賣用
+		String itemId = request.getParameter("itemId");
+		if(itemId!=null){
+//			receiver = dao.
+		}
+		System.out.println("title: "+ title);
+		System.out.println("msg: "+ msg);
 		Calendar time = Calendar.getInstance();
 
 		InnerMsg imsg = new InnerMsg(sender, alias, receiver, title, msg, time, false);
 		dao.setMsg(imsg);
-		
-		sent = true ;
-		pw.write(gson.toJson(sent));
+		map.put("sent", true);
+		pw.write(gson.toJson(map));
 		pw.flush();
+		pw.close();
 
 	}
 

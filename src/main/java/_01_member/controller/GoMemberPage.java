@@ -31,21 +31,28 @@ public class GoMemberPage extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		MemberDAO dao = new MemberHBN();
 		Gson gson = new Gson();
+		String json = "";
 		Member mb = (Member) session.getAttribute("Member");
-		String memberId = request.getParameter("memberId");
-		boolean myself = true;
-		int id = -1;
 
-		if (memberId != null && memberId.trim().length() != 0) {
-			id = Integer.parseInt(memberId);
+		int myId = 0;
+		if (mb != null) {
+			myId = mb.getUserId();
+		}
+		String member = request.getParameter("member");
+		boolean myself = true;
+		int id;
+
+		if (member == null) {
+			id = 0;
+		} else {
+			id = Integer.parseInt(request.getParameter("member"));
 		}
 		System.out.println(id);
 
-		if (id != -1 && id != mb.getUserId()) {
+		if (id != 0 && id != myId) {
 			mb = dao.getMember(id);
 			myself = false;
-		}
-
+		} 
 		mb.setPassword("");
 		map.put("Member", mb);
 		map.put("myself", myself);

@@ -2,6 +2,10 @@ package _01_member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialClob;
 
 import com.google.gson.Gson;
 
 import _01_member.model.Member;
+import _01_member.model.MemberDAO;
 
 @WebServlet("/memberEdit")
 public class MemberEdit extends HttpServlet {
