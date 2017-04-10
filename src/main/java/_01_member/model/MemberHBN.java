@@ -179,7 +179,7 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("userId", userId);
-			msg = (int) q.getSingleResult();
+			msg = (int) (long) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null)

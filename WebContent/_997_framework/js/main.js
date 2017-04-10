@@ -1,5 +1,8 @@
 // 初始化拿掉了...
 
+// 更新站內信數量
+$.getUnreadMsgNumber();
+
 var login_Nav = function () {
     $('#nav-login').hide();
     $('#nav-signup').hide();

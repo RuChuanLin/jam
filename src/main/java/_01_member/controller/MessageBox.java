@@ -57,7 +57,7 @@ public class MessageBox extends HttpServlet {
 		// // int userId = Integer.parseInt(request.getParameter("userId"));
 		//
 		// if (servType.equals("newMsg")) {
-		// result = dao.newMsg(userId);
+//		 result = dao.newMsg(userId);
 		// pw.write(gson.toJson(result));
 		// pw.flush();
 		// System.out.println("未讀信件數" + result);

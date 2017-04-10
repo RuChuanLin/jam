@@ -1434,7 +1434,7 @@ iframe {
     cursor: pointer;
     border-top: 1px solid #645F5F;
     border-bottom: 1px solid #645F5F;
-    display: none;
+    /*display: none;*/
 }
 
 .mailbox-bottom {

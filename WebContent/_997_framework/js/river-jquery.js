@@ -23,4 +23,18 @@
         }
     })
 
+    //計算新信數量
+    $.getUnreadMsgNumber = function (msgId = -1) {
+        $.ajax({
+            url: `/Jam/msgRead`,
+            type: `POST`,
+            dataType: `json`,
+            data: { msgId }
+        }).done(response => {
+            console.log(response);
+            $('.badge').html(response.unreadMsgNumber);
+            response.unreadMsgNumber === 0 ? $('.badge').hide() : $('.badge').show();
+        })
+    }
+
 }

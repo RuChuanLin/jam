@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 
 @WebServlet("/msgRead")
-public class MessageRead extends HttpServlet{
+public class MessageRead extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,11 +32,17 @@ public class MessageRead extends HttpServlet{
 		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
-		
+
 		int id = Integer.parseInt(request.getParameter("msgId"));
-		dao.changeState(id);
+		if (id != -1) {
+			dao.changeState(id);
+		}
+		int unreadMsgNumber = dao.newMsg(mem.getUserId());
+		System.out.println("userId:  " + mem.getUserId());
+		System.out.println("unreadMsgNumber:  " + unreadMsgNumber);
 		map.put("unread", true);
+		map.put("unreadMsgNumber", unreadMsgNumber);
 		pw.write(gson.toJson(map));
-		
+
 	}
 }
