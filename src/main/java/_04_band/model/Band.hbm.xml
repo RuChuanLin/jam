@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_04_band.model.Band" table="BAND">
+        <id name="videoId" type="int">
+            <column name="VIDEOID" />
+            <generator class="assigned" />
+        </id>
+        <property name="pk" type="int">
+            <column name="PK" />
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="CATEGORY" />
+        </property>
+        <property name="area" type="java.lang.String">
+            <column name="AREA" />
+        </property>
+        <property name="style" type="byte">
+            <column name="STYLE" />
+        </property>
+        <property name="description" type="java.sql.Clob">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="isGrouped" type="byte">
+            <column name="ISGROUPED" />
+        </property>
+        <property name="mateLink" type="java.lang.String">
+            <column name="MATELINK" />
+        </property>
+        <property name="image" type="java.sql.Blob">
+            <column name="IMAGE" />
+        </property>
+        <property name="bandStatus" type="byte">
+            <column name="BANDSTATUS" />
+        </property>
+    </class>
+</hibernate-mapping>

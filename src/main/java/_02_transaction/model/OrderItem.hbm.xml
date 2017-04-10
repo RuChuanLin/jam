@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="_02_transaction.model.OrderItem" table="ORDERITEM">
+        <id name="newItemId" type="int" access="field">
+            <column name="NEWITEMID" />
+            <generator class="assigned" />
+        </id>
+        <property name="PK" type="int" access="field">
+            <column name="PK" />
+        </property>
+        <property name="number" type="int" access="field">
+            <column name="NUMBER" />
+        </property>
+        <many-to-one name="orderform" class="_02_transaction.model.OrderForm" access="field" fetch="join">
+            <column name="ORDERFORM" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
