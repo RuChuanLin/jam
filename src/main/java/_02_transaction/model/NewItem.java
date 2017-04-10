@@ -12,6 +12,79 @@ public class NewItem {
 	private int itemCount;
 	private int sold;
 	
+	
+	public int getNewItemId() {
+		return newItemId;
+	}
+
+	public void setNewItemId(int newItemId) {
+		this.newItemId = newItemId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public byte getOnSale() {
+		return onSale;
+	}
+
+	public void setOnSale(byte onSale) {
+		this.onSale = onSale;
+	}
+
+	public int getItemCount() {
+		return itemCount;
+	}
+
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
+	}
+
+	public int getSold() {
+		return sold;
+	}
+
+	public void setSold(int sold) {
+		this.sold = sold;
+	}
+
 	public NewItem(int newItemId, String category, String brand, int price, String title, String model, byte onSale,
 			int itemCount, int sold) {
 		super();
