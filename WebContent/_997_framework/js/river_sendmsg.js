@@ -1,5 +1,5 @@
 {
-    const userId = $.getParameterByName('userId', window.location.toString());
+    const userId = $.getParameterByName('userId');
     const mailSubmit = $('#mail-submit');
     mailSubmit.on('click', () => {
         const title = $('#mail-title').val();

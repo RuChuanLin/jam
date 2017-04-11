@@ -70,7 +70,7 @@ public class UsedItemHBN implements UsedItemDAO {
 
 	@Override
 	public List<UsedItem> getAllItem(String key, int page) {
-		String hql = "from UsedItem where title like :key and onSale in (0,1) order by usedItemId desc";
+		String hql = "from UsedItem where category like :key and onSale in (0,1) order by usedItemId desc";
 		List<UsedItem> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;

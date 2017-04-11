@@ -12,8 +12,7 @@
 		url: `/Jam/messageBox`,
 		type: 'POST',
 		dataType: 'json'
-	}).done(response => {
-		$.getUnreadMsgNumber();
+	}).done(response => {		
 		console.log(response);
 		response.msgs.map((msg, i) => {
 			console.log(msg, i);

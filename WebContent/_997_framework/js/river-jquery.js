@@ -1,6 +1,6 @@
 {
     //取得URL查詢字串的正則表示式
-    $.getParameterByName = function (name, url) {
+    $.getParameterByName = function (name, url = window.location.toString()) {
         if (!url) {
             url = window.location.href;
         }

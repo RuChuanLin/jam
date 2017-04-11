@@ -1,8 +1,11 @@
 //-------------- window scrolling bottom get item 
+const category = $.getParameterByName('category');
+console.log(category);
 $.ajax({
   url: '/Jam/usedItemView',
   type: 'GET',
-  dataType: 'json'
+  dataType: 'json',
+  data: { category }
 }).done(response => {
   console.log(response)
   response.map(usedItem => {
@@ -20,7 +23,7 @@ $.ajax({
             url: '/Jam/usedItemView',
             type: 'GET',
             dataType: 'json',
-            data: { currentPage: usedItem }
+            data: { currentPage: usedItem, category }
           }).done(response => {
             console.log(response);
             response.map(usedItem => {

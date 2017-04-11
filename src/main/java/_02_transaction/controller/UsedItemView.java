@@ -41,6 +41,8 @@ public class UsedItemView extends HttpServlet {
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();
 		PrintWriter pw = response.getWriter();
+		System.out.println("request.getParameter category: " + request.getParameter("category"));
+		String category = request.getParameter("category") == null ? "" : request.getParameter("category");
 		int currentPage = 1;
 		if (request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -50,9 +52,12 @@ public class UsedItemView extends HttpServlet {
 		int totalPages = (int) page[1];
 		System.out.println("totalPages: " + totalPages);
 		System.out.println("currentPage: " + currentPage);
-		List<UsedItem> list = dao.getAllItem("", currentPage);
+
+		List<UsedItem> list = dao.getAllItem(category, currentPage);
+
 		List listWithPic = new ArrayList<>();
 		for (UsedItem ui : list) {
+			System.out.println("ui.getExpectedPrice(): " + ui.getExpectedPrice());
 			String pic = dao.getFirstPic(ui.getUsedItemId());
 			List temp = new ArrayList<>();
 			temp.add(ui);
