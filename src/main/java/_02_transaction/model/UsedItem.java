@@ -3,6 +3,29 @@ package _02_transaction.model;
 import java.util.Calendar;
 
 public class UsedItem {
+	public UsedItem(int usedItemId) {
+		this.usedItemId = usedItemId;
+	}
+
+	public UsedItem(int usedItemId, String category, String brand, String usedTime, String description, byte status,
+			byte preference, int expectedPrice, String title, String model, int browsedCount, int seller,
+			Calendar updatedDate, byte onSale) {
+		this.usedItemId = usedItemId;
+		this.category = category;
+		this.brand = brand;
+		this.usedTime = usedTime;
+		this.description = description;
+		this.status = status;
+		this.preference = preference;
+		this.expectedPrice = expectedPrice;
+		this.title = title;
+		this.model = model;
+		this.browsedCount = browsedCount;
+		this.seller = seller;
+		this.updatedDate = updatedDate;
+		this.onSale = onSale;
+	}
+
 	private int usedItemId;
 	private String category;
 	private String brand;

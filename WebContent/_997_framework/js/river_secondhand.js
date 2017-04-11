@@ -14,6 +14,7 @@
         }
     })
     function onSellClick() {
+        const itemId = getParameterByName('itemId', window.location.toString());
         const [brand, model, condition, age, title, price, category, desc] = [$('#secondhand-brand').val(), $('#secondhand-model').val(), $('#secondhand-condition').val(), $('#secondhand-age').val(), $('#secondhand-title').val(), $('#secondhand-price').val(), $('#secondhand-category').val(), $('#secondhand-edit-description').val()]
         const pic_arr = [];
         $('.secondhand-edit-upload-pic img').map((n, pic) => {
@@ -26,7 +27,7 @@
         $.ajax({
             url: '/Jam/usedItemPublish',
             type: 'POST',
-            data: { brand, model, status: condition, usedTime: age, title, expectedPrice: price, category, description: desc, pic_arr },
+            data: { itemId, brand, model, status: condition, usedTime: age, title, expectedPrice: price, category, description: desc, pic_arr },
             dataType: 'json'
         }).done(() => {
             window.location.assign("/Jam/secondhand_view.html");

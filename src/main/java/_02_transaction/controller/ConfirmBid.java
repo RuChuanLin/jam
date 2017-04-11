@@ -20,19 +20,18 @@ import _01_member.model.Member;
 import _01_member.model.MemberDAO;
 import _01_member.model.MemberHBN;
 import _02_transaction.model.BidRecord;
-import _02_transaction.model.UsedItem;
 import _02_transaction.model.UsedItemDAO;
 import _02_transaction.model.UsedItemHBN;
-import _02_transaction.model.UsedItemPic;
 
-@WebServlet("/usedItemDetail")
-public class UsedItemDetail extends HttpServlet {
+/**
+ * Servlet implementation class ConfirmBid
+ */
+@WebServlet("/confirmBid")
+public class ConfirmBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		System.out.println(itemId);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
@@ -41,32 +40,25 @@ public class UsedItemDetail extends HttpServlet {
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();
 		PrintWriter pw = response.getWriter();
-
-		System.out.println(itemId);
-		UsedItem ui = dao.getItem(itemId);
-		List<UsedItemPic> listUIP = dao.getAllPic(itemId);
-		List<String> listPic = new ArrayList<String>();
-		for (int i = 0; i < listUIP.size(); i++) {
-			listPic.add(listUIP.get(i).getPicBase64());
+		String bidder_str = request.getParameter("bidder");
+		int bidder = -1;
+		if (bidder_str != null) {
+			bidder = Integer.parseInt(bidder_str);
 		}
-		String status = "全新";
-		switch (ui.getStatus()) {
-		case 1:
-			status = "像新的一樣";
-			break;
-		case 2:
-			status = "良好";
-		case 3:
-			status = "外觀微損";
-			break;
-		case 4:
-			status = "部分功能損壞";
-			break;
+		int decision = Integer.parseInt(request.getParameter("decision"));
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		if (decision == 1) {
+			// 賣家確認買家
+			dao.setBidStatus(itemId, -1);
+			dao.confirmBid(itemId, bidder);
+		} else if (decision == -1) {
+			// 賣家反悔，取消確認買家
+			dao.setBidStatus(itemId, 1);
+		} else if (decision == -2) {
+			System.out.println("decision == -2:" + itemId + " " + bidder);
+			dao.cancelBid(itemId, bidder);
 		}
 		MemberDAO mDao = new MemberHBN();
-		Member mb = mDao.getMember(ui.getSeller());
-		String seller = mb.getAlias();
-		String sellerPic = mb.getPic();
 		List<BidRecord> temp = dao.getBid(itemId);
 		List bidderList = new ArrayList<>();
 		for (BidRecord br : temp) {
@@ -78,12 +70,6 @@ public class UsedItemDetail extends HttpServlet {
 			bidMap.put("alias", mm.getAlias());
 			bidderList.add(bidMap);
 		}
-
-		map.put("usedItem", ui);
-		map.put("pics", listPic);
-		map.put("status", status);
-		map.put("seller", seller);
-		map.put("sellerPic", sellerPic);
 		map.put("bidderList", bidderList);
 		String json = gson.toJson(map);
 		pw.write(json);

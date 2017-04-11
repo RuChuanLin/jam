@@ -11,9 +11,6 @@
         <property name="itemId" type="int">
             <column name="ITEMID" />
         </property>
-        <property name="picOrder" type="int">
-            <column name="PICORDER" />
-        </property>
         <property name="picBase64" type="java.lang.String">
             <column name="PICBASE64" length="200000" />
         </property>

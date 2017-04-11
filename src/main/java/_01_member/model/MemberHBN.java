@@ -149,8 +149,8 @@ public class MemberHBN implements MemberDAO {
 	}
 
 	@Override
-	public List<InnerMsg> getMsg(int userId, int start) {
-		String hql = "from InnerMsg where receiver = :userId and pk <= :start order by time desc";
+	public List<InnerMsg> getMsg(int userId) {
+		String hql = "from InnerMsg where receiver = :userId order by time desc";
 		List<InnerMsg> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
@@ -158,7 +158,6 @@ public class MemberHBN implements MemberDAO {
 			tx = session.beginTransaction();
 			TypedQuery<InnerMsg> q = session.createQuery(hql);
 			q.setParameter("userId", userId);
-			q.setParameter("start", start);
 			q.setMaxResults(11);
 			list = q.getResultList();
 			tx.commit();

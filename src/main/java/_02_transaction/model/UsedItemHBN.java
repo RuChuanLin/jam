@@ -70,7 +70,7 @@ public class UsedItemHBN implements UsedItemDAO {
 
 	@Override
 	public List<UsedItem> getAllItem(String key, int page) {
-		String hql = "from UsedItem where title like :key and onSale in (0,1) order by updatedDate desc";
+		String hql = "from UsedItem where title like :key and onSale in (0,1) order by usedItemId desc";
 		List<UsedItem> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
@@ -137,13 +137,14 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public String getFirstPic(int itemId) {
 		String pic = null;
-		String hql = "select picBase64 from UsedItemPic where itemId = :itemId and picOrder = 1";
+		String hql = "select picBase64 from UsedItemPic where itemId = :itemId ";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery(hql);
 			q.setParameter("itemId", itemId);
+			q.setMaxResults(1);
 			pic = (String) q.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
@@ -176,14 +177,14 @@ public class UsedItemHBN implements UsedItemDAO {
 	}
 
 	@Override
-	public List<String> getAllPic(int itemId) {
-		String hql = "select picBase64 from UsedItemPic where itemId = :itemId";
-		List<String> list = null;
+	public List<UsedItemPic> getAllPic(int itemId) {
+		String hql = "from UsedItemPic where itemId = :itemId";
+		List<UsedItemPic> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			TypedQuery<String> q = session.createQuery(hql);
+			TypedQuery<UsedItemPic> q = session.createQuery(hql);
 			q.setParameter("itemId", itemId);
 			list = q.getResultList();
 			tx.commit();
@@ -215,30 +216,37 @@ public class UsedItemHBN implements UsedItemDAO {
 
 	@Override
 	public int updatePic(int itemId, String[] pic) {
-		String updatahql = "update UsedItemPic set picBase64=:pic where itemId=:itemId and picOrder=:picOrder";
-		String deletehql = "delete UsedItemPic where itemId=:itemId and picOrder=:picOrder";
+		List<UsedItemPic> listUIP = getAllPic(itemId);
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
 		Transaction tx = null;
 		int updateNumber = 0;
 		try {
 			tx = session.beginTransaction();
-			Query q = null;
+
 			for (int i = 0; i < pic.length; i++) {
-				if (pic[i].trim().length() != 0) {
-					q = session.createQuery(updatahql);
-					q.setParameter("pic", pic[i]);
-					q.setParameter("itemId", itemId);
-					q.setParameter("picOrder", i + 1);
-					q.executeUpdate();
-					updateNumber++;
+				if (i < listUIP.size()) {
+					UsedItemPic uip = listUIP.get(i);
+					if (pic[i].trim().length() != 0) {
+
+						uip.setPicBase64(pic[i]);
+						session.update(uip);
+						System.out.println(i);
+						updateNumber++;
+					} else {
+						session.delete(uip);
+						updateNumber++;
+					}
 				} else {
-					q = session.createQuery(deletehql);
-					q.setParameter("itemId", itemId);
-					q.setParameter("picOrder", i + 1);
-					q.executeUpdate();
-					updateNumber++;
+					if (pic[i].trim().length() != 0) {
+						UsedItemPic uip = new UsedItemPic(itemId, pic[i]);
+						session.save(uip);
+						System.out.println(i);
+						updateNumber++;
+					}
 				}
 			}
+
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -302,6 +310,68 @@ public class UsedItemHBN implements UsedItemDAO {
 			System.out.println(e.getMessage());
 		}
 		return list;
+	}
+
+	@Override
+	public int cancelBid(int itemId, int bidder) {
+		String hql = "DELETE FROM BidRecord where itemId = :itemId and bidder = :bidder";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		Query q = null;
+		try {
+			tx = session.beginTransaction();
+			q = session.createQuery(hql);
+			q.setParameter("itemId", itemId);
+			q.setParameter("bidder", bidder);
+			q.executeUpdate();
+			tx.commit();
+			updateCount = -1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return updateCount;
+	}
+
+	@Override
+	public void confirmBid(int itemId, int bidder) {
+		String hql = "UPDATE BidRecord set status = 2 where itemId = :itemId and bidder = :bidder";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		Query q = null;
+
+		try {
+
+			tx = session.beginTransaction();
+			q = session.createQuery(hql);
+			q.setParameter("itemId", itemId);
+			q.setParameter("bidder", bidder);
+			q.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void setBidStatus(int itemId, int status) {
+		String hql = "UPDATE BidRecord set status = :status where itemId = :itemId";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		Query q = null;
+		try {
+			tx = session.beginTransaction();
+			q = session.createQuery(hql);
+			q.setParameter("status", status);
+			q.setParameter("itemId", itemId);
+			q.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

@@ -2,8 +2,10 @@ package _02_transaction.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -27,8 +29,9 @@ import _02_transaction.model.UsedItemPic;
 public class UsedItemPublish extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("this is from get");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		HttpSession session = request.getSession();
@@ -38,6 +41,41 @@ public class UsedItemPublish extends HttpServlet {
 		UsedItemDAO dao = new UsedItemHBN();
 		PrintWriter pw = response.getWriter();
 
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		UsedItem ui = dao.getItem(itemId);
+		List<UsedItemPic> listUIP = dao.getAllPic(itemId);
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < listUIP.size(); i++) {
+			list.add(listUIP.get(i).getPicBase64());
+		}
+
+		List listWithPic = new ArrayList<>();
+
+		listWithPic.add(ui);
+		listWithPic.add(list);
+
+		String json = gson.toJson(listWithPic);
+
+		pw.write(json);
+		pw.flush();
+		pw.close();
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("this is from POST");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+		HttpSession session = request.getSession();
+		Member mem = (Member) session.getAttribute("Member");
+		Map<String, Object> map = new HashMap<>();
+		Gson gson = new Gson();
+		UsedItemDAO dao = new UsedItemHBN();
+		PrintWriter pw = response.getWriter();
+		String itemId_string = request.getParameter("itemId");
+		int itemId = -1;
 		// 品牌
 		String brand = request.getParameter("brand");
 		// 型號
@@ -62,21 +100,35 @@ public class UsedItemPublish extends HttpServlet {
 		// 上架日期
 		Calendar updatedDate = Calendar.getInstance();
 
-		// 新增商品
-		UsedItem uim = new UsedItem(category, brand, usedTime, description, status, preference, expectedPrice, title,
-				model, 0, seller, updatedDate, (byte) 0);
-		dao.saveItem(uim);
-		// 透過搜尋該用戶最後一筆新增的資料來取得剛剛新增的itemId
-		int itemId = dao.getNewId(seller);
-		System.out.println(itemId);
-		// 獲得圖片+存入
-		String pic_arr[] = request.getParameterValues("pic_arr[]");
-		for (int i = 0; i < pic_arr.length; i++) {
-			if (pic_arr[i].trim().length() != 0) {
-				System.out.println(i + " " + pic_arr[i]);
-				UsedItemPic uip = new UsedItemPic(itemId, i + 1, pic_arr[i]);
-				dao.savePic(uip);
+		if (itemId_string.trim().equals("")) {
+			// 沒有物品ID，代表使用者正在PO新物品
+			// 透過搜尋該用戶最後一筆新增的資料來取得剛剛新增的itemId
+			UsedItem uim = new UsedItem(category, brand, usedTime, description, status, preference, expectedPrice,
+					title, model, 0, seller, updatedDate, (byte) 0);
+			dao.saveItem(uim);
+			itemId = dao.getNewId(seller);
+			// 獲得圖片+存入
+			String pic_arr[] = request.getParameterValues("pic_arr[]");
+			for (int i = 0; i < pic_arr.length; i++) {
+				if (pic_arr[i].trim().length() != 0) {
+					UsedItemPic uip = new UsedItemPic(itemId, pic_arr[i]);
+					dao.savePic(uip);
+				}
 			}
+		} else {
+			// 有物品ID，代表使用者正在修改物品
+			itemId = Integer.parseInt(itemId_string);
+			UsedItem uim = new UsedItem(itemId, category, brand, usedTime, description, status, preference,
+					expectedPrice, title, model, 0, seller, updatedDate, (byte) 0);
+			dao.updateItem(uim);
+			String pic_arr[] = request.getParameterValues("pic_arr[]");
+			dao.updatePic(itemId, pic_arr);
+			// for (int i = 0; i < pic_arr.length; i++) {
+			// if (pic_arr[i].trim().length() != 0) {
+			// UsedItemPic uip = new UsedItemPic(itemId, i + 1, pic_arr[i]);
+			// dao.updatePic(itemId, uip);
+			// }
+			// }
 		}
 
 		// 回傳成功

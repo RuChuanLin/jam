@@ -1,4 +1,4 @@
-package _01_member.controller;
+package _02_transaction.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,16 +15,15 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import _01_member.model.InnerMsg;
 import _01_member.model.Member;
-import _01_member.model.MemberDAO;
-import _01_member.model.MemberHBN;
+import _02_transaction.model.BidRecord;
+import _02_transaction.model.UsedItemDAO;
+import _02_transaction.model.UsedItemHBN;
 
-@WebServlet("/sendMsg")
-public class MessageSend extends HttpServlet {
+@WebServlet("/newBid")
+public class NewBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -32,29 +31,24 @@ public class MessageSend extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member mem = (Member) session.getAttribute("Member");
 		Map<String, Object> map = new HashMap<>();
-		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
-		MemberDAO dao = new MemberHBN();
-		
-		
-		int sender = mem.getUserId();
-		String alias = mem.getAlias();
-		int receiver = Integer.parseInt(request.getParameter("receiver"));
-		String title = request.getParameter("title");
-		String msg = request.getParameter("msg");
-		//給買賣用
-		String itemId = request.getParameter("itemId");
-		if(itemId!=null){
-//			receiver = dao.
-		}
-		System.out.println("title: "+ title);
-		System.out.println("msg: "+ msg);
+		UsedItemDAO dao = new UsedItemHBN();
+		PrintWriter pw = response.getWriter();
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		boolean bidded = Boolean.parseBoolean(request.getParameter("bidded"));
 		Calendar time = Calendar.getInstance();
+		BidRecord br = new BidRecord(itemId, mem.getUserId(), 0, 1, time);
+		String json = "";
+		int n = 0;
+		if (!bidded) {
+			n = dao.newBid(br);
+			json = gson.toJson(n);
+		} else {
+			n = dao.cancelBid(itemId, mem.getUserId());
+			json = gson.toJson(n);
+		}
 
-		InnerMsg imsg = new InnerMsg(sender, alias, receiver, title, msg, time, false);
-		dao.setMsg(imsg);
-		map.put("sent", true);
-		pw.write(gson.toJson(map));
+		pw.write(json);
 		pw.flush();
 		pw.close();
 

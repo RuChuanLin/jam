@@ -775,7 +775,7 @@ input[type="button"]:disabled {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 50%;
+    height: 10%;
 }
 
 .confirm-success {

@@ -58,7 +58,7 @@ public class UsedItemView extends HttpServlet {
 			temp.add(ui);
 			temp.add(pic);
 			listWithPic.add(temp);
-//			listWithPic.
+			// listWithPic.
 		}
 		if (currentPage < totalPages) {
 			currentPage++;
@@ -69,5 +69,7 @@ public class UsedItemView extends HttpServlet {
 		}
 		String json = gson.toJson(listWithPic);
 		pw.write(json);
+		pw.flush();
+		pw.close();
 	}
 }

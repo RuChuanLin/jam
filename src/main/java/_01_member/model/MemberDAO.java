@@ -31,7 +31,7 @@ public interface MemberDAO {
 	public int allMsg(int userId);
 	
 	//查詢站內信
-	public List<InnerMsg> getMsg(int userId,int start);
+	public List<InnerMsg> getMsg(int userId);
 	
 	//儲存站內信
 	public int setMsg(InnerMsg msg);

@@ -11,6 +11,7 @@ var login_Nav = function () {
     $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
 };
 
+
 //登出後nav-bar右上角的顯示
 
 var logout_Nav = function () {
@@ -42,6 +43,20 @@ if ($('.navbar').length > 0) {
         checkScroll();
     });
 }
+
+//取得URL查詢字串的正則表示式
+function getParameterByName(name, url) {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 
 jQuery(document).ready(function ($) {
     var pic_base64 = '';
@@ -109,12 +124,19 @@ jQuery(document).ready(function ($) {
         onMemberPageClick(sessionStorage.getItem("LoginId"));
     });
     //--------按別人頁面測試-------------
-    $('#river-test').attr('name', 1)
-    $('#river-test').on('click', () => {
-        console.log($('#river-test').attr('name'));
-        onMemberPageClick($('#river-test').attr('name')).then((arg) => onMemberLoading(arg))
-    })
+    // $('#river-test').attr('name', 1)
+    // $('#river-test').on('click', () => {
+    //     console.log($('#river-test').attr('name'));
+    //     onMemberPageClick($('#river-test').attr('name')).then((arg) => onMemberLoading(arg))
+    // })
 
+    // ----按別人頁面------
+    const userId = getParameterByName('userId', window.location.toString());
+    if (userId === sessionStorage.getItem('LoginId') || !userId) {
+        $('.profolio-action').hide();
+    } else {
+        onMemberPageClick(userId).then((arg) => onMemberLoading(arg))
+    }
 
     //---------------註冊ajax------------------
 
@@ -134,7 +156,7 @@ jQuery(document).ready(function ($) {
             if (account != '') {
                 $.ajax({
                     type: "POST",
-                    url: `http://localhost:8080/Jam/checkAcc`,
+                    url: `/Jam/checkAcc`,
                     data: { account },
                     dataType: 'json'
                 })
@@ -166,7 +188,6 @@ jQuery(document).ready(function ($) {
             url: `/Jam/register`,
             data: { account, password },
             type: 'POST',
-            cache: false,
             dataType: 'json'
         }).done(response => {
             console.log(response);
@@ -229,23 +250,28 @@ jQuery(document).ready(function ($) {
             }
             if (arg.Member.instrument) {
                 let instrument = arg.Member.instrument.split(' ');
-                $("#member-instrument").html(instrument.join(' | '));
+                $("#member-instrument").html(instrument.join(' / '));
             }
             $("#member-pic").attr("src", arg.Member.pic || '');
             $("#member-name").html(arg.Member.alias);
             let { intro } = arg.Member;
-            console.log(intro);
-            const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
-            intro = ReplaceAll(intro,"\n","<br />");
-            if (intro.length > intro_show_number && intro_show_number !== -1) {
-                $('#intro-original').html(intro.substr(0, intro_show_number))
-                $('#intro-expended').html(intro.substr(intro_show_number))
-            } else {
-                $('#intro-original').html(intro)
+            if (intro) {
+                const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
+                intro = ReplaceAll(intro, "\n", "<br />");
+                if (intro.length > intro_show_number && intro_show_number !== -1) {
+                    $('#intro-original').html(intro.substr(0, intro_show_number))
+                    $('#intro-expended').html(intro.substr(intro_show_number))
+                } else {
+                    $('#intro-original').html(intro)
+                }
             }
+
+
+            //收件者
+            $('#mail-recipient').val(arg.Member.alias);
             //            $('#nav-pic').attr("src", sessionStorage.getItem('pic') || '');
             //            $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
-            window.location.reload(false);
+            // window.location.reload(false);
         });
     }
 
@@ -266,6 +292,7 @@ jQuery(document).ready(function ($) {
         });
         //登出畫面，以下寫程式碼
         console.log('logout');
+        sessionStorage.clear();
         logout_Nav();
         window.location.reload(false);
         return;
@@ -764,17 +791,5 @@ jQuery(document).ready(function ($) {
             $(this).removeClass('animated shake');
         });
     }
-    //mailbox 返回收件匣
-    $('#return-to-mailbox-list-btn').on('click', function () {
 
-        $('.mailbox-content-wrapper').hide();
-        $('.mailbox-list-wrapper').show();
-    });
-
-    //mailbox-list點擊進入mailbox-content
-    $('.mailbox-list-tr').on('click', function () {
-
-        $('.mailbox-list-wrapper').hide();
-        $('.mailbox-content-wrapper').show();
-    });
 });

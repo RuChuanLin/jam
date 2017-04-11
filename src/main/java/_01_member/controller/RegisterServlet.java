@@ -68,7 +68,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 
 		ServletContext context = getServletContext();
-		InputStream is = context.getResourceAsStream("/_996_image/pic.png");
+		InputStream is = context.getResourceAsStream("/_996_image/user.png");
 		// 沒問題
 		// File file = new File(request.getRequestURL()+"/_996_image/pic.png");
 		// InputStream is = new FileInputStream(file);

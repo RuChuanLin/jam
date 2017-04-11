@@ -34,44 +34,53 @@ public class MessageBox extends HttpServlet {
 		MemberDAO dao = new MemberHBN();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
-		int start = 0;
 
-		String servType = request.getParameter("servType");
-		String rngStart = request.getParameter("rngStart");
-		if (rngStart != null) {
-			start = Integer.parseInt(rngStart);
-		}
-		
-		int userId = mem.getUserId();
-		int result = 0;
-		// int userId = Integer.parseInt(request.getParameter("userId"));
+		int receiverId = mem.getUserId();
+		List<InnerMsg> msgs = dao.getMsg(receiverId);
 
-		if (servType.equals("newMsg")) {
-			result = dao.newMsg(userId);
-			pw.write(gson.toJson(result));
-			pw.flush();
-			System.out.println("未讀信件數" + result);
-			return;
-		} else if (servType.equals("getMsg")) {
-			List<InnerMsg> msgs = null;
-			result = dao.allMsg(userId);
-			if (start == -1) {
-				start = Integer.MAX_VALUE;
-				msgs = dao.getMsg(userId, start);
-				if (msgs.size() > 10)
-					msgs.remove(10);
-			} else {
-				msgs = dao.getMsg(userId, start);
-				msgs.remove(0);
-			}
-			map.put("result", 0);
-			map.put("msgs", msgs);
-			pw.write(gson.toJson(msgs));
-			pw.flush();
-			System.out.println("讀取站內信");
-			return;
+		map.put("msgs", msgs);
+		String json = gson.toJson(map);
+		pw.write(json);
+		pw.flush();
+		pw.close();
 
-		}
+		// int start = 0;
+		//
+		// String servType = request.getParameter("servType");
+		// String rngStart = request.getParameter("rngStart");
+		// if (rngStart != null) {
+		// start = Integer.parseInt(rngStart);
+		// }
+		//
+		// int userId = mem.getUserId();
+		// int result = 0;
+		// // int userId = Integer.parseInt(request.getParameter("userId"));
+		//
+		// if (servType.equals("newMsg")) {
+		// result = dao.newMsg(userId);
+		// pw.write(gson.toJson(result));
+		// pw.flush();
+		// System.out.println("未讀信件數" + result);
+		// return;
+		// } else if (servType.equals("getMsg")) {
+		// List<InnerMsg> msgs = null;
+		// result = dao.allMsg(userId);
+		// if (start == -1) {
+		// start = Integer.MAX_VALUE;
+		// msgs = dao.getMsg(userId, start);
+		// if (msgs.size() > 10)
+		// msgs.remove(10);
+		// } else {
+		// msgs = dao.getMsg(userId, start);
+		// msgs.remove(0);
+		// }
+		// map.put("result", 0);
+		// map.put("msgs", msgs);
+		// pw.write(gson.toJson(msgs));
+		// pw.flush();
+		// System.out.println("讀取站內信");
+		// return;
+		// }
 
 	}
 }
