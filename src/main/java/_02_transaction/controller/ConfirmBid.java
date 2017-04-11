@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -34,8 +33,6 @@ public class ConfirmBid extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		HttpSession session = request.getSession();
-		Member mem = (Member) session.getAttribute("Member");
 		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();

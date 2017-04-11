@@ -1,65 +1,17 @@
 package _02_transaction.model;
 
-import java.sql.Blob;
-import java.util.Calendar;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 public class NewItem {
 	private int newItemId;
 	private String category;
 	private String brand;
-	private String image;
 	private int price;
 	private String title;
 	private String model;
-	private int browsedCount;
-	private java.util.Calendar updatedDate;
-	private char onSale;
+	private byte onSale;
 	private int itemCount;
 	private int sold;
-	public NewItem(int newItemId, String category, String brand, String image, int price, String title, String model,
-			int browsedCount, Calendar updatedDate, char onSale, int itemCount, int sold) {
-		super();
-		this.newItemId = newItemId;
-		this.category = category;
-		this.brand = brand;
-		this.image = image;
-		this.price = price;
-		this.title = title;
-		this.model = model;
-		this.browsedCount = browsedCount;
-		this.updatedDate = updatedDate;
-		this.onSale = onSale;
-		this.itemCount = itemCount;
-		this.sold = sold;
-	}
-	public NewItem() {
-		super();
-	}
-	public NewItem(String category, String brand, String image, int price, String title, String model, int browsedCount,
-			Calendar updatedDate, char onSale, int itemCount, int sold) {
-		super();
-		this.category = category;
-		this.brand = brand;
-		this.image = image;
-		this.price = price;
-		this.title = title;
-		this.model = model;
-		this.browsedCount = browsedCount;
-		this.updatedDate = updatedDate;
-		this.onSale = onSale;
-		this.itemCount = itemCount;
-		this.sold = sold;
-	}
-	public NewItem(int newItemId) {
-		super();
-		this.newItemId = newItemId;
-	}
+	private String intro;
 	public int getNewItemId() {
 		return newItemId;
 	}
@@ -77,12 +29,6 @@ public class NewItem {
 	}
 	public void setBrand(String brand) {
 		this.brand = brand;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
 	}
 	public int getPrice() {
 		return price;
@@ -102,22 +48,10 @@ public class NewItem {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public int getBrowsedCount() {
-		return browsedCount;
-	}
-	public void setBrowsedCount(int browsedCount) {
-		this.browsedCount = browsedCount;
-	}
-	public java.util.Calendar getUpdatedDate() {
-		return updatedDate;
-	}
-	public void setUpdatedDate(java.util.Calendar updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	public char getOnSale() {
+	public byte getOnSale() {
 		return onSale;
 	}
-	public void setOnSale(char onSale) {
+	public void setOnSale(byte onSale) {
 		this.onSale = onSale;
 	}
 	public int getItemCount() {
@@ -132,5 +66,30 @@ public class NewItem {
 	public void setSold(int sold) {
 		this.sold = sold;
 	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	public NewItem() {
+	}
+	
+	public NewItem(String category, String brand, int price, String title, String model, byte onSale,
+			int itemCount, int sold, String intro) {
+		this.newItemId = newItemId;
+		this.category = category;
+		this.brand = brand;
+		this.price = price;
+		this.title = title;
+		this.model = model;
+		this.onSale = onSale;
+		this.itemCount = itemCount;
+		this.sold = sold;
+		this.intro = intro;
+	}
+	
+	
+
 	
 }

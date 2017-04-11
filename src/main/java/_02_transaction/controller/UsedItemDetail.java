@@ -35,8 +35,6 @@ public class UsedItemDetail extends HttpServlet {
 		System.out.println(itemId);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		HttpSession session = request.getSession();
-		Member mem = (Member) session.getAttribute("Member");
 		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();
@@ -56,6 +54,7 @@ public class UsedItemDetail extends HttpServlet {
 			break;
 		case 2:
 			status = "良好";
+			break;
 		case 3:
 			status = "外觀微損";
 			break;

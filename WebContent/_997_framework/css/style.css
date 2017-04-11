@@ -1403,7 +1403,7 @@ iframe {
 .mailbox-page {
     width: 100%;
     min-height: 600px;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 .mailbox-container {
@@ -1435,6 +1435,9 @@ iframe {
     border-top: 1px solid #645F5F;
     border-bottom: 1px solid #645F5F;
     /*display: none;*/
+}
+.mailbox-list-tr.is-read{
+   background: #2c282d;
 }
 
 .mailbox-bottom {

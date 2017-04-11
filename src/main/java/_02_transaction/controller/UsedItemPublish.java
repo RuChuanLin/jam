@@ -16,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-//import _00_init.ReadDATA;
 import _01_member.model.Member;
 import _02_transaction.model.UsedItem;
 import _02_transaction.model.UsedItemDAO;
@@ -34,9 +32,6 @@ public class UsedItemPublish extends HttpServlet {
 		System.out.println("this is from get");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		HttpSession session = request.getSession();
-		Member mem = (Member) session.getAttribute("Member");
-		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
 		UsedItemDAO dao = new UsedItemHBN();
 		PrintWriter pw = response.getWriter();

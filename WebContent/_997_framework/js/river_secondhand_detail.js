@@ -1,4 +1,23 @@
 {
+   var  slickInint=function(){
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        centerPadding: '40px',
+        focusOnSelect: true
+    });
+   }
+    
     const itemId = $.getParameterByName('itemId', window.location.toString());
     $.ajax({
         url: `/Jam/usedItemDetail`,
@@ -19,8 +38,15 @@
         $('#secondhand-detail-seller-pic').attr('src', sellerPic)
         const pic_arr = pics;
         pic_arr.map(pic => {
-            $('.slider-for').append(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
-            $('.slider-nav').append(`<div class="secondhand-small-pic-div"><img class="secondhand-small-pic" src="${pic}"></div>`)
+            // console.log($('.slider-for').slickAdd(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" data-lazy="${pic}"></div>`)
+            // );
+            // slickInint();
+            $('.slider-for').slick('slickAdd',`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
+            $('.slider-nav').slick('slickAdd', `<div class="secondhand-small-pic-div"><img class="secondhand-small-pic" src="${pic}"></div>`)
+            // $('.slider-for').slickAdd(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
+            //$('.slider-nav').slickAdd(`<div class="secondhand-small-pic-div"><img class="secondhand-small-pic" src="${pic}"></div>`)
+            // $('.slider-for').append(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
+            // $('.slider-nav').append(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
         })
 
         //如果登入的不是自己頁面的判斷式
@@ -47,7 +73,7 @@
                     data: { title: usedItem.title, receiver: usedItem.seller, msg }
                 }).done(response => {
                     $('.mailbox-modal').removeClass('is-visible');
-                     $('.confirm-success').addClass('is-visible');
+                    $('.confirm-success').addClass('is-visible');
                     console.log('信件已寄出!');
                 }).fail(() => {
                     console.log('信件寄出失敗!');

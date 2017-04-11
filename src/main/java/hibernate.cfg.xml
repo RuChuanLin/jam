@@ -30,6 +30,7 @@
 		<mapping resource="_02_transaction/model/OrderItem.hbm.xml" />
 		<mapping resource="_02_transaction/model/BidRecord.hbm.xml" />
 		<mapping resource="_02_transaction/model/UsedItemPic.hbm.xml" />
+		<mapping resource="_02_transaction/model/NewItemPic.hbm.xml" />
 		
 		<mapping resource="_03_course/model/Course.hbm.xml" />
 		<mapping resource="_03_course/model/ReserveRecord.hbm.xml" />

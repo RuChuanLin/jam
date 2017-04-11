@@ -12,6 +12,7 @@ var login_Nav = function () {
     $('#nav-logout').show().css("display", "block");
     $('#nav-pic').attr("src", sessionStorage.getItem('pic') || '');
     $('#fb-loging-name').html(`Hi, ${sessionStorage.getItem('alias')}!`);
+    $.getUnreadMsgNumber();
 };
 
 
@@ -24,6 +25,7 @@ var logout_Nav = function () {
     $('#nav-myinbox-btn').hide();
     $('#nav-my-member-link').hide();
     $('#nav-logout').hide();
+    
 
 };
 //close modal
@@ -298,7 +300,7 @@ jQuery(document).ready(function ($) {
         console.log('logout');
         sessionStorage.clear();
         logout_Nav();
-        window.location.reload(false);
+        window.location.replace("http://localhost:8080/Jam/");
         return;
     }
 

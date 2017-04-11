@@ -14,9 +14,6 @@
 		<property name="brand" type="java.lang.String">
 			<column name="BRAND" />
 		</property>
-		<property name="image" type="java.lang.String">
-			<column name="IMAGE" length="200000" />
-		</property>
 		<property name="price" type="int">
 			<column name="PRICE" />
 		</property>
@@ -25,12 +22,6 @@
 		</property>
 		<property name="model" type="java.lang.String">
 			<column name="MODEL" />
-		</property>
-		<property name="browsedCount" type="int">
-			<column name="BROWSEDCOUNT" />
-		</property>
-		<property name="updatedDate" type="java.util.Calendar">
-			<column name="UPDATEDDATE" />
 		</property>
 		<property name="onSale" type="char">
 			<column name="ONSALE" />
@@ -41,5 +32,8 @@
 		<property name="sold" type="int">
 			<column name="SOLD" />
 		</property>
+		<property name="intro" type="java.lang.String">
+            <column name="INTRO" length="200000" />
+        </property>
 	</class>
 </hibernate-mapping>

@@ -50,7 +50,7 @@ public class UsedItemHBN implements UsedItemDAO {
 	@Override
 	public long[] getAllpage(String key) {
 		long msg[] = new long[2];
-		String hql = "select count(*) from UsedItem where title like :key and onSale in (0,1)";
+		String hql = "select count(*) from UsedItem where category like :key and onSale in (0,1)";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {

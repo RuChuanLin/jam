@@ -3,9 +3,7 @@
 	//mailbox 返回收件匣
 	$('#return-to-mailbox-list-btn').on('click', function () {
 
-		console.log($('.mail-td-sender.nxx_msgSender'));
-		$('.mailbox-content-wrapper').hide();
-		$('.mailbox-list-wrapper').show();
+		location.reload();
 	});
 
 	$.ajax({
@@ -16,7 +14,7 @@
 		console.log(response);
 		response.msgs.map((msg, i) => {
 			console.log(msg, i);
-			$('.mailbox-table-body').append(`<tr class="mailbox-list-tr ${i}">
+			$('.mailbox-table-body').append(`<tr class="mailbox-list-tr ${msg.state?'is-read':'is-unread'} ${i}">
                                 <td class="mail-td-delete">
                                     <input name="mail-del" type="checkbox">
                                 </td>

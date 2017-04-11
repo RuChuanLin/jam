@@ -3,7 +3,10 @@ package _02_transaction.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,23 +16,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import _02_transaction.model.UsedItem;
-import _02_transaction.model.UsedItemDAO;
-import _02_transaction.model.UsedItemHBN;
+import _02_transaction.model.NewItem;
+import _02_transaction.model.NewItemDAO;
+import _02_transaction.model.NewItemHBN;
+
+
+
+
 
 /**
  * Servlet implementation class UsedItemView
  */
-@WebServlet("/usedItemView")
-public class UsedItemView extends HttpServlet {
+@WebServlet("/newItemView")
+public class NewItemView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
+		Map<String, Object> map = new HashMap<>();
 		Gson gson = new Gson();
-		UsedItemDAO dao = new UsedItemHBN();
+		NewItemDAO dao = new NewItemHBN();
 		PrintWriter pw = response.getWriter();
 		System.out.println("request.getParameter category: " + request.getParameter("category"));
 		String category = request.getParameter("category") == null ? "" : request.getParameter("category");
@@ -43,14 +51,14 @@ public class UsedItemView extends HttpServlet {
 		System.out.println("totalPages: " + totalPages);
 		System.out.println("currentPage: " + currentPage);
 
-		List<UsedItem> list = dao.getAllItem(category, currentPage);
+		List<NewItem> list = dao.getAllItem(category, currentPage);
 
 		List listWithPic = new ArrayList<>();
-		for (UsedItem ui : list) {
-			System.out.println("ui.getExpectedPrice(): " + ui.getExpectedPrice());
-			String pic = dao.getFirstPic(ui.getUsedItemId());
+		for (NewItem ni : list) {
+			System.out.println("ui.getPrice(): " + ni.getPrice());
+			String pic = dao.getFirstPic(ni.getNewItemId());
 			List temp = new ArrayList<>();
-			temp.add(ui);
+			temp.add(ni);
 			temp.add(pic);
 			listWithPic.add(temp);
 			// listWithPic.
