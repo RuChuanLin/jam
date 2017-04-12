@@ -4,24 +4,30 @@
 <!-- Generated 2017/2/16 ?U?? 06:21:03 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="_04_band.model.Band" table="BAND">
-        <id name="videoId" type="int">
-            <column name="VIDEOID" />
-            <generator class="assigned" />
+        <id name="bandId" type="int">
+            <column name="BANDID" />
+            <generator class="increment" />
         </id>
-        <property name="pk" type="int">
-            <column name="PK" />
+        <property name="author" type="int">
+            <column name="AUTHOR" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
         </property>
         <property name="category" type="java.lang.String">
             <column name="CATEGORY" />
         </property>
+        <property name="instruments" type="java.lang.String">
+            <column name="INSTRUMENTS" />
+        </property>
         <property name="area" type="java.lang.String">
             <column name="AREA" />
         </property>
-        <property name="style" type="byte">
-            <column name="STYLE" />
+        <property name="detailedArea" type="java.lang.String">
+            <column name="DETAILEDAREA" />
         </property>
-        <property name="description" type="java.sql.Clob">
-            <column name="DESCRIPTION" />
+        <property name="style" type="java.lang.String">
+            <column name="STYLE" />
         </property>
         <property name="isGrouped" type="byte">
             <column name="ISGROUPED" />
@@ -29,8 +35,17 @@
         <property name="mateLink" type="java.lang.String">
             <column name="MATELINK" />
         </property>
-        <property name="image" type="java.sql.Blob">
-            <column name="IMAGE" />
+        <property name="video" type="java.lang.String">
+            <column name="VIDEO" length="262144"/>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="IMAGE" length="262144"/>
+        </property>
+        <property name="updatetime" type="java.util.Calendar">
+            <column name="UPDATETIME" />
         </property>
         <property name="bandStatus" type="byte">
             <column name="BANDSTATUS" />

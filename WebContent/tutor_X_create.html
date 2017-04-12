@@ -89,35 +89,36 @@
 			</div>
 		</div>
 		<div class="edit-body">
-            <div class="edit-row">
-				<div class="edit-col-4">
-					<label for="tutor-class1" >開課項目分類*</label>
-					<select class="edit-select-col" name="" id="tutor-class1">
-						<option selected disabled>請選擇</option>
-						<option value="guitar">吉他類</option>
-						<option value="bass">貝斯類</option>
-						<option value="drums&percussion">鼓及打擊類</option>
-						<option value="keyboard&sync">鍵盤與合成器類</option>
-						<option value="strings">古典弦樂類</option>
-						<option value="wind">管樂類</option>					
-						<option value="dj-controller">DJ混音類</option>						
-						<option value="recording">錄音編曲類</option>
-						<option value="other">其他</option>
-					</select>
-					<p id="nx_crsId" style="display:none;"></p>                
+			<div id="categories">
+	            <div class="edit-row">
+					<div class="edit-col-4">
+						<label for="tutor-class1" >開課項目分類*</label>
+						<select class="edit-select-col" name="" id="tutor-class1">
+							<option selected disabled>請選擇</option>
+							<option value="guitar">吉他類</option>
+							<option value="bass">貝斯類</option>
+							<option value="drums&percussion">鼓及打擊類</option>
+							<option value="keyboard&sync">鍵盤與合成器類</option>
+							<option value="strings">古典弦樂類</option>
+							<option value="wind">管樂類</option>					
+							<option value="dj-controller">DJ混音類</option>						
+							<option value="recording">錄音編曲類</option>
+							<option value="other">其他</option>
+						</select>                
+					</div>
+	                <div class="edit-col-4">
+						<label ><span class="note">具體教學樂器填寫*</span></label>
+						<input id="nx_instrument" class="edit-input" type="text">
+					</div>
+	                <div class="edit-pm-btn-wrapper">
+	                    <button type="button" class="form-btn instruments-plus">
+						    <i class="fa fa-plus" aria-hidden="true"></i>
+					    </button>
+					    <button type="button" class="form-btn instruments-minus">
+						    <i class="fa fa-minus" aria-hidden="true"></i>
+					    </button>
+	                </div>                 
 				</div>
-                <div class="edit-col-4">
-					<label ><span class="note">具體教學樂器填寫*</span></label>
-					<input id="nx_category" class="edit-input" type="text">
-				</div>
-                <div class="edit-pm-btn-wrapper">
-                    <button type="button" class="form-btn instruments-plus">
-					    <i class="fa fa-plus" aria-hidden="true"></i>
-				    </button>
-				    <button type="button" class="form-btn instruments-minus">
-					    <i class="fa fa-minus" aria-hidden="true"></i>
-				    </button>
-                </div> 
 			</div>
 			<div class="edit-row">
 				<div class="edit-col-4">
@@ -165,9 +166,10 @@
 				</div>
 			</div>
             <div class="edit-row">
-				<div class="edit-col-8">
+				<div id="vids" class="edit-col-8">
 					<label >表演、教學影片*<span class="note">僅支援Youtube連結</span></label>
-					<input class="edit-input" type="text">
+					<input id="model" style="display:none;" class="nxx_video edit-input" type="text">
+					<textarea class="nxx_video edit-input" style="border:none;resize:none;"></textarea>
 				</div>
 				<div class="edit-pm-btn-wrapper">
                     <button type="button" class="form-btn instruments-plus">
@@ -187,7 +189,7 @@
 			</div>			
 		</div>
         <div class="edit-footer">
-            <button id="sendEdit" class="form-btn edit-submit">確認送出</button>
+            <button id="sendCreate" class="form-btn edit-submit">確認送出</button>
         </div>
 	</div>
     <div class="footer-wrapper">
@@ -205,7 +207,7 @@
     <script src="_997_framework/js/secondhand_filter.js "></script>
 	<script src="_997_framework/js/menufunction.js "></script>
 	<script src="_997_framework/js/jam_lib/tutorDraft2.js"></script>
-	<script src="_997_framework/js/init_tutorEdit.js "></script>
+	<script src="_997_framework/js/init_tutorCreate.js"></script>
 </body>
 
 </html>

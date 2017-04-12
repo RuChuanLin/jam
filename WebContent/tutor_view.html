@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">Jam</a>
-                <ul id="menu-funtion" class="navbar-nav menu-wrapper ">
+                <ul id="menu-funtion" class="navbar-nav menu-wrapper">
                     <li><a href="#">Jam二手</a>
                         <ul class="drop">
                             <li><a href="#">吉他類</a></li>
@@ -55,7 +55,7 @@
                             <li><a href="#">其他</a></li>
                         </ul>
                     </li>
-                   <li><a href="#">Jam教學</a>
+                    <li><a href="#">Jam教學</a>
                         <ul class="drop">
                             <li><a href="#">北部</a>
                                 <ul>
@@ -127,9 +127,9 @@
                     <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
                     <li class="fb-loging-name" id="fb-loging-name"></li>
                     <li>
-                        <a href="mailbox.html" id="nav-myinbox-btn "><i  class="fa fa-envelope-o " fa-5x aria-hidden="true " ></i><span class="badge ">1<span></a></li>
-                    <li><a id="nav-my-member-link " href="member.html " class="my-member-link ">我的 Jam</a></li>
-                    <li><a id="nav-logout " href="# " class="logout ">登出</a></li>
+                        <a href="mailbox.html" id="nav-myinbox-btn"><i  class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>
+                    <li><a id="nav-my-member-link" href="member.html" class="my-member-link">我的 Jam</a></li>
+                    <li><a id="nav-logout" href="#" class="logout">登出</a></li>
 
                 </ul>
             </div>
@@ -140,113 +140,41 @@
         <div class="quicksearch-wrapper">
             <p><input type="text" class="quicksearch" placeholder="快速搜尋" /></p>
         </div>
+
         <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <button id="back-to-top" class="search-btn top-btn"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
-        <button class="search-btn post-btn">我要開課</button>
+
+
+
+        <button id="opencourse" class="post-btn">我要開課</button>
     </div>
     <!-- secondhand-view -->
-    <div class="grid">
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
+    <div id="courseHolder" class="grid">
+		<div id="noNewCourse" style="color:white;">沒有新課程</div>
+        <div id="courseTemplate" style="display:none" class="thumbnail preview-thumbnail">
+            <img class="nxx_pic tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
             <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
+                <h4  class="nxx_area_str tutor-place">台北/板橋</h4>
+                <h4  class="nxx_instrument tutor-instrument">民謠吉他</h4>
+                <h3  class="nxx_name tutor-name">江吉米</h3>
+				<p class="nxx_courseId" style="display:none"></p>
             </div>
         </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
+		<!--預定模板
+		 <div id="course_#" style="display:none" class="thumbnail preview-thumbnail">
+            <img class="nxx_pic tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
             <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
+                <h4  class="nxx_area_str tutor-place">台北/板橋</h4>
+                <h4  class="nxx_instrument tutor-instrument">民謠吉他</h4>
+                <h3  class="nxx_name tutor-name">江吉米</h3>
             </div>
         </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
-        <div class="thumbnail preview-thumbnail">
-            <img class="tutor-thumbnail-image" src="_996_image/user.png" alt="Image" />
-            <div class="caption view-caption">
-                <h4 class="tutor-place">台北/板橋</h4>
-                <h4 class="tutor-instrument">民謠吉他</h4>
-                <h3 class="tutor-name">江吉米</h3>
-            </div>
-        </div>
+		-->
+     
     </div>
-    <div id="loading-ajax" class="loading-ajax">
-        <img id="loading-svg" class="loading-svg" src="_996_image/loading.svg">
-    </div>
+
     <div class="footer-wrapper">
+        <!--        <button class="form-btn test-btn1">test1</button>
+        <button class="form-btn test-btn2">test2</button>    -->
         <span>Jam Corporation © 2017  </span>
         <span>連絡我們</span>
         <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
@@ -254,12 +182,13 @@
     </div>
 
     <script src="_997_framework/jquery-3.1.1.min.js"></script>
-    <script src="_997_framework/js/river-jquery.js"></script>
     <script src="_997_framework/isotope.pkgd.min.js"></script>
     <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
     <script src="_997_framework/js/main.js?ver=12"></script>
     <script src="_997_framework/js/tutor_grid.js"></script>
     <script src="_997_framework/js/menufunction.js"></script>
+	<script src="_997_framework/js/jam_lib/tutorDraft2.js"></script>
+    <script src="_997_framework/js/init_tutorView.js"></script>
 
 </body>
 
