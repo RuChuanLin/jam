@@ -1,7 +1,9 @@
 // 初始化拿掉了...
 
 // 更新站內信數量
-$.getUnreadMsgNumber();
+if (sessionStorage.getItem('LoginId')) {
+    $.getUnreadMsgNumber();
+}
 
 var login_Nav = function () {
     $('#nav-login').hide();
@@ -25,7 +27,7 @@ var logout_Nav = function () {
     $('#nav-myinbox-btn').hide();
     $('#nav-my-member-link').hide();
     $('#nav-logout').hide();
-    
+
 
 };
 //close modal

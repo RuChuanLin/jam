@@ -23,7 +23,7 @@
 		<property name="model" type="java.lang.String">
 			<column name="MODEL" />
 		</property>
-		<property name="onSale" type="char">
+		<property name="onSale" type="java.lang.Byte">
 			<column name="ONSALE" />
 		</property>
 		<property name="itemCount" type="int">
@@ -33,7 +33,7 @@
 			<column name="SOLD" />
 		</property>
 		<property name="intro" type="java.lang.String">
-            <column name="INTRO" length="200000" />
-        </property>
+			<column name="INTRO" length="200000" />
+		</property>
 	</class>
 </hibernate-mapping>

@@ -37,4 +37,34 @@
         })
     }
 
+
+    // 購物車
+    $.setShoppingCart = function () {
+        $('.cd-cart-container').html(`<a href="#0" class="cd-cart-trigger">
+		Cart
+		<ul class="count"> <!-- cart items count -->
+			<li>0</li>
+			<li>0</li>
+		</ul> <!-- .count -->
+	</a>
+        <div class="cd-cart">
+            <div class="wrapper">
+                <header>
+                    <h2>購物車</h2>
+                    <span class="undo">物品已移除 <a href="#0">上一步</a></span>
+                </header>
+
+                <div class="body">
+                    <ul>
+                        <!-- products added to the cart will be inserted here using JavaScript -->
+                    </ul>
+                </div>
+                <footer>
+                    <a href="#0" class="checkout"><em>前往結帳 - NT<span>0</span></em></a>
+                </footer>
+            </div>
+        </div>`)
+
+    }
+
 }

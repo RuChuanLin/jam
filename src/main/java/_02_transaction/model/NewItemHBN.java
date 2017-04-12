@@ -118,4 +118,40 @@ public class NewItemHBN implements NewItemDAO {
 		return list;
 	}
 
+	@Override
+	public int getNewId() {
+		int id = -1;
+		String hql = "select max(ni.newItemId) from NewItem ni";
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery(hql);
+			q.setMaxResults(1);
+			id = (int) q.getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(e.getMessage());
+		}
+		return id;
+	}
+
+	@Override
+	public void saveNewPic(NewItemPic nip) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		int updateCount = 0;
+		try {
+			tx = session.beginTransaction();
+			session.save(nip);
+			tx.commit();
+			updateCount = 1;
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+	}
+
 }

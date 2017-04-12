@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import _00_init.PicSize;
 import _02_transaction.model.UsedItem;
 import _02_transaction.model.UsedItemDAO;
 import _02_transaction.model.UsedItemHBN;
@@ -50,6 +51,7 @@ public class UsedItemView extends HttpServlet {
 			System.out.println("ui.getExpectedPrice(): " + ui.getExpectedPrice());
 			String pic = dao.getFirstPic(ui.getUsedItemId());
 			List temp = new ArrayList<>();
+//			pic = PicSize.minify(pic, 220);
 			temp.add(ui);
 			temp.add(pic);
 			listWithPic.add(temp);
