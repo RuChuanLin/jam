@@ -18,9 +18,10 @@ jQuery(document).ready(function ($) {
 
 		//add product to cart
 		addToCartBtn.on('click', function (event) {
+			console.log(this);
 			event.preventDefault();
 			addToCart($(this));
-			console.log(this);
+
 		});
 
 		//open/close cart

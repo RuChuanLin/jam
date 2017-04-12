@@ -216,6 +216,7 @@
 				</div>
 			</div>
 			<button class="form-btn edit-submit" id="sellButton">確認</button>
+			<button class="form-btn item">小幫手</button>
 		</div>
 	</div>
 	<div class="footer-wrapper">
@@ -327,6 +328,17 @@
 	<script src="_997_framework/js/secondhand_filter.js"></script>
 	<script src="_997_framework/js/river_secondhand.js"></script>
 	<script>
+	$('.form-btn.item').onMagicClick({
+        'secondhand-brand': 'Rogue',
+        'secondhand-model': 'RA-090',
+        'secondhand-condition': '2',
+        'secondhand-age': '2',
+        'secondhand-title': 'Rogue Starter Acoustic Guitar 低價出售',
+        'secondhand-price':'1000',
+        'secondhand-category': 'guitar',
+        'secondhand-edit-description': 'The small-bodied Rogue Starter Acoustic Guitar is an amazing deal for a starter guitar. Its smaller profile (7/8" scale) makes it very playable for kids or aspiring guitarists with smaller body frames and hands. It has a maple neck and rosewood fretboard and Martin strings which help.give you a nice tone.'
+    });
+	
 		const itemId = $.getParameterByName('itemId', window.location.toString());
 		$.ajax({
 			url: `/Jam/usedItemPublish`,
