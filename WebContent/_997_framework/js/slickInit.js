@@ -1,4 +1,4 @@
-$(document).ready(function(){
+{
      $('.slider-for').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -15,4 +15,4 @@ $('.slider-nav').slick({
   centerPadding: '40px',
   focusOnSelect: true
 });
-    });
+    }

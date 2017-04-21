@@ -6,6 +6,7 @@ public class CreateTable {
 
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HibernateUtil.shutdown();
 	}
 
 }

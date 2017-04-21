@@ -156,7 +156,9 @@
             </div>
             <div class="mail-footer">
                 <button class="form-btn send" id="mail-submit" type="submit">寄出</button>
+                 <button class="form-btn sendmsg">Demo小幫手</button>
             </div>
+           
         </div>
     </div>
     <div class="detail-show-container">
@@ -197,8 +199,7 @@
                     <dd id="secondhand-detail-condition"></dd>
                     <dt>使用年份：</dt>
                     <dd id="secondhand-detail-usedTime"></dd>
-                    <dt>偏好交易方式：</dt>
-                    <dd>郵寄 面交</dd>
+                    
                 </dl>
                 <div class="detail-show-description" id="secondhand-detail-desc">
 
@@ -209,11 +210,10 @@
         </div>
     </div>
     <div class="footer-wrapper">
-        <!--        <button class="form-btn test-btn1">test1</button>
-        <button class="form-btn test-btn2">test2</button>    -->
         <span>Jam Corporation © 2017  </span>
         <span>連絡我們</span>
-        <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
+        <a href=""> <i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <span id="fans-page">粉絲頁</span>       
     </div>
 
     <!-- 登入/註冊畫面 -->
@@ -317,15 +317,20 @@
     <script src="_997_framework/js/river-jquery.js"></script>
     <script src="_997_framework/js/main.js?ver=12"></script>
     <!--<script src="_997_framework/js/secondhand_filter.js"></script>-->
-
-    <script src="_997_framework/js/slickInit.js?ver=12"></script>
     <script src="_997_framework/slick/slick.js"></script>
+    <script src="_997_framework/js/slickInit.js?ver=12"></script>
+    
     <script src="_997_framework/js/menufunction.js"></script>
     <script src="_997_framework/js/login-status.js"></script>
     <script src="_997_framework/js/fblogin.js"></script>
     <script src="_997_framework/js/river_secondhand_detail.js"></script>
+    
     <script src="_997_framework/js/river_sendmsg.js"></script>
-
+	<script>
+		$(".form-btn.sendmsg").onMagicClick({
+			'mail-content': '你好，我有意購買這個吉他\n希望可以跟我聯絡'
+		});
+	</script>
 </body>
 
 </html>

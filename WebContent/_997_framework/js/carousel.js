@@ -1,5 +1,8 @@
 $(document).ready(function () {
-	$('#carousel-example-generic').carousel({
+	$('#secondhand-carousel-example-generic').carousel({
+		interval: 10000
+	})
+	$('#teacher-carousel-example-generic').carousel({
 		interval: 10000
 	})
 });

@@ -2,10 +2,12 @@ jQuery(document).ready(function ($) {
 	console.log($);
 	$.setShoppingCart();
 	var cartWrapper = $('.cd-cart-container');
+	console.log(665656);
 	//product id - you don't need a counter in your real project but you can use your real product id
 	var productId = 0;
 
-	if (cartWrapper.length > 0) {
+	if (cartWrapper.length >= 0) {
+		console.log('ffffffff');
 		//store jQuery objects
 		var cartBody = cartWrapper.find('.body')
 		var cartList = cartBody.find('ul').eq(0);
@@ -15,12 +17,36 @@ jQuery(document).ready(function ($) {
 		var addToCartBtn = $('.add-to-cart-btn');
 		var undo = cartWrapper.find('.undo');
 		var undoTimeoutId;
+		let cartLength = sessionStorage.getItem('cartItem') ? JSON.parse(sessionStorage.getItem('cartItem')).length : 0;
+		console.log(cartLength);
+		if (cartLength === 0) { cartWrapper.addClass('empty') }
+		let cartItem_arr = 1;
+		cartItem_arr = JSON.parse(sessionStorage.getItem('cartItem'));
+		console.log(cartItem_arr);
+		console.log(22);
+		let totalPrice = 0;
+		if (cartItem_arr) {
+			cartCount.find('li').eq(0).html(cartLength)
+			console.log(33);
+			cartWrapper.removeClass('empty');
+			cartItem_arr.map(cItem => {
+				let { title, id, price, pic } = cItem;
+				totalPrice += price;
+				var productAdded = $(getProductAdded(id, title, price, pic));
+				cartList.prepend(productAdded);
+			})
+
+			updateCartTotal(totalPrice, true)
+		}
 
 		//add product to cart
-		addToCartBtn.on('click', function (event) {
-			event.preventDefault();
-			addToCart($(this));
+		$('.detail-show-op-buy').on('click', function (event) {
+			console.log(11232);
 			console.log(this);
+			console.log($(this));
+			event.preventDefault();
+			addToCart($('.add-to-cart-btn'));
+
 		});
 
 		//open/close cart
@@ -37,7 +63,7 @@ jQuery(document).ready(function ($) {
 		//delete an item from the cart
 		cartList.on('click', '.delete-item', function (event) {
 			event.preventDefault();
-			removeProduct($(event.target).parents('.product'));
+			removeProduct($(event.target).parents('.product'), $(this));
 		});
 
 		//update item quantity
@@ -79,9 +105,12 @@ jQuery(document).ready(function ($) {
 
 	function addToCart(trigger) {
 		var cartIsEmpty = cartWrapper.hasClass('empty');
-		const { title, price } = trigger.data();
+		console.log(trigger.data());
+		const { title, price, id, pic } = trigger.data();
+
+
 		//update cart product list
-		addProduct(title, price);
+		addProduct(title, price, id, pic);
 		//update number of items 
 		updateCartCount(cartIsEmpty);
 		//update total price
@@ -90,22 +119,28 @@ jQuery(document).ready(function ($) {
 		cartWrapper.removeClass('empty');
 	}
 
-	function addProduct(title, price) {
+	function addProduct(title, price, id, pic) {
 		//this is just a product placeholder
 		//you should insert an item with the selected product info
 		//replace productId, productName, price and url with your real product info
 		productId = productId + 1;
-		var productAdded = $(`<li class="product"><div class="product-image"><a href="#0">
-		<img class="cart-img" src="_996_image/img/product-preview.png" alt="placeholder"></a></div>
-		<div class="product-details"><h3><a href="#0">${title}</a></h3>
-		<span class="price">NT${price}</span><div class="actions">
-		<a href="#0" class="delete-item">刪除</a><div class="quantity">
-		<label for="cd-product-${productId}">數量</label><span class="select">
-		<select id="cd-product-${productId}" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></span></div></div></div></li>`);
+		let quantity = 1;
+		let arr = [];
+		if (sessionStorage.getItem('cartItem')) {
+			arr = JSON.parse(sessionStorage.getItem('cartItem'));
+		}
+
+		let obj = { id, title, price, quantity, pic };
+		arr.push(obj);
+		sessionStorage.setItem('cartItem', JSON.stringify(arr))
+		console.log(JSON.parse(sessionStorage.getItem('cartItem')));
+		var productAdded = $(getProductAdded(id, title, price, pic));
 		cartList.prepend(productAdded);
 	}
 
-	function removeProduct(product) {
+	function removeProduct(product, removeBtn) {
+		console.log(product);
+		const removeId = $(removeBtn).data('id');
 		clearInterval(undoTimeoutId);
 		cartList.find('.deleted').remove();
 
@@ -124,7 +159,15 @@ jQuery(document).ready(function ($) {
 		undoTimeoutId = setTimeout(function () {
 			undo.removeClass('visible');
 			cartList.find('.deleted').remove();
-		}, 8000);
+			let arr = JSON.parse(sessionStorage.getItem('cartItem'));
+			console.log(arr);
+			arr.map((ci, i) => {
+				if (ci.id === removeId) {
+					arr.splice(i, 1)
+				}
+			})
+			sessionStorage.setItem('cartItem', JSON.stringify(arr))
+		}, 3000);
 	}
 
 	function quickUpdateCart() {
@@ -132,8 +175,11 @@ jQuery(document).ready(function ($) {
 		var price = 0;
 
 		cartList.children('li:not(.deleted)').each(function () {
+
 			var singleQuantity = Number($(this).find('select').val());
 			quantity = quantity + singleQuantity;
+			let item_obj = { id: $(this).find('a').eq(2).data().id, quantity }
+			console.log(item_obj);
 			price = price + singleQuantity * Number($(this).find('.price').text().replace('NT', ''));
 		});
 
@@ -176,5 +222,16 @@ jQuery(document).ready(function ($) {
 
 	function updateCartTotal(price, bool) {
 		bool ? cartTotal.text((Number(cartTotal.text()) + Number(price))) : cartTotal.text((Number(cartTotal.text()) - Number(price)));
+	}
+
+
+	function getProductAdded(id, title, price, pic) {
+		return `<li class="product"><div class="product-image"><a href="#0">
+		<img class="cart-img" src="${pic}" alt="placeholder"></a></div>
+		<div class="product-details"><h3><a href="#0">${title}</a></h3>
+		<span class="price">NT${price}</span><div class="actions">
+		<a href="#0" data-id="${id}" class="delete-item">刪除</a><div class="quantity">
+		<label for="cd-product-${id}">數量</label><span class="select">
+		<select id="cd-product-${id}" name="quantity">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<option value="${n}">${n}</option>`)}</select></span></div></div></div></li>`
 	}
 });

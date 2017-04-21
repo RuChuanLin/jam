@@ -32,11 +32,11 @@
         let { intro } = response.Member;
         if (intro) {
             const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
-            intro = ReplaceAll(intro, "\n", "<br />");
+            intro = ReplaceAll(intro, "\n", "<br>");
             console.log(intro);
             if (intro.length > intro_show_number && intro_show_number !== -1) {
                 $('#intro-original').html(intro.substr(0, intro_show_number))
-                $('#intro-expended').html(intro.substr(intro_show_number))
+                $('#intro-expended').html(intro.substr(intro_show_number + 1))
             } else {
                 $('#intro-original').html(intro)
             }

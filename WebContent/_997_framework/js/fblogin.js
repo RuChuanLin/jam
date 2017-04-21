@@ -64,7 +64,7 @@ $('.btn.btn-block.btn-social.btn-facebook').on('click', () => {
             // showName();
             // login_Nav();
             close_modal();
-            FB.api('/me', { fields: 'first_name, picture, email' }, function (response) {
+            FB.api('/me', { fields: 'first_name, picture.width(250).heght(250), email' }, function (response) {
                 console.log(response);
                 console.log(response.picture.data.url);
                 $.ajax({

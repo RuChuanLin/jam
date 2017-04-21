@@ -92,9 +92,15 @@ jQuery(document).ready(function ($) {
     })
 
     //---------按主頁面超連結!!!-----
+    $('.block.block1').click(() => {
+        window.location.assign("/Jam/tutor_view.html");
+    });
     $('.block.block2').click(() => {
         window.location.assign("/Jam/secondhand_view.html");
-    })
+    });
+    $('.block.block3').click(() => {
+        window.location.assign("/Jam/band_view.html");
+    });
 
 
     //---------確認------------
@@ -265,10 +271,10 @@ jQuery(document).ready(function ($) {
             let { intro } = arg.Member;
             if (intro) {
                 const intro_show_number = intro.indexOf('\n', intro.indexOf('\n', intro.indexOf('\n') + 1) + 1);
-                intro = ReplaceAll(intro, "\n", "<br />");
+                intro = $.ReplaceAll(intro, "\n", "<br>");
                 if (intro.length > intro_show_number && intro_show_number !== -1) {
                     $('#intro-original').html(intro.substr(0, intro_show_number))
-                    $('#intro-expended').html(intro.substr(intro_show_number))
+                    $('#intro-expended').html(intro.substr(intro_show_number + 1))
                 } else {
                     $('#intro-original').html(intro)
                 }
@@ -430,7 +436,7 @@ jQuery(document).ready(function ($) {
                 url = response.Member.url.split(' ');
                 url.map((v, i) => {
                     if (v) {
-                        $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${i + 1}" id="member-media${i + 1}" value="https://youtu.be/${url[i]}"><spam></spam></div>`);
+                        $('.member-edit-media.list').append(`<div><input type="text" class="form-control member-input media ${i + 1}" id="member-media${i + 1}" value="https://youtu.be/${url[i]}"><spam></spam></div>`);
                     }
                 });
                 mediaId = url.length + 1;
@@ -440,7 +446,7 @@ jQuery(document).ready(function ($) {
             // -------以下是影音連結的新增按鈕, 包含新增、檢查網址、設定sessionStorage
             // -------如果你不熟，拜託不要改---------
 
-            $(document).on('change', `.member-input.media`, function () {
+            $(document).on('keyup', `.member-input.media`, function () {
                 // console.log(this.className);//本行印出選擇中的className
                 // console.log(this.id);//本行印出選擇中的id
                 let id = this.id;
@@ -448,17 +454,19 @@ jQuery(document).ready(function ($) {
                 let k = $(`#${id}`).val();//印出選取中的值
                 let n = this.className.substr(this.className.lastIndexOf(' ') + 1);//輸入列編號
                 if (k.indexOf('https://www.youtube.com/watch?v=') === 0 && k.substr(k.indexOf('=') + 1).length === 11) {
-                    text.next().html(`OK!`);
+                    // text.next().html(`OK!`);
+                    text.parent().attr('class', 'form-group has-success');
                     // $(`.member-input.media.${n}`).attr('name', k.substr(k.indexOf('=') + 1));
                 } else if (k.indexOf('https://youtu.be/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
-                    text.next().html(`OK!`);
+                    text.parent().attr('class', 'form-group has-success');
                     // $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
                 } else if (k.indexOf('https://www.youtube.com/embed/') === 0 && k.substr(k.lastIndexOf('/') + 1).length === 11) {
-                    text.next().html(`OK!`);
+                    text.parent().attr('class', 'form-group has-success');
+
                     // $(`.member-input.media.${n}`).attr('name', k.substr(k.lastIndexOf('/') + 1));
                     // $(`.member-input.media`)[n - 1].val();
                 } else {
-                    text.next().html(`請確認網址`);
+                    text.parent().attr('class', 'form-group has-error');
                     // $(`.member-input.media.${n}`).attr('name', '');
                 }
                 // sessionStorage.setItem('url', url);
@@ -468,7 +476,7 @@ jQuery(document).ready(function ($) {
             //新增個人影音連結
             $('.form-btn.media-plus').click(function () {
                 if (mediaId > 6) return;
-                $('.member-edit-media.list').append(`<div><input type="text" class="member-input media ${mediaId}" id="member-media${mediaId}"><spam></spam></div>`);
+                $('.member-edit-media.list').append(`<div><input type="text" class="form-control member-input media ${mediaId}" id="member-media${mediaId}"><spam></spam></div>`);
                 mediaId++;
             });
         });

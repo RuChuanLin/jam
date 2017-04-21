@@ -37,13 +37,22 @@
         })
     }
 
+    // 取代全部文字
+    $.ReplaceAll = function (strOrg, strFind, strReplace) {
+        var index = 0;
+        while (strOrg.indexOf(strFind, index) != -1) {
+            strOrg = strOrg.replace(strFind, strReplace);
+            index = strOrg.indexOf(strFind, index);
+        }
+        return strOrg
+    }
 
     // 購物車
     $.setShoppingCart = function () {
         $('.cd-cart-container').html(`<a href="#0" class="cd-cart-trigger">
 		Cart
 		<ul class="count"> <!-- cart items count -->
-			<li>0</li>
+			<li></li>
 			<li>0</li>
 		</ul> <!-- .count -->
 	</a>
@@ -60,7 +69,7 @@
                     </ul>
                 </div>
                 <footer>
-                    <a href="#0" class="checkout"><em>前往結帳 - NT<span>0</span></em></a>
+                    <a href="/Jam/checkout_page.html" class="checkout"><em>前往結帳 - NT<span>0</span></em></a>
                 </footer>
             </div>
         </div>`)

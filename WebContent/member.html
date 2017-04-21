@@ -187,8 +187,7 @@
 					</p>
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password-confirm" type="text
-                           " placeholder="確認密碼">
+						<input class="full-width has-padding has-border" id="signup-password-confirm" type="text" placeholder="確認密碼">
 						<!-- <a href="#0" class="hide-password">隱藏密碼</a> -->
 						<span class="error-message">密碼不一致!</span>
 					</p>
@@ -222,16 +221,16 @@
 		</div>
 	</div>
 	<!--  mail成功畫面 -->
-    <div class="confirm-success-container">
-        <div class="confirm-success">
-            <p class="confirm-words">
-                信件已寄出!
-            </p>
-            <button type="button" class="confirm-button">確認</button>
-        </div>
-    </div>
-	
-   
+	<div class="confirm-success-container">
+		<div class="confirm-success">
+			<p class="confirm-words">
+				信件已寄出!
+			</p>
+			<button type="button" class="confirm-button">確認</button>
+		</div>
+	</div>
+
+
 	<!-- 站內信modal -->
 	<div class="mailbox-modal">
 		<div class="mailbox-modal-container">
@@ -309,9 +308,13 @@
 					<div class="member-edit-media list"></div>
 				</div>
 			</form>
+
 			<footer class="member-edit-footer">
 				<button class="form-btn submit" id="update-member" type="button">儲存</button>
+				<button class="form-btn mMemberEdit">Demo小幫手</button>
+				<button class="form-btn mMemberEdit2">Demo小幫手2</button>
 			</footer>
+
 		</div>
 	</div>
 	<!-- 會員資料主頁面 -->
@@ -321,7 +324,7 @@
 				<img class="profolio-img" id="member-pic" src="_996_image/user.png">
 			</div>
 			<div class="edit-wrapper" id="edit-member-btn">
-				
+
 			</div>
 		</div>
 		<div class="profolio-info-text">
@@ -354,9 +357,9 @@
 		<button type="button" class="abtbtn show" data-toggle="collapse" data-target="#intro-expended">展開 / 收回</button>
 
 		<div wrap="physical">
-			<div id="intro-original">
+			<div id="intro-original" class="member-intro">
 			</div>
-			<div id="intro-expended" class="collapse" wrap="physical">
+			<div id="intro-expended" class="collapse member-intro" wrap="physical">
 			</div>
 		</div>
 		<!--<div class="profolio-about-me-defualt" wrap="physical">
@@ -380,10 +383,12 @@
 		<div id="media-video-list"></div>
 	</section>
 	<!-- footer -->
-	<div class="footer-wrapper">
-
-		<span>Jam Corporation © 2017 </span> <span>連絡我們</span> <i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
-	</div>
+	    <div class="footer-wrapper">
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <a href=""> <i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <span id="fans-page">粉絲頁</span>       
+    </div>
 	<!-- 登入/註冊畫面 -->
 	<div class="user-modal">
 		<!-- this is the entire modal form, including the background -->
@@ -484,12 +489,44 @@
 	<script src="_997_framework/js/croppie.js"></script>
 	<script src="_997_framework/js/croppie_inst.js?ver=12"></script>
 	<script src="_997_framework/js/main.js"></script>
-
+	<script src="_997_framework/js/menufunction.js"></script>
 	<script src="_997_framework/js/fblogin.js"></script>
 	<script src="_997_framework/js/login-status.js"></script>
 	<script src="_997_framework/js/river_mailbox.js"></script>
 	<script src="_997_framework/js/river_sendmsg.js"></script>
 	<script src="_997_framework/js/river-member.js"></script>
+	<script>
+		$(".form-btn.mMemberEdit").onMagicClick({
+			'update-member-name': '格非老師',
+			'update-member-intro': 'YAMAHA協和音樂教室\n爵士鼓教師 (2009~2011)\n師範大學吉他社 爵士鼓講師(2010)\n黃石樂器 爵士鼓教師(2012~2015)\n莫札特音樂教室 爵士鼓教師(2012~2015)\n黑白鍵音樂教室 爵士鼓教師(2012~2015)\n「小山堂」音樂餐廳 固定演出樂手 (2012~2014)',
+			'member-instrument1': '爵士鼓',
+			'member-instrument2': '木箱鼓',
+			'member-instrument3': '手鼓',
+			'member-instrument4': 'DJ',
+			'member-instrument5': 'BASS',
+			'member-media1': 'https://www.youtube.com/embed/-wU92CaRRjw',
+			'member-media2': 'https://www.youtube.com/embed/LT7_Ay0B1RY',
+			'member-media3': 'https://www.youtube.com/embed/1mnp1rZn-04',
+			'member-media4': 'https://www.youtube.com/embed/ULg_nurXvMA',
+			'member-media5': 'https://www.youtube.com/watch?v=uf-8wmvpxZo',
+			'member-media6': 'https://www.youtube.com/watch?v=dCdZMRNK2ug',
+
+		});
+		$(".form-btn.mMemberEdit2").onMagicClick({
+			'member-instrument1': '爵士鼓',
+			'member-instrument2': '木箱鼓',
+			'member-instrument3': '手鼓',
+			'member-instrument4': 'DJ',
+			'member-instrument5': 'BASS',
+			'member-media1': 'https://www.youtube.com/embed/-wU92CaRRjw',
+			'member-media2': 'https://www.youtube.com/embed/LT7_Ay0B1RY',
+			'member-media3': 'https://www.youtube.com/embed/1mnp1rZn-04',
+			'member-media4': 'https://www.youtube.com/embed/ULg_nurXvMA',
+			'member-media5': 'https://www.youtube.com/watch?v=uf-8wmvpxZo',
+			'member-media6': 'https://www.youtube.com/watch?v=dCdZMRNK2ug',
+
+		});
+	</script>
 </body>
 
 </html>
