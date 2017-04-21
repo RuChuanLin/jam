@@ -1,23 +1,23 @@
 {
-   var  slickInint=function(){
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
-    $('.slider-nav').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: true,
-        centerMode: true,
-        centerPadding: '40px',
-        focusOnSelect: true
-    });
-   }
-    
+    var slickInint = function () {
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: true,
+            centerMode: true,
+            centerPadding: '40px',
+            focusOnSelect: true
+        });
+    }
+
     const itemId = $.getParameterByName('itemId', window.location.toString());
     $.ajax({
         url: `/Jam/usedItemDetail`,
@@ -34,14 +34,16 @@
         $('#secondhand-detail-model').html(usedItem.model);
         $('#secondhand-detail-condition').html(status);
         $('#secondhand-detail-usedTime').html(usedItem.usedTime);
-        $('#secondhand-detail-desc').html(usedItem.description);
+        console.log(usedItem.description);
+        let desc = $.ReplaceAll(usedItem.description, "\n", "<br>");
+        $('#secondhand-detail-desc').html(desc);
         $('#secondhand-detail-seller-pic').attr('src', sellerPic)
         const pic_arr = pics;
         pic_arr.map(pic => {
             // console.log($('.slider-for').slickAdd(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" data-lazy="${pic}"></div>`)
             // );
             // slickInint();
-            $('.slider-for').slick('slickAdd',`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
+            $('.slider-for').slick('slickAdd', `<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
             $('.slider-nav').slick('slickAdd', `<div class="secondhand-small-pic-div"><img class="secondhand-small-pic" src="${pic}"></div>`)
             // $('.slider-for').slickAdd(`<div class="secondhand-full-pic-div"><img class="secondhand-full-pic" src="${pic}"></div>`)
             //$('.slider-nav').slickAdd(`<div class="secondhand-small-pic-div"><img class="secondhand-small-pic" src="${pic}"></div>`)
@@ -153,7 +155,7 @@
                         <img class="member-small-pic" src="${bid.pic}">
                         <a href="member.html?userId=${bid.userId}">${bid.alias}</a> 想跟您購買此商品
                         <div class="client-btn-wrapper">
-                            <button class="btn btn-primary client-btn confirm-btn ${bid.userId}" ${bid.status === 1 ? "" : "disabled"}>${bid.status === 2 ? "已確認!" : "確認"}</button>
+                            <button class="btn btn-primary client-btn confirm-btn ${bid.userId}" ${bid.status === 1 ? "" : "disabled"}>${bid.status === 2 ? "成交" : "確認"}</button>
                             <button class="btn btn-primary client-btn refuse-btn ${bid.status === 2 ? "cancel" : "reject"} ${bid.userId}" ${bid.status === -1 ? "disabled" : ""}>${bid.status === 2 ? "取消" : "拒絕"}</button>
                         </div>
                     </div>`

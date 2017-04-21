@@ -11,6 +11,7 @@ a:hover{
 body {
     background-color: #2A2828;
 }
+
 /*捲軸樣式*/
 
 ::-webkit-scrollbar {
@@ -60,6 +61,13 @@ body {
    display: block;
    margin-top: 5px;
    
+}
+@media (min-width: 768px){
+
+.navbar-right{ 
+    float: right!important;
+    margin-right: 0px;
+}
 }
 @media (max-width: 792px){
     .menu-wrapper{
@@ -202,17 +210,21 @@ body {
 .index {
     margin-top: 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../_996_image/index1.jpg);
-    height: 950px;
+    height: 1080px;
     background-size: cover;
     background-position: center;
 }
 
 
+
+
+
+
 /*背景border分割*/
 
-.bg {
+    .bg {
     width: 33%;
-    height: 950px;
+    height: 1080px;
     float: left;
 }
 
@@ -227,7 +239,7 @@ body {
 
 .bgbt {
     position: relative;
-    top: 70%;
+    top: 60%;
     width: 100%;
 }
 
@@ -243,7 +255,7 @@ body {
     position: relative;
     margin-top: 0;
     width: 100%;
-    height: 950px;
+    height:1080px;
     background-size: cover;
     float: left;
     top: -60px;
@@ -272,7 +284,7 @@ body {
 
 .button {
     position: absolute;
-    top: 70%;
+    top: 60%;
     width: 100%;
 }
 
@@ -296,20 +308,82 @@ body {
 }
 
 
+
+
+/*---------------首頁樣式rwd---------------*/
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait) { 
+ .index{
+     margin-top:56px;
+ }
+.bg {
+    height:33%;
+    width: 100%;
+    float: left;
+}
+
+.bg1 {
+    border-bottom: solid #504F4F 5px;
+    border-right:none;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url(../../_996_image/t04.jpg);
+    
+}
+
+.bg2 {
+    border-top: solid #504F4F 5px;
+    border-bottom: solid #504F4F 5px;
+    border-right:none;
+    border-left: none;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url(../../_996_image/t01.jpg);
+}
+
+.bgbt {
+    position: relative;
+    top: 40%;
+    width: 20%;
+    margin: 0 auto;
+    
+}
+
+.bg3 {
+    width: 100%;
+    border-top: solid #504F4F 5px;
+    border-right: none;
+    border-left: none;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url(../../_996_image/t06.jpg);
+}
+
+
+.btn-success{
+    background-color: rgba(21, 23, 38, 0.31);
+    border:white 2px solid;
+    border-radius: 50px;
+}
+}
+
+
+
 /*找老師carousel*/
 
 .theme {
+    display: flex;
     width: 100%;
     height: 50px;
     color: #ECECEC;
-    margin-top: 35px;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    background: -webkit-linear-gradient(left,rgba(39, 47, 47, 0.74),rgba(133, 142, 137, 0.78));
+   background: linear-gradient(to right,rgba(39, 47, 47, 0.74),rgba(133, 142, 137, 0.78));
 }
 
 h1 {
     font-size: 40px;
 }
-
+.container-fluid {
+    padding-left:0;
+    padding-right: 0; 
+}
 
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 
@@ -352,9 +426,13 @@ h1 {
 }
 
 .well {
-    background-color: #272121;
+    background-color: transparent;
+    border-color: transparent;
 }
-
+.thumbnail{
+    background-color: transparent;
+    border-color: transparent;
+}
 
 /*.thumbnail {
     background-color: #403939;
@@ -628,12 +706,12 @@ input[type="button"]:disabled {
     position: absolute;
     left: -5px;
     bottom: -35px;
-    background: rgba(215, 102, 102, 0.9);
-    padding: .8em;
+    background: #960505;
+    padding: 0.8rem;
     z-index: 2;
-    color: #5C5C5C;
+    color: #ffffff;
     font-size: 13px;
-    font-size: 0.8125rem;
+    font-size: 1.2rem;
     border-radius: 0.25em;
     /* prevent click and touch events */
     pointer-events: none;
@@ -654,7 +732,7 @@ input[type="button"]:disabled {
     width: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid rgba(215, 102, 102, 0.9);
+    border-bottom: 8px solid #960505;
 }
 
 .form .error-message.is-visible {
@@ -943,7 +1021,7 @@ input[type="button"]:disabled {
     width: 90%;
 }
 .mail-footer{
-    width: 100px;
+    width: 150px;
     height: 100px;
     margin: 0 auto;
 }
@@ -951,7 +1029,11 @@ input[type="button"]:disabled {
     display: block;
     margin: 2px auto;
 }
-
+.sendmsg{
+    width:130px;
+    display: block;
+    margin: 20px auto; 
+}
 
 /*-----------------Page-member------------------------*/
 
@@ -1024,7 +1106,9 @@ input[type="button"]:disabled {
     margin: 10px 60px;
     padding: 10px;
 }
-
+.member-intro{
+    margin: 10px 72px;
+}
 /*mail區塊*/
 
 .profolio-action {
@@ -1266,7 +1350,12 @@ input[type="button"]:disabled {
     width: 140px;
     height: 140px;
 }*/
-
+.croppie-container .cr-slider-wrap{
+    position: fixed;
+    width: 38.8%;
+    margin: -12px auto;
+    z-index: 50;
+}
 
 /*裁切按鈕*/
 
@@ -1274,11 +1363,11 @@ input[type="button"]:disabled {
     display: block;
     position: fixed;
     z-index: 31;
-    width: 80px;
+    width: 100px;
     height: 30px;
-    top: 424px;
+    top: 413px;
     margin-left: -40px;
-    left: 50%
+    left: 49.5%
 }
 
 
@@ -1303,6 +1392,9 @@ input[type="button"]:disabled {
     padding: 0 10px;
     height: 32px;
 }
+.member-input.instruments{
+    margin-left: -8px;
+}
 
 .member-edit-image {
     width: 100px;
@@ -1319,14 +1411,14 @@ input[type="button"]:disabled {
 
 .member-edit-instruments {
     width: 50%;
-    margin: 10px;
+    margin: 20px 10px;
     vertical-align: middle;
     height: auto;
 }
 
 .member-edit-intro {
     width: 95%;
-    margin: 10px;
+    margin: 20px 10px;
     vertical-align: middle;
     height: 250px;
 }
@@ -1353,15 +1445,17 @@ input[type="button"]:disabled {
 .form-btn {
     color: #FDFDFD;
     background-color: #406C6E;
-    border-radius: 2px;
+    border-radius: 5px;
     border: #406C6E;
 }
 
 .form-btn.submit {
-    margin-left: 650px;
-    margin-top: 10px;
+   display: block;
+   margin: 15px auto;
 }
+.mInfo{
 
+}
 
 /*-----------------個人影音專區------------------*/
 
@@ -1390,13 +1484,17 @@ iframe {
     background-color: #2d2d2d;
     width: 100%;
     height: 200px;
-    padding: 10px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 30px;
 }
-
+.footer-wrapper span{
+    display: block;
+    margin: 20px;
+}
+#fans-page{
+    display: inline-block;
+    margin: 2px;
+}
 
 /*----------------------------------------收件匣----------------------------------------*/
 
@@ -1689,13 +1787,22 @@ iframe {
     height: 50px;
     background-color: #3D4759;
     color: #DFD8D8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .edit-title {
     display: block;
     margin: 10px auto;
     font-weight: 900;
-    width: 100px;
+    width: 200px;
+}
+.edit-title h1{
+    margin: 0;
+    font-size: 2.0rem;
+    font-weight: 700;
+    text-align: center;
 }
 
 .edit-body {
@@ -1724,6 +1831,22 @@ iframe {
     width: 700px;
     height: 60px;
 }
+.edit-row label{
+    margin-bottom:5px; 
+}
+.edit-col-2 {
+    float: left;
+    clear: none;
+    width: 15%;
+    margin-left: 0%;
+    margin-right: 3%;
+    min-height: 2px;
+    box-sizing: border-box;
+}
+.edit-col-2.valid-date-select {
+   
+}
+
 
 .edit-col-4 {
     float: left;
@@ -1763,6 +1886,12 @@ iframe {
     width: 100%;
     border-radius: 5px;
     border:1px #8F8A8A solid;
+}
+.edit-select-col.valid-date-select{
+    width: 40%;
+}
+.expire-date{
+    display: block;
 }
 
 /*提示*/
@@ -1813,6 +1942,9 @@ iframe {
     display: block;
     margin: 30px auto;
     font-weight: 600;
+}
+.edit-submit:hover{
+    background: #3D4759;
 }
 
 /*------------------------二手詳細頁面-------------------------*/
@@ -2030,6 +2162,9 @@ iframe {
     border-radius: 5px;
     
 }
+.detail-show-text-wrapper.tutor{
+    width: 860px;
+}
 .detail-show-text-title{
     display: flex;
     align-items: center;
@@ -2065,7 +2200,9 @@ iframe {
 }
 .detail-show-description{
     width: 100%;
-    min-height:300px; 
+    min-height:300px;
+    margin: 10px 10px;
+    line-height: 30px; 
 }
 
 /*教學編輯頁面設定*/
@@ -2086,14 +2223,15 @@ iframe {
     clear: left;
     width: 725px;
     padding: 16px;
-    margin:10px 50px 10px 20px;
+    margin:30px 50px 10px 20px;
     background-color: #f6f6f6;
     border-radius: 5px;
     color: #353535;
     box-shadow:10px 10px 5px #444444;
+    line-height: 30px;
 }
 .tutor-info{
-    width: 300px;
+    width: 360px;
     display: inline-block;
     margin: 10px 20px 10px 40px;
 }
@@ -2255,9 +2393,6 @@ a {
   text-decoration: none;
 }
 
-img {
-  max-width: 100%;
-}
 
 main {
   text-align: center;
@@ -3001,4 +3136,114 @@ main {
             transform: translateX(80px);
     opacity: 0;
   }
+}
+
+/*checkout-page*/
+.visa-img{
+    display: block;
+    height:50px; 
+    width: 193px;
+    margin: 10px 10px;
+}
+.shopping-list dt{
+    margin: 5px 10px;
+}
+.shopping-list{
+    margin-bottom: 40px;
+}
+.shopping-list-title{
+    font-size: 2rem;
+    color: #800000;
+}
+.shopping-list-body{
+    margin: 10px 10px;
+}
+thead{
+    background-color: #408080;
+}
+.shopping-list-body  th{
+    border: 2px #faf8f8 solid;
+    padding: 5px;
+}
+.shopping-list-body td{
+    border: 2px #faf8f8 solid;
+    padding: 5px;
+}
+
+.th-title{
+    width: 500px;
+}
+.th-number{
+    width: 55px;
+}
+.th-price{
+    width: 100px;
+    text-align: right;
+}
+.th-subtotal{
+    width: 100px;
+    text-align: right;
+}
+.shopping-list-body table tbody tr td+td{
+    text-align: center;
+}
+.shopping-list-body table tbody tr td+td+td{
+    text-align: right;
+}
+.shopping-list-body table tbody tr td+td+td+td{
+    text-align: right;
+}
+.td-total-price{
+    color: #800000;
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+.booking-info-title{
+   display: block;
+   margin: 10px;
+   color: #800000;
+   font-size: 2rem;
+   font-weight: 700;
+
+}
+.checkout-btn{
+    margin: 70px auto;
+    width:100px;
+    height: 40px;
+}
+
+.booking-details-dl{
+    margin: 10px;
+    background: #d5e6da;
+    border: #d5e6da;
+    border-radius: 2px;
+    padding: 5px;
+    line-height: 20px;
+}
+.booking-details-dl dt{
+    float: left;
+    width: 200px;
+    padding: 10px;
+}
+.booking-details-dl dd{
+    display: block;
+   padding: 10px;
+}
+.booking-success{
+    display: block;
+    width:200px; 
+    height: 50px;
+    margin: 10px auto;
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+.checkout-return-btn{
+     margin: 70px auto;
+    width:150px;
+    height: 40px;
+}
+.booking-details{
+    display: none;
 }

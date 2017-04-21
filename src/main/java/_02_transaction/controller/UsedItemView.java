@@ -37,36 +37,36 @@ public class UsedItemView extends HttpServlet {
 		int currentPage = 1;
 		if (request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			System.out.println("================");
 			System.out.println("currentPage: " + currentPage);
 		}
+
 		long[] page = dao.getAllpage(category);
 		int totalPages = (int) page[1];
-		System.out.println("totalPages: " + totalPages);
-		System.out.println("currentPage: " + currentPage);
+		// System.out.println("totalPages: " + totalPages);
+		// System.out.println("currentPage: " + currentPage);
+		if (currentPage <= totalPages) {
+			List<UsedItem> list = dao.getAllItem(category, currentPage);
 
-		List<UsedItem> list = dao.getAllItem(category, currentPage);
+			List listWithPic = new ArrayList<>();
+			for (UsedItem ui : list) {
+				// System.out.println("ui.getExpectedPrice(): " +
+				// ui.getExpectedPrice());
+				String pic = dao.getFirstPic(ui.getUsedItemId());
+				List temp = new ArrayList<>();
+				// pic = PicSize.minify(pic, 220);
+				temp.add(ui);
+				temp.add(pic);
+				listWithPic.add(temp);
+			}
 
-		List listWithPic = new ArrayList<>();
-		for (UsedItem ui : list) {
-			System.out.println("ui.getExpectedPrice(): " + ui.getExpectedPrice());
-			String pic = dao.getFirstPic(ui.getUsedItemId());
-			List temp = new ArrayList<>();
-//			pic = PicSize.minify(pic, 220);
-			temp.add(ui);
-			temp.add(pic);
-			listWithPic.add(temp);
-			// listWithPic.
-		}
-		if (currentPage < totalPages) {
 			currentPage++;
 			listWithPic.add(currentPage);
-		} else {
-			currentPage = -1;
-			listWithPic.add(-1);
+			String json = gson.toJson(listWithPic);
+			pw.write(json);
+			pw.flush();
+			pw.close();
 		}
-		String json = gson.toJson(listWithPic);
-		pw.write(json);
-		pw.flush();
-		pw.close();
+
 	}
 }

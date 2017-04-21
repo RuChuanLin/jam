@@ -154,4 +154,19 @@ public class NewItemHBN implements NewItemDAO {
 		}
 	}
 
+	@Override
+	public void saveNewItem(NewItem newItem) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(newItem);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+
+	}
+
 }

@@ -41,9 +41,11 @@ public class LoginServlet extends HttpServlet {
 			if (!dao.idExists(account)) {
 				map.put("loginSuccess", false);
 				System.out.println("帳號不存在");
-			} else if (!dao.checkPassword(account, password)) {
-				map.put("loginSuccess", false);
-				System.out.println("密碼錯誤");
+			} else {
+				if (!dao.checkPassword(account, password)) {
+					map.put("loginSuccess", false);
+					System.out.println("密碼錯誤");
+				}
 			}
 		}
 

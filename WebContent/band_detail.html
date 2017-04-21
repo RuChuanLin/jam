@@ -16,8 +16,48 @@
 </head>
 
 <body class="edit">
+    <!--  mail成功畫面 -->
+    <div class="confirm-success-container">
+        <div class="confirm-success">
+            <p class="confirm-words">
+                信件已寄出!
+            </p>
+            <button type="button" class="confirm-button">確認</button>
+        </div>
+    </div>
+    <!--站內信modal-->
+    <div class="mailbox-modal">
+        <div class="mailbox-modal-container">
+            <div class="mailbox-body">
+                <div class="mailbox-header">
+                    <form action="">
+                        <div class="mail-title">
+                            <label for="mail-title">主旨</label> <br> <label for="recipient">收件者</label> <br>
+                        </div>
+                        <div class="mail-input">
+                            <input type="text" class="mail-input" id="mail-title"> <br>
+                            <input type="text" class="mail-input" id="mail-recipient"> <br>
+                        </div>
+
+                        <div class="mail-content">
+                            <div class="mail-title">
+                                <label for="mail-content">內容</label>
+                            </div>
+                            <div class="mail-input content">
+                                <textarea name="" class="mail-textarea" id="mail-content"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mail-footer">
+                <button class="form-btn send" id="mail-submit">寄出</button>
+                <button class="form-btn sendmsg">Demo小幫手</button>
+            </div>
+        </div>
+    </div>
     <!-- navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -64,8 +104,8 @@
 
 
                 </a>
-                <ul id="menu-funtion" class="navbar-nav menu-wrapper ">
-                    <li><a href="#">Jam二手</a>
+                <ul id="menu-funtion" class="navbar-nav menu-wrapper">
+                    <li><a href="/Jam/secondhand_view.html">Jam二手</a>
                         <ul class="drop">
                             <li><a href="#">吉他類</a></li>
                             <li><a href="#">貝斯類</a></li>
@@ -95,122 +135,8 @@
                             <li><a href="#">其他</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Jam教學</a>
-                        <ul class="drop">
-                            <li><a href="#">北部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ混音類</a></li>
-                                    <li><a href="#">錄音編曲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">中部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ混音類</a></li>
-                                    <li><a href="#">錄音編曲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">南部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ混音類</a></li>
-                                    <li><a href="#">錄音編曲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">東部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ混音類</a></li>
-                                    <li><a href="#">錄音編曲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Jam組團</a>
-                        <ul class="drop">
-                            <li>
-                                <a href="#">北部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ鼓機類</a></li>
-                                    <li><a href="#">人聲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">中部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ鼓機類</a></li>
-                                    <li><a href="#">人聲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">南部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ鼓機類</a></li>
-                                    <li><a href="#">人聲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">東部</a>
-                                <ul>
-                                    <li><a href="#">吉他類</a></li>
-                                    <li><a href="#">貝斯類</a></li>
-                                    <li><a href="#">鼓及打擊類</a></li>
-                                    <li><a href="#">鍵盤與合成器類</a></li>
-                                    <li><a href="#">古典弦樂類</a></li>
-                                    <li><a href="#">管樂類</a></li>
-                                    <li><a href="#">DJ鼓機類</a></li>
-                                    <li><a href="#">人聲類</a></li>
-                                    <li><a href="#">其他</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    <li><a href="#">Jam教學</a></li>
+                    <li><a href="#">Jam組團</a></li>
                 </ul>
             </div>
 
@@ -220,94 +146,93 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- 登入前顯示 -->
-                    <!--<li><a href="#" class="login" id="nav-login">登入</a></li>
-                    <li><a href="#" class="signup" id="nav-signup">註冊</a></li>-->
+                    <li><a href="#" class="login" id="nav-login">登入</a></li>
+                    <li><a href="#" class="signup" id="nav-signup">註冊</a></li>
                     <!-- 登入後顯示 -->
-                    <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
+                    <li><img class="nav-pic" id="nav-pic" alt=""></li>
                     <li class="fb-loging-name" id="fb-loging-name"></li>
                     <li>
-                        <a href="mailbox.html" id="nav-myinbox-btn "><i  class="fa fa-envelope-o " fa-5x aria-hidden="true " ></i><span class="badge ">1<span></a></li>
-                    <li><a id="nav-my-member-link " href="member.html " class="my-member-link ">我的 Jam</a></li>
-                    <li><a id="nav-logout " href="# " class="logout ">登出</a></li>
+                        <a href="mailbox.html" id="nav-myinbox-btn"><i class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1</span></a></li>
+                    <li><a id="nav-my-member-link" href="member.html" class="my-member-link">我的 Jam</a></li>
+                    <li><a id="nav-logout" href="#" class="logout">登出</a></li>
 
                 </ul>
             </div>
         </div>
     </nav>
-<div class="detail-show-container ">
-    <div class="detail-show-text-wrapper">
-        <div class="detail-show-text-title">
-            <h4 class="band-title-show">台北練功團</h4>
-        </div>
-        <div class="detail-show-text-body">
-            <dl class="band-info">
-                <dt class="first-dt">徵求樂器：</dt>
-                <dd>電吉他/主唱</dd>
-                <dt>樂團所在地區：</dt>
-                <dd>士林/信義</dd>
-                <dt>曲風</dt>
-                <dd>indie Rock/後搖</dd>
-                <dt>目前是否已組團</dt>
-                <dd>是</dd>
+    <div class="detail-show-container">
+        <div class="detail-show-text-wrapper">
+            <div class="detail-show-text-title">
+                <h4 class="band-title-show">台北練功團</h4>
+            </div>
+            <div class="detail-show-text-body">
+                <dl class="band-info">
+                    <dt class="first-dt">徵求樂器：</dt>
+                    <dd>電吉他/主唱</dd>
+                    <dt>樂團所在地區：</dt>
+                    <dd>士林/信義</dd>
+                    <dt>曲風</dt>
+                    <dd>indie Rock/後搖</dd>
+                    <dt>目前是否已組團</dt>
+                    <dd>是</dd>
 
-            </dl>
-            <!--原po資訊欄-->
-            <div class="detail-show-op tutor-op">
-                <img class="profolio-img" src="images/test/b01.jpg" alt="">
-                <dl class="band-host">
-                    <dt>發起人：</dt>
-                    <dd><img class="member-small-pic band-op-img" src="_996_image/teacher/t01.jpg"><button class="btn btn-primary mail-btn band-mail-btn"><i class="fa fa-envelope-o" fa-4x aria-hidden="true"></i></button></dd>
-                    <dt>團員：</dt>
-                    <dd><img class="member-small-pic  band-players-img" src="_996_image/teacher/t02.jpg"><img class="member-small-pic band-players-img" src="_996_image/teacher/t03.jpg"></dd>
                 </dl>
-                <!--如果是自己才能看到這一個按鈕-->
-                <button class="btn btn-primary detail-edit-btn">編輯課程</button>
-    
-            </div>
-            <!--這裡放文案-->
-            <div class="detail-show-description tutor-description">
-                
-                都是上班族，開心玩音樂，所以不用擔心程度要多好，一起成長一起進步就好<br>
-                練團時間：六或日晚上<br>
-                地點：台北市區練團室<br>
-                目前cover取向：<br>
-                日搖- 以one ok rock為主，其他日搖團體為輔，只要主唱能飆上去，皆可考慮開歌<br>
+                <!--原po資訊欄-->
+                <div class="detail-show-op tutor-op">
+                    <img class="profolio-img" alt="">
+                    <dl class="band-host">
+                        <dt>發起人：</dt>
+                        <dd><img class="member-small-pic band-op-img" src="_996_image/teacher/t01.jpg"><button class="btn btn-primary mail-btn band-mail-btn"><i class="fa fa-envelope-o" fa-4x aria-hidden="true"></i></button></dd>
+                        <dt>團員：</dt>
+                        <dd><img class="member-small-pic  band-players-img" src="_996_image/teacher/t02.jpg"><img class="member-small-pic band-players-img"
+                                src="_996_image/teacher/t03.jpg"></dd>
+                    </dl>
+                    <!--如果是自己才能看到這一個按鈕-->
+                    <!--<button class="btn btn-primary detail-edit-btn">編輯課程</button>-->
 
-                希望明年能有成果，一起玩搖滾樂！
-            </div>
-            <div class="tutor-description media-zone">
-                <div class="media-zone-header">
-                    <h4>演出或作品影音參考</h4>
                 </div>
-                <div class="media-zone-body">
-                    <iframe class="media-style" src="https://www.youtube.com/embed/T4YszA5trGw?ecver=1" frameborder="0" allowfullscreen></iframe>
-                    <iframe class="media-style" src="https://www.youtube.com/embed/mMv6TGyjpec?ecver=1" frameborder="0" allowfullscreen></iframe>
-                    <iframe class="media-style" src="https://www.youtube.com/embed/OzeoJlzkkPE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                    <iframe class="media-style" src="https://www.youtube.com/embed/Yjarkl3VWPE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                <!--這裡放文案-->
+                <div class="detail-show-description tutor-description">
+
+                    都是上班族，開心玩音樂，所以不用擔心程度要多好，一起成長一起進步就好<br> 練團時間：六或日晚上
+                    <br> 地點：台北市區練團室
+                    <br> 目前cover取向：
+                    <br> 日搖- 以one ok rock為主，其他日搖團體為輔，只要主唱能飆上去，皆可考慮開歌<br> 希望明年能有成果，一起玩搖滾樂！
+                </div>
+                <div class="tutor-description media-zone">
+                    <div class="media-zone-header">
+                        <h4>演出或作品影音參考</h4>
+                    </div>
+                    <div class="media-zone-body">
+                        <iframe class="media-style" src="https://www.youtube.com/embed/T4YszA5trGw?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/mMv6TGyjpec?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/OzeoJlzkkPE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="media-style" src="https://www.youtube.com/embed/Yjarkl3VWPE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
+
+
         </div>
-
-
     </div>
-</div>
-<div class="footer-wrapper">
-    <!--        <button class="form-btn test-btn1 ">test1</button>
-        <button class="form-btn test-btn2 ">test2</button>    -->
-    <span>Jam Corporation © 2017  </span>
-    <span>連絡我們</span>
-    <i class="fa fa-facebook-square " aria-hidden="true ">粉絲頁</i>
-    </p>
-</div>
-<script src="_997_framework/jquery-3.1.1.min.js "></script>
-<script src="_997_framework/js/river-jquery.js"></script>
-<script src="_997_framework/isotope.pkgd.min.js "></script>
-<script src="_997_framework/bootstrap/js/bootstrap.min.js "></script>
-<script src="_997_framework/js/main.js?ver=12 "></script>
-<script src="_997_framework/js/secondhand_filter.js "></script>
-<script src="_997_framework/js/slick_media.js?ver=12 "></script>
-<script src="_997_framework/slick/slick.min.js"></script>
-<script src="_997_framework/js/menufunction.js "></script>
+    <div class="footer-wrapper">
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <a href=""> <i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <span id="fans-page">粉絲頁</span>       
+    </div>
+    <script src="_997_framework/jquery-3.1.1.min.js"></script>
+    <script src="_997_framework/js/river-jquery.js"></script>
+    <script src="_997_framework/isotope.pkgd.min.js"></script>
+    <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
+    <script src="_997_framework/js/main.js?ver=12"></script>
+    <!--<script src="_997_framework/js/secondhand_filter.js"></script>-->
+    <script src="_997_framework/js/slick_media.js?ver=12"></script>
+    <script src="_997_framework/slick/slick.min.js"></script>
+    <script src="_997_framework/js/menufunction.js"></script>
+    <script src="_997_framework/js/river_band_detail.js"></script>
+    <script src="_997_framework/js/login-status.js"></script>
+    <script src="_997_framework/js/fblogin.js"></script>
 </body>
 
 </html>

@@ -19,6 +19,10 @@ public interface NewItemDAO {
 	// 獲得該筆的所有圖片資料
 	public List<NewItemPic> getAllPic(int itemId);
 
+	//新增一筆資料
+	
+	public void saveNewItem(NewItem newItem);
+	
 	// 獲得新增一筆的id
 	public int getNewId();
 

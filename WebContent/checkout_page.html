@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>checkout_page</title>
+    <link href="_997_framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="_997_framework/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="_997_framework/css/reset1.css">
+    <link href="_997_framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="_997_framework/css/bootstrap-social.css">
+    <link rel="stylesheet" href="_997_framework/css/reset1.css?ver=1">
+    <link rel="stylesheet" href="_997_framework/css/style.css">
+</head>
+
+<body class="edit">
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <!-- svg logo -->
+                    <svg class="logo-brand" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet"
+                        viewBox="665 275 120 103">
+                        <g data-item-type="text" data-item="Business" id="logo__item--business" class="logo__item">
+                            <g class="logo__item__inner" transform="translate(753.0234375 371.4801896051838) scale(0.44079098643366293 0.44079098643366293) rotate(0 0 0)">
+                                <text data-part-id="logo__item--business" dy="0" dominant-baseline="auto" alignment-baseline="auto" font-family="Montserrat"
+                                    font-size="32px" fill="#435862" letter-spacing="0" font-weight="bold" font-style="normal"
+                                    data-font-family="Montserrat" data-font-weight="bold" data-font-style="normal" data-ttf-url="/builder_assets/fontsttf/font-montserrat-bold-normal.ttf"
+                                    data-font-filename="montserrat-bold-normal">Jam</text>
+                            </g>
+                        </g>
+                        <g data-item-type="image" data-item="Image" data-logo-item="" id="logo__item--logo_0" class="logo__item">
+                            <g class="logo__item__inner" transform="translate(648.9390949159263 254.5) scale(1.3379037364494117 1.3379037364494117) rotate(0 0 0)">
+
+                                <g>
+                                    <linearGradient id="logo__item--logo_0__0" gradientUnits="objectBoundingBox" x1="0.5" y1="0" x2="0.5" y2="1">
+                                        <stop offset="0" style="stop-color:#6f9074"></stop>
+                                        <stop offset="1" style="stop-color:#666666"></stop>
+                                    </linearGradient>
+                                    <path fill="url(#logo__item--logo_0__0)" d="M63.412,20.263v39.895c0,0,1.562,19.893-26.109,27.739c4.169,1.675,8.717,2.604,13.485,2.604   c20.021,0,36.249-16.229,36.249-36.251C87.037,38.67,77.206,25.389,63.412,20.263z"
+                                        data-part-id="logo__item--logo_0__0"></path>
+                                    <linearGradient id="logo__item--logo_0__1" gradientUnits="objectBoundingBox" x1="0.5" y1="0" x2="0.5" y2="1">
+                                        <stop offset="0" style="stop-color:#7da482"></stop>
+                                        <stop offset="1" style="stop-color:#666666"></stop>
+                                    </linearGradient>
+                                    <path fill="url(#logo__item--logo_0__1)" d="M45.808,60.85V36.067l16.267-16.265C58.522,18.636,54.729,18,50.788,18c-20.021,0-36.25,16.23-36.25,36.249   c0,14.418,8.417,26.866,20.604,32.707C37.871,85.179,45.808,78.495,45.808,60.85z"
+                                        data-part-id="logo__item--logo_0__1"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <!--svg logo-->
+
+
+                </a>
+                <ul id="menu-funtion" class="navbar-nav menu-wrapper">
+
+                </ul>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- 登入前顯示 -->
+                    <!--<li><a href="#" class="login" id="nav-login">登入</a></li>
+                    <li><a href="#" class="signup" id="nav-signup">註冊</a></li>-->
+                    <!-- 登入後顯示 -->
+                    <li><img class="nav-pic" id="nav-pic" src="" alt=""></li>
+                    <li class="fb-loging-name" id="fb-loging-name"></li>
+                    <li>
+                        <a href="mailbox.html" id="nav-myinbox-btn"><i  class="fa fa-envelope-o" fa-5x aria-hidden="true" ></i><span class="badge">1<span></a></li>
+                    <li><a id="nav-my-member-link" href="member.html" class="my-member-link">我的 Jam</a></li>
+                    <li><a id="nav-logout" href="#" class="logout">登出</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- edit page container -->
+    <div class="edit-container secondhand-edit-container">
+        <div class="edit-header secondhand-edit-header">
+            <div class="edit-title">
+                <h1>結帳資訊填寫</h1>
+            </div>
+        </div>
+        <div class="edit-body">
+            <dl class="shopping-list">
+                <dt>
+                    <span class="shopping-list-title">商品明細</span>
+                </dt>
+                <dd class="shopping-list-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="th-title">商品名稱</th>
+                                <th class="th-number">數量</th>
+                                <th class="th-price">單價</th>
+                                <th class="th-subtotal">小計</th>
+                            </tr>
+                        </thead>
+
+
+                    </table>
+                </dd>
+            </dl>
+
+            <div class="booking-detail-inputs">
+                <span class="booking-info-title">訂購人資訊</span>
+                <div class="edit-row">
+                    <div class="edit-col-2">
+                        <label>姓名*</label>
+                        <input id="checkout-info-name" class="edit-input" type="text">
+                    </div>
+                    <div class="edit-col-8">
+                        <label>聯絡電話*</label>
+                        <input id="checkout-info-phone" class="edit-input" type="text">
+                    </div>
+                </div>
+                <div class="edit-row">
+                    <div class="edit-col-2">
+                        <label>郵遞區號*</label>
+                        <input id="checkout-info-zip" class="edit-input" type="text">
+                    </div>
+                    <div class="edit-col-8">
+                        <label>寄送地址*</label>
+                        <input id="checkout-info-address" class="edit-input" type="text">
+                    </div>
+                </div>
+
+                <div class="edit-row">
+                    <div class="edit-col-4">
+                        <label for="checkout-creditcard">信用卡卡號*</label>
+                        <input id="checkout-creditnumber" class="edit-input" type="text" id="checkout-creditcard">
+                    </div>
+                </div>
+                <div class="edit-row">
+                    <div class="edit-col-4">
+                        <label class="expire-date" for=""> 有效期限*</label>
+                        <select id="checkout-expires-month" class="edit-select-col valid-date-select" name="">
+						<option selected disabled>請選擇</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+                        <option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+                        <option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+                        <option value="12">12</option>
+					</select>
+                        <span class="note">月</span>
+                        <select id="checkout-expires-year" class="edit-select-col valid-date-select" name="">
+						<option selected disabled>請選擇</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+                        <option value="2021">2021</option>
+						<option value="2022">2022</option>
+						<option value="2023">2023</option>
+						<option value="2024">2024</option>
+                        <option value="2025">2025</option>
+						<option value="2026">2026</option>
+						<option value="2027">2027</option>
+                        <option value="2028">2028</option>
+						<option value="2029">2029</option>
+						<option value="2030">2030</option>
+						<option value="2031">2031</option>
+					</select>
+                        <span class="note">年</span>
+                    </div>
+                    <div class="edit-col-2 valid-date-select">
+                        <label> 驗證三碼*</label>
+                        <input id="checkout-check" class="edit-input" type="text">
+                    </div>
+                </div>
+                <img class="visa-img" src="_996_image/visa_PNG34.png" alt="">
+                <span class="booking-info-title">收貨人資訊</span>
+                <div class="edit-row">
+                    <div class="edit-col-2">
+                        <label for="checkout-name">姓名*</label>
+                        <input class="edit-input" type="text" id="checkout-name">
+                    </div>
+                    <div class="edit-col-8">
+                        <label for="checkout-phone">聯絡電話*</label>
+                        <input class="edit-input" type="text" id="checkout-phone">
+                    </div>
+                </div>
+                <div class="edit-row">
+                    <div class="edit-col-2">
+                        <label for="checkout-zip">郵遞區號*</label>
+                        <input class="edit-input" type="text" id="checkout-zip">
+                    </div>
+                    <div class="edit-col-8">
+                        <label for="checkout-address">寄送地址*</label>
+                        <input class="edit-input" type="text" id="checkout-address">
+                    </div>
+                </div>
+            </div>
+            <div class="booking-details">
+                <span class="booking-info-title">收貨人資訊</span>
+                <dl class="booking-details-dl">
+                </dl>
+                <span class="booking-success">交易成功!</span>
+                <button class="form-btn edit-submit checkout-return-btn" id="checkout-return-btn"><i class="fa fa-caret-left" aria-hidden="true"></i> 返回商品瀏覽</button>
+            </div>
+            <button class="form-btn edit-submit checkout-btn" id="checkout-btn">確認送出</button>
+        </div>
+        <button class="form-btn mInfo">Demo小幫手</button>
+    </div>
+    <div class="footer-wrapper">
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <a href=""> <i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <span id="fans-page">粉絲頁</span>       
+    </div>
+    <script src="_997_framework/jquery-3.1.1.min.js"></script>
+    <script src="_997_framework/js/river-jquery.js"></script>
+    <script src="_997_framework/isotope.pkgd.min.js"></script>
+    <script src="_997_framework/bootstrap/js/bootstrap.min.js"></script>
+    <script src="_997_framework/js/main.js?ver=12"></script>
+    <script src="_997_framework/js/menufunction.js"></script>
+	<script src="_997_framework/js/fblogin.js"></script>
+	<script src="_997_framework/js/login-status.js"></script>
+    <script src="_997_framework/js/checkout_page.js"></script>
+    <script>
+        $('.form-btn.mInfo').onMagicClick({
+            'checkout-info-name': '朱孝天',
+            'checkout-info-phone': '0933445387',
+            'checkout-info-zip': '105',
+            'checkout-info-address': '台北市大安區建國北路72號3樓',
+            'checkout-creditnumber': '4368-8842-0138-6643',
+            'checkout-expires-month': 12,
+            'checkout-expires-year': 2025,
+            'checkout-check': 517,
+            'checkout-name': '朱七',
+            'checkout-phone': '0945884315',
+            'checkout-zip': '920',
+            'checkout-address': '屏東市潮洲鎮海康街66號'
+        })
+    </script>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ $.ajax({
   response.map(usedItem => {
     if (typeof usedItem !== 'number') {
       let $items = getSeconhandElement(usedItem[0].title, usedItem[0].expectedPrice, usedItem[1])
+      console.log($items);
       $items.on('click', function () {
         GoUsedItemDetail(usedItem[0].usedItemId, usedItem[0].seller)
       })
@@ -18,7 +19,7 @@ $.ajax({
     } else {
       $(window).on('scroll', function () {
         // test Json Text to set
-        if ($(document).height() - $(window).height() - $(document).scrollTop() < 100 && usedItem > 0) {
+        if ($(document).height() - $(window).height() - $(document).scrollTop() < 1 && usedItem > 0) {
           $.ajax({
             url: '/Jam/usedItemView',
             type: 'GET',
@@ -82,11 +83,11 @@ function onUsedItemLoading(arg) {
 }
 
 // loading動畫
-$(document).ajaxStart(function () {
-  $("#loading-ajax").css("display", "block");
+$("#loading-ajax").ajaxStart(function () {
+  $(this).show();
 });
-$(document).ajaxComplete(function () {
-  $("#loading-ajax").css("display", "none");
+ $("#loading-ajax").ajaxComplete(function () {
+  $(this).hide();
 });
 //back-to-top
 if ($('#back-to-top').length) {

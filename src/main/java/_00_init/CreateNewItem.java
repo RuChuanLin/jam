@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Session;
@@ -19,24 +21,35 @@ import _02_transaction.model.UsedItemHBN;
 public class CreateNewItem {
 
 	public static void main(String[] args) throws IOException {
-		NewItem ni = new NewItem("guitar", "sony", 65000, "Sony Guitar", "eletronic", (byte) 0, 10, 0, "");
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.save(ni);
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-			System.out.println(e.getMessage());
-		}
+		List<String> pics_temp = new ArrayList<>();
 		NewItemDAO nDao = new NewItemHBN();
-		int itemId = nDao.getNewId();
-		String picBase64 = GetImageStr(
-				"C:/Users/admin/Documents/_Projects/workspace/Jam/WebContent/images/test/i03.jpg");
 
-		NewItemPic nip = new NewItemPic(itemId, picBase64);
-		nDao.saveNewPic(nip);
+		nDao.saveNewItem(new NewItem("guitar", "fender", 16780, "FENDER CD-60CE 全桃花木 可插電民謠吉他", "CD-60CE", (byte) 0, 10, 0, ""));
+		int itemId = nDao.getNewId();
+		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/" + "01.jpg"));
+		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/" + "02.jpg"));
+		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/" + "03.jpg"));
+		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/" + "04.jpg"));
+		//pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/吉他類 帳號aaaa@1111/" + "5.jpg"));
+
+//		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/吉他類 帳號aaaa@1111/" + "Palir3.webp"));
+
+		for (String s : pics_temp) {
+			nDao.saveNewPic(new NewItemPic(itemId, s));
+		}
+		pics_temp.clear();
+
+//		nDao.saveNewItem(new NewItem("guitar", "fender", 29000, "yy Guitar", "eletronic", (byte) 0, 10, 0, ""));
+//		itemId = nDao.getNewId();
+//		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/吉他類 帳號aaaa@1111/" + "Palir5.webp"));
+//
+//		pics_temp.add(GetImageStr("C:/Users/admin/Desktop/假資料圖檔/吉他類 帳號aaaa@1111/" + "Palir3.webp"));
+//
+//		for (String s : pics_temp) {
+//			nDao.saveNewPic(new NewItemPic(itemId, s));
+//		}
+//		pics_temp.clear();
+
 	}
 
 	public static String GetImageStr(String imgFilePath) throws IOException {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理

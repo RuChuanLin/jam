@@ -216,16 +216,15 @@
 				</div>
 			</div>
 			<button class="form-btn edit-submit" id="sellButton">確認</button>
-			<button class="form-btn item">小幫手</button>
+			<button class="form-btn item">Demo小幫手</button>
 		</div>
 	</div>
 	<div class="footer-wrapper">
-		<!--        <button class="form-btn test-btn1">test1</button>
-        <button class="form-btn test-btn2">test2</button>    -->
-		<span>Jam Corporation © 2017  </span>
-		<span>連絡我們</span>
-		<i class="fa fa-facebook-square" aria-hidden="true">粉絲頁</i>
-	</div>
+        <span>Jam Corporation © 2017  </span>
+        <span>連絡我們</span>
+        <a href=""> <i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <span id="fans-page">粉絲頁</span>       
+    </div>
 	<!-- 登入/註冊畫面 -->
 	<div class="user-modal">
 		<!-- this is the entire modal form, including the background -->
@@ -327,6 +326,7 @@
 	<script src="_997_framework/js/login-status.js"></script>
 	<script src="_997_framework/js/secondhand_filter.js"></script>
 	<script src="_997_framework/js/river_secondhand.js"></script>
+	<script src="_997_framework/js/menufunction.js"></script>
 	<script>
 	$('.form-btn.item').onMagicClick({
         'secondhand-brand': 'Rogue',
@@ -336,7 +336,7 @@
         'secondhand-title': 'Rogue Starter Acoustic Guitar 低價出售',
         'secondhand-price':'1000',
         'secondhand-category': 'guitar',
-        'secondhand-edit-description': 'The small-bodied Rogue Starter Acoustic Guitar is an amazing deal for a starter guitar. Its smaller profile (7/8" scale) makes it very playable for kids or aspiring guitarists with smaller body frames and hands. It has a maple neck and rosewood fretboard and Martin strings which help.give you a nice tone.'
+        'secondhand-edit-description': '少彈琴身有使用痕跡\n整體八成五新，使用上沒問題聲音不錯\n附隨身琴袋及背帶\n交易限台北現金面交避免爭議，不接受換物\n有興趣試琴可來信連絡'
     });
 	
 		const itemId = $.getParameterByName('itemId', window.location.toString());
